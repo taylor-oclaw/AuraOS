@@ -1,14 +1,35 @@
-use bootloader::BootConfig;
+use std::path::PathBuf;
 
-pub fn main() {
-    let mut config = BootConfig::default();
-    config.frame_buffer.minimum_framebuffer_height = Some(720);
+fn main() {
+    let kernel_path = PathBuf::from(std::env::var("KERNEL_BIN").unwrap_or_else(|_| {
+        // Default: look for the kernel binary in the kernel target dir
+        let manifest_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+        let kernel_binary = manifest_dir
+            .parent()
+            .unwrap()
+            .join("kernel/target/x86_64-unknown-none/debug/aura-kernel");
+        kernel_binary.to_string_lossy().to_string()
+    }));
 
-    let kernel = include_bytes!(env!("CARGO_BIN_FILE_AURA_KERNEL"));
-    let mut binding = bootloader::UefiBoot::new(kernel);
-    let uefi_builder = binding.set_boot_config(&config);
+    if !kernel_path.exists() {
+        eprintln!("Kernel binary not found at: {}", kernel_path.display());
+        eprintln!("Build the kernel first: cd kernel && cargo +nightly build");
+        std::process::exit(1);
+    }
 
-    let out_path = std::env::args().nth(1).expect("output path argument");
-    uefi_builder.create_disk_image(out_path.as_ref()).unwrap();
-    println!("Created bootable disk image at {}", out_path);
+    let out_dir = PathBuf::from(std::env::var("OUT_DIR").unwrap_or_else(|_| ".".to_string()));
+
+    // Create UEFI disk image
+    let uefi_path = out_dir.join("aura-os-uefi.img");
+    bootloader::UefiBoot::new(&kernel_path)
+        .create_disk_image(&uefi_path)
+        .expect("Failed to create UEFI disk image");
+    println!("Created UEFI image: {}", uefi_path.display());
+
+    // Create BIOS disk image
+    let bios_path = out_dir.join("aura-os-bios.img");
+    bootloader::BiosBoot::new(&kernel_path)
+        .create_disk_image(&bios_path)
+        .expect("Failed to create BIOS disk image");
+    println!("Created BIOS image: {}", bios_path.display());
 }

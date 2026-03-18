@@ -1,17 +1,13 @@
 [package]
 name = "aura-kernel"
-version.workspace = true
-edition.workspace = true
-authors.workspace = true
+version = "0.1.0"
+edition = "2024"
+authors = ["Venkat Yarlagadda", "Taylor Oclaw"]
 
 [dependencies]
-spin = "0.9"
-bitflags = "2"
-log = "0.4"
-linked_list_allocator = "0.10"
-
-[dependencies.bootloader_api]
-version = "0.11"
-
-[dependencies.x86_64]
-version = "0.15"
+bootloader_api = "0.11"
+spin = { version = "0.9", default-features = false, features = ["lock_api", "spin_mutex", "lazy"] }
+x86_64 = "0.15"
+uart_16550 = "0.3"
+pic8259 = "0.11"
+pc-keyboard = "0.7"

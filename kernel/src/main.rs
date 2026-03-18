@@ -2,10 +2,10 @@
 #![no_main]
 #![feature(abi_x86_interrupt)]
 
-mod vga;
 mod serial;
-mod interrupts;
+mod vga;
 mod gdt;
+mod interrupts;
 mod memory;
 
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
@@ -20,34 +20,45 @@ pub static BOOTLOADER_CONFIG: BootloaderConfig = {
 entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 fn kernel_main(boot_info: &'static mut BootInfo) -> ! {
-    // Initialize GDT and IDT
+    // Initialize hardware
     gdt::init();
     interrupts::init_idt();
+    unsafe { interrupts::PICS.lock().initialize() };
+    x86_64::instructions::interrupts::enable();
 
-    // Clear screen and print banner
+    // Clear screen and show banner
     vga::clear_screen();
     vga::print_banner();
 
-    serial::serial_println!("AuraOS kernel initialized");
-    serial::serial_println!("Boot info: {:?}", boot_info.memory_regions.len());
+    crate::serial_println!("[kernel] AuraOS v0.1.0 booting...");
+    crate::serial_println!("[kernel] GDT initialized");
+    crate::serial_println!("[kernel] IDT initialized");
+    crate::serial_println!("[kernel] PIC initialized, interrupts enabled");
 
-    // Initialize memory
-    if let Some(phys_offset) = boot_info.physical_memory_offset.into_option() {
-        serial::serial_println!("Physical memory offset: {:#x}", phys_offset);
-    }
+    // Memory info
+    let mem_regions = boot_info.memory_regions.len();
+    let usable_mem = memory::total_usable_memory(&boot_info.memory_regions);
+    crate::serial_println!("[kernel] Memory regions: {}", mem_regions);
+    crate::serial_println!("[kernel] Usable memory: {} MB", usable_mem / (1024 * 1024));
 
-    vga::println!("");
-    vga::println!("  Welcome to AuraOS v0.1.0");
-    vga::println!("  The future of human-computer interaction.");
-    vga::println!("");
-    vga::println!("  [kernel] GDT initialized");
-    vga::println!("  [kernel] IDT initialized");
-    vga::println!("  [kernel] Memory regions: {}", boot_info.memory_regions.len());
-    vga::println!("");
-    vga::println!("  Type 'help' for available commands.");
-    vga::println!("");
+    crate::println!("");
+    vga::set_color(vga::Color::LightGreen, vga::Color::Black);
+    crate::println!("  AuraOS v0.1.0 - The Ambient Intelligence OS");
+    vga::set_color(vga::Color::LightCyan, vga::Color::Black);
+    crate::println!("");
+    crate::println!("  [ok] GDT initialized");
+    crate::println!("  [ok] IDT initialized");
+    crate::println!("  [ok] PIC initialized");
+    crate::println!("  [ok] Interrupts enabled");
+    crate::println!("  [ok] Memory: {} MB usable ({} regions)", usable_mem / (1024 * 1024), mem_regions);
+    crate::println!("");
+    vga::set_color(vga::Color::White, vga::Color::Black);
+    crate::println!("  Type something... (keyboard input active)");
+    crate::println!("");
+    vga::set_color(vga::Color::LightCyan, vga::Color::Black);
+    crate::print!("  aura> ");
 
-    // Halt loop
+    // Main loop — halt until interrupt
     loop {
         x86_64::instructions::hlt();
     }
@@ -55,12 +66,11 @@ fn kernel_main(boot_info: &'static mut BootInfo) -> ! {
 
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
-    serial::serial_println!("KERNEL PANIC: {}", info);
-    vga::set_color(vga::Color::Red, vga::Color::Black);
-    vga::println!("\n  !! KERNEL PANIC !!");
-    vga::println!("  {}", info);
+    crate::serial_println!("KERNEL PANIC: {}", info);
+    vga::set_color(vga::Color::LightRed, vga::Color::Black);
+    crate::println!("\n  !! KERNEL PANIC !!");
+    crate::println!("  {}", info);
     loop {
         x86_64::instructions::hlt();
     }
 }
-pub mod net;
