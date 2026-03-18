@@ -29,6 +29,8 @@ members = [
     "apps/terminal",
     "apps/files",
     "apps/settings",
+    "services/user-manager",
+    "services/session-manager",
 ]
 
 [workspace.package]
@@ -44,3 +46,7 @@ panic = "abort"
 panic = "abort"
 lto = true
 opt-level = "s"
+
+# Not in workspace (separate build targets):
+# mobile/aura-mobile — built for Android/iOS
+# boot — built separately for disk image generation
