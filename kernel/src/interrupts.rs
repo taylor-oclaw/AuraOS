@@ -1,7 +1,7 @@
 use x86_64::structures::idt::{InterruptDescriptorTable, InterruptStackFrame};
 use pic8259::ChainedPics;
 use spin::Mutex;
-use crate::vga;
+use crate::framebuffer;
 
 pub const PIC_1_OFFSET: u8 = 32;
 pub const PIC_2_OFFSET: u8 = PIC_1_OFFSET + 8;
@@ -25,7 +25,8 @@ static IDT: spin::Lazy<InterruptDescriptorTable> = spin::Lazy::new(|| {
             .set_stack_index(crate::gdt::DOUBLE_FAULT_IST_INDEX);
     }
 
-    idt[InterruptIndex::Timer as u8].set_handler_fn(timer_interrupt_handler);
+    // Timer: mask it in PIC instead of handling it
+    // idt[InterruptIndex::Timer as u8].set_handler_fn(timer_interrupt_handler);
     idt[InterruptIndex::Keyboard as u8].set_handler_fn(keyboard_interrupt_handler);
 
     idt
@@ -48,7 +49,10 @@ extern "x86-interrupt" fn double_fault_handler(
 }
 
 extern "x86-interrupt" fn timer_interrupt_handler(_stack_frame: InterruptStackFrame) {
-    unsafe { PICS.lock().notify_end_of_interrupt(InterruptIndex::Timer as u8) };
+    // Minimal handler — just acknowledge the interrupt
+    unsafe {
+        x86_64::instructions::port::Port::<u8>::new(0x20).write(0x20);
+    }
 }
 
 extern "x86-interrupt" fn keyboard_interrupt_handler(_stack_frame: InterruptStackFrame) {
@@ -68,16 +72,20 @@ extern "x86-interrupt" fn keyboard_interrupt_handler(_stack_frame: InterruptStac
             match key {
                 DecodedKey::Unicode(character) => {
                     if character == '\n' || character == '\r' {
-                        crate::println!("");
-                        vga::set_color(vga::Color::LightCyan, vga::Color::Black);
-                        crate::print!("  aura> ");
+                        crate::fb_println!("");
+                        framebuffer::with_writer(|w| w.set_fg(0, 210, 255));
+                        crate::fb_print!("  aura> ");
                     } else if character == '\u{8}' {
-                        vga::backspace();
+                        framebuffer::with_writer(|w| w.backspace());
                     } else {
-                        crate::print!("{}", character);
+                        framebuffer::with_writer(|w| w.set_fg(255, 255, 255));
+                        crate::fb_print!("{}", character);
                     }
+                    crate::serial_println!("[kbd] char: {:?}", character);
                 }
-                DecodedKey::RawKey(_key) => {}
+                DecodedKey::RawKey(key) => {
+                    crate::serial_println!("[kbd] raw: {:?}", key);
+                }
             }
         }
     }

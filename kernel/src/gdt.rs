@@ -7,7 +7,14 @@ pub const DOUBLE_FAULT_IST_INDEX: u16 = 0;
 static TSS: spin::Lazy<TaskStateSegment> = spin::Lazy::new(|| {
     let mut tss = TaskStateSegment::new();
     tss.interrupt_stack_table[DOUBLE_FAULT_IST_INDEX as usize] = {
-        const STACK_SIZE: usize = 4096 * 5;
+        const STACK_SIZE: usize = 4096 * 20; // 80KB stack
+        static mut STACK: [u8; STACK_SIZE] = [0; STACK_SIZE];
+        let stack_start = VirtAddr::from_ptr(unsafe { core::ptr::addr_of!(STACK) });
+        stack_start + STACK_SIZE as u64
+    };
+    // Also set up a proper privilege stack (RSP0) for interrupts
+    tss.privilege_stack_table[0] = {
+        const STACK_SIZE: usize = 4096 * 20; // 80KB
         static mut STACK: [u8; STACK_SIZE] = [0; STACK_SIZE];
         let stack_start = VirtAddr::from_ptr(unsafe { core::ptr::addr_of!(STACK) });
         stack_start + STACK_SIZE as u64
