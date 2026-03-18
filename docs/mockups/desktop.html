@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AuraOS — Desktop Mockup</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+  
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: linear-gradient(135deg, #0a0a1e 0%, #1a0f3c 40%, #0d1b2a 100%);
+    color: #f0f0ff;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Ambient particles */
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.15;
+    filter: blur(40px);
+  }
+  .p1 { width: 400px; height: 400px; background: #00d2ff; top: -100px; right: 200px; }
+  .p2 { width: 300px; height: 300px; background: #7b2ff7; bottom: 100px; left: -50px; }
+  .p3 { width: 200px; height: 200px; background: #00ffc8; bottom: -50px; right: 400px; }
+
+  /* Top bar — minimal, transparent */
+  .topbar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    background: rgba(10, 10, 30, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    z-index: 100;
+    font-size: 13px;
+  }
+  .topbar-left { display: flex; gap: 16px; align-items: center; }
+  .topbar-right { display: flex; gap: 16px; align-items: center; color: rgba(255,255,255,0.6); }
+  .topbar .logo { font-weight: 600; color: #00d2ff; font-size: 14px; letter-spacing: 1px; }
+  .topbar .dot { width: 6px; height: 6px; border-radius: 50%; background: #00dc82; }
+
+  /* Time widget — large ambient display */
+  .time-widget {
+    position: absolute;
+    top: 80px;
+    left: 80px;
+    z-index: 10;
+  }
+  .time-widget .time {
+    font-size: 72px;
+    font-weight: 200;
+    letter-spacing: -2px;
+    color: rgba(255,255,255,0.9);
+  }
+  .time-widget .date {
+    font-size: 18px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.4);
+    margin-top: 4px;
+  }
+  .time-widget .greeting {
+    font-size: 24px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.6);
+    margin-top: 16px;
+  }
+
+  /* Glass surface */
+  .surface {
+    position: absolute;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(24px) saturate(1.4);
+    -webkit-backdrop-filter: blur(24px) saturate(1.4);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
+  }
+
+  /* Companion surface — the AI chat */
+  .companion {
+    right: 40px;
+    top: 60px;
+    width: 400px;
+    height: 580px;
+    display: flex;
+    flex-direction: column;
+  }
+  .companion-header {
+    padding: 20px 24px 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .companion-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00d2ff, #7b2ff7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+  .companion-name { font-weight: 600; font-size: 15px; }
+  .companion-status { font-size: 12px; color: rgba(255,255,255,0.4); }
+  .companion-messages {
+    flex: 1;
+    padding: 16px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+  }
+  .msg {
+    max-width: 85%;
+    padding: 10px 16px;
+    border-radius: 16px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .msg-ai {
+    background: rgba(0, 210, 255, 0.1);
+    border: 1px solid rgba(0, 210, 255, 0.15);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+  }
+  .msg-user {
+    background: rgba(123, 47, 247, 0.15);
+    border: 1px solid rgba(123, 47, 247, 0.2);
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+  }
+  .companion-input {
+    padding: 16px 24px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    gap: 8px;
+  }
+  .companion-input input {
+    flex: 1;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 10px 16px;
+    color: #f0f0ff;
+    font-size: 14px;
+    outline: none;
+  }
+  .companion-input input::placeholder { color: rgba(255,255,255,0.3); }
+  .send-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #00d2ff, #7b2ff7);
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Quick surfaces — floating cards at bottom */
+  .quick-surfaces {
+    position: absolute;
+    bottom: 40px;
+    left: 80px;
+    display: flex;
+    gap: 20px;
+    z-index: 10;
+  }
+  .quick-card {
+    width: 280px;
+    height: 160px;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(24px) saturate(1.4);
+    -webkit-backdrop-filter: blur(24px) saturate(1.4);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .quick-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 20px rgba(0,210,255,0.1);
+  }
+  .card-icon { font-size: 28px; }
+  .card-title { font-weight: 600; font-size: 15px; }
+  .card-subtitle { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.4; }
+
+  /* Weather ambient */
+  .weather {
+    position: absolute;
+    top: 80px;
+    right: 460px;
+    text-align: right;
+    z-index: 10;
+  }
+  .weather-temp { font-size: 42px; font-weight: 200; }
+  .weather-desc { font-size: 14px; color: rgba(255,255,255,0.5); }
+  .weather-icon { font-size: 32px; margin-bottom: 4px; }
+
+  /* Command palette hint */
+  .command-hint {
+    position: absolute;
+    bottom: 220px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 8px 20px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
+    z-index: 10;
+  }
+  .command-hint kbd {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 12px;
+    margin: 0 2px;
+  }
+
+  /* Notification */
+  .notification {
+    position: absolute;
+    top: 52px;
+    right: 40px;
+    width: 340px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 14px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    z-index: 50;
+    display: none; /* hidden for clean view */
+  }
+
+  /* Music mini player */
+  .music-player {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    width: 400px;
+    z-index: 10;
+  }
+  .music-inner {
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(24px) saturate(1.4);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .music-art {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #1a0f3c, #7b2ff7);
+    flex-shrink: 0;
+  }
+  .music-info { flex: 1; }
+  .music-title { font-size: 14px; font-weight: 500; }
+  .music-artist { font-size: 12px; color: rgba(255,255,255,0.4); }
+  .music-progress {
+    width: 100%;
+    height: 3px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    margin-top: 8px;
+    position: relative;
+  }
+  .music-progress-fill {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 35%;
+    background: linear-gradient(90deg, #00d2ff, #7b2ff7);
+    border-radius: 2px;
+  }
+  .music-controls {
+    display: flex;
+    gap: 12px;
+    color: rgba(255,255,255,0.6);
+    font-size: 18px;
+  }
+</style>
+</head>
+<body>
+
+<!-- Ambient particles -->
+<div class="particle p1"></div>
+<div class="particle p2"></div>
+<div class="particle p3"></div>
+
+<!-- Top bar -->
+<div class="topbar">
+  <div class="topbar-left">
+    <span class="logo">AURA</span>
+  </div>
+  <div class="topbar-right">
+    <span>☁️ 72°F</span>
+    <span>🔋 94%</span>
+    <span>📶</span>
+    <div class="dot"></div>
+    <span>3:26 PM</span>
+  </div>
+</div>
+
+<!-- Time widget -->
+<div class="time-widget">
+  <div class="time">3:26</div>
+  <div class="date">Wednesday, March 18, 2026</div>
+  <div class="greeting">Good afternoon, Venkat</div>
+</div>
+
+<!-- Weather -->
+<div class="weather">
+  <div class="weather-icon">⛅</div>
+  <div class="weather-temp">72°</div>
+  <div class="weather-desc">Partly Cloudy · San Antonio</div>
+</div>
+
+<!-- AI Companion -->
+<div class="surface companion">
+  <div class="companion-header">
+    <div class="companion-avatar">🤖</div>
+    <div>
+      <div class="companion-name">Aura</div>
+      <div class="companion-status">Always here · Local AI</div>
+    </div>
+  </div>
+  <div class="companion-messages">
+    <div class="msg msg-ai">Good afternoon! You have 2 meetings today and 3 unread emails. Want me to summarize them?</div>
+    <div class="msg msg-user">Yeah, give me the highlights</div>
+    <div class="msg msg-ai">📧 <strong>Jennifer</strong> sent the updated HireFlow contract — needs your signature by Friday.<br><br>📧 <strong>Tom</strong> asking about VyMatik demo timeline.<br><br>📅 <strong>4:00 PM</strong> — Team standup<br>📅 <strong>6:30 PM</strong> — Dinner with Sujitha</div>
+    <div class="msg msg-user">Reply to Jennifer: I'll review tonight</div>
+    <div class="msg msg-ai">✅ Draft reply sent to Jennifer. Want me to set a reminder to review the contract at 9 PM?</div>
+  </div>
+  <div class="companion-input">
+    <input type="text" placeholder="Ask Aura anything...">
+    <button class="send-btn">→</button>
+  </div>
+</div>
+
+<!-- Quick surface cards -->
+<div class="quick-surfaces">
+  <div class="quick-card">
+    <div class="card-icon">📂</div>
+    <div>
+      <div class="card-title">Recent Files</div>
+      <div class="card-subtitle">HireFlow360 contract, AuraOS architecture doc, meeting notes</div>
+    </div>
+  </div>
+  <div class="quick-card">
+    <div class="card-icon">✅</div>
+    <div>
+      <div class="card-title">Today's Tasks</div>
+      <div class="card-subtitle">3 of 7 complete · Next: Review patent draft</div>
+    </div>
+  </div>
+  <div class="quick-card">
+    <div class="card-icon">📊</div>
+    <div>
+      <div class="card-title">HireFlow360</div>
+      <div class="card-subtitle">1,535 crates compiled · All systems healthy</div>
+    </div>
+  </div>
+  <div class="quick-card">
+    <div class="card-icon">💬</div>
+    <div>
+      <div class="card-title">Messages</div>
+      <div class="card-subtitle">2 unread from Jennifer, 1 from Tom</div>
+    </div>
+  </div>
+</div>
+
+<!-- Command palette hint -->
+<div class="command-hint">
+  Press <kbd>⌘</kbd> <kbd>Space</kbd> or just speak to open Command Palette
+</div>
+
+<!-- Music mini player -->
+<div class="music-player">
+  <div class="music-inner">
+    <div class="music-art"></div>
+    <div class="music-info">
+      <div class="music-title">Weightless</div>
+      <div class="music-artist">Marconi Union</div>
+      <div class="music-progress"><div class="music-progress-fill"></div></div>
+    </div>
+    <div class="music-controls">
+      <span>⏮</span>
+      <span>⏸</span>
+      <span>⏭</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
