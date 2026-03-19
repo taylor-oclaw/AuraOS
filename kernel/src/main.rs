@@ -31,6 +31,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod accessibility;
 mod acpi;
 mod agent_hierarchy;
@@ -46,8 +47,10 @@ mod audio_mixer;
 mod aura_engine;
 mod backup_manager;
 mod behavior;
+mod bluetooth_mgr;
 mod boot_sequence;
 mod clipboard;
+mod clipboard_plus;
 mod cmd_parser;
 mod color;
 mod compat_bridge;
@@ -125,6 +128,7 @@ mod pci;
 mod permissions;
 mod pipes;
 mod power_mgmt;
+mod print_manager;
 mod proc_mgr;
 mod proc_sched;
 mod random;
@@ -132,6 +136,7 @@ mod ring_buffer;
 mod rtc;
 mod sandbox_manager;
 mod scheduler;
+mod screen_capture;
 mod search_indexer;
 mod self_evolution;
 mod serial;
@@ -151,6 +156,7 @@ mod tcpip;
 mod terminal;
 mod text_editor;
 mod theme;
+mod theme_engine;
 mod timers;
 mod tokenizer;
 mod transformer;
