@@ -30,6 +30,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod accessibility;
 mod acpi;
 mod agent_hierarchy;
@@ -74,6 +75,7 @@ mod dhcp;
 mod display_server;
 mod dma;
 mod dns;
+mod drag_drop;
 mod e1000;
 mod elf_loader;
 mod env;
@@ -89,6 +91,7 @@ mod framebuffer;
 mod gdt;
 mod gesture_engine;
 mod gguf;
+mod gpu_driver;
 mod graphics;
 mod gui_text;
 mod http;
@@ -97,6 +100,7 @@ mod identity;
 mod input_router;
 mod intent_storage;
 mod interrupts;
+mod io_scheduler;
 mod ipc;
 mod kbd_layout;
 mod kernel_orchestrator;
@@ -109,6 +113,7 @@ mod memfs;
 mod memory;
 mod mesh;
 mod mouse;
+mod multi_monitor;
 mod net_stack;
 mod nlp;
 mod nlp_bridge;
@@ -159,6 +164,7 @@ mod virtio_net;
 mod voice_engine;
 mod wasm_runtime;
 mod widget;
+mod wifi_stack;
 mod window_decor;
 mod window_mgr;
 mod wm;
