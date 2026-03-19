@@ -147,3 +147,8 @@ pub fn list_devices(devices: &[PciDevice]) {
             dev.class_name);
     }
 }
+
+/// Read BAR0 from PCI config space
+pub fn read_bar0(bus: u8, device: u8, function: u8) -> u32 {
+    pci_read(bus, device, function, 0x10)
+}

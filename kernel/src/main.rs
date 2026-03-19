@@ -24,6 +24,12 @@ mod pci;
 mod mouse;
 mod acpi;
 mod memfs;
+mod surface;
+mod e1000;
+mod usb;
+mod mesh;
+mod scheduler;
+mod identity;
 
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
