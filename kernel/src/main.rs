@@ -21,6 +21,7 @@ mod gguf;
 mod tokenizer;
 mod transformer;
 mod pci;
+mod font;
 mod mouse;
 mod acpi;
 mod memfs;
