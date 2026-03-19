@@ -90,11 +90,11 @@ impl GestureEngine {
             return None;
         }
 
-        let first = &self.touch_points[0];
-        let last = &self.touch_points[self.touch_points.len() - 1];
+        let first_x = self.touch_points[0].x; let first_y = self.touch_points[0].y; let first_p = self.touch_points[0].pressure; let first_t = self.touch_points[0].timestamp;
+        let last_idx = self.touch_points.len() - 1; let last_x = self.touch_points[last_idx].x; let last_y = self.touch_points[last_idx].y; let last_p = self.touch_points[last_idx].pressure; let last_t = self.touch_points[last_idx].timestamp;
 
-        let dx = last.x - first.x;
-        let dy = last.y - first.y;
+        let dx = last_x - first_x;
+        let dy = last_y - first_y;
 
         let dist_sq = (dx * dx + dy * dy) as f32;
 
