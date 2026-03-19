@@ -32,10 +32,12 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod accessibility;
 mod acpi;
 mod agent_hierarchy;
 mod allocator;
+mod animation_system;
 mod app_marketplace;
 mod apps;
 mod arp;
@@ -109,7 +111,9 @@ mod kbd_layout;
 mod kernel_orchestrator;
 mod keyboard;
 mod knowledge_graph;
+mod lock_screen;
 mod logger;
+mod login_screen;
 mod math;
 mod mem_pool;
 mod memfs;
@@ -142,8 +146,10 @@ mod self_evolution;
 mod serial;
 mod serial_console;
 mod shell;
+mod shutdown_mgr;
 mod signals;
 mod socket_api;
+mod status_bar;
 mod storage;
 mod string_utils;
 mod surface;
