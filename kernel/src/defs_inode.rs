@@ -44,7 +44,7 @@ pub struct SemanticTag {
     pub auto_generated: bool,
 }
 
-/// AuraFS inode — the heart of the filesystem
+/// DEFS inode — the heart of the filesystem
 pub struct Inode {
     pub inode_num: InodeNum,
     pub file_type: FileType,

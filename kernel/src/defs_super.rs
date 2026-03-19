@@ -1,7 +1,7 @@
 extern crate alloc;
 use alloc::vec::Vec;
 
-pub const AURAFS_MAGIC: u64 = 0x4155524146533031;
+pub const DEFS_MAGIC: u64 = 0x4445465346533031;
 pub const BLOCK_SIZE: u32 = 4096;
 
 #[derive(Debug, PartialEq)]
@@ -46,7 +46,7 @@ impl Superblock {
         sb_label[..len].copy_from_slice(&label[..len]);
 
         Superblock {
-            magic: AURAFS_MAGIC,
+            magic: DEFS_MAGIC,
             version: 1,
             total_blocks,
             free_blocks: total_blocks,
@@ -67,7 +67,7 @@ impl Superblock {
     }
 
     pub fn is_valid(&self) -> bool {
-        self.magic == AURAFS_MAGIC && self.block_size == BLOCK_SIZE
+        self.magic == DEFS_MAGIC && self.block_size == BLOCK_SIZE
     }
 
     pub fn has_feature(&self, feature: u64) -> bool {

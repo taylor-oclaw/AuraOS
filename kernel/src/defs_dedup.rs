@@ -41,7 +41,7 @@ pub struct DedupEntry {
     pub size: u32,
 }
 
-/// PATENTABLE: Content-addressable dedup engine for AuraFS
+/// PATENTABLE: Content-addressable dedup engine for DEFS
 pub struct DedupEngine {
     entries: Vec<DedupEntry>,
     pub bytes_saved: u64,

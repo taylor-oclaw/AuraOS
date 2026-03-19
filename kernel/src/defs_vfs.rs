@@ -22,14 +22,14 @@ pub struct FileHandle {
     pub writable: bool,
 }
 
-pub struct AuraVfs {
+pub struct DefsVfs {
     pub mounted: bool,
     pub read_only: bool,
     pub next_fd: u32,
     pub open_files: Vec<(u32, FileHandle)>,
 }
 
-impl AuraVfs {
+impl DefsVfs {
     pub fn new() -> Self {
         Self {
             mounted: false,
