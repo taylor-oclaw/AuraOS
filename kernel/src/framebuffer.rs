@@ -7,7 +7,7 @@ use core::fmt;
 use spin::Mutex;
 
 /// Built-in 8x16 bitmap font (basic ASCII)
-mod font {
+pub mod font_data {
     // Simple 8x16 font - each character is 16 bytes (one byte per row, 8 pixels wide)
     include!("font_data.rs");
 }
@@ -83,7 +83,7 @@ impl FbWriter {
     fn draw_char(&mut self, c: u8, col: usize, row: usize) {
         let x0 = col * CHAR_W;
         let y0 = row * CHAR_H;
-        let glyph = font::get_glyph(c);
+        let glyph = font_data::get_glyph(c);
 
         for dy in 0..CHAR_H {
             let row_bits = glyph[dy];

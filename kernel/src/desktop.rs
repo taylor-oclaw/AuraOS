@@ -93,6 +93,103 @@ impl Desktop {
 
         // Render all surfaces
         self.manager.render(fb, stride, bpp);
+        
+        // Render text content inside surfaces
+        let sw = self.manager.screen_width as usize;
+        let sh = self.manager.screen_height as usize;
+        
+        for surface in &self.manager.surfaces {
+            if !surface.visible { continue; }
+            let cx = surface.rect.x + 10; // Content area with padding
+            let cy = surface.rect.y + 34; // Below title bar
+            
+            match surface.surface_type {
+                crate::surface::SurfaceType::Terminal => {
+                    crate::gui_text::draw_text_block(
+                        fb, stride, bpp,
+                        &[
+                            "AuraOS Terminal v0.1",
+                            "",
+                            "you> hello",
+                            "Hey! I'm Aura, your OS companion.",
+                            "What can I help you with?",
+                            "",
+                            "you> _",
+                        ],
+                        cx, cy, 200, 220, 200, sw, sh,
+                    );
+                }
+                crate::surface::SurfaceType::Companion => {
+                    // Title
+                    crate::gui_text::draw_text(
+                        fb, stride, bpp,
+                        "Aura", cx, cy,
+                        0, 210, 255, sw, sh,
+                    );
+                    crate::gui_text::draw_text_block(
+                        fb, stride, bpp,
+                        &[
+                            "",
+                            "",
+                            "Hi! I'm your AI companion.",
+                            "I live inside this OS.",
+                            "",
+                            "Ask me anything, or just",
+                            "talk naturally.",
+                            "",
+                            "Pattern match mode",
+                            "(LLM loading soon...)",
+                        ],
+                        cx, cy, 180, 200, 180, sw, sh,
+                    );
+                }
+                crate::surface::SurfaceType::Widget => {
+                    // System info
+                    let dt = crate::rtc::read_local_time();
+                    let tz = crate::rtc::timezone_name();
+                    
+                    crate::gui_text::draw_text_block(
+                        fb, stride, bpp,
+                        &[
+                            "System Info",
+                            "",
+                            "AuraOS v0.1.0",
+                            "CPU: x86_64",
+                            "RAM: 506 MB",
+                        ],
+                        cx, cy, 100, 200, 255, sw, sh,
+                    );
+                }
+                _ => {}
+            }
+        }
+        
+        // Taskbar text
+        crate::gui_text::draw_text(
+            fb, stride, bpp,
+            "Aura", 14, (h - self.taskbar_height + 8) as i32,
+            255, 255, 255, sw, sh,
+        );
+        
+        // Clock in taskbar
+        let dt = crate::rtc::read_local_time();
+        let (h12, ampm) = if dt.hour == 0 { (12, "AM") } 
+            else if dt.hour < 12 { (dt.hour, "AM") }
+            else if dt.hour == 12 { (12, "PM") }
+            else { (dt.hour - 12, "PM") };
+        
+        // Format time string
+        let time_str = {
+            use core::fmt::Write;
+            let mut buf = alloc::string::String::new();
+            let _ = write!(buf, "{}:{:02} {}", h12, dt.minute, ampm);
+            buf
+        };
+        crate::gui_text::draw_text(
+            fb, stride, bpp,
+            &time_str, (w - 80) as i32, (self.manager.screen_height - self.taskbar_height + 8) as i32,
+            200, 200, 200, sw, sh,
+        );
     }
 
     fn fill_rect(&self, fb: &mut [u8], stride: usize, bpp: usize,
