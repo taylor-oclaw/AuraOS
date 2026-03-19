@@ -33,6 +33,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod accessibility;
 mod acpi;
 mod agent_hierarchy;
@@ -60,6 +61,7 @@ mod compositor;
 mod crucible_parser;
 mod crypto;
 mod cursor;
+mod datetime_mgr;
 mod defs_alloc;
 mod defs_btree;
 mod defs_decay;
@@ -90,6 +92,7 @@ mod events;
 mod fat32;
 mod fb_console;
 mod file_mgr;
+mod file_permissions;
 mod font;
 mod font_data;
 mod framebuffer;
@@ -100,6 +103,7 @@ mod gpu_driver;
 mod graphics;
 mod gui_text;
 mod http;
+mod i18n_system;
 mod icmp;
 mod identity;
 mod input_router;
@@ -124,6 +128,7 @@ mod multi_monitor;
 mod net_stack;
 mod nlp;
 mod nlp_bridge;
+mod notif_sounds;
 mod notification_center;
 mod notifications;
 mod os_init;
@@ -132,6 +137,7 @@ mod pci;
 mod permissions;
 mod pipes;
 mod power_mgmt;
+mod power_profiles;
 mod print_manager;
 mod proc_mgr;
 mod proc_sched;
