@@ -23,7 +23,9 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod acpi;
+mod agent_hierarchy;
 mod allocator;
 mod apps;
 mod arp;
@@ -36,6 +38,7 @@ mod behavior;
 mod clipboard;
 mod cmd_parser;
 mod color;
+mod compat_bridge;
 mod compositor;
 mod crucible_parser;
 mod crypto;
@@ -83,6 +86,7 @@ mod ipc;
 mod kbd_layout;
 mod kernel_orchestrator;
 mod keyboard;
+mod knowledge_graph;
 mod logger;
 mod math;
 mod mem_pool;
@@ -105,6 +109,7 @@ mod random;
 mod ring_buffer;
 mod rtc;
 mod scheduler;
+mod self_evolution;
 mod serial;
 mod serial_console;
 mod shell;
