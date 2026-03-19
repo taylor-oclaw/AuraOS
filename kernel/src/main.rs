@@ -67,6 +67,8 @@ mod dns;
 mod panic_handler;
 mod compositor;
 mod fat32;
+mod syscall;
+mod virtio_net;
 mod dhcp;
 mod cursor;
 mod dma;
