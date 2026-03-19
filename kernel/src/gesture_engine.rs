@@ -101,10 +101,10 @@ impl GestureEngine {
         if dist_sq < 100.0 {
             self.touch_points.clear();
             return Some(Gesture::Tap(TouchPoint {
-                x: first.x,
-                y: first.y,
-                pressure: first.pressure,
-                timestamp: first.timestamp,
+                x: fx,
+                y: fy,
+                pressure: fp,
+                timestamp: ft,
             }));
         }
 
@@ -123,17 +123,17 @@ impl GestureEngine {
         };
 
         let start = TouchPoint {
-            x: first.x,
-            y: first.y,
-            pressure: first.pressure,
-            timestamp: first.timestamp,
+            x: fx,
+            y: fy,
+            pressure: fp,
+            timestamp: ft,
         };
 
         let end = TouchPoint {
-            x: last.x,
-            y: last.y,
-            pressure: last.pressure,
-            timestamp: last.timestamp,
+            x: lx,
+            y: ly,
+            pressure: lp,
+            timestamp: lt,
         };
 
         self.touch_points.clear();
