@@ -108,6 +108,7 @@ mod cursor;
 mod dma;
 mod mem_pool;
 mod color;
+mod defs_tests;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
