@@ -34,9 +34,11 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod accessibility;
 mod acpi;
 mod agent_hierarchy;
+mod agent_identity;
 mod allocator;
 mod animation_system;
 mod app_marketplace;
@@ -47,6 +49,7 @@ mod attention_mgr;
 mod auction_sched;
 mod audio;
 mod audio_mixer;
+mod audit_trail;
 mod aura_engine;
 mod backup_manager;
 mod behavior;
@@ -93,6 +96,7 @@ mod fat32;
 mod fb_console;
 mod file_mgr;
 mod file_permissions;
+mod focus_modes;
 mod font;
 mod font_data;
 mod framebuffer;
@@ -115,6 +119,7 @@ mod kbd_layout;
 mod kernel_orchestrator;
 mod keyboard;
 mod knowledge_graph;
+mod llm_engine;
 mod lock_screen;
 mod logger;
 mod login_screen;
@@ -148,6 +153,7 @@ mod sandbox_manager;
 mod scheduler;
 mod screen_capture;
 mod search_indexer;
+mod secure_boot;
 mod self_evolution;
 mod serial;
 mod serial_console;
