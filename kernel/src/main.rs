@@ -63,6 +63,8 @@ mod uptime;
 mod kbd_layout;
 mod string_utils;
 mod sync_primitives;
+mod dns;
+mod dma;
 mod mem_pool;
 mod color;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
