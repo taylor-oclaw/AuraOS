@@ -93,6 +93,7 @@ fn execute_command(cmd: &str) {
         "/shutdown" => cmd_shutdown(),
         "/color" => cmd_color(&parts[1..]),
         "/echo" => cmd_echo(&parts[1..]),
+        "/tz" => cmd_timezone(&parts[1..]),
         _ => {
             // Natural language mode — send everything through NLP
             let intent = crate::nlp::parse_intent(cmd);
@@ -262,6 +263,29 @@ fn cmd_aura(args: &[&str]) {
         crate::fb_println!("  I heard you say: '{}'", args.join(" "));
         crate::fb_println!("  My brain (LLM runtime) isn't loaded yet.");
         crate::fb_println!("  Soon I'll be able to help you with anything!");
+    }
+}
+
+fn cmd_timezone(args: &[&str]) {
+    if args.is_empty() {
+        crate::fb_println!("  Current: {} (UTC{}{})",
+            crate::rtc::timezone_name(),
+            if crate::rtc::timezone_offset() >= 0 { "+" } else { "" },
+            crate::rtc::timezone_offset());
+        return;
+    }
+    match args[0] {
+        "est" => { crate::rtc::set_timezone(-5, "EST"); crate::fb_println!("  Timezone set to EST (UTC-5)"); }
+        "edt" => { crate::rtc::set_timezone(-4, "EDT"); crate::fb_println!("  Timezone set to EDT (UTC-4)"); }
+        "cst" => { crate::rtc::set_timezone(-6, "CST"); crate::fb_println!("  Timezone set to CST (UTC-6)"); }
+        "cdt" => { crate::rtc::set_timezone(-5, "CDT"); crate::fb_println!("  Timezone set to CDT (UTC-5)"); }
+        "mst" => { crate::rtc::set_timezone(-7, "MST"); crate::fb_println!("  Timezone set to MST (UTC-7)"); }
+        "pst" => { crate::rtc::set_timezone(-8, "PST"); crate::fb_println!("  Timezone set to PST (UTC-8)"); }
+        "pdt" => { crate::rtc::set_timezone(-7, "PDT"); crate::fb_println!("  Timezone set to PDT (UTC-7)"); }
+        "utc" | "gmt" => { crate::rtc::set_timezone(0, "UTC"); crate::fb_println!("  Timezone set to UTC"); }
+        "ist" => { crate::rtc::set_timezone(5, "IST"); crate::fb_println!("  Timezone set to IST (UTC+5:30)"); }
+        "jst" => { crate::rtc::set_timezone(9, "JST"); crate::fb_println!("  Timezone set to JST (UTC+9)"); }
+        _ => { crate::fb_println!("  Unknown timezone: {}", args[0]); }
     }
 }
 

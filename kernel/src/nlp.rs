@@ -24,6 +24,7 @@ pub enum Intent {
     Compliment,
     Joke,
     Weather,
+    SetTimezone,
     FileOperation(String),
     Unknown(String),
 }
@@ -99,6 +100,11 @@ pub fn parse_intent(input: &str) -> Intent {
         return Intent::Weather;
     }
 
+    // Timezone
+    if contains_any(lower, &["timezone", "time zone", "set time"]) {
+        return Intent::SetTimezone;
+    }
+
     Intent::Unknown(String::from(input))
 }
 
@@ -146,10 +152,23 @@ pub fn respond(intent: &Intent) {
             crate::shell::cmd_memory_pub();
         }
         Intent::TimeQuery => {
-            let dt = crate::rtc::read_rtc();
+            let dt = crate::rtc::read_local_time();
+            let tz = crate::rtc::timezone_name();
             framebuffer::with_writer(|w| w.set_fg(0, 255, 180));
-            crate::fb_println!("  It's {}:{:02}:{:02} on {} {} {}, {}",
-                dt.hour, dt.minute, dt.second,
+            
+            // 12-hour format for friendliness
+            let (hour12, ampm) = if dt.hour == 0 {
+                (12, "AM")
+            } else if dt.hour < 12 {
+                (dt.hour, "AM")
+            } else if dt.hour == 12 {
+                (12, "PM")
+            } else {
+                (dt.hour - 12, "PM")
+            };
+            
+            crate::fb_println!("  It's {}:{:02} {} {} on {} {} {}, {}",
+                hour12, dt.minute, ampm, tz,
                 dt.weekday_name(), dt.month_name(), dt.day, dt.year);
         }
         Intent::ClearScreen => {
@@ -201,6 +220,22 @@ pub fn respond(intent: &Intent) {
                     crate::fb_println!("  and those who don't.");
                 }
             }
+        }
+        Intent::SetTimezone => {
+            framebuffer::with_writer(|w| w.set_fg(0, 255, 180));
+            crate::fb_println!("  Current timezone: {} (UTC{}{})",
+                crate::rtc::timezone_name(),
+                if crate::rtc::timezone_offset() >= 0 { "+" } else { "" },
+                crate::rtc::timezone_offset());
+            crate::fb_println!("");
+            crate::fb_println!("  Common timezones (use /tz command):");
+            framebuffer::with_writer(|w| w.set_fg(200, 200, 200));
+            crate::fb_println!("    /tz est    Eastern (UTC-5)");
+            crate::fb_println!("    /tz edt    Eastern Daylight (UTC-4)");
+            crate::fb_println!("    /tz cst    Central (UTC-6)");
+            crate::fb_println!("    /tz pst    Pacific (UTC-8)");
+            crate::fb_println!("    /tz utc    UTC (UTC+0)");
+            crate::fb_println!("    /tz gmt    GMT (UTC+0)");
         }
         Intent::Weather => {
             framebuffer::with_writer(|w| w.set_fg(255, 200, 100));
