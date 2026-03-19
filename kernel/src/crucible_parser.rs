@@ -1,11 +1,7 @@
 extern crate alloc;
+use alloc::string::String;
 use alloc::vec::Vec;
 use alloc::vec;
-use alloc::string::String;
-extern crate alloc;
-use alloc::string::String;
-use alloc::vec::Vec;
-
 #[derive(Clone)]
 pub enum CrucibleToken {
     Intent(String),
@@ -19,7 +15,6 @@ pub enum CrucibleToken {
     Limit(u64),
     Unknown(String)
 }
-
 pub struct CrucibleProgram {
     pub intent: String,
     pub constraints: Vec<(String, String)>,
@@ -28,16 +23,13 @@ pub struct CrucibleProgram {
     pub sort: Option<String>,
     pub limit: Option<u64>
 }
-
 pub struct CrucibleParser {
     pub tokens: Vec<CrucibleToken>
 }
-
 impl CrucibleParser {
     pub fn new() -> Self {
         Self { tokens: Vec::new() }
     }
-
     pub fn tokenize(&mut self, input: &str) -> Vec<CrucibleToken> {
         let mut tokens = Vec::new();
         let parts: Vec<&str> = input.split(' ').collect();
@@ -105,7 +97,6 @@ impl CrucibleParser {
         self.tokens = tokens.clone();
         tokens
     }
-
     pub fn parse(&self) -> CrucibleProgram {
         let mut prog = CrucibleProgram {
             intent: String::new(),
