@@ -52,6 +52,11 @@ mod ipc;
 mod events;
 mod sysinfo;
 mod env;
+mod pipes;
+mod timers;
+mod device_mgr;
+mod cmd_parser;
+mod signals;
 mod storage;
 
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
