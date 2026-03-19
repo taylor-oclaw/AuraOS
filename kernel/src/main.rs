@@ -31,6 +31,8 @@ mod mesh;
 mod scheduler;
 mod identity;
 mod desktop;
+mod behavior;
+mod updater;
 
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
@@ -214,8 +216,19 @@ fn kernel_main(boot_info: &'static mut BootInfo) -> ! {
                 }
             }
         } else {
-            // Poll mouse too
-            mouse::poll(1280, 720);
+            // Poll mouse
+            if mouse::poll(1280, 720) {
+                let ms = mouse::state();
+                desktop::update_mouse(ms.x, ms.y);
+                
+                // Re-render desktop if active
+                if desktop::is_active() {
+                    framebuffer::with_writer(|w| {
+                        let fb = unsafe { w.raw_buffer() };
+                        desktop::render(fb, 1280, 3);
+                    });
+                }
+            }
             
             // Brief pause to avoid burning CPU
             core::hint::spin_loop();
