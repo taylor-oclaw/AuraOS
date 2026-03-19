@@ -35,6 +35,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod accessibility;
 mod acpi;
 mod agent_hierarchy;
@@ -59,12 +60,14 @@ mod clipboard;
 mod clipboard_plus;
 mod cmd_parser;
 mod color;
+mod command_palette;
 mod compat_bridge;
 mod compositor;
 mod crucible_parser;
 mod crypto;
 mod cursor;
 mod datetime_mgr;
+mod debug_console;
 mod defs_alloc;
 mod defs_btree;
 mod defs_decay;
@@ -96,6 +99,7 @@ mod fat32;
 mod fb_console;
 mod file_mgr;
 mod file_permissions;
+mod firewall_engine;
 mod focus_modes;
 mod font;
 mod font_data;
@@ -185,12 +189,14 @@ mod usb_hid;
 mod user_profiles;
 mod vfs;
 mod virtio_net;
+mod virtual_desktops;
 mod voice_engine;
 mod wasm_runtime;
 mod widget;
 mod wifi_stack;
 mod window_decor;
 mod window_mgr;
+mod window_tiling;
 mod wm;
 
 fn kernel_main(boot_info: &'static mut BootInfo) -> ! {
