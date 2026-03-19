@@ -22,6 +22,8 @@ mod tokenizer;
 mod transformer;
 mod pci;
 mod mouse;
+mod acpi;
+mod memfs;
 
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
