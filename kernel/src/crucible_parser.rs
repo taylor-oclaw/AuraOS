@@ -1,7 +1,12 @@
 extern crate alloc;
+use alloc::vec::Vec;
+use alloc::vec;
+use alloc::string::String;
+extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
+#[derive(Clone)]
 pub enum CrucibleToken {
     Intent(String),
     Constraint(String, String),
