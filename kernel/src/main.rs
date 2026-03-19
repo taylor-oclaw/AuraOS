@@ -48,6 +48,10 @@ mod power_mgmt;
 mod vfs;
 mod graphics;
 mod proc_sched;
+mod ipc;
+mod events;
+mod sysinfo;
+mod env;
 mod storage;
 
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
