@@ -40,6 +40,9 @@ mod audio;
 mod tcpip;
 mod clipboard;
 mod notifications;
+mod wm;
+mod logger;
+mod permissions;
 mod storage;
 
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
