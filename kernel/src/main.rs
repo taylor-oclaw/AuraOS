@@ -65,6 +65,8 @@ mod string_utils;
 mod sync_primitives;
 mod dns;
 mod panic_handler;
+mod compositor;
+mod dhcp;
 mod cursor;
 mod dma;
 mod mem_pool;
