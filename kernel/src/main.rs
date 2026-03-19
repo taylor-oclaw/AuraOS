@@ -48,6 +48,7 @@ mod aurafs_model;
 mod aurafs_snapshot;
 mod aurafs_prefetch;
 mod aurafs_decay;
+mod aurafs_dedup;
 mod aurafs_super;
 mod aurafs_btree;
 mod aurafs_alloc;
