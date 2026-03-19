@@ -64,6 +64,8 @@ mod kbd_layout;
 mod string_utils;
 mod sync_primitives;
 mod dns;
+mod panic_handler;
+mod cursor;
 mod dma;
 mod mem_pool;
 mod color;
