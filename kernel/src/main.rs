@@ -21,6 +21,7 @@ mod gguf;
 mod tokenizer;
 mod transformer;
 mod pci;
+mod mouse;
 
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
@@ -170,6 +171,10 @@ fn kernel_main(boot_info: &'static mut BootInfo) -> ! {
     use pc_keyboard::{layouts, DecodedKey, HandleControl, Keyboard, ScancodeSet1};
     let mut kbd = Keyboard::new(ScancodeSet1::new(), layouts::Us104Key, HandleControl::Ignore);
     
+    // Initialize mouse
+    mouse::init(1280, 720);
+    crate::serial_println!("[kernel] Mouse initialized");
+    
     crate::serial_println!("[kernel] Entering main loop (polling mode)...");
 
     // Main loop — poll keyboard controller directly
@@ -200,7 +205,10 @@ fn kernel_main(boot_info: &'static mut BootInfo) -> ! {
                 }
             }
         } else {
-            // No key — brief pause to avoid burning CPU
+            // Poll mouse too
+            mouse::poll(1280, 720);
+            
+            // Brief pause to avoid burning CPU
             core::hint::spin_loop();
         }
     }
