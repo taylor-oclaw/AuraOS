@@ -20,6 +20,7 @@ mod math;
 mod gguf;
 mod tokenizer;
 mod transformer;
+mod pci;
 
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;

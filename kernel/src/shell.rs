@@ -215,8 +215,19 @@ fn cmd_hardware() {
     crate::fb_println!("  Framebuffer: active (1280x720 BGR)");
     crate::fb_println!("  Keyboard: PS/2 (active)");
     crate::fb_println!("  Mouse: PS/2 (not yet initialized)");
-    crate::fb_println!("  Network: not yet initialized");
-    crate::fb_println!("  Storage: boot disk only");
+    
+    // PCI scan
+    framebuffer::with_writer(|w| w.set_fg(0, 255, 180));
+    crate::fb_println!("");
+    crate::fb_println!("  PCI Bus Scan:");
+    let pci_devices = crate::pci::scan();
+    for dev in &pci_devices {
+        framebuffer::with_writer(|w| w.set_fg(200, 200, 200));
+        crate::fb_println!("    {:02x}:{:02x}.{} [{:04x}:{:04x}] {}",
+            dev.bus, dev.device, dev.function,
+            dev.vendor_id, dev.device_id,
+            dev.class_name);
+    }
 }
 
 fn cmd_color(args: &[&str]) {
