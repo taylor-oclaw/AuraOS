@@ -61,7 +61,7 @@ static IDT: spin::Lazy<InterruptDescriptorTable> = spin::Lazy::new(|| {
             .set_stack_index(crate::gdt::DOUBLE_FAULT_IST_INDEX);
     }
 
-    idt[InterruptIndex::Keyboard as u8].set_handler_fn(keyboard_interrupt_handler);
+    idt[InterruptIndex::Keyboard as u8 as usize].set_handler_fn(keyboard_interrupt_handler);
 
     idt
 });

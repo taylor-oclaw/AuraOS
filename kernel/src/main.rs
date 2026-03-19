@@ -37,6 +37,7 @@ mod scheduler;
 mod identity;
 mod desktop;
 mod text_editor;
+mod widget;
 mod serial_console;
 mod behavior;
 mod updater;

@@ -25,8 +25,8 @@ static TSS: spin::Lazy<TaskStateSegment> = spin::Lazy::new(|| {
 
 static GDT: spin::Lazy<(GlobalDescriptorTable, Selectors)> = spin::Lazy::new(|| {
     let mut gdt = GlobalDescriptorTable::new();
-    let code = gdt.append(Descriptor::kernel_code_segment());
-    let tss = gdt.append(Descriptor::tss_segment(&TSS));
+    let code = gdt.add_entry(Descriptor::kernel_code_segment());
+    let tss = gdt.add_entry(Descriptor::tss_segment(&TSS));
     (gdt, Selectors { code, tss })
 });
 
