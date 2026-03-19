@@ -66,6 +66,7 @@ mod sync_primitives;
 mod dns;
 mod panic_handler;
 mod compositor;
+mod fat32;
 mod dhcp;
 mod cursor;
 mod dma;
