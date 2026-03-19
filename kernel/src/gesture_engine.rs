@@ -96,9 +96,9 @@ impl GestureEngine {
         let dx = last.x - first.x;
         let dy = last.y - first.y;
 
-        let dist = ((dx * dx + dy * dy) as f32).sqrt();
+        let dist_sq = (dx * dx + dy * dy) as f32;
 
-        if dist < 10.0 {
+        if dist_sq < 100.0 {
             self.touch_points.clear();
             return Some(Gesture::Tap(TouchPoint {
                 x: first.x,
