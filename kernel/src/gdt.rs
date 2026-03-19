@@ -3,6 +3,7 @@ use x86_64::structures::tss::TaskStateSegment;
 use x86_64::VirtAddr;
 
 pub const DOUBLE_FAULT_IST_INDEX: u16 = 0;
+pub const KEYBOARD_IST_INDEX: u16 = 1;
 
 static TSS: spin::Lazy<TaskStateSegment> = spin::Lazy::new(|| {
     let mut tss = TaskStateSegment::new();
@@ -12,9 +13,9 @@ static TSS: spin::Lazy<TaskStateSegment> = spin::Lazy::new(|| {
         let stack_start = VirtAddr::from_ptr(unsafe { core::ptr::addr_of!(STACK) });
         stack_start + STACK_SIZE as u64
     };
-    // Also set up a proper privilege stack (RSP0) for interrupts
-    tss.privilege_stack_table[0] = {
-        const STACK_SIZE: usize = 4096 * 20; // 80KB
+    // IST1 — dedicated stack for keyboard interrupt
+    tss.interrupt_stack_table[KEYBOARD_IST_INDEX as usize] = {
+        const STACK_SIZE: usize = 4096 * 10; // 40KB
         static mut STACK: [u8; STACK_SIZE] = [0; STACK_SIZE];
         let stack_start = VirtAddr::from_ptr(unsafe { core::ptr::addr_of!(STACK) });
         stack_start + STACK_SIZE as u64

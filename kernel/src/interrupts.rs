@@ -1,7 +1,7 @@
 use x86_64::structures::idt::{InterruptDescriptorTable, InterruptStackFrame};
 use pic8259::ChainedPics;
 use spin::Mutex;
-use crate::framebuffer;
+#[allow(unused_imports)]
 
 pub const PIC_1_OFFSET: u8 = 32;
 pub const PIC_2_OFFSET: u8 = PIC_1_OFFSET + 8;
@@ -10,6 +10,7 @@ pub static PICS: Mutex<ChainedPics> = Mutex::new(unsafe { ChainedPics::new(PIC_1
 
 #[derive(Debug, Clone, Copy)]
 #[repr(u8)]
+#[allow(dead_code)]
 pub enum InterruptIndex {
     Timer = PIC_1_OFFSET,
     Keyboard = PIC_1_OFFSET + 1,
@@ -25,8 +26,6 @@ static IDT: spin::Lazy<InterruptDescriptorTable> = spin::Lazy::new(|| {
             .set_stack_index(crate::gdt::DOUBLE_FAULT_IST_INDEX);
     }
 
-    // Timer: mask it in PIC instead of handling it
-    // idt[InterruptIndex::Timer as u8].set_handler_fn(timer_interrupt_handler);
     idt[InterruptIndex::Keyboard as u8].set_handler_fn(keyboard_interrupt_handler);
 
     idt
@@ -48,47 +47,18 @@ extern "x86-interrupt" fn double_fault_handler(
     loop { x86_64::instructions::hlt(); }
 }
 
-extern "x86-interrupt" fn timer_interrupt_handler(_stack_frame: InterruptStackFrame) {
-    // Minimal handler — just acknowledge the interrupt
-    unsafe {
-        x86_64::instructions::port::Port::<u8>::new(0x20).write(0x20);
-    }
-}
-
 extern "x86-interrupt" fn keyboard_interrupt_handler(_stack_frame: InterruptStackFrame) {
-    use pc_keyboard::{layouts, DecodedKey, HandleControl, Keyboard, ScancodeSet1};
-    use x86_64::instructions::port::Port;
-
-    static KEYBOARD: Mutex<Keyboard<layouts::Us104Key, ScancodeSet1>> = Mutex::new(
-        Keyboard::new(ScancodeSet1::new(), layouts::Us104Key, HandleControl::Ignore),
-    );
-
-    let mut keyboard = KEYBOARD.lock();
-    let mut port = Port::new(0x60);
-    let scancode: u8 = unsafe { port.read() };
-
-    if let Ok(Some(key_event)) = keyboard.add_byte(scancode) {
-        if let Some(key) = keyboard.process_keyevent(key_event) {
-            match key {
-                DecodedKey::Unicode(character) => {
-                    if character == '\n' || character == '\r' {
-                        crate::fb_println!("");
-                        framebuffer::with_writer(|w| w.set_fg(0, 210, 255));
-                        crate::fb_print!("  aura> ");
-                    } else if character == '\u{8}' {
-                        framebuffer::with_writer(|w| w.backspace());
-                    } else {
-                        framebuffer::with_writer(|w| w.set_fg(255, 255, 255));
-                        crate::fb_print!("{}", character);
-                    }
-                    crate::serial_println!("[kbd] char: {:?}", character);
-                }
-                DecodedKey::RawKey(key) => {
-                    crate::serial_println!("[kbd] raw: {:?}", key);
-                }
-            }
-        }
+    // ABSOLUTE MINIMUM: read scancode, buffer it, EOI
+    // All through raw port I/O, no abstractions
+    unsafe {
+        // Read scancode from keyboard controller
+        let scancode: u8;
+        core::arch::asm!("in al, dx", out("al") scancode, in("dx") 0x60u16);
+        
+        // Buffer it
+        crate::keyboard::push_key(scancode);
+        
+        // Send EOI to PIC1
+        core::arch::asm!("out dx, al", in("al") 0x20u8, in("dx") 0x20u16);
     }
-
-    unsafe { PICS.lock().notify_end_of_interrupt(InterruptIndex::Keyboard as u8) };
 }
