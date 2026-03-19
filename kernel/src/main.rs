@@ -38,6 +38,9 @@ mod input_router;
 mod apps;
 mod audio;
 mod tcpip;
+mod clipboard;
+mod notifications;
+mod storage;
 
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;

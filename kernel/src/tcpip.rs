@@ -133,7 +133,12 @@ pub fn parse_arp(data: &[u8]) -> Option<ArpPacket> {
         target_ip: IpAddr(copy_ip(&data[24..28])),
     };
 
-    if packet.hardware_len != 6 || packet.protocol_len != 4 {
+    if packet.hardware_type != 1
+        || packet.protocol_type != ETHERTYPE_IPV4
+        || packet.hardware_len != 6
+        || packet.protocol_len != 4
+        || (packet.operation != ARP_REQUEST && packet.operation != ARP_REPLY)
+    {
         return None;
     }
 
@@ -211,13 +216,14 @@ pub fn parse_icmp(data: &[u8]) -> Option<IcmpPacket<'_>> {
     }
 
     let icmp_type = data[0];
-    if icmp_type != ICMP_ECHO_REQUEST && icmp_type != ICMP_ECHO_REPLY {
+    let code = data[1];
+    if (icmp_type != ICMP_ECHO_REQUEST && icmp_type != ICMP_ECHO_REPLY) || code != 0 {
         return None;
     }
 
     Some(IcmpPacket {
         icmp_type,
-        code: data[1],
+        code,
         checksum: read_u16_be(&data[2..4]),
         identifier: read_u16_be(&data[4..6]),
         sequence: read_u16_be(&data[6..8]),
