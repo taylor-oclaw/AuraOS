@@ -59,6 +59,7 @@ mod cmd_parser;
 mod signals;
 mod storage;
 
+mod uptime;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
