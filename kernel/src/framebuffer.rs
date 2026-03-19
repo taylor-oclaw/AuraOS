@@ -160,6 +160,15 @@ impl FbWriter {
         }
     }
 
+    /// Get raw framebuffer for direct pixel rendering
+    pub unsafe fn raw_buffer(&mut self) -> &mut [u8] {
+        self.fb
+    }
+    
+    pub fn get_info(&self) -> (usize, usize, usize) {
+        (self.width, self.height, self.stride)
+    }
+    
     pub fn backspace(&mut self) {
         if self.col > 0 {
             self.col -= 1;

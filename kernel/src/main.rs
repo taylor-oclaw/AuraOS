@@ -30,6 +30,7 @@ mod usb;
 mod mesh;
 mod scheduler;
 mod identity;
+mod desktop;
 
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;

@@ -25,6 +25,7 @@ pub enum Intent {
     Joke,
     Weather,
     SetTimezone,
+    LaunchDesktop,
     FileOperation(String),
     Unknown(String),
 }
@@ -98,6 +99,11 @@ pub fn parse_intent(input: &str) -> Intent {
     // Weather
     if contains_any(lower, &["weather", "temperature", "rain", "sunny", "forecast"]) {
         return Intent::Weather;
+    }
+
+    // Desktop/GUI
+    if contains_any(lower, &["desktop", "gui", "graphical", "show me the desktop", "start gui", "windows", "surfaces"]) {
+        return Intent::LaunchDesktop;
     }
 
     // Timezone
@@ -220,6 +226,20 @@ pub fn respond(intent: &Intent) {
                     crate::fb_println!("  and those who don't.");
                 }
             }
+        }
+        Intent::LaunchDesktop => {
+            framebuffer::with_writer(|w| w.set_fg(0, 255, 180));
+            crate::fb_println!("  Launching desktop mode...");
+            crate::fb_println!("  (Type '/text' to return to text mode)");
+            
+            // Get framebuffer info and init desktop
+            crate::desktop::init(1280, 720);
+            
+            // Render to framebuffer
+            framebuffer::with_writer(|w| {
+                let fb = unsafe { w.raw_buffer() };
+                crate::desktop::render(fb, 1280, 3);
+            });
         }
         Intent::SetTimezone => {
             framebuffer::with_writer(|w| w.set_fg(0, 255, 180));
