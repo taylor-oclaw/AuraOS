@@ -13,6 +13,7 @@ mod allocator;
 mod keyboard;
 mod shell;
 mod nlp;
+mod aura_engine;
 
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
@@ -138,6 +139,10 @@ fn kernel_main(boot_info: &'static mut BootInfo) -> ! {
     framebuffer::with_writer(|w| {
         w.set_fg(0, 255, 180);
         w.write_string("  [ok] Heap allocator: 1 MB\n");
+        w.set_fg(100, 180, 255);
+        w.write_string("  [ok] Aura Engine: pattern match mode\n");
+        w.write_string("        (LLM runtime ready for model loading)\n");
+        w.set_fg(0, 255, 180);
         w.write_string("  [ok] Shell ready\n");
         w.write_string("\n");
         w.set_fg(255, 255, 255);
