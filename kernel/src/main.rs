@@ -40,6 +40,8 @@ mod text_editor;
 mod widget;
 mod window_decor;
 mod sys_monitor;
+mod terminal;
+mod file_mgr;
 mod net_stack;
 mod fb_console;
 mod ethernet;
