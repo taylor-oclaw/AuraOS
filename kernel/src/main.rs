@@ -26,6 +26,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod acpi;
 mod agent_hierarchy;
 mod allocator;
@@ -39,6 +40,7 @@ mod audio;
 mod audio_mixer;
 mod aura_engine;
 mod behavior;
+mod boot_sequence;
 mod clipboard;
 mod cmd_parser;
 mod color;
@@ -61,14 +63,17 @@ mod defs_super;
 mod defs_tests;
 mod defs_vfs;
 mod desktop;
+mod device_manager;
 mod device_mgr;
 mod dhcp;
+mod display_server;
 mod dma;
 mod dns;
 mod e1000;
 mod elf_loader;
 mod env;
 mod ethernet;
+mod event_loop;
 mod events;
 mod fat32;
 mod fb_console;
@@ -128,6 +133,7 @@ mod sync_primitives;
 mod sys_monitor;
 mod syscall;
 mod sysinfo;
+mod system_config;
 mod tcpip;
 mod terminal;
 mod text_editor;
