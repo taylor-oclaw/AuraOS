@@ -27,6 +27,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod acpi;
 mod agent_hierarchy;
 mod allocator;
@@ -109,6 +110,7 @@ mod nlp;
 mod nlp_bridge;
 mod notification_center;
 mod notifications;
+mod os_init;
 mod panic_handler;
 mod pci;
 mod permissions;
