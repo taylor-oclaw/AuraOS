@@ -165,28 +165,29 @@ fn kernel_main(boot_info: &'static mut BootInfo) -> ! {
         w.write_string("  [ok] Shell ready\n");
         w.write_string("\n");
         w.set_fg(255, 255, 255);
-        w.write_string("  Talk to me naturally. I understand you.\n");
-        w.write_string("  (Dev mode: prefix with / for raw commands)\n");
-        w.write_string("\n");
-        w.set_fg(0, 210, 255);
-        w.write_string("  you> ");
-        w.set_fg(255, 255, 255);
+        w.write_string("  Launching desktop...\n");
     });
 
-    crate::serial_println!("[kernel] Boot complete. Shell active.");
-    
-    // Verify interrupt delivery works
-    crate::serial_println!("[kernel] Waiting for keyboard input...");
+    crate::serial_println!("[kernel] Boot complete.");
 
-    // Keyboard decoder — polling mode (no interrupts needed!)
-    use pc_keyboard::{layouts, DecodedKey, HandleControl, Keyboard, ScancodeSet1};
-    let mut kbd = Keyboard::new(ScancodeSet1::new(), layouts::Us104Key, HandleControl::Ignore);
-    
     // Initialize mouse
     mouse::init(1280, 720);
     crate::serial_println!("[kernel] Mouse initialized");
+
+    // Boot straight into desktop GUI
+    let (fb_w, fb_h) = fb_info.unwrap_or((1280, 720));
+    desktop::init(fb_w as u32, fb_h as u32);
+    framebuffer::with_writer(|w| {
+        let fb = unsafe { w.raw_buffer() };
+        desktop::render(fb, fb_w, 3);
+    });
+    crate::serial_println!("[kernel] Desktop launched");
+
+    // Keyboard decoder
+    use pc_keyboard::{layouts, DecodedKey, HandleControl, Keyboard, ScancodeSet1};
+    let mut kbd = Keyboard::new(ScancodeSet1::new(), layouts::Us104Key, HandleControl::Ignore);
     
-    crate::serial_println!("[kernel] Entering main loop (polling mode)...");
+    crate::serial_println!("[kernel] Entering main loop...");
 
     // Main loop — poll keyboard controller directly
     loop {
