@@ -28,6 +28,8 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
+mod accessibility;
 mod acpi;
 mod agent_hierarchy;
 mod allocator;
@@ -40,6 +42,7 @@ mod auction_sched;
 mod audio;
 mod audio_mixer;
 mod aura_engine;
+mod backup_manager;
 mod behavior;
 mod boot_sequence;
 mod clipboard;
