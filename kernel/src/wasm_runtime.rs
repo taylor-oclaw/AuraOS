@@ -1,5 +1,6 @@
 extern crate alloc;
 use alloc::vec::Vec;
+use alloc::vec;
 use alloc::string::String;
 
 pub struct WasmModule {
