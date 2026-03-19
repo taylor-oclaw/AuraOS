@@ -55,7 +55,7 @@ pub fn handle_key(c: char) {
             
             // New prompt
             framebuffer::with_writer(|w| w.set_fg(0, 210, 255));
-            crate::fb_print!("  aura> ");
+            crate::fb_print!("  you> ");
             framebuffer::with_writer(|w| w.set_fg(255, 255, 255));
         }
         '\u{8}' => {
@@ -78,27 +78,25 @@ pub fn handle_key(c: char) {
 }
 
 fn execute_command(cmd: &str) {
+    // First try exact commands (for power users / dev mode)
     let parts: Vec<&str> = cmd.split_whitespace().collect();
     if parts.is_empty() { return; }
     
     match parts[0] {
-        "help" => cmd_help(),
-        "about" => cmd_about(),
-        "clear" | "cls" => cmd_clear(),
-        "mem" | "memory" => cmd_memory(),
-        "uptime" => cmd_uptime(),
-        "echo" => cmd_echo(&parts[1..]),
-        "uname" => cmd_uname(),
-        "hello" | "hi" => cmd_hello(),
-        "hardware" | "hw" => cmd_hardware(),
-        "color" => cmd_color(&parts[1..]),
-        "aura" => cmd_aura(&parts[1..]),
-        "reboot" => cmd_reboot(),
-        "shutdown" | "poweroff" => cmd_shutdown(),
+        // Dev mode commands (prefix with /)
+        "/help" => cmd_help(),
+        "/clear" | "/cls" => cmd_clear(),
+        "/mem" => cmd_memory(),
+        "/hw" => cmd_hardware(),
+        "/uname" => cmd_uname(),
+        "/reboot" => cmd_reboot(),
+        "/shutdown" => cmd_shutdown(),
+        "/color" => cmd_color(&parts[1..]),
+        "/echo" => cmd_echo(&parts[1..]),
         _ => {
-            framebuffer::with_writer(|w| w.set_fg(255, 100, 100));
-            crate::fb_println!("  unknown command: '{}'. Type 'help' for commands.", cmd);
-            framebuffer::with_writer(|w| w.set_fg(255, 255, 255));
+            // Natural language mode — send everything through NLP
+            let intent = crate::nlp::parse_intent(cmd);
+            crate::nlp::respond(&intent);
         }
     }
 }
@@ -177,6 +175,9 @@ fn cmd_hello() {
     crate::fb_println!("  I'm still learning, but I'm here to help.");
     crate::fb_println!("  Try 'aura tell me a joke' when I get smarter!");
 }
+
+pub fn cmd_hardware_pub() { cmd_hardware(); }
+pub fn cmd_memory_pub() { cmd_memory(); }
 
 fn cmd_hardware() {
     framebuffer::with_writer(|w| w.set_fg(0, 255, 180));

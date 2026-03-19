@@ -12,6 +12,7 @@ mod memory;
 mod allocator;
 mod keyboard;
 mod shell;
+mod nlp;
 
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
@@ -140,10 +141,11 @@ fn kernel_main(boot_info: &'static mut BootInfo) -> ! {
         w.write_string("  [ok] Shell ready\n");
         w.write_string("\n");
         w.set_fg(255, 255, 255);
-        w.write_string("  Type 'help' for commands, 'about' for info\n");
+        w.write_string("  Talk to me naturally. I understand you.\n");
+        w.write_string("  (Dev mode: prefix with / for raw commands)\n");
         w.write_string("\n");
         w.set_fg(0, 210, 255);
-        w.write_string("  aura> ");
+        w.write_string("  you> ");
         w.set_fg(255, 255, 255);
     });
 
