@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod drag_drop;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
