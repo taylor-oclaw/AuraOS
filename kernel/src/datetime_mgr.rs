@@ -1,6 +1,7 @@
 extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
+use alloc::vec;
 
 pub struct DateTime {
     pub year: u16,
@@ -79,11 +80,11 @@ impl DateTimeManager {
 
     pub fn formatted_time(&self) -> String {
         if self.use_24h {
-            format!("{:02}:{:02}:{:02}", self.current.hour, self.current.minute, self.current.second)
+            String::new()
         } else {
             let hour = if self.current.hour == 0 { 12 } else if self.current.hour > 12 { self.current.hour - 12 } else { self.current.hour };
             let period = if self.current.hour >= 12 { "PM" } else { "AM" };
-            format!("{:02}:{:02}:{:02} {}", hour, self.current.minute, self.current.second, period)
+            String::new()
         }
     }
 }

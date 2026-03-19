@@ -2,6 +2,7 @@ extern crate alloc;
 
 use alloc::string::String;
 use alloc::vec::Vec;
+use alloc::vec;
 
 pub const ADMIN_UID: u32 = 0;
 

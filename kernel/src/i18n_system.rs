@@ -85,7 +85,7 @@ impl I18nManager {
         mgr
     }
 
-    pub fn t(&self, key: &str) -> &str {
+    pub fn t<'a>(&'a self, key: &'a str) -> &'a str {
         self.locales[self.active_locale]
             .translations
             .iter()
