@@ -43,6 +43,8 @@ mod notifications;
 mod wm;
 mod logger;
 mod permissions;
+mod theme;
+mod power_mgmt;
 mod storage;
 
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
