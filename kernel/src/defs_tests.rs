@@ -1,5 +1,5 @@
 #[cfg(test)]
-mod tests {
+
     extern crate alloc;
     use alloc::vec::Vec;
     use alloc::vec;
@@ -191,4 +191,3 @@ mod tests {
         let expired_files = decay.detect_expired_files();
         assert_eq!(expired_files, vec![String::from("file1")]);
     }
-}
