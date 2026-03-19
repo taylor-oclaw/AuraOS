@@ -5,6 +5,26 @@
 extern crate alloc;
 
 
+<<<<<<< HEAD
+=======
+mod uptime;
+mod kbd_layout;
+mod string_utils;
+mod sync_primitives;
+mod dns;
+mod panic_handler;
+mod compositor;
+mod fat32;
+mod syscall;
+mod virtio_net;
+mod elf_loader;
+mod dhcp;
+mod cursor;
+mod dma;
+mod mem_pool;
+mod color;
+mod defs_disk_format;
+>>>>>>> origin/feat/defs_disk_format
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
