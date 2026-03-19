@@ -69,6 +69,7 @@ mod compositor;
 mod fat32;
 mod syscall;
 mod virtio_net;
+mod elf_loader;
 mod dhcp;
 mod cursor;
 mod dma;
