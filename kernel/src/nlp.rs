@@ -146,10 +146,11 @@ pub fn respond(intent: &Intent) {
             crate::shell::cmd_memory_pub();
         }
         Intent::TimeQuery => {
-            framebuffer::with_writer(|w| w.set_fg(255, 200, 100));
-            crate::fb_println!("  I don't have a clock yet — the real-time clock");
-            crate::fb_println!("  driver isn't built. It's on my todo list!");
-            crate::fb_println!("  Once I have it, I'll always know the time.");
+            let dt = crate::rtc::read_rtc();
+            framebuffer::with_writer(|w| w.set_fg(0, 255, 180));
+            crate::fb_println!("  It's {}:{:02}:{:02} on {} {} {}, {}",
+                dt.hour, dt.minute, dt.second,
+                dt.weekday_name(), dt.month_name(), dt.day, dt.year);
         }
         Intent::ClearScreen => {
             framebuffer::with_writer(|w| w.clear());
