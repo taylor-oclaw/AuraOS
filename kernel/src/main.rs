@@ -43,6 +43,8 @@ mod sys_monitor;
 mod terminal;
 mod window_mgr;
 mod aurafs_journal;
+mod aurafs_inode;
+mod aurafs_super;
 mod aurafs_btree;
 mod aurafs_alloc;
 mod file_mgr;
