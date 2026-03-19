@@ -25,6 +25,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod acpi;
 mod agent_hierarchy;
 mod allocator;
@@ -32,6 +33,7 @@ mod app_marketplace;
 mod apps;
 mod arp;
 mod ata;
+mod attention_mgr;
 mod auction_sched;
 mod audio;
 mod audio_mixer;
