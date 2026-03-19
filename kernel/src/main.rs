@@ -29,6 +29,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod accessibility;
 mod acpi;
 mod agent_hierarchy;
@@ -124,7 +125,9 @@ mod proc_sched;
 mod random;
 mod ring_buffer;
 mod rtc;
+mod sandbox_manager;
 mod scheduler;
+mod search_indexer;
 mod self_evolution;
 mod serial;
 mod serial_console;
@@ -150,6 +153,7 @@ mod updater;
 mod uptime;
 mod usb;
 mod usb_hid;
+mod user_profiles;
 mod vfs;
 mod virtio_net;
 mod voice_engine;
