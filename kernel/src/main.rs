@@ -24,9 +24,11 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod acpi;
 mod agent_hierarchy;
 mod allocator;
+mod app_marketplace;
 mod apps;
 mod arp;
 mod ata;
@@ -73,6 +75,7 @@ mod font;
 mod font_data;
 mod framebuffer;
 mod gdt;
+mod gesture_engine;
 mod gguf;
 mod graphics;
 mod gui_text;
@@ -97,6 +100,7 @@ mod mouse;
 mod net_stack;
 mod nlp;
 mod nlp_bridge;
+mod notification_center;
 mod notifications;
 mod panic_handler;
 mod pci;
@@ -135,6 +139,7 @@ mod usb;
 mod usb_hid;
 mod vfs;
 mod virtio_net;
+mod voice_engine;
 mod wasm_runtime;
 mod widget;
 mod window_decor;
