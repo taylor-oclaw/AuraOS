@@ -45,6 +45,9 @@ mod logger;
 mod permissions;
 mod theme;
 mod power_mgmt;
+mod vfs;
+mod graphics;
+mod proc_sched;
 mod storage;
 
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
