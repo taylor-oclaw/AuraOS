@@ -105,17 +105,12 @@ impl Desktop {
             
             match surface.surface_type {
                 crate::surface::SurfaceType::Terminal => {
+                    // Live terminal content from input router
+                    let lines = crate::input_router::display_lines();
+                    let line_refs: alloc::vec::Vec<&str> = lines.iter().map(|s| s.as_str()).collect();
                     crate::gui_text::draw_text_block(
                         fb, stride, bpp,
-                        &[
-                            "AuraOS Terminal v0.1",
-                            "",
-                            "you> hello",
-                            "Hey! I'm Aura, your OS companion.",
-                            "What can I help you with?",
-                            "",
-                            "you> _",
-                        ],
+                        &line_refs,
                         cx, cy, 200, 220, 200, sw, sh,
                     );
                 }

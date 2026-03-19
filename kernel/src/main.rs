@@ -34,6 +34,7 @@ mod desktop;
 mod behavior;
 mod updater;
 mod gui_text;
+mod input_router;
 
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
@@ -209,11 +210,17 @@ fn kernel_main(boot_info: &'static mut BootInfo) -> ! {
                 if let Some(key) = kbd.process_keyevent(key_event) {
                     match key {
                         DecodedKey::Unicode(character) => {
-                            shell::handle_key(character);
+                            // Route to desktop input router
+                            input_router::handle_key(character);
+                            
+                            // Re-render desktop with updated terminal content
+                            framebuffer::with_writer(|w| {
+                                let (fw, _fh, _fs) = w.get_info();
+                                let fb = unsafe { w.raw_buffer() };
+                                desktop::render(fb, fw, 3);
+                            });
                         }
-                        DecodedKey::RawKey(_key) => {
-                            // Arrow keys, F-keys, etc. — handle later
-                        }
+                        DecodedKey::RawKey(_key) => {}
                     }
                 }
             }
