@@ -7,7 +7,7 @@ authors = ["Venkat Yarlagadda", "Taylor Oclaw"]
 [dependencies]
 bootloader_api = "0.11"
 spin = { version = "0.9", default-features = false, features = ["lock_api", "spin_mutex", "lazy"] }
-x86_64 = "0.15"
+x86_64 = "0.14"
 uart_16550 = "0.3"
 pic8259 = "0.11"
 pc-keyboard = "0.7"

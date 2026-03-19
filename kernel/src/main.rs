@@ -62,6 +62,9 @@ mod storage;
 mod uptime;
 mod kbd_layout;
 mod string_utils;
+mod sync_primitives;
+mod mem_pool;
+mod color;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
