@@ -35,6 +35,9 @@ mod behavior;
 mod updater;
 mod gui_text;
 mod input_router;
+mod apps;
+mod audio;
+mod tcpip;
 
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
