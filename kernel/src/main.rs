@@ -14,6 +14,7 @@ mod keyboard;
 mod shell;
 mod nlp;
 mod aura_engine;
+mod crypto;
 
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
