@@ -41,6 +41,7 @@ mod widget;
 mod window_decor;
 mod sys_monitor;
 mod terminal;
+mod window_mgr;
 mod file_mgr;
 mod net_stack;
 mod fb_console;
