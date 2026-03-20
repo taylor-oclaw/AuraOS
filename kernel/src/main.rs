@@ -36,10 +36,12 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod accessibility;
 mod acpi;
 mod agent_hierarchy;
 mod agent_identity;
+mod agent_memory;
 mod allocator;
 mod animation_system;
 mod app_marketplace;
@@ -63,6 +65,7 @@ mod color;
 mod command_palette;
 mod compat_bridge;
 mod compositor;
+mod cost_accounting;
 mod crucible_parser;
 mod crypto;
 mod cursor;
@@ -132,6 +135,7 @@ mod mem_pool;
 mod memfs;
 mod memory;
 mod mesh;
+mod model_registry;
 mod mouse;
 mod multi_monitor;
 mod net_stack;
@@ -150,6 +154,7 @@ mod power_profiles;
 mod print_manager;
 mod proc_mgr;
 mod proc_sched;
+mod prompt_templates;
 mod random;
 mod ring_buffer;
 mod rtc;
@@ -158,6 +163,7 @@ mod scheduler;
 mod screen_capture;
 mod search_indexer;
 mod secure_boot;
+mod secure_ipc;
 mod self_evolution;
 mod serial;
 mod serial_console;
