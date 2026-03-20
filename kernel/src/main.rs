@@ -37,6 +37,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod accessibility;
 mod acpi;
 mod agent_hierarchy;
@@ -58,6 +59,7 @@ mod backup_manager;
 mod behavior;
 mod bluetooth_mgr;
 mod boot_sequence;
+mod cert_manager;
 mod clipboard;
 mod clipboard_plus;
 mod cmd_parser;
@@ -113,6 +115,7 @@ mod gguf;
 mod gpu_driver;
 mod graphics;
 mod gui_text;
+mod hot_reload;
 mod http;
 mod i18n_system;
 mod icmp;
@@ -147,6 +150,7 @@ mod notifications;
 mod os_init;
 mod panic_handler;
 mod pci;
+mod perf_profiler;
 mod permissions;
 mod pipes;
 mod power_mgmt;
@@ -167,6 +171,7 @@ mod secure_ipc;
 mod self_evolution;
 mod serial;
 mod serial_console;
+mod service_discovery;
 mod shell;
 mod shutdown_mgr;
 mod signals;
@@ -197,6 +202,7 @@ mod vfs;
 mod virtio_net;
 mod virtual_desktops;
 mod voice_engine;
+mod vpn_client;
 mod wasm_runtime;
 mod widget;
 mod wifi_stack;
