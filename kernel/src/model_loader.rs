@@ -14,10 +14,10 @@ impl ModelLoader {
     }
 
     pub fn load_model(&mut self, model_name: &str) -> Result<(), &'static str> {
-        if self.models.contains(&model_name) {
+        if self.models.iter().any(|m| m == model_name) {
             Err("Model already loaded")
         } else {
-            self.models.push(model_name);
+            self.models.push(String::from(model_name));
             Ok(())
         }
     }
@@ -37,7 +37,7 @@ impl ModelLoader {
     }
 
     pub fn is_model_loaded(&self, model_name: &str) -> bool {
-        self.models.contains(&model_name)
+        self.models.iter().any(|m| m == model_name)
     }
 
     pub fn count_models(&self) -> usize {

@@ -19,7 +19,7 @@ impl ClipboardMgr {
         if !self.content.is_empty() {
             self.history.push(self.content.clone());
         }
-        self.content = text;
+        self.content = String::from(text);
     }
 
     pub fn paste(&self) -> String {
