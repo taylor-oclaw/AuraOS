@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod trust_web_of_trust;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
