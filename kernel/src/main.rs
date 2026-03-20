@@ -81,6 +81,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod account_lockout;
@@ -160,6 +161,7 @@ mod date_picker;
 mod datetime_mgr;
 mod deadlock_detector;
 mod debug_console;
+mod defs_acl;
 mod defs_alloc;
 mod defs_btree;
 mod defs_decay;
@@ -170,10 +172,13 @@ mod defs_inode;
 mod defs_journal;
 mod defs_model;
 mod defs_prefetch;
+mod defs_quota;
+mod defs_replication;
 mod defs_snapshot;
 mod defs_super;
 mod defs_tests;
 mod defs_vfs;
+mod defs_xattr;
 mod desktop;
 mod device_manager;
 mod device_mgr;
