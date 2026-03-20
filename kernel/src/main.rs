@@ -141,6 +141,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod account_lockout;
@@ -371,6 +372,7 @@ mod aura_workspace_mgr;
 mod backup_manager;
 mod bandwidth_monitor;
 mod batch_scheduler;
+mod battery_manager;
 mod behavior;
 mod belief_revision;
 mod bluetooth_mgr;
@@ -420,6 +422,7 @@ mod crucible_json;
 mod crucible_net;
 mod crucible_package;
 mod crucible_parser;
+mod crucible_regex;
 mod crucible_stdlib;
 mod crucible_template;
 mod crucible_test;
@@ -468,6 +471,7 @@ mod dhcp;
 mod dhcp_client;
 mod dialog_box;
 mod disk_partition;
+mod display_connector;
 mod display_server;
 mod dma;
 mod dma_controller;
@@ -487,6 +491,7 @@ mod ethernet;
 mod event_bus;
 mod event_loop;
 mod events;
+mod fan_controller;
 mod fat32;
 mod fb_console;
 mod federated_learn;
@@ -517,6 +522,7 @@ mod group_manager;
 mod grpc_runtime;
 mod gui_automation;
 mod gui_text;
+mod hdmi_handler;
 mod health_monitor;
 mod hibernate_handler;
 mod hot_reload;
