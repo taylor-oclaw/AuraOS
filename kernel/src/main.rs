@@ -51,6 +51,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod acpi;
@@ -196,6 +197,7 @@ mod notif_sounds;
 mod notification_center;
 mod notifications;
 mod npu_driver;
+mod oom_killer;
 mod os_init;
 mod page_fault;
 mod panic_handler;
@@ -245,6 +247,7 @@ mod status_bar;
 mod storage;
 mod string_utils;
 mod surface;
+mod swap_manager;
 mod swarm_intelligence;
 mod sync_primitives;
 mod sys_monitor;
