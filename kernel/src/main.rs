@@ -139,6 +139,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod account_lockout;
@@ -680,6 +681,7 @@ mod terminal;
 mod text_editor;
 mod theme;
 mod theme_engine;
+mod thermal_monitor;
 mod tiered_cache;
 mod timer_subsystem;
 mod timers;
