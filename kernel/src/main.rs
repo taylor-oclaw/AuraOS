@@ -210,8 +210,11 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
+mod a2a_host;
 mod a2a_protocol;
 mod a2a_protocol_v2;
+mod a2a_server;
 mod accelerometer_driver;
 mod accessibility;
 mod account_lockout;
@@ -782,15 +785,18 @@ mod matter_protocol;
 mod mcp_auth_handler;
 mod mcp_capability_negotiate;
 mod mcp_discovery;
+mod mcp_error_handler;
 mod mcp_host;
 mod mcp_prompt_handler;
 mod mcp_protocol;
 mod mcp_resource_handler;
 mod mcp_schema_validator;
 mod mcp_server;
+mod mcp_streaming;
 mod mcp_tool_adapter;
 mod mcp_transport_http;
 mod mcp_transport_stdio;
+mod mcp_transport_ws;
 mod media_controls;
 mod medusa_v2;
 mod mem_pool;
