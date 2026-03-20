@@ -166,6 +166,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accelerometer_driver;
 mod accessibility;
@@ -440,6 +441,7 @@ mod clipboard_mgr;
 mod clipboard_plus;
 mod cmd_parser;
 mod coalition_mgr;
+mod collision_detector;
 mod color;
 mod color_picker;
 mod command_palette;
@@ -669,6 +671,7 @@ mod packet_filter;
 mod page_fault;
 mod pam_module;
 mod panic_handler;
+mod particle_renderer;
 mod password_hasher;
 mod pci;
 mod pci_bus;
@@ -709,6 +712,7 @@ mod saml_handler;
 mod sandbox_eval;
 mod sandbox_manager;
 mod sata_controller;
+mod scene_graph;
 mod scheduler;
 mod screen_capture;
 mod scrollbar;
@@ -827,6 +831,7 @@ mod voice_engine;
 mod voice_pipeline;
 mod vpn_client;
 mod vpn_wireguard;
+mod vulkan_renderer;
 mod wasm_runtime;
 mod watch_agent;
 mod watchdog_timer;
