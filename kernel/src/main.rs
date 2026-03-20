@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod state_space_model_v2;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
