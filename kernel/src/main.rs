@@ -172,6 +172,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accelerometer_driver;
 mod accessibility;
@@ -473,6 +474,7 @@ mod container_mkv;
 mod container_mp4;
 mod container_webm;
 mod context_inherit;
+mod continuous_batching;
 mod core_dump;
 mod cost_accounting;
 mod cpu_hotplug;
@@ -640,6 +642,7 @@ mod key_manager;
 mod key_storage;
 mod keyboard;
 mod knowledge_graph;
+mod kv_cache_v2;
 mod ldap_client;
 mod llm_engine;
 mod loadavg_calc;
@@ -660,6 +663,7 @@ mod menu_system;
 mod mesh;
 mod metal_compat;
 mod mfa_handler;
+mod ml_accelerator;
 mod model_loader;
 mod model_registry;
 mod mount_manager;
@@ -687,6 +691,7 @@ mod opengl_compat;
 mod os_init;
 mod packet_filter;
 mod page_fault;
+mod paged_attention_v2;
 mod pam_module;
 mod panic_handler;
 mod particle_renderer;
@@ -795,6 +800,7 @@ mod task_queue;
 mod taskbar;
 mod tcpip;
 mod telnet_server;
+mod tensor_core;
 mod tensor_ops;
 mod terminal;
 mod text_editor;
