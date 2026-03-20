@@ -102,6 +102,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod account_lockout;
@@ -115,6 +116,7 @@ mod agent_identity;
 mod agent_marketplace;
 mod agent_memory;
 mod agent_migration;
+mod agent_orchestrator;
 mod agent_playbooks;
 mod agent_profiler;
 mod agent_reflection;
@@ -187,6 +189,7 @@ mod aura_split_view;
 mod aura_system_info;
 mod aura_task_manager;
 mod aura_terminal;
+mod aura_terminal_v2;
 mod aura_theme_mgr_v2;
 mod aura_time_tracker;
 mod aura_update_mgr;
@@ -195,6 +198,7 @@ mod aura_video_player;
 mod aura_voice_recorder;
 mod aura_wallpaper_mgr;
 mod aura_weather;
+mod aura_web_browser;
 mod aura_workspace_mgr;
 mod backup_manager;
 mod bandwidth_monitor;
