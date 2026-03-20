@@ -58,7 +58,7 @@ impl DreamCycle {
 
     pub fn consolidate(&mut self) -> Vec<&DreamEntry> {
         let threshold = self.consolidation_threshold;
-        let mut consolidated = Vec::new();
+        let mut consolidated: Vec<&DreamEntry> = Vec::new();
         for entry in &mut self.entries {
             if entry.frequency >= threshold && !entry.consolidated {
                 entry.consolidated = true;
