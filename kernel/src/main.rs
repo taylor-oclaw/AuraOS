@@ -147,6 +147,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accelerometer_driver;
 mod accessibility;
@@ -389,6 +390,7 @@ mod boot_sequence;
 mod buddy_allocator;
 mod camera_driver;
 mod capability_system;
+mod cellular_modem;
 mod cert_manager;
 mod certificate_store;
 mod cgroup_manager;
@@ -529,6 +531,7 @@ mod gguf;
 mod goal_decompose;
 mod google_home_bridge;
 mod gossip_protocol;
+mod gps_receiver;
 mod gpu_driver;
 mod graphics;
 mod group_manager;
@@ -763,6 +766,8 @@ mod watchdog_timer;
 mod websocket_mgr;
 mod websocket_server;
 mod widget;
+mod wifi6e_handler;
+mod wifi7_handler;
 mod wifi_stack;
 mod window_decor;
 mod window_mgr;
