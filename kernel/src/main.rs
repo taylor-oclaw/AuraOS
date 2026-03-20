@@ -135,6 +135,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod account_lockout;
@@ -403,6 +404,8 @@ mod core_dump;
 mod cost_accounting;
 mod cpu_hotplug;
 mod crash_reporter;
+mod crucible_io;
+mod crucible_net;
 mod crucible_parser;
 mod crypto;
 mod crypto_engine;
@@ -676,10 +679,13 @@ mod transformer;
 mod tree_view;
 mod trust_attestation;
 mod trust_capability_token;
+mod trust_credential_verify;
 mod trust_decentralized_id;
 mod trust_delegation_chain;
 mod trust_reputation_graph;
+mod trust_revocation;
 mod trust_scoring;
+mod trust_transparency_log;
 mod trust_web_of_trust;
 mod trust_zero_knowledge_proof;
 mod updater;
