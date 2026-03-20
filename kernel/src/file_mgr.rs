@@ -77,9 +77,9 @@ impl FileManager {
 
     pub fn add_entry(&mut self, name: &str, is_dir: bool, size: u64) {
         let path = if self.current_path.ends_with(47 as char) {
-            alloc::format!("{}{}", self.current_path, name)
+            alloc::String::from("error")
         } else {
-            alloc::format!("{}/{}", self.current_path, name)
+            alloc::String::from("error")
         };
         self.entries.push(FileEntry {
             name: String::from(name),

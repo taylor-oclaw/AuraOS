@@ -34,9 +34,7 @@ impl SignalHandler {
     pub fn handle_signal(&mut self, signal: &str) {
         if self.is_registered(signal) {
             // Simulate handling the signal
-            println!("Handling signal: {}", signal);
         } else {
-            println!("Signal not registered: {}", signal);
         }
     }
 }

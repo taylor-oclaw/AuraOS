@@ -71,14 +71,12 @@ pub fn init_idt() {
 }
 
 extern "x86-interrupt" fn breakpoint_handler(stack_frame: InterruptStackFrame) {
-    crate::serial_println!("EXCEPTION: BREAKPOINT\n{:#?}", stack_frame);
 }
 
 extern "x86-interrupt" fn double_fault_handler(
     stack_frame: InterruptStackFrame,
     _error_code: u64,
 ) -> ! {
-    crate::serial_println!("EXCEPTION: DOUBLE FAULT\n{:#?}", stack_frame);
     loop { x86_64::instructions::hlt(); }
 }
 

@@ -17,7 +17,7 @@ impl PageFaultHandler {
 
     pub fn handle_page_fault(&mut self, address: usize) {
         self.fault_count += 1;
-        let log_entry = format!("Page fault at address: {:#x}", address);
+        let log_entry = String::from("error");
         self.fault_log.push(log_entry);
     }
 
@@ -37,9 +37,9 @@ impl PageFaultHandler {
         if self.fault_count == 0 {
             return String::from("No page faults recorded.");
         }
-        let mut analysis = format!("Total page faults: {}\n", self.fault_count);
+        let mut analysis = String::from("error");
         for (index, log_entry) in self.fault_log.iter().enumerate() {
-            analysis.push_str(&format!("Fault {}: {}\n", index + 1, log_entry));
+            analysis.push_str(&String::from("error"));
         }
         analysis
     }
