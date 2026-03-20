@@ -37,11 +37,33 @@ impl EmbeddingEngine {
         &self.metadata
     }
 
-    pub fn set_metadata(&mut self, new_metadata: &str) {
+    pub fn update_metadata(&mut self, new_metadata: &str) {
         self.metadata = String::from(new_metadata);
     }
 
     pub fn append_to_data(&mut self, additional_data: &[u8]) {
         self.data.extend_from_slice(additional_data);
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_embedding_engine() {
+        let mut engine = EmbeddingEngine::new(vec![1, 2, 3], "initial metadata");
+
+        assert_eq!(engine.get_data(), &[1, 2, 3]);
+        assert_eq!(engine.get_metadata(), "initial metadata");
+
+        engine.set_data(vec![4, 5, 6]);
+        assert_eq!(engine.get_data(), &[4, 5, 6]);
+
+        engine.update_metadata("updated metadata");
+        assert_eq!(engine.get_metadata(), "updated metadata");
+
+        engine.append_to_data(&[7, 8, 9]);
+        assert_eq!(engine.get_data(), &[4, 5, 6, 7, 8, 9]);
     }
 }
