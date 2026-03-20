@@ -184,6 +184,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod a2a_protocol_v2;
 mod accelerometer_driver;
@@ -322,7 +323,11 @@ mod agent_usage_dashboard;
 mod agent_vector_index;
 mod agent_versioning;
 mod agent_voting_system;
+mod ai_accelerator_abstract;
+mod ai_accelerator_detect;
+mod ai_accelerator_fallback;
 mod ai_model_auto_convert;
+mod ai_model_format_detect;
 mod ai_provider_adapter;
 mod ai_provider_discovery;
 mod ai_provider_hot_swap;
