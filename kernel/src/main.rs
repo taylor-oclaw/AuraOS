@@ -173,6 +173,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accelerometer_driver;
 mod accessibility;
@@ -644,6 +645,7 @@ mod keyboard;
 mod knowledge_graph;
 mod kv_cache_v2;
 mod ldap_client;
+mod linear_attention_v2;
 mod llm_engine;
 mod loadavg_calc;
 mod lock_screen;
@@ -774,9 +776,11 @@ mod sleep_manager;
 mod smtp_client;
 mod socket_api;
 mod socks_handler;
+mod sparse_attention_v2;
 mod ssh_client;
 mod ssh_server;
 mod stack_unwinder;
+mod state_space_model_v2;
 mod status_bar;
 mod storage;
 mod string_utils;
