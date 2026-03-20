@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod compat_apfs_read;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
