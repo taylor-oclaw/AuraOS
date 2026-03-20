@@ -181,6 +181,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod a2a_protocol_v2;
 mod accelerometer_driver;
@@ -319,6 +320,7 @@ mod agent_usage_dashboard;
 mod agent_vector_index;
 mod agent_versioning;
 mod agent_voting_system;
+mod ai_provider_trait;
 mod alexa_bridge;
 mod allocator;
 mod ambient_light_sensor;
@@ -488,6 +490,7 @@ mod container_webm;
 mod context_inherit;
 mod continuous_batching;
 mod core_dump;
+mod coreml_compat;
 mod cost_accounting;
 mod cpu_hotplug;
 mod crash_reporter;
@@ -705,6 +708,7 @@ mod ntp_sync;
 mod numa_topology;
 mod nvme_driver;
 mod oauth_client;
+mod ollama_compat;
 mod onnxruntime_compat;
 mod oom_killer;
 mod openai_compat;
@@ -828,10 +832,12 @@ mod tcpip;
 mod telnet_server;
 mod tensor_core;
 mod tensor_ops;
+mod tensorrt_compat;
 mod terminal;
 mod text_editor;
 mod text_layout;
 mod texture_manager;
+mod tgi_compat;
 mod theme;
 mod theme_engine;
 mod thermal_monitor;
