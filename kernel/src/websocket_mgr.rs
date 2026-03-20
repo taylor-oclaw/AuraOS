@@ -15,7 +15,7 @@ impl WebSocketManager {
     }
 
     pub fn add_connection(&mut self, connection_id: &str) {
-        if !self.connections.contains(&connection_id) {
+        if !self.connections.iter().any(|c| c == connection_id) {
             self.connections.push(connection_id);
         }
     }
@@ -29,7 +29,7 @@ impl WebSocketManager {
     }
 
     pub fn has_connection(&self, connection_id: &str) -> bool {
-        self.connections.contains(&connection_id)
+        self.connections.iter().any(|c| c == connection_id)
     }
 
     pub fn count_connections(&self) -> usize {

@@ -24,7 +24,7 @@ impl GrpcRuntime {
     }
 
     pub fn register_service(&mut self, service_name: &str) {
-        self.services.push(service_name);
+        self.services.push(String::from(service_name));
     }
 
     pub fn unregister_service(&mut self, service_name: &str) {
@@ -34,7 +34,7 @@ impl GrpcRuntime {
     }
 
     pub fn register_client(&mut self, client_name: &str) {
-        self.clients.push(client_name);
+        self.clients.push(String::from(client_name));
     }
 
     pub fn unregister_client(&mut self, client_name: &str) {
