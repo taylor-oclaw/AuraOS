@@ -218,6 +218,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -690,9 +691,12 @@ mod event_loop;
 mod events;
 mod expert_router_v2;
 mod face_recognition;
+mod family_activity_log;
 mod family_invite_handler;
 mod family_member_mgr;
+mod family_notification;
 mod family_role_mgr;
+mod family_shared_data;
 mod fan_controller;
 mod fat32;
 mod fb_console;
@@ -978,6 +982,7 @@ mod skill_scope_public;
 mod skill_scope_resolver;
 mod skill_secret_mgr;
 mod skill_timeout_handler;
+mod skill_transform_layer;
 mod skill_trust_scorer;
 mod skill_updater;
 mod skill_usage_tracker;
