@@ -154,6 +154,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accelerometer_driver;
 mod accessibility;
@@ -511,6 +512,8 @@ mod elf_loader;
 mod embedding_engine;
 mod emmc_driver;
 mod encryption_aes;
+mod encryption_aes_gcm;
+mod encryption_chacha20;
 mod encryption_rsa;
 mod encryption_xchacha20;
 mod entropy_pool;
@@ -555,6 +558,7 @@ mod grpc_runtime;
 mod gui_automation;
 mod gui_text;
 mod gyroscope_driver;
+mod hash_blake3;
 mod hdmi_handler;
 mod health_monitor;
 mod hibernate_handler;
