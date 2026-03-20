@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod sparse_attention_v2;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
