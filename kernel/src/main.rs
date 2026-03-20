@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod skill_report_abuse;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
