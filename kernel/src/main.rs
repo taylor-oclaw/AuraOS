@@ -75,6 +75,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod account_lockout;
@@ -336,6 +337,7 @@ mod serial_console;
 mod serial_port;
 mod service_discovery;
 mod session_manager;
+mod sftp_handler;
 mod shared_memory;
 mod shell;
 mod shutdown_mgr;
@@ -344,6 +346,7 @@ mod signals;
 mod slab_allocator;
 mod smtp_client;
 mod socket_api;
+mod ssh_client;
 mod status_bar;
 mod storage;
 mod string_utils;
@@ -364,6 +367,7 @@ mod tar_handler;
 mod task_queue;
 mod taskbar;
 mod tcpip;
+mod telnet_server;
 mod tensor_ops;
 mod terminal;
 mod text_editor;
@@ -399,6 +403,7 @@ mod vpn_client;
 mod wasm_runtime;
 mod watch_agent;
 mod websocket_mgr;
+mod websocket_server;
 mod widget;
 mod wifi_stack;
 mod window_decor;
