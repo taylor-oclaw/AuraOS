@@ -152,6 +152,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accelerometer_driver;
 mod accessibility;
@@ -425,6 +426,8 @@ mod compositor;
 mod connection_tracker;
 mod consensus_engine;
 mod constitution;
+mod container_mkv;
+mod container_webm;
 mod context_inherit;
 mod core_dump;
 mod cost_accounting;
@@ -563,6 +566,7 @@ mod hugepage_alloc;
 mod i18n_system;
 mod icmp;
 mod identity;
+mod image_codec_avif;
 mod image_codec_jpeg;
 mod image_codec_png;
 mod image_codec_webp;
