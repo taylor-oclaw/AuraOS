@@ -111,6 +111,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod account_lockout;
@@ -119,6 +120,7 @@ mod agent_attention_system;
 mod agent_backpressure;
 mod agent_bulkhead;
 mod agent_capability_discovery;
+mod agent_cep_engine;
 mod agent_checkpoint;
 mod agent_circuit_breaker;
 mod agent_collaboration;
@@ -130,6 +132,7 @@ mod agent_dead_letter;
 mod agent_debugger;
 mod agent_delegation;
 mod agent_economics;
+mod agent_event_bus;
 mod agent_goal_tracker;
 mod agent_hierarchy;
 mod agent_identity;
@@ -149,6 +152,7 @@ mod agent_permission_gate;
 mod agent_playbooks;
 mod agent_priority_engine;
 mod agent_profiler;
+mod agent_pub_sub;
 mod agent_rate_governor;
 mod agent_reflection;
 mod agent_reputation;
@@ -158,6 +162,7 @@ mod agent_retry_policy;
 mod agent_sandboxer;
 mod agent_service_mesh;
 mod agent_snapshot;
+mod agent_stream_processor;
 mod agent_task_planner;
 mod agent_telemetry;
 mod agent_timeout_policy;
