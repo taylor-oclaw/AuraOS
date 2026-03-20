@@ -133,6 +133,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod account_lockout;
@@ -290,6 +291,8 @@ mod aura_agent_config;
 mod aura_agent_debugger_ui;
 mod aura_agent_installer;
 mod aura_agent_marketplace_v2;
+mod aura_agent_monitor;
+mod aura_agent_permission_ui;
 mod aura_agent_playground;
 mod aura_agent_rating;
 mod aura_agent_review;
@@ -670,7 +673,10 @@ mod trace_assurance;
 mod traffic_shaper;
 mod transformer;
 mod tree_view;
+mod trust_attestation;
+mod trust_reputation_graph;
 mod trust_scoring;
+mod trust_web_of_trust;
 mod updater;
 mod uptime;
 mod usb;
