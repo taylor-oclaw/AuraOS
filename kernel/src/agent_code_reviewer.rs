@@ -68,6 +68,6 @@ mod tests {
                 String::from("No issues found in the code."),
                 String::from("Code contains a panic! statement.")
             ]
-        ;
+        );
     }
 }
