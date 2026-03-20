@@ -161,6 +161,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accelerometer_driver;
 mod accessibility;
@@ -347,8 +348,10 @@ mod aura_code_editor;
 mod aura_color_mgr;
 mod aura_contacts;
 mod aura_control_center;
+mod aura_cookie_manager;
 mod aura_disk_encrypt;
 mod aura_display_mgr;
+mod aura_dns_over_https;
 mod aura_do_not_disturb;
 mod aura_dock;
 mod aura_engine;
@@ -390,11 +393,13 @@ mod aura_shell;
 mod aura_split_view;
 mod aura_system_info;
 mod aura_task_manager;
+mod aura_telemetry_control;
 mod aura_terminal;
 mod aura_terminal_v2;
 mod aura_text_editor_v2;
 mod aura_theme_mgr_v2;
 mod aura_time_tracker;
+mod aura_tracker_blocker;
 mod aura_update_mgr;
 mod aura_user_setup;
 mod aura_video_player;
