@@ -78,6 +78,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod account_lockout;
@@ -116,6 +117,7 @@ mod audit_log;
 mod audit_trail;
 mod aura_engine;
 mod backup_manager;
+mod bandwidth_monitor;
 mod batch_scheduler;
 mod behavior;
 mod belief_revision;
@@ -311,7 +313,9 @@ mod proc_sched;
 mod process_table;
 mod progress_bar;
 mod prompt_templates;
+mod proxy_handler;
 mod proxy_server;
+mod qos_manager;
 mod quantizer;
 mod quic_protocol;
 mod rag_pipeline;
@@ -390,6 +394,7 @@ mod tokenizer;
 mod tool_executor;
 mod tooltip_system;
 mod trace_assurance;
+mod traffic_shaper;
 mod transformer;
 mod tree_view;
 mod trust_scoring;
@@ -406,6 +411,7 @@ mod vga_text;
 mod video_decoder;
 mod virtio_net;
 mod virtual_desktops;
+mod vlan_manager;
 mod voice_engine;
 mod voice_pipeline;
 mod vpn_client;
