@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod a2a_push_notify;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
