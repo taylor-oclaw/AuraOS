@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod ldap_client;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
