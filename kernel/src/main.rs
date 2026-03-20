@@ -55,10 +55,12 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod acpi;
 mod agent_contracts;
+mod agent_debugger;
 mod agent_economics;
 mod agent_hierarchy;
 mod agent_identity;
@@ -66,6 +68,7 @@ mod agent_marketplace;
 mod agent_memory;
 mod agent_migration;
 mod agent_playbooks;
+mod agent_profiler;
 mod agent_reflection;
 mod agent_reputation;
 mod agent_telemetry;
@@ -164,6 +167,7 @@ mod goal_decompose;
 mod gossip_protocol;
 mod gpu_driver;
 mod graphics;
+mod grpc_runtime;
 mod gui_automation;
 mod gui_text;
 mod hot_reload;
@@ -230,6 +234,7 @@ mod proc_mgr;
 mod proc_sched;
 mod process_table;
 mod prompt_templates;
+mod proxy_server;
 mod random;
 mod rate_limiter;
 mod resource_monitor;
@@ -300,6 +305,7 @@ mod voice_pipeline;
 mod vpn_client;
 mod wasm_runtime;
 mod watch_agent;
+mod websocket_mgr;
 mod widget;
 mod wifi_stack;
 mod window_decor;
