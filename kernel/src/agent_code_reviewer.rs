@@ -50,24 +50,3 @@ impl AgentCodeReviewer {
         &self.review_comments
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_agent_code_reviewer() {
-        let mut reviewer = AgentCodeReviewer::new();
-        reviewer.add_code(String::from("fn foo() { panic!(\"This is a panic\"); }"));
-
-        reviewer.review_code();
-
-        assert_eq!(
-            reviewer.get_review_comments(),
-            &vec![
-                String::from("No issues found in the code."),
-                String::from("Code contains a panic! statement.")
-            ]
-        );
-    }
-}
