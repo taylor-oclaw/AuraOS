@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod aura_text_editor_v2;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
