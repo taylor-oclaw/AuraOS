@@ -157,6 +157,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accelerometer_driver;
 mod accessibility;
@@ -600,6 +601,7 @@ mod kernel_orchestrator;
 mod key_exchange_kyber;
 mod key_exchange_x25519;
 mod key_manager;
+mod key_storage;
 mod keyboard;
 mod knowledge_graph;
 mod ldap_client;
@@ -694,6 +696,7 @@ mod sd_card_handler;
 mod search_indexer;
 mod seccomp_filter;
 mod secure_boot;
+mod secure_enclave;
 mod secure_ipc;
 mod self_evolution;
 mod self_healing;
@@ -712,6 +715,7 @@ mod shutdown_mgr;
 mod signal_handler;
 mod signals;
 mod signature_dilithium;
+mod signature_ed25519;
 mod slab_allocator;
 mod sleep_manager;
 mod smtp_client;
