@@ -70,6 +70,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod acpi;
@@ -206,6 +207,7 @@ mod goal_decompose;
 mod gossip_protocol;
 mod gpu_driver;
 mod graphics;
+mod group_manager;
 mod grpc_runtime;
 mod gui_automation;
 mod gui_text;
@@ -226,6 +228,7 @@ mod ipc;
 mod ipc_semaphore;
 mod kbd_layout;
 mod kernel_orchestrator;
+mod key_manager;
 mod keyboard;
 mod knowledge_graph;
 mod llm_engine;
@@ -265,6 +268,7 @@ mod os_init;
 mod packet_filter;
 mod page_fault;
 mod panic_handler;
+mod password_hasher;
 mod pci;
 mod pci_bus;
 mod perf_profiler;
@@ -311,6 +315,7 @@ mod serial;
 mod serial_console;
 mod serial_port;
 mod service_discovery;
+mod session_manager;
 mod shared_memory;
 mod shell;
 mod shutdown_mgr;
@@ -359,6 +364,7 @@ mod usb;
 mod usb_hid;
 mod usb_hub;
 mod usb_mass_storage;
+mod user_auth;
 mod user_profiles;
 mod vfs;
 mod vga_text;
