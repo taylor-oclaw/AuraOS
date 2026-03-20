@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod aura_agent_updater;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
