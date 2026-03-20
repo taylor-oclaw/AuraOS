@@ -67,6 +67,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod acpi;
@@ -107,6 +108,7 @@ mod batch_scheduler;
 mod behavior;
 mod belief_revision;
 mod bluetooth_mgr;
+mod bluetooth_stack;
 mod boot_sequence;
 mod buddy_allocator;
 mod camera_driver;
@@ -157,6 +159,7 @@ mod device_tree;
 mod dhcp;
 mod dhcp_client;
 mod dialog_box;
+mod disk_partition;
 mod display_server;
 mod dma;
 mod dma_controller;
@@ -180,6 +183,8 @@ mod file_mgr;
 mod file_permissions;
 mod filesystem_btrfs;
 mod filesystem_ext4;
+mod filesystem_fat;
+mod filesystem_ntfs;
 mod firewall_engine;
 mod focus_modes;
 mod font;
@@ -231,6 +236,7 @@ mod menu_system;
 mod mesh;
 mod model_loader;
 mod model_registry;
+mod mount_manager;
 mod mouse;
 mod multi_monitor;
 mod namespace_isolate;
