@@ -39,11 +39,13 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod accessibility;
 mod acpi;
 mod agent_hierarchy;
 mod agent_identity;
 mod agent_memory;
+mod agent_playbooks;
 mod allocator;
 mod animation_system;
 mod app_marketplace;
@@ -70,6 +72,7 @@ mod color;
 mod command_palette;
 mod compat_bridge;
 mod compositor;
+mod context_inherit;
 mod cost_accounting;
 mod crucible_parser;
 mod crypto;
@@ -115,8 +118,10 @@ mod framebuffer;
 mod gdt;
 mod gesture_engine;
 mod gguf;
+mod goal_decompose;
 mod gpu_driver;
 mod graphics;
+mod gui_automation;
 mod gui_text;
 mod hot_reload;
 mod http;
