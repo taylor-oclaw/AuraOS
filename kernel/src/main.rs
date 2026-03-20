@@ -46,9 +46,11 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod acpi;
+mod agent_contracts;
 mod agent_economics;
 mod agent_hierarchy;
 mod agent_identity;
@@ -121,6 +123,7 @@ mod e1000;
 mod elf_loader;
 mod env;
 mod ethernet;
+mod event_bus;
 mod event_loop;
 mod events;
 mod fat32;
@@ -182,9 +185,11 @@ mod pci;
 mod perf_profiler;
 mod permissions;
 mod pipes;
+mod plugin_system;
 mod power_mgmt;
 mod power_profiles;
 mod print_manager;
+mod privacy_engine;
 mod proc_mgr;
 mod proc_sched;
 mod prompt_templates;
@@ -202,6 +207,7 @@ mod secure_ipc;
 mod self_evolution;
 mod self_healing;
 mod semantic_search;
+mod sentiment_engine;
 mod serial;
 mod serial_console;
 mod service_discovery;
