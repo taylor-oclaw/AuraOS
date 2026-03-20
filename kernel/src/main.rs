@@ -43,6 +43,8 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
+mod a2a_protocol;
 mod accessibility;
 mod acpi;
 mod agent_hierarchy;
@@ -50,6 +52,7 @@ mod agent_identity;
 mod agent_memory;
 mod agent_playbooks;
 mod agent_reflection;
+mod agent_telemetry;
 mod allocator;
 mod animation_system;
 mod app_marketplace;
@@ -77,6 +80,7 @@ mod command_palette;
 mod compat_bridge;
 mod compositor;
 mod consensus_engine;
+mod constitution;
 mod context_inherit;
 mod cost_accounting;
 mod crucible_parser;
@@ -199,6 +203,7 @@ mod status_bar;
 mod storage;
 mod string_utils;
 mod surface;
+mod swarm_intelligence;
 mod sync_primitives;
 mod sys_monitor;
 mod syscall;
@@ -224,6 +229,7 @@ mod video_decoder;
 mod virtio_net;
 mod virtual_desktops;
 mod voice_engine;
+mod voice_pipeline;
 mod vpn_client;
 mod wasm_runtime;
 mod watch_agent;
