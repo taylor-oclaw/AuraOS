@@ -1,6 +1,6 @@
 extern crate alloc;
 
-use alloc::string::String;
+use alloc::string::{String, ToString};
 use alloc::vec::Vec;
 
 pub struct WebSocketManager {
@@ -15,8 +15,8 @@ impl WebSocketManager {
     }
 
     pub fn add_connection(&mut self, connection_id: &str) {
-        if !self.connections.contains(&connection_id.to_string()) {
-            self.connections.push(connection_id.to_string());
+        if !self.connections.contains(&connection_id) {
+            self.connections.push(connection_id);
         }
     }
 
@@ -29,7 +29,7 @@ impl WebSocketManager {
     }
 
     pub fn has_connection(&self, connection_id: &str) -> bool {
-        self.connections.contains(&connection_id.to_string())
+        self.connections.contains(&connection_id)
     }
 
     pub fn count_connections(&self) -> usize {

@@ -1,5 +1,5 @@
 extern crate alloc;
-use alloc::string::String;
+use alloc::string::{String, ToString};
 use alloc::vec::Vec;
 
 pub extern "C" fn grpc_runtime_init() {
@@ -24,7 +24,7 @@ impl GrpcRuntime {
     }
 
     pub fn register_service(&mut self, service_name: &str) {
-        self.services.push(service_name.to_string());
+        self.services.push(service_name);
     }
 
     pub fn unregister_service(&mut self, service_name: &str) {
@@ -34,7 +34,7 @@ impl GrpcRuntime {
     }
 
     pub fn register_client(&mut self, client_name: &str) {
-        self.clients.push(client_name.to_string());
+        self.clients.push(client_name);
     }
 
     pub fn unregister_client(&mut self, client_name: &str) {
