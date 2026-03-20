@@ -3,6 +3,15 @@ use alloc::string::String;
 use alloc::vec::Vec;
 use alloc::vec;
 
+
+fn log2_ceil(n: usize) -> usize {
+    if n <= 1 { return 0; }
+    let mut v = n - 1;
+    let mut r = 0;
+    while v > 0 { v >>= 1; r += 1; }
+    r
+}
+
 pub struct BuddyAllocator {
     memory: Vec<u8>,
     free_lists: Vec<Vec<usize>>,
@@ -11,7 +20,7 @@ pub struct BuddyAllocator {
 impl BuddyAllocator {
     pub fn new(size: usize) -> Self {
         let mut memory = vec![0; size];
-        let levels = (size as f64).log2().ceil() as usize;
+        let levels = log2_ceil(size);
         let mut free_lists = vec![Vec::new(); levels];
 
         // Initialize the largest block
@@ -21,7 +30,7 @@ impl BuddyAllocator {
     }
 
     pub fn allocate(&mut self, size: usize) -> Option<usize> {
-        let level = (size as f64).log2().ceil() as usize;
+        let level = log2_ceil(size);
         if level >= self.free_lists.len() {
             return None;
         }
@@ -43,7 +52,7 @@ impl BuddyAllocator {
     }
 
     pub fn deallocate(&mut self, address: usize, size: usize) {
-        let level = (size as f64).log2().ceil() as usize;
+        let level = log2_ceil(size);
         if level >= self.free_lists.len() {
             return;
         }
@@ -65,7 +74,7 @@ impl BuddyAllocator {
     }
 
     fn is_free(&self, address: usize, size: usize) -> bool {
-        let level = (size as f64).log2().ceil() as usize;
+        let level = log2_ceil(size);
         if level >= self.free_lists.len() {
             return false;
         }
