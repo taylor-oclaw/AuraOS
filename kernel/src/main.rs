@@ -129,6 +129,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod account_lockout;
@@ -233,6 +234,7 @@ mod agent_retry_policy;
 mod agent_reward_model;
 mod agent_rlhf_trainer;
 mod agent_robustness_check;
+mod agent_rollback_handler;
 mod agent_rule_engine;
 mod agent_safety_monitor;
 mod agent_saga_manager;
@@ -278,6 +280,8 @@ mod audio_routing;
 mod audit_log;
 mod audit_trail;
 mod aura_accessibility_mgr;
+mod aura_agent_marketplace_v2;
+mod aura_agent_store;
 mod aura_app_sandbox;
 mod aura_app_store;
 mod aura_audio_mgr;
