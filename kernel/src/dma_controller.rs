@@ -53,7 +53,7 @@ impl DmaController {
 
     pub fn get_channel_status(&self, channel_index: usize) -> Result<String, String> {
         if let Some(channel) = self.channels.get(channel_index) {
-            Ok(String::from("error") { "in use" } else { "free" }))
+            Ok(String::from("channel status"))
         } else {
             Err(String::from("Invalid channel index"))
         }
