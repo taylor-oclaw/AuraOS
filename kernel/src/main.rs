@@ -68,6 +68,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod acpi;
@@ -92,6 +93,7 @@ mod animation_system;
 mod anomaly_detector;
 mod app_marketplace;
 mod apps;
+mod archive_manager;
 mod arp;
 mod arp_cache;
 mod ata;
@@ -178,9 +180,11 @@ mod events;
 mod fat32;
 mod fb_console;
 mod federated_learn;
+mod file_compression;
 mod file_dialog;
 mod file_mgr;
 mod file_permissions;
+mod file_watcher;
 mod filesystem_btrfs;
 mod filesystem_ext4;
 mod filesystem_fat;
@@ -368,6 +372,7 @@ mod window_mgr;
 mod window_tiling;
 mod wm;
 mod workflow_engine;
+mod zip_handler;
 
 fn kernel_main(boot_info: &'static mut BootInfo) -> ! {
     // Initialize serial first (for debug output even if screen fails)
