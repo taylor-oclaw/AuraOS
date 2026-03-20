@@ -53,6 +53,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod acpi;
@@ -80,6 +81,7 @@ mod auction_sched;
 mod audio;
 mod audio_mixer;
 mod audio_routing;
+mod audit_log;
 mod audit_trail;
 mod aura_engine;
 mod backup_manager;
@@ -106,6 +108,7 @@ mod cost_accounting;
 mod cpu_hotplug;
 mod crucible_parser;
 mod crypto;
+mod crypto_engine;
 mod cursor;
 mod datetime_mgr;
 mod debug_console;
@@ -127,6 +130,7 @@ mod device_manager;
 mod device_mgr;
 mod device_tree;
 mod dhcp;
+mod dhcp_client;
 mod display_server;
 mod dma;
 mod dma_controller;
@@ -232,6 +236,7 @@ mod sandbox_manager;
 mod scheduler;
 mod screen_capture;
 mod search_indexer;
+mod seccomp_filter;
 mod secure_boot;
 mod secure_ipc;
 mod self_evolution;
@@ -269,6 +274,7 @@ mod theme_engine;
 mod tiered_cache;
 mod timer_subsystem;
 mod timers;
+mod tls_handshake;
 mod tokenizer;
 mod trace_assurance;
 mod transformer;
