@@ -18,7 +18,7 @@ impl ShortcutManager {
     pub fn new() -> Self {
         ShortcutManager {
             shortcuts: Vec::new(),
-        }
+        })
     }
 
     pub fn add_shortcut(&mut self, key_sequence: &str, action: &str) {
@@ -34,7 +34,7 @@ impl ShortcutManager {
             true
         } else {
             false
-        }
+        })
     }
 
     pub fn get_action(&self, key_sequence: &str) -> Option<&String> {
@@ -44,7 +44,7 @@ impl ShortcutManager {
             } else {
                 None
             }
-        }
+        })
     }
 
     pub fn list_shortcuts(&self) -> Vec<(String, String)> {
