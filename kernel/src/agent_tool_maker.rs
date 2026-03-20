@@ -39,9 +39,9 @@ impl AgentToolMaker {
         self.tools.iter().find_map(|&(ref tool_name, ref desc)| {
             if tool_name == name {
                 Some(desc.clone())
-            } else {
+            }) else {
                 None
-            }
-        }
+            })
+        })
     }
 }
