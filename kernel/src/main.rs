@@ -203,6 +203,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod a2a_protocol_v2;
 mod accelerometer_driver;
@@ -895,10 +896,13 @@ mod signal_handler;
 mod signals;
 mod signature_dilithium;
 mod signature_ed25519;
+mod skill_api_key_store;
 mod skill_config_mgr;
 mod skill_data_isolation;
+mod skill_dependency_mgr;
 mod skill_discovery;
 mod skill_installer;
+mod skill_lifecycle_mgr;
 mod skill_manifest_parser;
 mod skill_permission_mgr;
 mod skill_registry;
@@ -910,6 +914,7 @@ mod skill_scope_personal;
 mod skill_scope_public;
 mod skill_scope_resolver;
 mod skill_updater;
+mod skill_version_mgr;
 mod slab_allocator;
 mod sleep_manager;
 mod smtp_client;
