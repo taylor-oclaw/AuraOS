@@ -2,6 +2,7 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
+#[derive(Clone)]
 pub enum UiAction {
     Click(u32, u32),
     Type(String),
