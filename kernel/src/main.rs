@@ -136,6 +136,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod account_lockout;
@@ -404,9 +405,12 @@ mod core_dump;
 mod cost_accounting;
 mod cpu_hotplug;
 mod crash_reporter;
+mod crucible_async;
+mod crucible_http;
 mod crucible_io;
 mod crucible_net;
 mod crucible_parser;
+mod crucible_stdlib;
 mod crypto;
 mod crypto_engine;
 mod cursor;
