@@ -69,6 +69,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod acpi;
@@ -117,6 +118,7 @@ mod camera_driver;
 mod capability_system;
 mod cert_manager;
 mod cgroup_manager;
+mod checksum_engine;
 mod clipboard;
 mod clipboard_mgr;
 mod clipboard_plus;
@@ -171,6 +173,8 @@ mod dream_cycle;
 mod e1000;
 mod elf_loader;
 mod embedding_engine;
+mod encryption_aes;
+mod encryption_rsa;
 mod entropy_pool;
 mod env;
 mod ethernet;
@@ -320,6 +324,7 @@ mod string_utils;
 mod surface;
 mod swap_manager;
 mod swarm_intelligence;
+mod symlink_handler;
 mod sync_primitives;
 mod sys_monitor;
 mod syscall;
@@ -328,6 +333,7 @@ mod syslog_daemon;
 mod system_config;
 mod system_tray;
 mod tab_control;
+mod tar_handler;
 mod task_queue;
 mod taskbar;
 mod tcpip;
