@@ -66,6 +66,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod acpi;
@@ -177,6 +178,8 @@ mod federated_learn;
 mod file_dialog;
 mod file_mgr;
 mod file_permissions;
+mod filesystem_btrfs;
+mod filesystem_ext4;
 mod firewall_engine;
 mod focus_modes;
 mod font;
@@ -242,6 +245,7 @@ mod notifications;
 mod npu_driver;
 mod ntp_sync;
 mod numa_topology;
+mod nvme_driver;
 mod oom_killer;
 mod os_init;
 mod packet_filter;
@@ -338,6 +342,7 @@ mod uptime;
 mod usb;
 mod usb_hid;
 mod usb_hub;
+mod usb_mass_storage;
 mod user_profiles;
 mod vfs;
 mod vga_text;
