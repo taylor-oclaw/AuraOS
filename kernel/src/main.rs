@@ -123,6 +123,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod account_lockout;
@@ -136,6 +137,7 @@ mod agent_backpressure;
 mod agent_billing_meter;
 mod agent_bulkhead;
 mod agent_capability_discovery;
+mod agent_catastrophic_forget_guard;
 mod agent_cep_engine;
 mod agent_chain_of_thought;
 mod agent_checkpoint;
@@ -147,8 +149,10 @@ mod agent_compliance_engine;
 mod agent_consensus;
 mod agent_constitutional_ai;
 mod agent_context_manager;
+mod agent_continual_learn;
 mod agent_contracts;
 mod agent_cost_tracker;
+mod agent_curriculum_learn;
 mod agent_dead_letter;
 mod agent_debugger;
 mod agent_decision_tree;
