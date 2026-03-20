@@ -207,6 +207,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod a2a_protocol_v2;
 mod accelerometer_driver;
@@ -776,7 +777,10 @@ mod lookahead_decode;
 mod mamba_v2;
 mod math;
 mod matter_protocol;
+mod mcp_host;
 mod mcp_protocol;
+mod mcp_server;
+mod mcp_tool_adapter;
 mod media_controls;
 mod medusa_v2;
 mod mem_pool;
@@ -900,6 +904,7 @@ mod signals;
 mod signature_dilithium;
 mod signature_ed25519;
 mod skill_api_key_store;
+mod skill_audit_log;
 mod skill_billing_hook;
 mod skill_certification;
 mod skill_config_mgr;
