@@ -174,6 +174,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accelerometer_driver;
 mod accessibility;
@@ -429,6 +430,7 @@ mod aura_workspace_mgr;
 mod backup_manager;
 mod bandwidth_monitor;
 mod barometer_driver;
+mod batch_inference_v2;
 mod batch_scheduler;
 mod battery_manager;
 mod behavior;
@@ -559,6 +561,7 @@ mod ethernet;
 mod event_bus;
 mod event_loop;
 mod events;
+mod expert_router_v2;
 mod face_recognition;
 mod fan_controller;
 mod fat32;
@@ -575,6 +578,7 @@ mod filesystem_fat;
 mod filesystem_ntfs;
 mod fingerprint_driver;
 mod firewall_engine;
+mod flash_attention_v2;
 mod focus_modes;
 mod font;
 mod font_data;
@@ -653,6 +657,7 @@ mod log_rotator;
 mod logger;
 mod login_manager;
 mod login_screen;
+mod mamba_v2;
 mod math;
 mod matter_protocol;
 mod media_controls;
@@ -665,6 +670,7 @@ mod menu_system;
 mod mesh;
 mod metal_compat;
 mod mfa_handler;
+mod mixture_experts_v2;
 mod ml_accelerator;
 mod model_loader;
 mod model_registry;
