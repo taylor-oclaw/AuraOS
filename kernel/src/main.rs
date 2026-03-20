@@ -179,7 +179,9 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
+mod a2a_protocol_v2;
 mod accelerometer_driver;
 mod accessibility;
 mod account_lockout;
@@ -269,6 +271,7 @@ mod agent_priority_engine;
 mod agent_profiler;
 mod agent_prompt_optimizer;
 mod agent_prompt_template_v2;
+mod agent_protocol;
 mod agent_pub_sub;
 mod agent_query_planner;
 mod agent_rag_v2;
@@ -320,6 +323,7 @@ mod allocator;
 mod ambient_light_sensor;
 mod animation_system;
 mod anomaly_detector;
+mod anthropic_compat;
 mod anti_aliasing;
 mod app_marketplace;
 mod apps;
@@ -639,6 +643,7 @@ mod ipc;
 mod ipc_semaphore;
 mod iris_scanner;
 mod jacobi_decode;
+mod json_mode;
 mod jwt_handler;
 mod kbd_layout;
 mod kerberos_client;
@@ -700,6 +705,7 @@ mod numa_topology;
 mod nvme_driver;
 mod oauth_client;
 mod oom_killer;
+mod openai_compat;
 mod opengl_compat;
 mod os_init;
 mod packet_filter;
