@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod sudo_handler;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
