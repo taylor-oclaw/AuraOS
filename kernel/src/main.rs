@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod marketplace_trial_period;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
