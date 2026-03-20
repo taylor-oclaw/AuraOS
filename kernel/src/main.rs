@@ -85,6 +85,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod account_lockout;
@@ -145,9 +146,13 @@ mod coalition_mgr;
 mod color;
 mod color_picker;
 mod command_palette;
+mod compat_apfs_read;
 mod compat_bridge;
 mod compat_btrfs;
+mod compat_ext4;
 mod compat_fat32;
+mod compat_hfs;
+mod compat_ntfs;
 mod compositor;
 mod connection_tracker;
 mod consensus_engine;
