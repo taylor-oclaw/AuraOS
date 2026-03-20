@@ -40,6 +40,7 @@ impl OomKiller {
     }
 }
 
+#[derive(Clone)]
 struct Process {
     pid: u32,
     name: String,
