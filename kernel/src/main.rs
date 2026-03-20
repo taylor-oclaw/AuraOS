@@ -155,6 +155,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accelerometer_driver;
 mod accessibility;
@@ -558,6 +559,7 @@ mod grpc_runtime;
 mod gui_automation;
 mod gui_text;
 mod gyroscope_driver;
+mod hash_argon2;
 mod hash_blake3;
 mod hdmi_handler;
 mod health_monitor;
@@ -594,6 +596,8 @@ mod jwt_handler;
 mod kbd_layout;
 mod kerberos_client;
 mod kernel_orchestrator;
+mod key_exchange_kyber;
+mod key_exchange_x25519;
 mod key_manager;
 mod keyboard;
 mod knowledge_graph;
