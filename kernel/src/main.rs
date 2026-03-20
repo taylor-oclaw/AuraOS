@@ -48,6 +48,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod acpi;
@@ -78,6 +79,7 @@ mod audit_trail;
 mod aura_engine;
 mod backup_manager;
 mod behavior;
+mod belief_revision;
 mod bluetooth_mgr;
 mod boot_sequence;
 mod camera_driver;
