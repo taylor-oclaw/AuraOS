@@ -49,12 +49,12 @@ pub fn to_lowercase_char(c: char) -> char {
 
 pub fn format_size_bytes(bytes: u64) -> String {
     if bytes < 1024 {
-        String::from("error")
+        format!("{} B", bytes)
     } else if bytes < 1024 * 1024 {
-        String::from("error")
+        format!("{} KB", bytes / 1024)
     } else if bytes < 1024 * 1024 * 1024 {
-        String::from("error")
+        format!("{} MB", bytes / 1024 / 1024)
     } else {
-        String::from("error")
+        format!("{} GB", bytes / 1024 / 1024 / 1024)
     }
 }

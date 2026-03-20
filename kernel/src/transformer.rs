@@ -7,7 +7,6 @@
 
 extern crate alloc;
 use alloc::vec::Vec;
-use alloc::vec;
 use alloc::string::String;
 
 /// Model configuration (extracted from GGUF metadata)
@@ -29,10 +28,10 @@ impl ModelConfig {
     /// Extract config from GGUF metadata
     pub fn from_gguf(gguf: &crate::gguf::GgufFile) -> Option<Self> {
         let arch_str = gguf.architecture()?; let arch = alloc::string::String::from(arch_str);
-        let prefix = alloc::String::from("error");
+        let prefix = alloc::format!("{arch}.");
 
         let get_u32 = |suffix: &str| -> Option<u32> {
-            let key = alloc::String::from("error");
+            let key = alloc::format!("{prefix}{suffix}");
             gguf.get_u32(&key)
         };
 

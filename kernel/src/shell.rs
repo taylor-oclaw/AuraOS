@@ -43,6 +43,7 @@ pub fn handle_key(c: char) {
             state.history_count += 1;
             drop(state); // Release lock before executing
             
+            crate::fb_println!("");
             
             // Convert to str
             if let Ok(cmd_str) = core::str::from_utf8(&cmd_buf[..cmd_len]) {
@@ -103,12 +104,36 @@ fn execute_command(cmd: &str) {
 
 fn cmd_help() {
     framebuffer::with_writer(|w| w.set_fg(0, 255, 180));
+    crate::fb_println!("  AuraOS Commands:");
     framebuffer::with_writer(|w| w.set_fg(200, 200, 200));
+    crate::fb_println!("  help          - Show this help");
+    crate::fb_println!("  about         - About AuraOS");
+    crate::fb_println!("  clear         - Clear screen");
+    crate::fb_println!("  mem           - Memory info");
+    crate::fb_println!("  uptime        - System uptime");
+    crate::fb_println!("  uname         - System info");
+    crate::fb_println!("  hardware      - Hardware detection");
+    crate::fb_println!("  echo <text>   - Print text");
+    crate::fb_println!("  color <name>  - Change prompt color");
+    crate::fb_println!("  aura <msg>    - Talk to Aura AI");
+    crate::fb_println!("  hello         - Say hi");
+    crate::fb_println!("  reboot        - Reboot system");
+    crate::fb_println!("  shutdown      - Power off");
 }
 
 fn cmd_about() {
     framebuffer::with_writer(|w| w.set_fg(0, 210, 255));
+    crate::fb_println!("  AuraOS v0.1.0 - The Ambient Intelligence OS");
+    crate::fb_println!("  Created by Venkat Yarlagadda");
+    crate::fb_println!("  Built by Taylor Oclaw");
+    crate::fb_println!("");
     framebuffer::with_writer(|w| w.set_fg(200, 200, 200));
+    crate::fb_println!("  An operating system where AI is not an app you open,");
+    crate::fb_println!("  but the environment you live in. Your computer sees,");
+    crate::fb_println!("  hears, and understands. It anticipates, adapts, and");
+    crate::fb_println!("  works alongside you.");
+    crate::fb_println!("");
+    crate::fb_println!("  Patent Pending - Suvayar LLC / RedSky LLC");
 }
 
 fn cmd_clear() {
@@ -119,15 +144,21 @@ fn cmd_memory() {
     // We can't easily get runtime memory stats from the allocator in this version
     // but we can show what we know
     framebuffer::with_writer(|w| w.set_fg(0, 255, 180));
+    crate::fb_println!("  Memory Status:");
     framebuffer::with_writer(|w| w.set_fg(200, 200, 200));
+    crate::fb_println!("  Heap: {} KB allocated", crate::allocator::HEAP_SIZE / 1024);
+    crate::fb_println!("  Heap start: {:#x}", crate::allocator::HEAP_START);
 }
 
 fn cmd_uptime() {
     framebuffer::with_writer(|w| w.set_fg(200, 200, 200));
+    crate::fb_println!("  AuraOS is running (timer not yet calibrated)");
+    crate::fb_println!("  PIT timer: masked (stable mode)");
 }
 
 fn cmd_uname() {
     framebuffer::with_writer(|w| w.set_fg(200, 200, 200));
+    crate::fb_println!("  AuraOS 0.1.0 x86_64 aura-kernel");
 }
 
 fn cmd_echo(args: &[&str]) {
@@ -136,10 +167,14 @@ fn cmd_echo(args: &[&str]) {
         if i > 0 { crate::fb_print!(" "); }
         crate::fb_print!("{}", arg);
     }
+    crate::fb_println!("");
 }
 
 fn cmd_hello() {
     framebuffer::with_writer(|w| w.set_fg(255, 200, 50));
+    crate::fb_println!("  Hey there! I'm Aura, your OS companion.");
+    crate::fb_println!("  I'm still learning, but I'm here to help.");
+    crate::fb_println!("  Try 'aura tell me a joke' when I get smarter!");
 }
 
 pub fn cmd_hardware_pub() { cmd_hardware(); }
@@ -147,6 +182,7 @@ pub fn cmd_memory_pub() { cmd_memory(); }
 
 fn cmd_hardware() {
     framebuffer::with_writer(|w| w.set_fg(0, 255, 180));
+    crate::fb_println!("  Hardware Detection:");
     framebuffer::with_writer(|w| w.set_fg(200, 200, 200));
     
     // Read CPUID
@@ -171,16 +207,24 @@ fn cmd_hardware() {
             vendor[4..8].copy_from_slice(&edx_val.to_le_bytes());
             vendor[8..12].copy_from_slice(&ecx_val.to_le_bytes());
         }
+        crate::fb_println!("  CPU: x86_64 (CPUID max leaf: {})", cpuid_result);
         if let Ok(v) = core::str::from_utf8(&vendor) {
+            crate::fb_println!("  Vendor: {}", v);
         }
     }
     
+    crate::fb_println!("  Framebuffer: active (1280x720 BGR)");
+    crate::fb_println!("  Keyboard: PS/2 (active)");
+    crate::fb_println!("  Mouse: PS/2 (not yet initialized)");
     
     // PCI scan
     framebuffer::with_writer(|w| w.set_fg(0, 255, 180));
+    crate::fb_println!("");
+    crate::fb_println!("  PCI Bus Scan:");
     let pci_devices = crate::pci::scan();
     for dev in &pci_devices {
         framebuffer::with_writer(|w| w.set_fg(200, 200, 200));
+        crate::fb_println!("    {:02x}:{:02x}.{} [{:04x}:{:04x}] {}",
             dev.bus, dev.device, dev.function,
             dev.vendor_id, dev.device_id,
             dev.class_name);
@@ -189,6 +233,7 @@ fn cmd_hardware() {
 
 fn cmd_color(args: &[&str]) {
     if args.is_empty() {
+        crate::fb_println!("  Usage: color <cyan|green|white|red|yellow|pink>");
         return;
     }
     match args[0] {
@@ -199,31 +244,54 @@ fn cmd_color(args: &[&str]) {
         "yellow" => framebuffer::with_writer(|w| w.set_fg(255, 220, 50)),
         "pink" => framebuffer::with_writer(|w| w.set_fg(255, 100, 200)),
         _ => {
+            crate::fb_println!("  Unknown color. Try: cyan, green, white, red, yellow, pink");
             return;
         }
     }
+    crate::fb_println!("  Color changed to {}", args[0]);
 }
 
 fn cmd_aura(args: &[&str]) {
     framebuffer::with_writer(|w| w.set_fg(0, 210, 255));
     if args.is_empty() {
+        crate::fb_println!("  Aura AI is not yet connected.");
+        crate::fb_println!("  When the LLM runtime is ready, you'll be able to");
+        crate::fb_println!("  have conversations right here in the shell.");
+        crate::fb_println!("  Try: aura what can you do");
     } else {
+        crate::fb_println!("  [Aura AI - offline]");
+        crate::fb_println!("  I heard you say: '{}'", args.join(" "));
+        crate::fb_println!("  My brain (LLM runtime) isn't loaded yet.");
+        crate::fb_println!("  Soon I'll be able to help you with anything!");
     }
 }
 
 fn cmd_timezone(args: &[&str]) {
     if args.is_empty() {
+        crate::fb_println!("  Current: {} (UTC{}{})",
             crate::rtc::timezone_name(),
             if crate::rtc::timezone_offset() >= 0 { "+" } else { "" },
             crate::rtc::timezone_offset());
         return;
     }
     match args[0] {
+        "est" => { crate::rtc::set_timezone(-5, "EST"); crate::fb_println!("  Timezone set to EST (UTC-5)"); }
+        "edt" => { crate::rtc::set_timezone(-4, "EDT"); crate::fb_println!("  Timezone set to EDT (UTC-4)"); }
+        "cst" => { crate::rtc::set_timezone(-6, "CST"); crate::fb_println!("  Timezone set to CST (UTC-6)"); }
+        "cdt" => { crate::rtc::set_timezone(-5, "CDT"); crate::fb_println!("  Timezone set to CDT (UTC-5)"); }
+        "mst" => { crate::rtc::set_timezone(-7, "MST"); crate::fb_println!("  Timezone set to MST (UTC-7)"); }
+        "pst" => { crate::rtc::set_timezone(-8, "PST"); crate::fb_println!("  Timezone set to PST (UTC-8)"); }
+        "pdt" => { crate::rtc::set_timezone(-7, "PDT"); crate::fb_println!("  Timezone set to PDT (UTC-7)"); }
+        "utc" | "gmt" => { crate::rtc::set_timezone(0, "UTC"); crate::fb_println!("  Timezone set to UTC"); }
+        "ist" => { crate::rtc::set_timezone(5, "IST"); crate::fb_println!("  Timezone set to IST (UTC+5:30)"); }
+        "jst" => { crate::rtc::set_timezone(9, "JST"); crate::fb_println!("  Timezone set to JST (UTC+9)"); }
+        _ => { crate::fb_println!("  Unknown timezone: {}", args[0]); }
     }
 }
 
 fn cmd_reboot() {
     framebuffer::with_writer(|w| w.set_fg(255, 200, 50));
+    crate::fb_println!("  Rebooting...");
     // Triple fault to reboot
     unsafe {
         // Write to the keyboard controller reset line
@@ -234,6 +302,9 @@ fn cmd_reboot() {
 
 fn cmd_shutdown() {
     framebuffer::with_writer(|w| w.set_fg(255, 200, 50));
+    crate::fb_println!("  Shutting down AuraOS...");
+    crate::fb_println!("  (ACPI power off not yet implemented)");
+    crate::fb_println!("  You can safely power off the machine.");
     // Halt all CPUs
     loop { x86_64::instructions::hlt(); }
 }

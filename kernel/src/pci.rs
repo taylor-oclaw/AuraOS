@@ -136,9 +136,12 @@ pub fn list_devices(devices: &[PciDevice]) {
     use crate::framebuffer;
     
     framebuffer::with_writer(|w| w.set_fg(0, 255, 180));
+    crate::fb_println!("  PCI Devices Found: {}", devices.len());
+    crate::fb_println!("");
     
     for dev in devices {
         framebuffer::with_writer(|w| w.set_fg(200, 200, 200));
+        crate::fb_println!("  {:02x}:{:02x}.{} [{:04x}:{:04x}] {}",
             dev.bus, dev.device, dev.function,
             dev.vendor_id, dev.device_id,
             dev.class_name);
