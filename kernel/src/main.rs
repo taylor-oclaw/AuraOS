@@ -195,6 +195,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod a2a_protocol_v2;
 mod accelerometer_driver;
@@ -380,6 +381,9 @@ mod ai_provider_hot_swap;
 mod ai_provider_registry;
 mod ai_provider_trait;
 mod ai_provider_version_mgr;
+mod ai_realtime_screen;
+mod ai_realtime_video;
+mod ai_realtime_voice;
 mod ai_runtime_abstract;
 mod ai_runtime_native;
 mod ai_runtime_remote;
@@ -387,6 +391,7 @@ mod ai_runtime_wasm;
 mod ai_safety_abstract;
 mod ai_safety_registry;
 mod ai_schema_enforcer;
+mod ai_structured_handler;
 mod ai_tokenizer_abstract;
 mod ai_tokenizer_registry;
 mod ai_tool_protocol;
