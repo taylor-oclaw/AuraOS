@@ -168,6 +168,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accelerometer_driver;
 mod accessibility;
@@ -445,6 +446,7 @@ mod coalition_mgr;
 mod collision_detector;
 mod color;
 mod color_picker;
+mod color_space_mgr;
 mod command_palette;
 mod compass_driver;
 mod compat_apfs_read;
@@ -585,6 +587,7 @@ mod gyroscope_driver;
 mod hash_argon2;
 mod hash_blake3;
 mod hdmi_handler;
+mod hdr_handler;
 mod health_monitor;
 mod hibernate_handler;
 mod homekit_bridge;
@@ -596,6 +599,7 @@ mod http_client;
 mod http_server;
 mod hugepage_alloc;
 mod i18n_system;
+mod icc_profile;
 mod icmp;
 mod identity;
 mod image_codec_avif;
@@ -706,6 +710,7 @@ mod rag_pipeline;
 mod raid_manager;
 mod random;
 mod rate_limiter;
+mod raytracing_engine;
 mod render_pipeline;
 mod resource_monitor;
 mod ring_buffer;
