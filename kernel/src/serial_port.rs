@@ -3,77 +3,23 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct SerialPort {
-    base_address: u16,
+    pub port_base: u16,
+    pub baud_rate: u32,
+    pub initialized: bool,
+    pub tx_buffer: Vec<u8>,
+    pub rx_buffer: Vec<u8>,
+    pub bytes_sent: u64,
+    pub bytes_received: u64,
 }
 
 impl SerialPort {
-    pub fn new(base_address: u16) -> Self {
-        SerialPort { base_address }
+    pub fn new(base: u16, baud: u32) -> Self {
+        Self { port_base: base, baud_rate: baud, initialized: false, tx_buffer: Vec::new(), rx_buffer: Vec::new(), bytes_sent: 0, bytes_received: 0 }
     }
-
-    pub fn initialize(&self) {
-        unsafe {
-            // Disable interrupts
-            outb(self.base_address + 1, 0x00);
-            // Enable DLAB (set baud rate divisor)
-            outb(self.base_address + 3, 0x80);
-            // Set divisor to 3 (lo byte) 19200 baud (hi byte is 0)
-            outb(self.base_address, 0x03);
-            outb(self.base_address + 1, 0x00);
-            // Enable FIFO, clear them, with 14-byte threshold
-            outb(self.base_address + 2, 0xC7);
-            // IRQs enabled, RTS/DSR set
-            outb(self.base_address + 4, 0x0B);
-        }
-    }
-
-    pub fn write_byte(&self, byte: u8) {
-        while self.is_transmit_fifo_full() {}
-        unsafe { outb(self.base_address, byte); }
-    }
-
-    pub fn read_byte(&self) -> Option<u8> {
-        if self.is_receive_fifo_empty() {
-            None
-        } else {
-            Some(unsafe { inb(self.base_address) })
-        }
-    }
-
-    pub fn write_string(&self, string: &str) {
-        for byte in string.bytes() {
-            self.write_byte(byte);
-        }
-    }
-
-    pub fn read_line(&self) -> String {
-        let mut line = String::new();
-        loop {
-            if let Some(byte) = self.read_byte() {
-                if byte == b'\n' || byte == b'\r' {
-                    break;
-                }
-                line.push(byte as char);
-            }
-        }
-        line
-    }
-
-    fn is_transmit_fifo_full(&self) -> bool {
-        unsafe { (inb(self.base_address + 5) & 0x20) != 0 }
-    }
-
-    fn is_receive_fifo_empty(&self) -> bool {
-        unsafe { (inb(self.base_address + 5) & 0x1) == 0 }
-    }
-}
-
-unsafe fn outb(port: u16, value: u8) {
-    asm!("outb %al, %dx", in("al") value, in("dx") port);
-}
-
-unsafe fn inb(port: u16) -> u8 {
-    let result: u8;
-    asm!("inb %dx, %al", out("al") result, in("dx") port);
-    result
+    pub fn init(&mut self) { self.initialized = true; }
+    pub fn write_byte(&mut self, b: u8) { if self.initialized { self.tx_buffer.push(b); self.bytes_sent += 1; } }
+    pub fn write_str(&mut self, s: &str) { for b in s.bytes() { self.write_byte(b); } }
+    pub fn read_byte(&mut self) -> Option<u8> { if self.rx_buffer.is_empty() { None } else { self.bytes_received += 1; Some(self.rx_buffer.remove(0)) } }
+    pub fn flush(&mut self) { self.tx_buffer.clear(); }
+    pub fn is_ready(&self) -> bool { self.initialized }
 }
