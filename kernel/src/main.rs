@@ -83,6 +83,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod account_lockout;
@@ -165,9 +166,11 @@ mod debug_console;
 mod defs_acl;
 mod defs_alloc;
 mod defs_btree;
+mod defs_cloud_sync;
 mod defs_compression;
 mod defs_decay;
 mod defs_dedup;
+mod defs_dedup_v2;
 mod defs_disk_format;
 mod defs_encryption;
 mod defs_hardlink;
@@ -182,6 +185,8 @@ mod defs_snapshot;
 mod defs_super;
 mod defs_symlink;
 mod defs_tests;
+mod defs_tiered_storage;
+mod defs_trash;
 mod defs_vfs;
 mod defs_watcher;
 mod defs_xattr;
