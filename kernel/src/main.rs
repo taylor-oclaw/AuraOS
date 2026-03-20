@@ -87,6 +87,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod account_lockout;
@@ -124,6 +125,9 @@ mod audio_routing;
 mod audit_log;
 mod audit_trail;
 mod aura_engine;
+mod aura_package_mgr;
+mod aura_shell;
+mod aura_terminal;
 mod backup_manager;
 mod bandwidth_monitor;
 mod batch_scheduler;
@@ -154,6 +158,7 @@ mod compat_exfat;
 mod compat_ext4;
 mod compat_fat32;
 mod compat_hfs;
+mod compat_iso9660;
 mod compat_ntfs;
 mod compositor;
 mod connection_tracker;
