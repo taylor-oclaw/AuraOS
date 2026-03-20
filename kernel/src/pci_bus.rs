@@ -44,3 +44,4 @@ pub struct PciDevice {
     pub device_id: u16,
     // Add more fields as necessary
 }
+

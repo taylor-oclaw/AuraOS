@@ -2,47 +2,46 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub enum FaultType { Read, Write, Execute, NotPresent, ProtectionViolation }
-
-pub struct PageFault {
-    pub address: u64,
-    pub fault_type: FaultType,
-    pub agent_id: Option<u64>,
-    pub resolved: bool,
-}
-
 pub struct PageFaultHandler {
-    pub faults: Vec<PageFault>,
-    pub total_faults: u64,
-    pub total_resolved: u64,
-    pub oom_kills: u64,
+    fault_count: usize,
+    fault_log: Vec<String>,
 }
 
 impl PageFaultHandler {
     pub fn new() -> Self {
-        Self { faults: Vec::new(), total_faults: 0, total_resolved: 0, oom_kills: 0 }
+        PageFaultHandler {
+            fault_count: 0,
+            fault_log: Vec::new(),
+        }
     }
 
-    pub fn handle_fault(&mut self, address: u64, fault_type: FaultType, agent_id: Option<u64>) -> bool {
-        self.total_faults += 1;
-        let resolved = !matches!(fault_type, FaultType::ProtectionViolation);
-        self.faults.push(PageFault { address, fault_type, agent_id, resolved });
-        if resolved { self.total_resolved += 1; }
-        resolved
+    pub fn handle_page_fault(&mut self, address: usize) {
+        self.fault_count += 1;
+        let log_entry = String::from("info");
+        self.fault_log.push(log_entry);
     }
 
-    pub fn unresolved_faults(&self) -> Vec<&PageFault> {
-        self.faults.iter().filter(|f| !f.resolved).collect()
+    pub fn get_fault_count(&self) -> usize {
+        self.fault_count
     }
 
-    pub fn faults_for_agent(&self, agent_id: u64) -> usize {
-        self.faults.iter().filter(|f| f.agent_id == Some(agent_id)).count()
+    pub fn get_fault_log(&self) -> &Vec<String> {
+        &self.fault_log
     }
 
-    pub fn resolution_rate(&self) -> f32 {
-        if self.total_faults == 0 { 1.0 }
-        else { self.total_resolved as f32 / self.total_faults as f32 }
+    pub fn clear_fault_log(&mut self) {
+        self.fault_log.clear();
     }
 
-    pub fn total(&self) -> u64 { self.total_faults }
+    pub fn analyze_faults(&self) -> String {
+        if self.fault_count == 0 {
+            return String::from("No page faults recorded.");
+        }
+        let mut analysis = String::from("info");
+        for (index, log_entry) in self.fault_log.iter().enumerate() {
+            analysis.push_str(&String::from("info"));
+        }
+        analysis
+    }
 }
+

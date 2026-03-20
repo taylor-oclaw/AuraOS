@@ -1,7 +1,6 @@
 extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
-use alloc::vec;
 
 pub struct Pipe {
     buffer: Vec<u8>,
