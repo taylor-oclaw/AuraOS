@@ -148,6 +148,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accelerometer_driver;
 mod accessibility;
@@ -286,6 +287,7 @@ mod agent_versioning;
 mod agent_voting_system;
 mod alexa_bridge;
 mod allocator;
+mod ambient_light_sensor;
 mod animation_system;
 mod anomaly_detector;
 mod app_marketplace;
@@ -442,6 +444,7 @@ mod crypto;
 mod crypto_engine;
 mod cursor;
 mod cursor_manager;
+mod cxl_handler;
 mod date_picker;
 mod datetime_mgr;
 mod deadlock_detector;
@@ -622,6 +625,7 @@ mod panic_handler;
 mod password_hasher;
 mod pci;
 mod pci_bus;
+mod pcie_gen5;
 mod perf_profiler;
 mod permissions;
 mod pipe_system;
@@ -716,6 +720,7 @@ mod text_editor;
 mod theme;
 mod theme_engine;
 mod thermal_monitor;
+mod thunderbolt_handler;
 mod tiered_cache;
 mod timer_subsystem;
 mod timers;
@@ -741,6 +746,7 @@ mod trust_scoring;
 mod trust_transparency_log;
 mod trust_web_of_trust;
 mod trust_zero_knowledge_proof;
+mod ufs_driver;
 mod updater;
 mod uptime;
 mod usb;
