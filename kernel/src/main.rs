@@ -170,6 +170,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accelerometer_driver;
 mod accessibility;
@@ -462,6 +463,7 @@ mod compat_hfs;
 mod compat_iso9660;
 mod compat_ntfs;
 mod compositor;
+mod compute_shader;
 mod connection_tracker;
 mod consensus_engine;
 mod constitution;
@@ -525,6 +527,7 @@ mod dhcp;
 mod dhcp_client;
 mod dialog_box;
 mod disk_partition;
+mod display_calibrate;
 mod display_connector;
 mod display_server;
 mod displayport_handler;
@@ -771,6 +774,7 @@ mod string_utils;
 mod stylus_driver;
 mod sudo_handler;
 mod surface;
+mod svg_renderer;
 mod swap_manager;
 mod swarm_intelligence;
 mod symlink_handler;
@@ -851,6 +855,7 @@ mod vulkan_renderer;
 mod wasm_runtime;
 mod watch_agent;
 mod watchdog_timer;
+mod webgpu_compat;
 mod websocket_mgr;
 mod websocket_server;
 mod widget;
