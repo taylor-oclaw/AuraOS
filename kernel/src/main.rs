@@ -59,6 +59,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod acpi;
@@ -95,6 +96,7 @@ mod audit_log;
 mod audit_trail;
 mod aura_engine;
 mod backup_manager;
+mod batch_scheduler;
 mod behavior;
 mod belief_revision;
 mod bluetooth_mgr;
@@ -121,6 +123,7 @@ mod crypto;
 mod crypto_engine;
 mod cursor;
 mod datetime_mgr;
+mod deadlock_detector;
 mod debug_console;
 mod defs_alloc;
 mod defs_btree;
@@ -206,6 +209,7 @@ mod mem_pool;
 mod memfs;
 mod memory;
 mod memory_decay;
+mod memory_pool;
 mod mesh;
 mod model_loader;
 mod model_registry;
@@ -238,6 +242,7 @@ mod plugin_system;
 mod power_mgmt;
 mod power_profiles;
 mod print_manager;
+mod priority_queue;
 mod privacy_engine;
 mod proc_mgr;
 mod proc_sched;
@@ -274,6 +279,7 @@ mod shell;
 mod shutdown_mgr;
 mod signal_handler;
 mod signals;
+mod slab_allocator;
 mod socket_api;
 mod status_bar;
 mod storage;
