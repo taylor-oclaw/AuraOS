@@ -8,19 +8,19 @@ mod tensor_ops {
     use core::ops::{Add, Mul};
 
     #[derive(Debug)]
-    pub struct Tensor<T> {
-        data: Vec<Vec<T>>,
+    pub struct Tensor {
+        data: Vec<Vec>,
         shape: (usize, usize),
     }
 
-    impl<T: Copy + Add<Output = T> + Mul<Output = T>> Tensor<T> {
-        pub fn new(data: Vec<Vec<T>>) -> Self {
+    impl<T: Copy + Add<Output = T> + Mul<Output = T>> Tensor {
+        pub fn new(data: Vec<Vec>) -> Self {
             let rows = data.len();
             let cols = if rows > 0 { data[0].len() } else { 0 };
             Tensor { data, shape: (rows, cols) }
         }
 
-        pub fn add(&self, other: &Tensor<T>) -> Result<Self, String> {
+        pub fn add(&self, other: &Tensor) -> Result<Self, String> {
             if self.shape != other.shape {
                 return Err(String::from("Shape mismatch"));
             }
@@ -34,7 +34,7 @@ mod tensor_ops {
             Ok(Tensor { data: result, shape: self.shape })
         }
 
-        pub fn multiply(&self, other: &Tensor<T>) -> Result<Self, String> {
+        pub fn multiply(&self, other: &Tensor) -> Result<Self, String> {
             if self.shape != other.shape {
                 return Err(String::from("Shape mismatch"));
             }
@@ -59,7 +59,7 @@ mod tensor_ops {
             Tensor { data: transposed, shape: (self.shape.1, self.shape.0) }
         }
 
-        pub fn scalar_add(&self, value: T) -> Self {
+        pub fn scalar_add(&self, value: f32) -> Self {
             let mut result = Vec::with_capacity(self.shape.0);
             for row in &self.data {
                 let new_row = row.iter().map(|&x| x + value).collect();
@@ -68,7 +68,7 @@ mod tensor_ops {
             Tensor { data: result, shape: self.shape }
         }
 
-        pub fn scalar_multiply(&self, value: T) -> Self {
+        pub fn scalar_multiply(&self, value: f32) -> Self {
             let mut result = Vec::with_capacity(self.shape.0);
             for row in &self.data {
                 let new_row = row.iter().map(|&x| x * value).collect();
