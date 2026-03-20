@@ -33,7 +33,7 @@ impl OomKiller {
 
     pub fn get_oom_candidate(&mut self) -> Option<Process> {
         if let Some((index, _)) = self.processes.iter().enumerate().min_by_key(|&(_, p)| p.memory_usage) {
-            self.processes.remove(index)
+            Some(self.processes.remove(index))
         } else {
             None
         }
