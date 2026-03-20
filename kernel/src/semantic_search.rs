@@ -53,6 +53,7 @@ impl SearchIndex {
         emb
     }
 
+    fn sqrt_approx(x: f32) -> f32 { if x <= 0.0 { return 0.0; } let mut guess = x / 2.0; for _ in 0..10 { guess = (guess + x / guess) / 2.0; } guess }
     fn cosine_sim(a: &[f32], b: &[f32]) -> f32 {
         let mut dot = 0.0f32;
         let mut na = 0.0f32;
@@ -65,7 +66,7 @@ impl SearchIndex {
         if na == 0.0 || nb == 0.0 { 
             0.0 
         } else { 
-            dot / (na.sqrt() * nb.sqrt()) 
+            dot / (Self::sqrt_approx(na) * Self::sqrt_approx(nb)) 
         }
     }
 
