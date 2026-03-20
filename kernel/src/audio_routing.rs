@@ -1,6 +1,7 @@
 extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
+use alloc::vec;
 
 pub enum AudioDevice {
     Speaker,
@@ -12,7 +13,7 @@ pub enum AudioDevice {
 
 pub struct AudioRoute {
     pub source: String,
-    pub destination: AudioDevice,
+    pub destination: String,
     pub volume: u8,
     pub active: bool
 }
