@@ -57,6 +57,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod acpi;
@@ -73,6 +74,7 @@ mod agent_playbooks;
 mod agent_profiler;
 mod agent_reflection;
 mod agent_reputation;
+mod agent_snapshot;
 mod agent_telemetry;
 mod agent_versioning;
 mod allocator;
