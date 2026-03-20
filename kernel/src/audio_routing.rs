@@ -43,7 +43,7 @@ impl AudioRouter {
         if let Some(device) = self.devices.get(dest_idx) {
             self.routes.push(AudioRoute {
                 source: String::from(source),
-                destination: device.clone(),
+                destination: String::from("default"),
                 volume,
                 active: true
             });
