@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod aura_malware_scanner;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
