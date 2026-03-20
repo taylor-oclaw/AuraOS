@@ -169,6 +169,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accelerometer_driver;
 mod accessibility;
@@ -310,6 +311,7 @@ mod allocator;
 mod ambient_light_sensor;
 mod animation_system;
 mod anomaly_detector;
+mod anti_aliasing;
 mod app_marketplace;
 mod apps;
 mod archive_manager;
@@ -427,6 +429,7 @@ mod batch_scheduler;
 mod battery_manager;
 mod behavior;
 mod belief_revision;
+mod bidi_text;
 mod bluetooth_mgr;
 mod bluetooth_stack;
 mod boot_sequence;
@@ -536,6 +539,7 @@ mod e1000;
 mod elf_loader;
 mod embedding_engine;
 mod emmc_driver;
+mod emoji_renderer;
 mod encryption_aes;
 mod encryption_aes_gcm;
 mod encryption_chacha20;
@@ -566,6 +570,7 @@ mod firewall_engine;
 mod focus_modes;
 mod font;
 mod font_data;
+mod font_renderer;
 mod framebuffer;
 mod framebuffer_mgr;
 mod ftp_client;
@@ -785,6 +790,7 @@ mod telnet_server;
 mod tensor_ops;
 mod terminal;
 mod text_editor;
+mod text_layout;
 mod texture_manager;
 mod theme;
 mod theme_engine;
