@@ -223,6 +223,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -460,14 +461,19 @@ mod arp;
 mod arp_cache;
 mod asf_auth_apikey;
 mod asf_auth_handler;
+mod asf_auth_mtls;
 mod asf_auth_oauth;
 mod asf_capability_descriptor;
+mod asf_input_validator;
+mod asf_lifecycle_manager;
 mod asf_manifest_parser;
+mod asf_output_validator;
 mod asf_schema_validator;
 mod asf_transport_abstract;
 mod asf_transport_grpc;
 mod asf_transport_http;
 mod asf_transport_stdio;
+mod asf_transport_websocket;
 mod asf_version_negotiator;
 mod ata;
 mod attention_mgr;
