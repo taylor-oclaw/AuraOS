@@ -153,6 +153,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accelerometer_driver;
 mod accessibility;
@@ -427,6 +428,7 @@ mod connection_tracker;
 mod consensus_engine;
 mod constitution;
 mod container_mkv;
+mod container_mp4;
 mod container_webm;
 mod context_inherit;
 mod core_dump;
@@ -510,6 +512,7 @@ mod embedding_engine;
 mod emmc_driver;
 mod encryption_aes;
 mod encryption_rsa;
+mod encryption_xchacha20;
 mod entropy_pool;
 mod env;
 mod ethernet;
@@ -776,6 +779,7 @@ mod vga_text;
 mod video_codec_av1;
 mod video_codec_h264;
 mod video_codec_h265;
+mod video_codec_vp9;
 mod video_decoder;
 mod virtio_net;
 mod virtual_desktops;
