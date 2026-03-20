@@ -76,6 +76,10 @@ impl SentimentEngine {
             0.5
         };
 
+        let is_positive = matches!(sentiment, Sentiment::Positive);
+        let is_negative = matches!(sentiment, Sentiment::Negative);
+        let is_mixed = matches!(sentiment, Sentiment::Mixed);
+
         self.results.push(SentimentResult {
             text: String::from(text),
             sentiment,
@@ -84,7 +88,10 @@ impl SentimentEngine {
             timestamp: 0,
         });
 
-        sentiment
+        if is_mixed { Sentiment::Mixed }
+        else if is_positive { Sentiment::Positive }
+        else if is_negative { Sentiment::Negative }
+        else { Sentiment::Neutral }
     }
 
     pub fn positive_ratio(&self) -> f32 {
