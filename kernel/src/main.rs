@@ -227,6 +227,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -478,6 +479,7 @@ mod asf_bidirectional_bridge;
 mod asf_capability_descriptor;
 mod asf_error_handler;
 mod asf_expose_as_a2a;
+mod asf_expose_as_mcp;
 mod asf_expose_as_openapi;
 mod asf_input_validator;
 mod asf_lifecycle_manager;
@@ -835,7 +837,11 @@ mod login_screen;
 mod lookahead_decode;
 mod mamba_v2;
 mod marketplace_catalog;
+mod marketplace_categories;
 mod marketplace_core;
+mod marketplace_featured;
+mod marketplace_search;
+mod marketplace_trending;
 mod math;
 mod matter_protocol;
 mod mcp_auth_handler;
