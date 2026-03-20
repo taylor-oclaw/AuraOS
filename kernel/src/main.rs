@@ -77,6 +77,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod account_lockout;
@@ -273,6 +274,7 @@ mod multi_monitor;
 mod namespace_isolate;
 mod nat_gateway;
 mod net_stack;
+mod network_bridge;
 mod nlp;
 mod nlp_bridge;
 mod nlp_tokenizer;
@@ -311,6 +313,7 @@ mod progress_bar;
 mod prompt_templates;
 mod proxy_server;
 mod quantizer;
+mod quic_protocol;
 mod rag_pipeline;
 mod raid_manager;
 mod random;
@@ -349,6 +352,7 @@ mod signals;
 mod slab_allocator;
 mod smtp_client;
 mod socket_api;
+mod socks_handler;
 mod ssh_client;
 mod ssh_server;
 mod status_bar;
@@ -405,6 +409,7 @@ mod virtual_desktops;
 mod voice_engine;
 mod voice_pipeline;
 mod vpn_client;
+mod vpn_wireguard;
 mod wasm_runtime;
 mod watch_agent;
 mod websocket_mgr;
