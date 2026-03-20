@@ -228,6 +228,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -838,8 +839,12 @@ mod lookahead_decode;
 mod mamba_v2;
 mod marketplace_catalog;
 mod marketplace_categories;
+mod marketplace_certification;
 mod marketplace_core;
 mod marketplace_featured;
+mod marketplace_moderation;
+mod marketplace_ratings;
+mod marketplace_report_abuse;
 mod marketplace_search;
 mod marketplace_trending;
 mod math;
