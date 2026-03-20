@@ -224,6 +224,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -459,11 +460,16 @@ mod apps;
 mod archive_manager;
 mod arp;
 mod arp_cache;
+mod asf_adapter_a2a;
+mod asf_adapter_mcp;
+mod asf_adapter_openapi;
+mod asf_adapter_wasm;
 mod asf_auth_apikey;
 mod asf_auth_handler;
 mod asf_auth_mtls;
 mod asf_auth_oauth;
 mod asf_capability_descriptor;
+mod asf_error_handler;
 mod asf_input_validator;
 mod asf_lifecycle_manager;
 mod asf_manifest_parser;
