@@ -52,6 +52,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod acpi;
@@ -102,6 +103,7 @@ mod consensus_engine;
 mod constitution;
 mod context_inherit;
 mod cost_accounting;
+mod cpu_hotplug;
 mod crucible_parser;
 mod crypto;
 mod cursor;
@@ -160,6 +162,7 @@ mod gui_automation;
 mod gui_text;
 mod hot_reload;
 mod http;
+mod hugepage_alloc;
 mod i18n_system;
 mod icmp;
 mod identity;
@@ -176,6 +179,7 @@ mod kernel_orchestrator;
 mod keyboard;
 mod knowledge_graph;
 mod llm_engine;
+mod loadavg_calc;
 mod lock_screen;
 mod logger;
 mod login_screen;
@@ -197,6 +201,7 @@ mod notif_sounds;
 mod notification_center;
 mod notifications;
 mod npu_driver;
+mod numa_topology;
 mod oom_killer;
 mod os_init;
 mod page_fault;
@@ -253,6 +258,7 @@ mod sync_primitives;
 mod sys_monitor;
 mod syscall;
 mod sysinfo;
+mod syslog_daemon;
 mod system_config;
 mod task_queue;
 mod tcpip;
