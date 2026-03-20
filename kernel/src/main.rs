@@ -61,6 +61,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod acpi;
@@ -214,6 +215,7 @@ mod memfs;
 mod memory;
 mod memory_decay;
 mod memory_pool;
+mod menu_system;
 mod mesh;
 mod model_loader;
 mod model_registry;
@@ -310,6 +312,7 @@ mod timers;
 mod tls_handshake;
 mod tokenizer;
 mod tool_executor;
+mod tooltip_system;
 mod trace_assurance;
 mod transformer;
 mod trust_scoring;
@@ -320,6 +323,7 @@ mod usb_hid;
 mod usb_hub;
 mod user_profiles;
 mod vfs;
+mod vga_text;
 mod video_decoder;
 mod virtio_net;
 mod virtual_desktops;
