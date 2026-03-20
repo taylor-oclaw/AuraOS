@@ -219,6 +219,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -695,6 +696,7 @@ mod family_activity_log;
 mod family_invite_handler;
 mod family_member_mgr;
 mod family_notification;
+mod family_parental_ctrl;
 mod family_role_mgr;
 mod family_shared_data;
 mod fan_controller;
@@ -859,6 +861,11 @@ mod openapi_auth_handler;
 mod openapi_schema_import;
 mod openapi_skill_adapter;
 mod opengl_compat;
+mod org_audit_trail;
+mod org_member_mgr;
+mod org_policy_engine;
+mod org_role_mgr;
+mod org_sso_handler;
 mod os_init;
 mod packet_filter;
 mod page_fault;
