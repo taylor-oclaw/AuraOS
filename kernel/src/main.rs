@@ -215,6 +215,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -939,13 +940,17 @@ mod skill_chain_builder;
 mod skill_chain_executor;
 mod skill_chain_planner;
 mod skill_compose_engine;
+mod skill_conditional;
 mod skill_config_mgr;
 mod skill_data_isolation;
 mod skill_dependency_mgr;
 mod skill_discovery;
+mod skill_fan_in;
+mod skill_fan_out;
 mod skill_health_check;
 mod skill_installer;
 mod skill_lifecycle_mgr;
+mod skill_loop_handler;
 mod skill_manifest_parser;
 mod skill_marketplace;
 mod skill_permission_mgr;
@@ -1074,6 +1079,7 @@ mod wasm_runtime;
 mod wasm_skill_bridge;
 mod wasm_skill_loader;
 mod wasm_skill_runtime;
+mod wasm_skill_sandbox;
 mod watch_agent;
 mod watchdog_timer;
 mod webgpu_compat;
