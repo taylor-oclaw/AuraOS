@@ -1,5 +1,5 @@
 extern crate alloc;
-use alloc::string::String;
+use alloc::string::{String, ToString};
 use alloc::vec::Vec;
 
 pub struct ClipboardMgr {
@@ -19,7 +19,7 @@ impl ClipboardMgr {
         if !self.content.is_empty() {
             self.history.push(self.content.clone());
         }
-        self.content = text.to_string();
+        self.content = text;
     }
 
     pub fn paste(&self) -> String {
