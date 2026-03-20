@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod memory_decay;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
