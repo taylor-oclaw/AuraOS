@@ -72,6 +72,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod account_lockout;
@@ -228,11 +229,13 @@ mod interrupts;
 mod io_scheduler;
 mod ipc;
 mod ipc_semaphore;
+mod jwt_handler;
 mod kbd_layout;
 mod kernel_orchestrator;
 mod key_manager;
 mod keyboard;
 mod knowledge_graph;
+mod ldap_client;
 mod llm_engine;
 mod loadavg_calc;
 mod lock_screen;
@@ -267,6 +270,7 @@ mod npu_driver;
 mod ntp_sync;
 mod numa_topology;
 mod nvme_driver;
+mod oauth_client;
 mod oom_killer;
 mod os_init;
 mod packet_filter;
@@ -302,6 +306,7 @@ mod ring_buffer;
 mod route_table;
 mod rtc;
 mod rtc_clock;
+mod saml_handler;
 mod sandbox_eval;
 mod sandbox_manager;
 mod sata_controller;
@@ -331,6 +336,7 @@ mod socket_api;
 mod status_bar;
 mod storage;
 mod string_utils;
+mod sudo_handler;
 mod surface;
 mod swap_manager;
 mod swarm_intelligence;
