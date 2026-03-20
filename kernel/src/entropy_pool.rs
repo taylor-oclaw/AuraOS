@@ -2,7 +2,6 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-#[no_mangle]
 pub extern "C" fn rust_start() {
     // Entry point for the kernel module
 }
@@ -53,7 +52,6 @@ impl EntropyPool {
     }
 }
 
-#[no_mangle]
 pub extern "C" fn rust_stop() {
     // Cleanup code if necessary
 }

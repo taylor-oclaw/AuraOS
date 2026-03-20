@@ -26,7 +26,7 @@ impl IpcSemaphore {
 
     pub fn signal(&mut self) -> Option<usize> {
         if let Some(task_id) = self.waiting_list.pop() {
-            task_id
+            Some(task_id)
         } else {
             self.count += 1;
             None

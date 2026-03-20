@@ -2,12 +2,10 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-#[no_mangle]
 pub extern "C" fn cgroup_manager_init() {
     // Initialization logic for the cgroup manager
 }
 
-#[no_mangle]
 pub extern "C" fn cgroup_manager_exit() {
     // Cleanup logic for the cgroup manager
 }

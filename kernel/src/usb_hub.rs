@@ -2,12 +2,10 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-#[no_mangle]
 pub extern "C" fn usb_hub_init() {
     // Initialization logic for the USB hub module
 }
 
-#[no_mangle]
 pub extern "C" fn usb_hub_exit() {
     // Cleanup logic for the USB hub module
 }
