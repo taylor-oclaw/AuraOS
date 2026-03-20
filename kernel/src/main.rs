@@ -216,6 +216,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -935,6 +936,7 @@ mod signature_ed25519;
 mod skill_api_key_store;
 mod skill_audit_log;
 mod skill_billing_hook;
+mod skill_cache_layer;
 mod skill_certification;
 mod skill_chain_builder;
 mod skill_chain_executor;
@@ -945,6 +947,7 @@ mod skill_config_mgr;
 mod skill_data_isolation;
 mod skill_dependency_mgr;
 mod skill_discovery;
+mod skill_error_recovery;
 mod skill_fan_in;
 mod skill_fan_out;
 mod skill_health_check;
@@ -954,6 +957,7 @@ mod skill_loop_handler;
 mod skill_manifest_parser;
 mod skill_marketplace;
 mod skill_permission_mgr;
+mod skill_pipe_handler;
 mod skill_publisher;
 mod skill_rate_limiter;
 mod skill_rating_engine;
@@ -968,6 +972,7 @@ mod skill_scope_personal;
 mod skill_scope_public;
 mod skill_scope_resolver;
 mod skill_secret_mgr;
+mod skill_timeout_handler;
 mod skill_trust_scorer;
 mod skill_updater;
 mod skill_usage_tracker;
