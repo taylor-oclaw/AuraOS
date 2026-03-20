@@ -45,6 +45,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod acpi;
@@ -53,12 +54,14 @@ mod agent_hierarchy;
 mod agent_identity;
 mod agent_marketplace;
 mod agent_memory;
+mod agent_migration;
 mod agent_playbooks;
 mod agent_reflection;
 mod agent_telemetry;
 mod agent_versioning;
 mod allocator;
 mod animation_system;
+mod anomaly_detector;
 mod app_marketplace;
 mod apps;
 mod arp;
@@ -186,6 +189,7 @@ mod proc_mgr;
 mod proc_sched;
 mod prompt_templates;
 mod random;
+mod rate_limiter;
 mod ring_buffer;
 mod rtc;
 mod sandbox_eval;
@@ -245,6 +249,7 @@ mod window_decor;
 mod window_mgr;
 mod window_tiling;
 mod wm;
+mod workflow_engine;
 
 fn kernel_main(boot_info: &'static mut BootInfo) -> ! {
     // Initialize serial first (for debug output even if screen fails)
