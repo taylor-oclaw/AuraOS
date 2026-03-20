@@ -149,6 +149,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accelerometer_driver;
 mod accessibility;
@@ -299,6 +300,9 @@ mod ata;
 mod attention_mgr;
 mod auction_sched;
 mod audio;
+mod audio_codec_aac;
+mod audio_codec_flac;
+mod audio_codec_opus;
 mod audio_mixer;
 mod audio_routing;
 mod audit_log;
