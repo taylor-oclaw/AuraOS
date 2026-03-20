@@ -145,7 +145,9 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
+mod accelerometer_driver;
 mod accessibility;
 mod account_lockout;
 mod acpi;
@@ -529,6 +531,7 @@ mod group_manager;
 mod grpc_runtime;
 mod gui_automation;
 mod gui_text;
+mod gyroscope_driver;
 mod hdmi_handler;
 mod health_monitor;
 mod hibernate_handler;
@@ -655,6 +658,7 @@ mod secure_ipc;
 mod self_evolution;
 mod self_healing;
 mod semantic_search;
+mod sensor_hub;
 mod sentiment_engine;
 mod serial;
 mod serial_console;
