@@ -3,50 +3,50 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct NlpTokenizer {
-    // Example field: a list of stop words
-    stop_words: Vec<String>,
+    vocabulary: Vec<String>,
 }
 
 impl NlpTokenizer {
-    pub fn new() -> Self {
-        NlpTokenizer {
-            stop_words: vec![
-                String::from("the"),
-                String::from("and"),
-                String::from("is"),
-                String::from("in"),
-                String::from("to"),
-            ],
+    pub fn new(vocabulary: Vec<String>) -> Self {
+        NlpTokenizer { vocabulary }
+    }
+
+    pub fn tokenize(&self, text: &str) -> Vec<String> {
+        let mut tokens = Vec::new();
+        let words = text.split_whitespace();
+        for word in words {
+            if self.vocabulary.contains(&word.to_string()) {
+                tokens.push(word.to_string());
+            } else {
+                // Handle unknown words (e.g., subword tokenization, BPE)
+                tokens.extend(self.handle_unknown_word(word));
+            }
+        }
+        tokens
+    }
+
+    fn handle_unknown_word(&self, word: &str) -> Vec<String> {
+        // Simple heuristic: split by characters
+        let mut sub_tokens = Vec::new();
+        for ch in word.chars() {
+            sub_tokens.push(ch.to_string());
+        }
+        sub_tokens
+    }
+
+    pub fn add_to_vocabulary(&mut self, word: String) {
+        if !self.vocabulary.contains(&word) {
+            self.vocabulary.push(word);
         }
     }
 
-    // Method to tokenize a sentence into words
-    pub fn tokenize(&self, sentence: &str) -> Vec<String> {
-        sentence.split_whitespace()
-            .map(|word| word.to_lowercase())
-            .filter(|word| !self.stop_words.contains(word))
-            .collect()
-    }
-
-    // Method to add a stop word to the tokenizer
-    pub fn add_stop_word(&mut self, word: String) {
-        if !self.stop_words.contains(&word) {
-            self.stop_words.push(word);
+    pub fn remove_from_vocabulary(&mut self, word: &str) {
+        if let Some(index) = self.vocabulary.iter().position(|w| w == word) {
+            self.vocabulary.remove(index);
         }
     }
 
-    // Method to remove a stop word from the tokenizer
-    pub fn remove_stop_word(&mut self, word: &str) {
-        self.stop_words.retain(|w| w != word);
-    }
-
-    // Method to check if a word is a stop word
-    pub fn is_stop_word(&self, word: &str) -> bool {
-        self.stop_words.contains(word)
-    }
-
-    // Method to get the list of stop words
-    pub fn get_stop_words(&self) -> Vec<String> {
-        self.stop_words.clone()
+    pub fn vocabulary_size(&self) -> usize {
+        self.vocabulary.len()
     }
 }
