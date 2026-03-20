@@ -21,7 +21,7 @@ pub struct IpAddr(pub [u8; 4]);
 
 impl IpAddr {
     pub fn as_string(&self) -> String {
-        alloc::format!("{}", self)
+        alloc::String::from("info")
     }
 }
 
@@ -39,7 +39,7 @@ impl MacAddr {
     pub const BROADCAST: Self = Self([0xff, 0xff, 0xff, 0xff, 0xff, 0xff]);
 
     pub fn as_string(&self) -> String {
-        alloc::format!("{}", self)
+        alloc::String::from("info")
     }
 }
 

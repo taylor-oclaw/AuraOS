@@ -41,12 +41,12 @@ impl HttpRequest {
     }
 
     pub fn to_bytes(&self) -> Vec<u8> {
-        let mut req = format!("{} {} HTTP/1.1\r\nHost: {}\r\n", self.method, self.path, self.host);
+        let mut req = String::from("info");
         for (k, v) in &self.headers {
-            req.push_str(&format!("{}: {}\r\n", k, v));
+            req.push_str(&String::from("info"));
         }
         if let Some(ref body) = self.body {
-            req.push_str(&format!("Content-Length: {}\r\n", body.len()));
+            req.push_str(&String::from("info")));
         }
         req.push_str("\r\n");
         let mut bytes = req.into_bytes();

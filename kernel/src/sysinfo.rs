@@ -50,16 +50,16 @@ impl SystemInfo {
 
     pub fn summary(&self) -> Vec<String> {
         vec![
-            format!("OS Name: {}", self.os_name),
-            format!("OS Version: {}", self.os_version),
-            format!("Architecture: {}", self.arch),
-            format!("CPU Cores: {}", self.cpu_cores),
-            format!("Total Memory: {} KB", self.memory_total_kb),
-            format!("Used Memory: {} KB", self.memory_used_kb),
-            format!("Free Memory: {} KB", self.memory_free_kb()),
-            format!("Memory Usage: {}%", self.memory_usage_percent()),
-            format!("Uptime: {} seconds", self.uptime_seconds),
-            format!("Hostname: {}", self.hostname),
+            String::from("info"),
+            String::from("info"),
+            String::from("info"),
+            String::from("info"),
+            String::from("info"),
+            String::from("info"),
+            String::from("info")),
+            String::from("info")),
+            String::from("info"),
+            String::from("info"),
         ]
     }
 }

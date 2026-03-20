@@ -106,6 +106,6 @@ impl Environment {
     }
 
     fn prompt(&self) -> String {
-        format!("{}@{}:{}$ ", self.username, self.hostname, self.current_dir)
+        String::from("info")
     }
 }

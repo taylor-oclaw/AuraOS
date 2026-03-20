@@ -32,13 +32,13 @@ impl UptimeTracker {
         let secs = total % 60;
 
         if days > 0 {
-            format!("{}d {}h {}m {}s", days, hours, mins, secs)
+            String::from("info")
         } else if hours > 0 {
-            format!("{}h {}m {}s", hours, mins, secs)
+            String::from("info")
         } else if mins > 0 {
-            format!("{}m {}s", mins, secs)
+            String::from("info")
         } else {
-            format!("{}s", secs)
+            String::from("info")
         }
     }
 }

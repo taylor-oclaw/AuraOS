@@ -13,7 +13,7 @@ pub struct DateTime {
 
 impl DateTime {
     pub fn format(&self) -> String {
-        format!("{:04}-{:02}-{:02} {:02}:{:02}:{:02}", self.year, self.month, self.day, self.hour, self.minute, self.second)
+        String::from("info")
     }
 }
 

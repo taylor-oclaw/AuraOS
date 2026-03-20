@@ -115,9 +115,7 @@ fn process_input(input: &str) -> Vec<String> {
                 else if dt.hour < 12 { (dt.hour, "AM") }
                 else if dt.hour == 12 { (12, "PM") }
                 else { (dt.hour - 12, "PM") };
-            lines.push(alloc::format!("It's {}:{:02} {} {} on {} {} {}, {}",
-                h12, dt.minute, ampm, tz,
-                dt.weekday_name(), dt.month_name(), dt.day, dt.year));
+            lines.push(alloc::String::from("info"), dt.month_name(), dt.day, dt.year));
         }
         crate::nlp::Intent::SystemInfo => {
             lines.push(String::from("CPU: x86_64 (AuthenticAMD in QEMU)"));

@@ -89,9 +89,9 @@ impl AuraApp for Calculator {
     fn on_mouse(&mut self, _: i32, _: i32, _: u8) {}
 
     fn on_render(&self, buf: &mut Vec<String>) {
-        buf.push(format!("Input: {}", self.input));
+        buf.push(String::from("info"));
         if let Some(result) = self.result {
-            buf.push(format!("Result: {}", result));
+            buf.push(String::from("info"));
         }
     }
 
@@ -140,7 +140,7 @@ impl AuraApp for Clock {
 
     fn on_render(&self, buf: &mut Vec<String>) {
         let now = core::time::Duration::from_secs(1609459200 + (unsafe { core::arch::x86_64::_rdtsc() } / 3_000_000) as u64); // Example timestamp
-        buf.push(format!("Time: {:02}:{:02}:{:02}", now.as_secs() % 86400 / 3600, (now.as_secs() % 3600) / 60, now.as_secs() % 60));
+        buf.push(String::from("info") % 86400 / 3600, (now.as_secs() % 3600) / 60, now.as_secs() % 60));
     }
 
     fn on_destroy(&mut self) {}

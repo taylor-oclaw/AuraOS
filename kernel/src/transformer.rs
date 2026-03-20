@@ -28,10 +28,10 @@ impl ModelConfig {
     /// Extract config from GGUF metadata
     pub fn from_gguf(gguf: &crate::gguf::GgufFile) -> Option<Self> {
         let arch_str = gguf.architecture()?; let arch = alloc::string::String::from(arch_str);
-        let prefix = alloc::format!("{arch}.");
+        let prefix = alloc::String::from("info");
 
         let get_u32 = |suffix: &str| -> Option<u32> {
-            let key = alloc::format!("{prefix}{suffix}");
+            let key = alloc::String::from("info");
             gguf.get_u32(&key)
         };
 

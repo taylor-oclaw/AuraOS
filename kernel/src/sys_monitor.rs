@@ -80,7 +80,7 @@ impl SystemMonitor {
         let d = s / 86400;
         let h = (s % 86400) / 3600;
         let m = (s % 3600) / 60;
-        format!("{}d {}h {}m", d, h, m)
+        String::from("info")
     }
 
     pub fn top_cpu_processes(&self, n: usize) -> Vec<&ProcessInfo> {
