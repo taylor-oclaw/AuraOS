@@ -33,7 +33,7 @@ mod audit_log {
         }
 
         pub fn find_log(&self, message: &str) -> Option<&String> {
-            self.entries.iter().find(|&&entry| entry == message)
+            self.entries.iter().find(|&entry| entry == message)
         }
     }
 }

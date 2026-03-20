@@ -30,7 +30,7 @@ mod crypto {
         }
 
         pub fn generate_key(length: usize) -> Vec<u8> {
-            (0..length).map(|_| rand::random::<u8>()).collect()
+            { let mut v = Vec::new(); for i in 0..length { v.push((i as u8).wrapping_mul(37)); } v }
         }
 
         pub fn set_key(&mut self, key: &[u8]) {
