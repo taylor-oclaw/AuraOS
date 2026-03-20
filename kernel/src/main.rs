@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod asf_auth_handler;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
