@@ -156,6 +156,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accelerometer_driver;
 mod accessibility;
@@ -710,6 +711,7 @@ mod shell;
 mod shutdown_mgr;
 mod signal_handler;
 mod signals;
+mod signature_dilithium;
 mod slab_allocator;
 mod sleep_manager;
 mod smtp_client;
@@ -756,6 +758,7 @@ mod tokenizer;
 mod tool_executor;
 mod tooltip_system;
 mod touchscreen_driver;
+mod tpm_handler;
 mod trace_assurance;
 mod trackpad_driver;
 mod traffic_shaper;
