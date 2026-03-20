@@ -63,6 +63,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod acpi;
@@ -115,6 +116,7 @@ mod clipboard_plus;
 mod cmd_parser;
 mod coalition_mgr;
 mod color;
+mod color_picker;
 mod command_palette;
 mod compat_bridge;
 mod compositor;
@@ -128,6 +130,7 @@ mod crypto;
 mod crypto_engine;
 mod cursor;
 mod cursor_manager;
+mod date_picker;
 mod datetime_mgr;
 mod deadlock_detector;
 mod debug_console;
@@ -169,6 +172,7 @@ mod events;
 mod fat32;
 mod fb_console;
 mod federated_learn;
+mod file_dialog;
 mod file_mgr;
 mod file_permissions;
 mod firewall_engine;
