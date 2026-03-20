@@ -171,6 +171,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accelerometer_driver;
 mod accessibility;
@@ -436,6 +437,7 @@ mod bluetooth_stack;
 mod boot_sequence;
 mod buddy_allocator;
 mod camera_driver;
+mod canvas_2d;
 mod capability_system;
 mod cellular_modem;
 mod cert_manager;
@@ -616,6 +618,7 @@ mod image_codec_png;
 mod image_codec_webp;
 mod image_viewer;
 mod imap_client;
+mod inference_engine;
 mod input_router;
 mod intent_parser;
 mod intent_storage;
@@ -674,6 +677,7 @@ mod notif_sounds;
 mod notification_center;
 mod notifications;
 mod npu_driver;
+mod npu_scheduler;
 mod ntp_sync;
 mod numa_topology;
 mod nvme_driver;
