@@ -90,6 +90,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod account_lockout;
@@ -133,10 +134,12 @@ mod aura_engine;
 mod aura_file_browser;
 mod aura_network_mgr;
 mod aura_package_mgr;
+mod aura_printer_mgr;
 mod aura_settings;
 mod aura_shell;
 mod aura_system_info;
 mod aura_terminal;
+mod aura_update_mgr;
 mod backup_manager;
 mod bandwidth_monitor;
 mod batch_scheduler;
