@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod audio_codec_flac;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
