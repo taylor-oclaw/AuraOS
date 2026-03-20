@@ -58,6 +58,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod acpi;
@@ -206,6 +207,7 @@ mod memfs;
 mod memory;
 mod memory_decay;
 mod mesh;
+mod model_loader;
 mod model_registry;
 mod mouse;
 mod multi_monitor;
@@ -242,6 +244,8 @@ mod proc_sched;
 mod process_table;
 mod prompt_templates;
 mod proxy_server;
+mod quantizer;
+mod rag_pipeline;
 mod random;
 mod rate_limiter;
 mod resource_monitor;
@@ -285,6 +289,7 @@ mod syslog_daemon;
 mod system_config;
 mod task_queue;
 mod tcpip;
+mod tensor_ops;
 mod terminal;
 mod text_editor;
 mod theme;
@@ -294,6 +299,7 @@ mod timer_subsystem;
 mod timers;
 mod tls_handshake;
 mod tokenizer;
+mod tool_executor;
 mod trace_assurance;
 mod transformer;
 mod trust_scoring;
