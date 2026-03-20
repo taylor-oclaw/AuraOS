@@ -86,6 +86,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod account_lockout;
@@ -149,6 +150,7 @@ mod command_palette;
 mod compat_apfs_read;
 mod compat_bridge;
 mod compat_btrfs;
+mod compat_exfat;
 mod compat_ext4;
 mod compat_fat32;
 mod compat_hfs;
@@ -258,6 +260,7 @@ mod gui_automation;
 mod gui_text;
 mod health_monitor;
 mod hot_reload;
+mod hotplug_manager;
 mod http;
 mod http2_handler;
 mod http_client;
@@ -439,6 +442,7 @@ mod usb;
 mod usb_hid;
 mod usb_hub;
 mod usb_mass_storage;
+mod usb_mount_detect;
 mod user_auth;
 mod user_profiles;
 mod vfs;
