@@ -56,9 +56,11 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod acpi;
+mod agent_checkpoint;
 mod agent_contracts;
 mod agent_debugger;
 mod agent_economics;
@@ -144,6 +146,7 @@ mod drag_drop;
 mod dream_cycle;
 mod e1000;
 mod elf_loader;
+mod embedding_engine;
 mod entropy_pool;
 mod env;
 mod ethernet;
@@ -178,6 +181,7 @@ mod icmp;
 mod identity;
 mod image_viewer;
 mod input_router;
+mod intent_parser;
 mod intent_storage;
 mod interrupt_ctrl;
 mod interrupts;
@@ -208,6 +212,7 @@ mod nat_gateway;
 mod net_stack;
 mod nlp;
 mod nlp_bridge;
+mod nlp_tokenizer;
 mod notif_sounds;
 mod notification_center;
 mod notifications;
