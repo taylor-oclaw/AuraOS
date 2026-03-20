@@ -220,6 +220,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -455,6 +456,9 @@ mod apps;
 mod archive_manager;
 mod arp;
 mod arp_cache;
+mod asf_capability_descriptor;
+mod asf_manifest_parser;
+mod asf_schema_validator;
 mod ata;
 mod attention_mgr;
 mod auction_sched;
@@ -865,6 +869,7 @@ mod org_audit_trail;
 mod org_member_mgr;
 mod org_policy_engine;
 mod org_role_mgr;
+mod org_skill_mandate;
 mod org_sso_handler;
 mod os_init;
 mod packet_filter;
