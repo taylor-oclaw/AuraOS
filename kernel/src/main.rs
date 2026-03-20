@@ -73,6 +73,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod account_lockout;
@@ -172,6 +173,8 @@ mod display_server;
 mod dma;
 mod dma_controller;
 mod dns;
+mod dns_cache;
+mod dns_resolver;
 mod drag_drop;
 mod dream_cycle;
 mod e1000;
@@ -216,6 +219,8 @@ mod gui_automation;
 mod gui_text;
 mod hot_reload;
 mod http;
+mod http_client;
+mod http_server;
 mod hugepage_alloc;
 mod i18n_system;
 mod icmp;
