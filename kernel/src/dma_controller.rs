@@ -1,92 +1,38 @@
 extern crate alloc;
-use alloc::string::String;
 use alloc::vec::Vec;
 
+pub struct DmaChannel {
+    pub id: u8,
+    pub base_addr: u64,
+    pub count: u32,
+    pub in_use: bool,
+    pub transfers_completed: u64,
+}
+
 pub struct DmaController {
-    channels: Vec<DmaChannel>,
+    pub channels: Vec<DmaChannel>,
 }
 
 impl DmaController {
-    pub fn new(num_channels: usize) -> Self {
-        let mut channels = Vec::with_capacity(num_channels);
-        for _ in 0..num_channels {
-            channels.push(DmaChannel::new());
+    pub fn new(max: u8) -> Self {
+        let mut channels = Vec::new();
+        for i in 0..max {
+            channels.push(DmaChannel { id: i, base_addr: 0, count: 0, in_use: false, transfers_completed: 0 });
         }
-        DmaController { channels }
+        Self { channels }
     }
-
-    pub fn allocate_channel(&mut self) -> Option<usize> {
-        if let Some(index) = self.channels.iter().position(|c| !c.is_in_use()) {
-            self.channels[index].set_in_use(true);
-            Some(index)
-        } else {
-            None
-        }
+    pub fn allocate(&mut self) -> Option<u8> {
+        for ch in &mut self.channels { if !ch.in_use { ch.in_use = true; return Some(ch.id); } }
+        None
     }
-
-    pub fn free_channel(&mut self, channel_index: usize) -> Result<(), String> {
-        if let Some(channel) = self.channels.get_mut(channel_index) {
-            if channel.is_in_use() {
-                channel.set_in_use(false);
-                Ok(())
-            } else {
-                Err(String::from("Channel is not in use"))
-            }
-        } else {
-            Err(String::from("Invalid channel index"))
-        }
+    pub fn setup(&mut self, ch: u8, addr: u64, count: u32) -> bool {
+        if let Some(c) = self.channels.iter_mut().find(|c| c.id == ch && c.in_use) { c.base_addr = addr; c.count = count; true } else { false }
     }
-
-    pub fn transfer_data(&mut self, channel_index: usize, data: &[u8]) -> Result<(), String> {
-        if let Some(channel) = self.channels.get_mut(channel_index) {
-            if channel.is_in_use() {
-                // Simulate DMA transfer
-                channel.data = Vec::from(data);
-                Ok(())
-            } else {
-                Err(String::from("Channel is not in use"))
-            }
-        } else {
-            Err(String::from("Invalid channel index"))
-        }
+    pub fn complete(&mut self, ch: u8) {
+        if let Some(c) = self.channels.iter_mut().find(|c| c.id == ch) { c.transfers_completed += 1; c.count = 0; }
     }
-
-    pub fn get_channel_status(&self, channel_index: usize) -> Result<String, String> {
-        if let Some(channel) = self.channels.get(channel_index) {
-            Ok(String::from("info") { "in use" } else { "free" })
-        } else {
-            Err(String::from("Invalid channel index"))
-        }
+    pub fn release(&mut self, ch: u8) {
+        if let Some(c) = self.channels.iter_mut().find(|c| c.id == ch) { c.in_use = false; c.base_addr = 0; }
     }
-
-    pub fn get_transferred_data(&self, channel_index: usize) -> Result<Vec<u8>, String> {
-        if let Some(channel) = self.channels.get(channel_index) {
-            Ok(Vec::from(&channel.data[..]))
-        } else {
-            Err(String::from("Invalid channel index"))
-        }
-    }
+    pub fn active(&self) -> usize { self.channels.iter().filter(|c| c.in_use).count() }
 }
-
-struct DmaChannel {
-    in_use: bool,
-    data: Vec<u8>,
-}
-
-impl DmaChannel {
-    fn new() -> Self {
-        DmaChannel {
-            in_use: false,
-            data: Vec::new(),
-        }
-    }
-
-    fn is_in_use(&self) -> bool {
-        self.in_use
-    }
-
-    fn set_in_use(&mut self, value: bool) {
-        self.in_use = value;
-    }
-}
-
