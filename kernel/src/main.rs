@@ -180,6 +180,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod a2a_protocol_v2;
 mod accelerometer_driver;
@@ -704,6 +705,7 @@ mod ntp_sync;
 mod numa_topology;
 mod nvme_driver;
 mod oauth_client;
+mod onnxruntime_compat;
 mod oom_killer;
 mod openai_compat;
 mod opengl_compat;
@@ -851,6 +853,7 @@ mod trackpad_driver;
 mod traffic_shaper;
 mod transformer;
 mod tree_view;
+mod triton_compat;
 mod trust_attestation;
 mod trust_capability_token;
 mod trust_credential_verify;
@@ -883,6 +886,7 @@ mod video_decoder;
 mod virtio_net;
 mod virtual_desktops;
 mod vlan_manager;
+mod vllm_compat;
 mod voice_engine;
 mod voice_pipeline;
 mod vpn_client;
