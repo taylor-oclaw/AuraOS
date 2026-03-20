@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod pcie_gen5;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
