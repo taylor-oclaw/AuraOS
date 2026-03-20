@@ -175,6 +175,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accelerometer_driver;
 mod accessibility;
@@ -546,6 +547,7 @@ mod dns_resolver;
 mod drag_drop;
 mod dream_cycle;
 mod e1000;
+mod eagle_decode;
 mod elf_loader;
 mod embedding_engine;
 mod emmc_driver;
@@ -637,6 +639,7 @@ mod iot_device_manager;
 mod ipc;
 mod ipc_semaphore;
 mod iris_scanner;
+mod jacobi_decode;
 mod jwt_handler;
 mod kbd_layout;
 mod kerberos_client;
@@ -657,10 +660,12 @@ mod log_rotator;
 mod logger;
 mod login_manager;
 mod login_screen;
+mod lookahead_decode;
 mod mamba_v2;
 mod math;
 mod matter_protocol;
 mod media_controls;
+mod medusa_v2;
 mod mem_pool;
 mod memfs;
 mod memory;
