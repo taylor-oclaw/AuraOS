@@ -109,3 +109,4 @@ impl Environment {
         String::from("info")
     }
 }
+}
