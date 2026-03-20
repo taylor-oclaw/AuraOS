@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod mcp_transport_http;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
