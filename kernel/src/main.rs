@@ -144,6 +144,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod account_lockout;
@@ -279,6 +280,7 @@ mod agent_usage_dashboard;
 mod agent_vector_index;
 mod agent_versioning;
 mod agent_voting_system;
+mod alexa_bridge;
 mod allocator;
 mod animation_system;
 mod anomaly_detector;
@@ -475,6 +477,7 @@ mod dialog_box;
 mod disk_partition;
 mod display_connector;
 mod display_server;
+mod displayport_handler;
 mod dma;
 mod dma_controller;
 mod dns;
@@ -529,6 +532,7 @@ mod gui_text;
 mod hdmi_handler;
 mod health_monitor;
 mod hibernate_handler;
+mod homekit_bridge;
 mod hot_reload;
 mod hotplug_manager;
 mod http;
@@ -567,6 +571,7 @@ mod logger;
 mod login_manager;
 mod login_screen;
 mod math;
+mod matter_protocol;
 mod media_controls;
 mod mem_pool;
 mod memfs;
@@ -756,6 +761,7 @@ mod wm;
 mod workflow_engine;
 mod zigbee_handler;
 mod zip_handler;
+mod zwave_handler;
 
 fn kernel_main(boot_info: &'static mut BootInfo) -> ! {
     // Initialize serial first (for debug output even if screen fails)
