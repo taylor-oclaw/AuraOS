@@ -44,15 +44,19 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod acpi;
+mod agent_economics;
 mod agent_hierarchy;
 mod agent_identity;
+mod agent_marketplace;
 mod agent_memory;
 mod agent_playbooks;
 mod agent_reflection;
 mod agent_telemetry;
+mod agent_versioning;
 mod allocator;
 mod animation_system;
 mod app_marketplace;
@@ -192,6 +196,8 @@ mod search_indexer;
 mod secure_boot;
 mod secure_ipc;
 mod self_evolution;
+mod self_healing;
+mod semantic_search;
 mod serial;
 mod serial_console;
 mod service_discovery;
