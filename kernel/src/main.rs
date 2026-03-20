@@ -79,6 +79,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod account_lockout;
@@ -144,8 +145,10 @@ mod compositor;
 mod consensus_engine;
 mod constitution;
 mod context_inherit;
+mod core_dump;
 mod cost_accounting;
 mod cpu_hotplug;
+mod crash_reporter;
 mod crucible_parser;
 mod crypto;
 mod crypto_engine;
@@ -241,6 +244,7 @@ mod intent_parser;
 mod intent_storage;
 mod interrupt_ctrl;
 mod interrupts;
+mod intrusion_detector;
 mod io_scheduler;
 mod ipc;
 mod ipc_semaphore;
@@ -255,6 +259,7 @@ mod ldap_client;
 mod llm_engine;
 mod loadavg_calc;
 mod lock_screen;
+mod log_rotator;
 mod logger;
 mod login_manager;
 mod login_screen;
