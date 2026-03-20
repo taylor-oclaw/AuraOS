@@ -176,6 +176,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accelerometer_driver;
 mod accessibility;
@@ -602,6 +603,7 @@ mod group_manager;
 mod grpc_runtime;
 mod gui_automation;
 mod gui_text;
+mod guided_generation;
 mod gyroscope_driver;
 mod hash_argon2;
 mod hash_blake3;
@@ -788,6 +790,7 @@ mod smtp_client;
 mod socket_api;
 mod socks_handler;
 mod sparse_attention_v2;
+mod speculative_decode_v2;
 mod ssh_client;
 mod ssh_server;
 mod stack_unwinder;
@@ -795,6 +798,7 @@ mod state_space_model_v2;
 mod status_bar;
 mod storage;
 mod string_utils;
+mod structured_output;
 mod stylus_driver;
 mod sudo_handler;
 mod surface;
@@ -830,6 +834,7 @@ mod timer_subsystem;
 mod timers;
 mod tls_engine;
 mod tls_handshake;
+mod token_healing;
 mod tokenizer;
 mod tool_executor;
 mod tooltip_system;
