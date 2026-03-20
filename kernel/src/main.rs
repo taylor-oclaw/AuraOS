@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod asf_expose_as_openapi;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
