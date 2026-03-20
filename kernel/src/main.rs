@@ -54,6 +54,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod acpi;
@@ -75,6 +76,7 @@ mod anomaly_detector;
 mod app_marketplace;
 mod apps;
 mod arp;
+mod arp_cache;
 mod ata;
 mod attention_mgr;
 mod auction_sched;
@@ -198,6 +200,7 @@ mod model_registry;
 mod mouse;
 mod multi_monitor;
 mod namespace_isolate;
+mod nat_gateway;
 mod net_stack;
 mod nlp;
 mod nlp_bridge;
@@ -205,9 +208,11 @@ mod notif_sounds;
 mod notification_center;
 mod notifications;
 mod npu_driver;
+mod ntp_sync;
 mod numa_topology;
 mod oom_killer;
 mod os_init;
+mod packet_filter;
 mod page_fault;
 mod panic_handler;
 mod pci;
@@ -229,6 +234,7 @@ mod random;
 mod rate_limiter;
 mod resource_monitor;
 mod ring_buffer;
+mod route_table;
 mod rtc;
 mod rtc_clock;
 mod sandbox_eval;
