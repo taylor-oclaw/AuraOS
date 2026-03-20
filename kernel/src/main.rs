@@ -76,6 +76,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod account_lockout;
@@ -124,6 +125,7 @@ mod buddy_allocator;
 mod camera_driver;
 mod capability_system;
 mod cert_manager;
+mod certificate_store;
 mod cgroup_manager;
 mod checksum_engine;
 mod clipboard;
@@ -222,6 +224,7 @@ mod gui_automation;
 mod gui_text;
 mod hot_reload;
 mod http;
+mod http2_handler;
 mod http_client;
 mod http_server;
 mod hugepage_alloc;
@@ -347,6 +350,7 @@ mod slab_allocator;
 mod smtp_client;
 mod socket_api;
 mod ssh_client;
+mod ssh_server;
 mod status_bar;
 mod storage;
 mod string_utils;
@@ -376,6 +380,7 @@ mod theme_engine;
 mod tiered_cache;
 mod timer_subsystem;
 mod timers;
+mod tls_engine;
 mod tls_handshake;
 mod tokenizer;
 mod tool_executor;
