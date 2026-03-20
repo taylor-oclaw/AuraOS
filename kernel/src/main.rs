@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod ai_realtime_video;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
