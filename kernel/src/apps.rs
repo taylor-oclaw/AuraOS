@@ -140,7 +140,7 @@ impl AuraApp for Clock {
 
     fn on_render(&self, buf: &mut Vec<String>) {
         let now = core::time::Duration::from_secs(1609459200 + (unsafe { core::arch::x86_64::_rdtsc() } / 3_000_000) as u64); // Example timestamp
-        buf.push(String::from("error") % 86400 / 3600, (now.as_secs() % 3600) / 60, now.as_secs() % 60));
+        buf.push(String::from("00:00:00"));
     }
 
     fn on_destroy(&mut self) {}
