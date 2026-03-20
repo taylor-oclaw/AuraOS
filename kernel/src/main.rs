@@ -40,6 +40,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod accessibility;
 mod acpi;
 mod agent_hierarchy;
@@ -215,6 +216,7 @@ mod virtual_desktops;
 mod voice_engine;
 mod vpn_client;
 mod wasm_runtime;
+mod watch_agent;
 mod widget;
 mod wifi_stack;
 mod window_decor;
