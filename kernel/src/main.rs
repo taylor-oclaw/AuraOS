@@ -199,6 +199,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod a2a_protocol_v2;
 mod accelerometer_driver;
@@ -343,6 +344,7 @@ mod ai_accelerator_fallback;
 mod ai_agent_protocol_v2;
 mod ai_audio_handler;
 mod ai_benchmark_runner_v2;
+mod ai_billing_abstract;
 mod ai_code_handler;
 mod ai_content_filter;
 mod ai_context_protocol;
@@ -412,6 +414,7 @@ mod ai_token_budget;
 mod ai_tokenizer_abstract;
 mod ai_tokenizer_registry;
 mod ai_tool_protocol;
+mod ai_usage_analytics;
 mod ai_video_handler;
 mod ai_vision_handler;
 mod alexa_bridge;
@@ -888,6 +891,8 @@ mod signal_handler;
 mod signals;
 mod signature_dilithium;
 mod signature_ed25519;
+mod skill_manifest_parser;
+mod skill_runtime;
 mod slab_allocator;
 mod sleep_manager;
 mod smtp_client;
