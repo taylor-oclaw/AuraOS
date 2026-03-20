@@ -143,6 +143,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod account_lockout;
@@ -492,6 +493,7 @@ mod ethernet;
 mod event_bus;
 mod event_loop;
 mod events;
+mod face_recognition;
 mod fan_controller;
 mod fat32;
 mod fb_console;
@@ -548,6 +550,7 @@ mod intrusion_detector;
 mod io_scheduler;
 mod ipc;
 mod ipc_semaphore;
+mod iris_scanner;
 mod jwt_handler;
 mod kbd_layout;
 mod kerberos_client;
@@ -582,6 +585,7 @@ mod namespace_isolate;
 mod nat_gateway;
 mod net_stack;
 mod network_bridge;
+mod nfc_handler;
 mod nlp;
 mod nlp_bridge;
 mod nlp_tokenizer;
@@ -750,6 +754,7 @@ mod window_mgr;
 mod window_tiling;
 mod wm;
 mod workflow_engine;
+mod zigbee_handler;
 mod zip_handler;
 
 fn kernel_main(boot_info: &'static mut BootInfo) -> ! {
