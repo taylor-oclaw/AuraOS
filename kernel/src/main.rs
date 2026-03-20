@@ -150,6 +150,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accelerometer_driver;
 mod accessibility;
@@ -502,6 +503,7 @@ mod dream_cycle;
 mod e1000;
 mod elf_loader;
 mod embedding_engine;
+mod emmc_driver;
 mod encryption_aes;
 mod encryption_rsa;
 mod entropy_pool;
@@ -668,6 +670,7 @@ mod sata_controller;
 mod scheduler;
 mod screen_capture;
 mod scrollbar;
+mod sd_card_handler;
 mod search_indexer;
 mod seccomp_filter;
 mod secure_boot;
@@ -762,6 +765,8 @@ mod user_auth;
 mod user_profiles;
 mod vfs;
 mod vga_text;
+mod video_codec_av1;
+mod video_codec_h265;
 mod video_decoder;
 mod virtio_net;
 mod virtual_desktops;
