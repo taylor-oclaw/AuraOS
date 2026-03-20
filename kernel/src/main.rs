@@ -142,6 +142,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod account_lockout;
@@ -504,6 +505,7 @@ mod filesystem_btrfs;
 mod filesystem_ext4;
 mod filesystem_fat;
 mod filesystem_ntfs;
+mod fingerprint_driver;
 mod firewall_engine;
 mod focus_modes;
 mod font;
@@ -667,6 +669,7 @@ mod stack_unwinder;
 mod status_bar;
 mod storage;
 mod string_utils;
+mod stylus_driver;
 mod sudo_handler;
 mod surface;
 mod swap_manager;
@@ -699,7 +702,9 @@ mod tls_handshake;
 mod tokenizer;
 mod tool_executor;
 mod tooltip_system;
+mod touchscreen_driver;
 mod trace_assurance;
+mod trackpad_driver;
 mod traffic_shaper;
 mod transformer;
 mod tree_view;
