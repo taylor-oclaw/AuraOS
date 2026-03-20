@@ -140,6 +140,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod account_lockout;
@@ -517,6 +518,7 @@ mod grpc_runtime;
 mod gui_automation;
 mod gui_text;
 mod health_monitor;
+mod hibernate_handler;
 mod hot_reload;
 mod hotplug_manager;
 mod http;
@@ -649,6 +651,7 @@ mod shutdown_mgr;
 mod signal_handler;
 mod signals;
 mod slab_allocator;
+mod sleep_manager;
 mod smtp_client;
 mod socket_api;
 mod socks_handler;
