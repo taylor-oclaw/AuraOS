@@ -62,6 +62,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod acpi;
@@ -103,6 +104,7 @@ mod behavior;
 mod belief_revision;
 mod bluetooth_mgr;
 mod boot_sequence;
+mod buddy_allocator;
 mod camera_driver;
 mod capability_system;
 mod cert_manager;
@@ -148,6 +150,7 @@ mod device_mgr;
 mod device_tree;
 mod dhcp;
 mod dhcp_client;
+mod dialog_box;
 mod display_server;
 mod dma;
 mod dma_controller;
@@ -253,6 +256,7 @@ mod privacy_engine;
 mod proc_mgr;
 mod proc_sched;
 mod process_table;
+mod progress_bar;
 mod prompt_templates;
 mod proxy_server;
 mod quantizer;
@@ -268,6 +272,7 @@ mod sandbox_eval;
 mod sandbox_manager;
 mod scheduler;
 mod screen_capture;
+mod scrollbar;
 mod search_indexer;
 mod seccomp_filter;
 mod secure_boot;
@@ -299,6 +304,7 @@ mod syscall;
 mod sysinfo;
 mod syslog_daemon;
 mod system_config;
+mod tab_control;
 mod task_queue;
 mod tcpip;
 mod tensor_ops;
