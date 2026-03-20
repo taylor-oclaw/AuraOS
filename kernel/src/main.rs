@@ -146,6 +146,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accelerometer_driver;
 mod accessibility;
@@ -377,6 +378,7 @@ mod aura_web_browser;
 mod aura_workspace_mgr;
 mod backup_manager;
 mod bandwidth_monitor;
+mod barometer_driver;
 mod batch_scheduler;
 mod battery_manager;
 mod behavior;
@@ -399,6 +401,7 @@ mod coalition_mgr;
 mod color;
 mod color_picker;
 mod command_palette;
+mod compass_driver;
 mod compat_apfs_read;
 mod compat_bridge;
 mod compat_btrfs;
@@ -524,6 +527,7 @@ mod gdt;
 mod gesture_engine;
 mod gguf;
 mod goal_decompose;
+mod google_home_bridge;
 mod gossip_protocol;
 mod gpu_driver;
 mod graphics;
@@ -555,6 +559,7 @@ mod interrupt_ctrl;
 mod interrupts;
 mod intrusion_detector;
 mod io_scheduler;
+mod iot_device_manager;
 mod ipc;
 mod ipc_semaphore;
 mod iris_scanner;
@@ -630,6 +635,7 @@ mod proc_sched;
 mod process_table;
 mod progress_bar;
 mod prompt_templates;
+mod proximity_sensor;
 mod proxy_handler;
 mod proxy_server;
 mod qos_manager;
