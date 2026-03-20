@@ -205,6 +205,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod a2a_protocol_v2;
 mod accelerometer_driver;
@@ -903,11 +904,15 @@ mod skill_config_mgr;
 mod skill_data_isolation;
 mod skill_dependency_mgr;
 mod skill_discovery;
+mod skill_health_check;
 mod skill_installer;
 mod skill_lifecycle_mgr;
 mod skill_manifest_parser;
+mod skill_marketplace;
 mod skill_permission_mgr;
+mod skill_rate_limiter;
 mod skill_registry;
+mod skill_review_system;
 mod skill_runtime;
 mod skill_sandbox;
 mod skill_scope_family;
@@ -915,6 +920,7 @@ mod skill_scope_org;
 mod skill_scope_personal;
 mod skill_scope_public;
 mod skill_scope_resolver;
+mod skill_secret_mgr;
 mod skill_updater;
 mod skill_usage_tracker;
 mod skill_version_mgr;
