@@ -2,95 +2,42 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-#[no_mangle]
-pub extern "C" fn init_module() -> i32 {
-    0
+pub enum NpuModel { Int8, Float16, Float32 }
+
+pub struct NpuTask {
+    pub id: u64,
+    pub model_name: String,
+    pub input_size: usize,
+    pub output_size: usize,
+    pub completed: bool,
 }
 
-#[no_mangle]
-pub extern "C" fn cleanup_module() {}
-
-struct NpuDriver {
-    device_id: u32,
-    status: String,
-    tasks: Vec<String>,
+pub struct NpuDriver {
+    pub tasks: Vec<NpuTask>,
+    pub next_id: u64,
+    pub total_inferences: u64,
+    pub available_cores: u8,
+    pub active_tasks: u8,
 }
 
 impl NpuDriver {
-    pub fn new(device_id: u32) -> Self {
-        NpuDriver {
-            device_id,
-            status: String::from("Initialized"),
-            tasks: Vec::new(),
+    pub fn new(cores: u8) -> Self {
+        Self { tasks: Vec::new(), next_id: 1, total_inferences: 0, available_cores: cores, active_tasks: 0 }
+    }
+    pub fn submit(&mut self, model: &str, input_size: usize, output_size: usize) -> Option<u64> {
+        if self.active_tasks >= self.available_cores { return None; }
+        let id = self.next_id; self.next_id += 1;
+        self.tasks.push(NpuTask { id, model_name: String::from(model), input_size, output_size, completed: false });
+        self.active_tasks += 1;
+        Some(id)
+    }
+    pub fn complete(&mut self, id: u64) {
+        if let Some(t) = self.tasks.iter_mut().find(|t| t.id == id) {
+            t.completed = true; self.total_inferences += 1;
+            if self.active_tasks > 0 { self.active_tasks -= 1; }
         }
     }
-
-    pub fn start(&mut self) {
-        self.status = String::from("Running");
-    }
-
-    pub fn stop(&mut self) {
-        self.status = String::from("Stopped");
-    }
-
-    pub fn add_task(&mut self, task: &str) {
-        self.tasks.push(String::from(task));
-    }
-
-    pub fn remove_task(&mut self, task_index: usize) -> Option<String> {
-        if task_index < self.tasks.len() {
-            Some(self.tasks.remove(task_index))
-        } else {
-            None
-        }
-    }
-
-    pub fn get_status(&self) -> &str {
-        &self.status
-    }
-}
-
-#[no_mangle]
-pub extern "C" fn npu_driver_new(device_id: u32) -> *mut NpuDriver {
-    Box::into_raw(Box::new(NpuDriver::new(device_id)))
-}
-
-#[no_mangle]
-pub extern "C" fn npu_driver_start(driver: *mut NpuDriver) {
-    unsafe { (*driver).start() };
-}
-
-#[no_mangle]
-pub extern "C" fn npu_driver_stop(driver: *mut NpuDriver) {
-    unsafe { (*driver).stop() };
-}
-
-#[no_mangle]
-pub extern "C" fn npu_driver_add_task(driver: *mut NpuDriver, task: *const u8, task_len: usize) {
-    let task_str = unsafe { core::str::from_utf8_unchecked(core::slice::from_raw_parts(task, task_len)) };
-    unsafe { (*driver).add_task(task_str) };
-}
-
-#[no_mangle]
-pub extern "C" fn npu_driver_remove_task(driver: *mut NpuDriver, task_index: usize) -> *const u8 {
-    match unsafe { (*driver).remove_task(task_index) } {
-        Some(task) => task.as_ptr(),
-        None => core::ptr::null(),
-    }
-}
-
-#[no_mangle]
-pub extern "C" fn npu_driver_get_status(driver: *mut NpuDriver, status: *mut u8, max_len: usize) -> isize {
-    let driver_status = unsafe { (*driver).get_status() };
-    let len = core::cmp::min(max_len - 1, driver_status.len());
-    unsafe {
-        core::ptr::copy_nonoverlapping(driver_status.as_ptr(), status, len);
-        *status.add(len) = 0; // Null-terminate the string
-    }
-    len as isize
-}
-
-#[no_mangle]
-pub extern "C" fn npu_driver_free(driver: *mut NpuDriver) {
-    unsafe { Box::from_raw(driver) };
+    pub fn utilization(&self) -> f32 { self.active_tasks as f32 / self.available_cores as f32 }
+    pub fn pending(&self) -> usize { self.tasks.iter().filter(|t| !t.completed).count() }
+    pub fn total(&self) -> u64 { self.total_inferences }
 }
