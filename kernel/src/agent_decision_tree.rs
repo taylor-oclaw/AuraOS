@@ -103,6 +103,6 @@ impl AgentDecisionTree {
                 self.remove_node_by_label(child, label);
                 true
             }
-        };
+        });
     }
 }
