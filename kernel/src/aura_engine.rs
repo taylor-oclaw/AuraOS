@@ -270,7 +270,11 @@ static ENGINE: spin::Lazy<spin::Mutex<AuraEngine>> = spin::Lazy::new(|| {
 /// Get the Aura Engine status for display
 pub fn status_string() -> String {
     let engine = ENGINE.lock();
-    alloc::String::from("info"),
+    alloc::format!(
+        "Aura Engine: {:?} | Tier: {:?} | Models: {} local, {} cloud",
+        engine.state,
+        engine.hardware_profile.recommended_tier,
+        engine.local_models.len(),
         engine.cloud_providers.len()
     )
 }
