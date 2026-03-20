@@ -80,6 +80,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod account_lockout;
@@ -142,6 +143,7 @@ mod color_picker;
 mod command_palette;
 mod compat_bridge;
 mod compositor;
+mod connection_tracker;
 mod consensus_engine;
 mod constitution;
 mod context_inherit;
@@ -163,6 +165,7 @@ mod defs_btree;
 mod defs_decay;
 mod defs_dedup;
 mod defs_disk_format;
+mod defs_encryption;
 mod defs_inode;
 mod defs_journal;
 mod defs_model;
@@ -228,6 +231,7 @@ mod group_manager;
 mod grpc_runtime;
 mod gui_automation;
 mod gui_text;
+mod health_monitor;
 mod hot_reload;
 mod http;
 mod http2_handler;
@@ -364,6 +368,7 @@ mod socket_api;
 mod socks_handler;
 mod ssh_client;
 mod ssh_server;
+mod stack_unwinder;
 mod status_bar;
 mod storage;
 mod string_utils;
@@ -423,6 +428,7 @@ mod vpn_client;
 mod vpn_wireguard;
 mod wasm_runtime;
 mod watch_agent;
+mod watchdog_timer;
 mod websocket_mgr;
 mod websocket_server;
 mod widget;
