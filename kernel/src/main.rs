@@ -38,6 +38,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod accessibility;
 mod acpi;
 mod agent_hierarchy;
@@ -53,12 +54,14 @@ mod attention_mgr;
 mod auction_sched;
 mod audio;
 mod audio_mixer;
+mod audio_routing;
 mod audit_trail;
 mod aura_engine;
 mod backup_manager;
 mod behavior;
 mod bluetooth_mgr;
 mod boot_sequence;
+mod camera_driver;
 mod cert_manager;
 mod clipboard;
 mod clipboard_plus;
@@ -120,6 +123,7 @@ mod http;
 mod i18n_system;
 mod icmp;
 mod identity;
+mod image_viewer;
 mod input_router;
 mod intent_storage;
 mod interrupts;
@@ -134,6 +138,7 @@ mod lock_screen;
 mod logger;
 mod login_screen;
 mod math;
+mod media_controls;
 mod mem_pool;
 mod memfs;
 mod memory;
@@ -199,6 +204,7 @@ mod usb;
 mod usb_hid;
 mod user_profiles;
 mod vfs;
+mod video_decoder;
 mod virtio_net;
 mod virtual_desktops;
 mod voice_engine;
