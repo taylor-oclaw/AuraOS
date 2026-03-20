@@ -65,6 +65,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod acpi;
@@ -266,6 +267,7 @@ mod prompt_templates;
 mod proxy_server;
 mod quantizer;
 mod rag_pipeline;
+mod raid_manager;
 mod random;
 mod rate_limiter;
 mod resource_monitor;
@@ -275,6 +277,7 @@ mod rtc;
 mod rtc_clock;
 mod sandbox_eval;
 mod sandbox_manager;
+mod sata_controller;
 mod scheduler;
 mod screen_capture;
 mod scrollbar;
