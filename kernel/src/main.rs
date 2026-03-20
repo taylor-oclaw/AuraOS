@@ -186,6 +186,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod a2a_protocol_v2;
 mod accelerometer_driver;
@@ -327,8 +328,11 @@ mod agent_voting_system;
 mod ai_accelerator_abstract;
 mod ai_accelerator_detect;
 mod ai_accelerator_fallback;
+mod ai_embedding_abstract;
 mod ai_inference_batch;
+mod ai_inference_cache;
 mod ai_inference_queue;
+mod ai_inference_router;
 mod ai_inference_stream;
 mod ai_model_auto_convert;
 mod ai_model_format_detect;
@@ -342,6 +346,8 @@ mod ai_runtime_abstract;
 mod ai_runtime_native;
 mod ai_runtime_remote;
 mod ai_runtime_wasm;
+mod ai_tokenizer_abstract;
+mod ai_tokenizer_registry;
 mod alexa_bridge;
 mod allocator;
 mod ambient_light_sensor;
