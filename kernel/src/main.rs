@@ -212,11 +212,14 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
+mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
 mod a2a_protocol_v2;
 mod a2a_push_notify;
 mod a2a_server;
+mod a2a_task_handler;
 mod accelerometer_driver;
 mod accessibility;
 mod account_lockout;
@@ -838,6 +841,7 @@ mod ollama_compat;
 mod onnxruntime_compat;
 mod oom_killer;
 mod openai_compat;
+mod openapi_auth_handler;
 mod openapi_schema_import;
 mod openapi_skill_adapter;
 mod opengl_compat;
@@ -1059,6 +1063,8 @@ mod vpn_client;
 mod vpn_wireguard;
 mod vulkan_renderer;
 mod wasm_runtime;
+mod wasm_skill_loader;
+mod wasm_skill_runtime;
 mod watch_agent;
 mod watchdog_timer;
 mod webgpu_compat;
