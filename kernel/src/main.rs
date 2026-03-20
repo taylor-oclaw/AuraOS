@@ -167,6 +167,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accelerometer_driver;
 mod accessibility;
@@ -569,6 +570,7 @@ mod ftp_client;
 mod gdt;
 mod gesture_engine;
 mod gguf;
+mod global_illumination;
 mod goal_decompose;
 mod google_home_bridge;
 mod gossip_protocol;
@@ -678,10 +680,12 @@ mod pci_bus;
 mod pcie_gen5;
 mod perf_profiler;
 mod permissions;
+mod physics_engine;
 mod pipe_system;
 mod pipes;
 mod plugin_system;
 mod pop3_client;
+mod post_processing;
 mod power_mgmt;
 mod power_profiles;
 mod print_manager;
@@ -735,6 +739,7 @@ mod service_discovery;
 mod session_manager;
 mod sftp_handler;
 mod shader_compiler;
+mod shadow_mapper;
 mod shared_memory;
 mod shell;
 mod shutdown_mgr;
