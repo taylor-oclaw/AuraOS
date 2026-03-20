@@ -158,6 +158,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accelerometer_driver;
 mod accessibility;
@@ -330,6 +331,7 @@ mod aura_agent_share;
 mod aura_agent_store;
 mod aura_agent_template;
 mod aura_agent_updater;
+mod aura_antivirus;
 mod aura_app_sandbox;
 mod aura_app_store;
 mod aura_audio_mgr;
@@ -348,6 +350,7 @@ mod aura_do_not_disturb;
 mod aura_dock;
 mod aura_engine;
 mod aura_file_browser;
+mod aura_firewall;
 mod aura_focus_session;
 mod aura_font_mgr;
 mod aura_install_wizard;
@@ -789,6 +792,7 @@ mod usb_mass_storage;
 mod usb_mount_detect;
 mod user_auth;
 mod user_profiles;
+mod vault_engine;
 mod vfs;
 mod vga_text;
 mod video_codec_av1;
