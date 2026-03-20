@@ -177,6 +177,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accelerometer_driver;
 mod accessibility;
@@ -589,6 +590,7 @@ mod font_renderer;
 mod framebuffer;
 mod framebuffer_mgr;
 mod ftp_client;
+mod function_calling;
 mod gdt;
 mod gesture_engine;
 mod gguf;
@@ -666,6 +668,7 @@ mod lookahead_decode;
 mod mamba_v2;
 mod math;
 mod matter_protocol;
+mod mcp_protocol;
 mod media_controls;
 mod medusa_v2;
 mod mem_pool;
@@ -709,6 +712,7 @@ mod page_fault;
 mod paged_attention_v2;
 mod pam_module;
 mod panic_handler;
+mod parallel_decode;
 mod particle_renderer;
 mod password_hasher;
 mod pci;
@@ -837,6 +841,7 @@ mod tls_handshake;
 mod token_healing;
 mod tokenizer;
 mod tool_executor;
+mod tool_use_engine;
 mod tooltip_system;
 mod touchscreen_driver;
 mod tpm_handler;
