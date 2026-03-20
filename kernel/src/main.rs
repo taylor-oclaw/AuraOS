@@ -52,6 +52,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod acpi;
@@ -122,6 +123,7 @@ mod defs_vfs;
 mod desktop;
 mod device_manager;
 mod device_mgr;
+mod device_tree;
 mod dhcp;
 mod display_server;
 mod dma;
@@ -167,6 +169,7 @@ mod interrupt_ctrl;
 mod interrupts;
 mod io_scheduler;
 mod ipc;
+mod ipc_semaphore;
 mod kbd_layout;
 mod kernel_orchestrator;
 mod keyboard;
@@ -195,8 +198,10 @@ mod os_init;
 mod page_fault;
 mod panic_handler;
 mod pci;
+mod pci_bus;
 mod perf_profiler;
 mod permissions;
+mod pipe_system;
 mod pipes;
 mod plugin_system;
 mod power_mgmt;
@@ -226,6 +231,7 @@ mod sentiment_engine;
 mod serial;
 mod serial_console;
 mod service_discovery;
+mod shared_memory;
 mod shell;
 mod shutdown_mgr;
 mod signal_handler;
