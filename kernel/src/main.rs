@@ -192,6 +192,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod a2a_protocol_v2;
 mod accelerometer_driver;
@@ -349,7 +350,11 @@ mod ai_inference_queue;
 mod ai_inference_router;
 mod ai_inference_stream;
 mod ai_middleware_auth;
+mod ai_middleware_cache;
 mod ai_middleware_chain;
+mod ai_middleware_logging;
+mod ai_middleware_metrics;
+mod ai_middleware_transform;
 mod ai_model_auto_convert;
 mod ai_model_format_detect;
 mod ai_output_validator;
