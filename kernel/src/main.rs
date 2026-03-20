@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod native_skill_ffi;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
