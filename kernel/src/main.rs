@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod speculative_decode_v2;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
