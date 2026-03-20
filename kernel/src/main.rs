@@ -49,6 +49,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod acpi;
@@ -61,6 +62,7 @@ mod agent_memory;
 mod agent_migration;
 mod agent_playbooks;
 mod agent_reflection;
+mod agent_reputation;
 mod agent_telemetry;
 mod agent_versioning;
 mod allocator;
@@ -157,6 +159,7 @@ mod identity;
 mod image_viewer;
 mod input_router;
 mod intent_storage;
+mod interrupt_ctrl;
 mod interrupts;
 mod io_scheduler;
 mod ipc;
@@ -201,6 +204,7 @@ mod process_table;
 mod prompt_templates;
 mod random;
 mod rate_limiter;
+mod resource_monitor;
 mod ring_buffer;
 mod rtc;
 mod sandbox_eval;
@@ -231,6 +235,7 @@ mod sys_monitor;
 mod syscall;
 mod sysinfo;
 mod system_config;
+mod task_queue;
 mod tcpip;
 mod terminal;
 mod text_editor;
