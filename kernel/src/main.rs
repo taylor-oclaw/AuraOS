@@ -213,6 +213,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -822,6 +823,8 @@ mod mouse;
 mod multi_monitor;
 mod namespace_isolate;
 mod nat_gateway;
+mod native_skill_ffi;
+mod native_skill_loader;
 mod net_stack;
 mod network_bridge;
 mod nfc_handler;
@@ -931,6 +934,7 @@ mod skill_api_key_store;
 mod skill_audit_log;
 mod skill_billing_hook;
 mod skill_certification;
+mod skill_chain_builder;
 mod skill_config_mgr;
 mod skill_data_isolation;
 mod skill_dependency_mgr;
