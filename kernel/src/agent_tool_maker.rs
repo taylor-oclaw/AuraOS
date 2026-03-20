@@ -36,12 +36,11 @@ impl AgentToolMaker {
     }
 
     pub fn get_tool_description(&self, name: &str) -> Option<String> {
-        self.tools.iter().find_map(|&(ref tool_name, ref desc)| {
+        for (tool_name, desc) in &self.tools {
             if tool_name == name {
-                Some(desc.clone())
-            }) else {
-                None
-            })
-        })
+                return Some(desc.clone());
+            }
+        }
+        None
     }
 }
