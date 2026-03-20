@@ -200,6 +200,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod a2a_protocol_v2;
 mod accelerometer_driver;
@@ -399,6 +400,7 @@ mod ai_provider_hot_swap;
 mod ai_provider_registry;
 mod ai_provider_trait;
 mod ai_provider_version_mgr;
+mod ai_quota_manager;
 mod ai_realtime_screen;
 mod ai_realtime_video;
 mod ai_realtime_voice;
@@ -891,8 +893,12 @@ mod signal_handler;
 mod signals;
 mod signature_dilithium;
 mod signature_ed25519;
+mod skill_discovery;
+mod skill_installer;
 mod skill_manifest_parser;
+mod skill_registry;
 mod skill_runtime;
+mod skill_updater;
 mod slab_allocator;
 mod sleep_manager;
 mod smtp_client;
