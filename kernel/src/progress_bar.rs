@@ -38,7 +38,7 @@ impl ProgressBar {
     }
 
     pub fn render(&self) -> String {
-        let filled_width = (self.get_progress() / 100.0 * self.width as f32).round() as usize;
+        let filled_width = (self.get_progress() / 100.0 * self.width as f32) as usize;
         let empty_width = self.width - filled_width;
 
         let mut bar = String::from("[");

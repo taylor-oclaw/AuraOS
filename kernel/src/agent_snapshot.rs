@@ -5,7 +5,7 @@ use alloc::vec::Vec;
 
 pub extern "C" fn rust_start() {
     // Entry point for the kernel module
-    let snapshot = AgentSnapshot::new();
+    let mut snapshot = AgentSnapshot::new();
     snapshot.log_status();
     snapshot.add_process(String::from("init"));
     snapshot.add_process(String::from("sshd"));

@@ -30,6 +30,6 @@ impl ToolExecutor {
     }
 
     pub fn execute_tool(&self, tool_name: &str) -> Option<&String> {
-        self.tools.iter().find(|&&t| t == tool_name)
+        self.tools.iter().find(|t| t.as_str() == tool_name)
     }
 }

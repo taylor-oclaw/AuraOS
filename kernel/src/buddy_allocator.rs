@@ -1,8 +1,6 @@
 extern crate alloc;
-use alloc::string::String;
 use alloc::vec::Vec;
 use alloc::vec;
-
 
 fn log2_ceil(n: usize) -> usize {
     if n <= 1 { return 0; }
@@ -13,84 +11,58 @@ fn log2_ceil(n: usize) -> usize {
 }
 
 pub struct BuddyAllocator {
-    memory: Vec<u8>,
+    levels: usize,
     free_lists: Vec<Vec<usize>>,
+    total_size: usize,
 }
 
 impl BuddyAllocator {
     pub fn new(size: usize) -> Self {
-        let mut memory = vec![0; size];
-        let levels = log2_ceil(size);
-        let mut free_lists = vec![Vec::new(); levels];
-
-        // Initialize the largest block
-        free_lists[levels - 1].push(0);
-
-        BuddyAllocator { memory, free_lists }
+        let levels = log2_ceil(size) + 1;
+        let mut free_lists = Vec::with_capacity(levels);
+        for _ in 0..levels {
+            free_lists.push(Vec::new());
+        }
+        if levels > 0 {
+            free_lists[levels - 1].push(0);
+        }
+        BuddyAllocator { levels, free_lists, total_size: size }
     }
 
     pub fn allocate(&mut self, size: usize) -> Option<usize> {
         let level = log2_ceil(size);
-        if level >= self.free_lists.len() {
-            return None;
-        }
-
-        // Find the first available block of at least the required size
-        for i in level..self.free_lists.len() {
-            if let Some(&block) = self.free_lists[i].first() {
-                // Split blocks until we reach the desired level
-                for j in (level..i).rev() {
-                    let buddy = block + (1 << j);
-                    self.free_lists[j].push(buddy);
+        if level >= self.levels { return None; }
+        for l in level..self.levels {
+            if !self.free_lists[l].is_empty() {
+                let block = self.free_lists[l].remove(0);
+                let mut current_level = l;
+                while current_level > level {
+                    current_level -= 1;
+                    let buddy = block + (1 << current_level);
+                    self.free_lists[current_level].push(buddy);
                 }
-                self.free_lists[level].remove(0);
                 return Some(block);
             }
         }
-
         None
     }
 
-    pub fn deallocate(&mut self, address: usize, size: usize) {
+    pub fn deallocate(&mut self, addr: usize, size: usize) {
         let level = log2_ceil(size);
-        if level >= self.free_lists.len() {
-            return;
+        if level < self.levels {
+            self.free_lists[level].push(addr);
         }
+    }
 
-        // Coalesce buddies until we reach the largest possible block
-        let mut current_address = address;
-        for i in level..self.free_lists.len() {
-            let buddy = current_address ^ (1 << i);
-            if self.is_free(buddy, 1 << i) {
-                self.remove_from_list(&mut self.free_lists[i], buddy);
-                current_address = buddy.min(current_address);
-            } else {
-                break;
-            }
+    pub fn available_blocks(&self) -> usize {
+        let mut count = 0;
+        for list in &self.free_lists {
+            count += list.len();
         }
-
-        // Insert the coalesced block back into the free list
-        self.free_lists[level].push(current_address);
+        count
     }
 
-    fn is_free(&self, address: usize, size: usize) -> bool {
-        let level = log2_ceil(size);
-        if level >= self.free_lists.len() {
-            return false;
-        }
-        self.free_lists[level].contains(&(address))
-    }
-
-    fn remove_from_list(&mut self, list: &mut Vec<usize>, address: usize) {
-        let index = list.iter().position(|&x| x == address).unwrap();
-        list.remove(index);
-    }
-
-    pub fn total_memory(&self) -> usize {
-        self.memory.len()
-    }
-
-    pub fn free_memory(&self) -> usize {
-        self.free_lists.iter().map(|list| list.len() * (1 << self.free_lists.len())).sum()
+    pub fn total_size(&self) -> usize {
+        self.total_size
     }
 }

@@ -25,7 +25,7 @@ impl NlpTokenizer {
     pub fn tokenize(&self, sentence: &str) -> Vec<String> {
         sentence.split_whitespace()
             .map(|word| word.to_lowercase())
-            .filter(|word| !self.stop_words.contains(word))
+            .filter(|word| !self.stop_words.iter().any(|w| w == word))
             .collect()
     }
 
@@ -43,7 +43,7 @@ impl NlpTokenizer {
 
     // Method to check if a word is a stop word
     pub fn is_stop_word(&self, word: &str) -> bool {
-        self.stop_words.contains(word)
+        self.stop_words.iter().any(|w| w == word)
     }
 
     // Method to get the list of stop words
