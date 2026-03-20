@@ -97,6 +97,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod account_lockout;
@@ -156,19 +157,24 @@ mod aura_notification_hub;
 mod aura_package_mgr;
 mod aura_panel;
 mod aura_permission_prompt;
+mod aura_picture_in_picture;
 mod aura_power_mgr;
 mod aura_printer_mgr;
 mod aura_recovery_mode;
+mod aura_screen_record_mgr;
 mod aura_screensaver;
+mod aura_screenshot_mgr;
 mod aura_search_spotlight;
 mod aura_settings;
 mod aura_shell;
+mod aura_split_view;
 mod aura_system_info;
 mod aura_task_manager;
 mod aura_terminal;
 mod aura_update_mgr;
 mod aura_user_setup;
 mod aura_wallpaper_mgr;
+mod aura_workspace_mgr;
 mod backup_manager;
 mod bandwidth_monitor;
 mod batch_scheduler;
