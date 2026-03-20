@@ -93,6 +93,8 @@ impl E1000 {
     }
 
     pub fn mac_string(&self) -> alloc::string::String {
-        alloc::String::from("info")
+        alloc::format!("{:02x}:{:02x}:{:02x}:{:02x}:{:02x}:{:02x}",
+            self.mac[0], self.mac[1], self.mac[2],
+            self.mac[3], self.mac[4], self.mac[5])
     }
 }
