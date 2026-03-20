@@ -42,6 +42,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod accessibility;
 mod acpi;
 mod agent_hierarchy;
@@ -179,6 +180,7 @@ mod prompt_templates;
 mod random;
 mod ring_buffer;
 mod rtc;
+mod sandbox_eval;
 mod sandbox_manager;
 mod scheduler;
 mod screen_capture;
@@ -207,9 +209,11 @@ mod terminal;
 mod text_editor;
 mod theme;
 mod theme_engine;
+mod tiered_cache;
 mod timers;
 mod tokenizer;
 mod transformer;
+mod trust_scoring;
 mod updater;
 mod uptime;
 mod usb;
