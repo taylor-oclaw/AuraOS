@@ -151,6 +151,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accelerometer_driver;
 mod accessibility;
@@ -562,6 +563,9 @@ mod hugepage_alloc;
 mod i18n_system;
 mod icmp;
 mod identity;
+mod image_codec_jpeg;
+mod image_codec_png;
+mod image_codec_webp;
 mod image_viewer;
 mod imap_client;
 mod input_router;
@@ -766,6 +770,7 @@ mod user_profiles;
 mod vfs;
 mod vga_text;
 mod video_codec_av1;
+mod video_codec_h264;
 mod video_codec_h265;
 mod video_decoder;
 mod virtio_net;
