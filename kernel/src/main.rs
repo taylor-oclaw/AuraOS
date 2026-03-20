@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod display_calibrate;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
