@@ -50,6 +50,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod acpi;
@@ -85,6 +86,7 @@ mod belief_revision;
 mod bluetooth_mgr;
 mod boot_sequence;
 mod camera_driver;
+mod capability_system;
 mod cert_manager;
 mod clipboard;
 mod clipboard_plus;
@@ -122,6 +124,7 @@ mod device_mgr;
 mod dhcp;
 mod display_server;
 mod dma;
+mod dma_controller;
 mod dns;
 mod drag_drop;
 mod dream_cycle;
@@ -188,6 +191,7 @@ mod notif_sounds;
 mod notification_center;
 mod notifications;
 mod os_init;
+mod page_fault;
 mod panic_handler;
 mod pci;
 mod perf_profiler;
@@ -223,6 +227,7 @@ mod serial_console;
 mod service_discovery;
 mod shell;
 mod shutdown_mgr;
+mod signal_handler;
 mod signals;
 mod socket_api;
 mod status_bar;
@@ -242,6 +247,7 @@ mod text_editor;
 mod theme;
 mod theme_engine;
 mod tiered_cache;
+mod timer_subsystem;
 mod timers;
 mod tokenizer;
 mod trace_assurance;
