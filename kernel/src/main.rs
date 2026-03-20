@@ -214,6 +214,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -935,6 +936,9 @@ mod skill_audit_log;
 mod skill_billing_hook;
 mod skill_certification;
 mod skill_chain_builder;
+mod skill_chain_executor;
+mod skill_chain_planner;
+mod skill_compose_engine;
 mod skill_config_mgr;
 mod skill_data_isolation;
 mod skill_dependency_mgr;
@@ -1067,6 +1071,7 @@ mod vpn_client;
 mod vpn_wireguard;
 mod vulkan_renderer;
 mod wasm_runtime;
+mod wasm_skill_bridge;
 mod wasm_skill_loader;
 mod wasm_skill_runtime;
 mod watch_agent;
