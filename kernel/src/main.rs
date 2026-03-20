@@ -74,6 +74,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod account_lockout;
@@ -206,6 +207,7 @@ mod font;
 mod font_data;
 mod framebuffer;
 mod framebuffer_mgr;
+mod ftp_client;
 mod gdt;
 mod gesture_engine;
 mod gguf;
@@ -226,6 +228,7 @@ mod i18n_system;
 mod icmp;
 mod identity;
 mod image_viewer;
+mod imap_client;
 mod input_router;
 mod intent_parser;
 mod intent_storage;
@@ -236,6 +239,7 @@ mod ipc;
 mod ipc_semaphore;
 mod jwt_handler;
 mod kbd_layout;
+mod kerberos_client;
 mod kernel_orchestrator;
 mod key_manager;
 mod keyboard;
@@ -290,6 +294,7 @@ mod permissions;
 mod pipe_system;
 mod pipes;
 mod plugin_system;
+mod pop3_client;
 mod power_mgmt;
 mod power_profiles;
 mod print_manager;
@@ -337,6 +342,7 @@ mod shutdown_mgr;
 mod signal_handler;
 mod signals;
 mod slab_allocator;
+mod smtp_client;
 mod socket_api;
 mod status_bar;
 mod storage;
