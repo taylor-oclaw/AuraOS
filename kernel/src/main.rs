@@ -64,6 +64,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
 mod acpi;
@@ -308,8 +309,10 @@ mod syscall;
 mod sysinfo;
 mod syslog_daemon;
 mod system_config;
+mod system_tray;
 mod tab_control;
 mod task_queue;
+mod taskbar;
 mod tcpip;
 mod tensor_ops;
 mod terminal;
@@ -325,6 +328,7 @@ mod tool_executor;
 mod tooltip_system;
 mod trace_assurance;
 mod transformer;
+mod tree_view;
 mod trust_scoring;
 mod updater;
 mod uptime;
