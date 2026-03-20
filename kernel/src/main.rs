@@ -71,8 +71,10 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_protocol;
 mod accessibility;
+mod account_lockout;
 mod acpi;
 mod agent_checkpoint;
 mod agent_contracts;
@@ -235,6 +237,7 @@ mod llm_engine;
 mod loadavg_calc;
 mod lock_screen;
 mod logger;
+mod login_manager;
 mod login_screen;
 mod math;
 mod media_controls;
@@ -245,6 +248,7 @@ mod memory_decay;
 mod memory_pool;
 mod menu_system;
 mod mesh;
+mod mfa_handler;
 mod model_loader;
 mod model_registry;
 mod mount_manager;
@@ -267,6 +271,7 @@ mod oom_killer;
 mod os_init;
 mod packet_filter;
 mod page_fault;
+mod pam_module;
 mod panic_handler;
 mod password_hasher;
 mod pci;
