@@ -63,3 +63,39 @@ protocol/ (binary), transport/, bridge/
 
 ### `services/` — Cross-cutting
 observe/, config/, sync/, runtime/, update/, migration/
+
+## VyMatik Installation Modes
+
+### Native Mode (AuraOS + DEFS)
+AuraOS kernel already has: particles, dimensions, gravity, density, resonance basics, entropy, quantum logging, membranes, nullspace, manifolds.
+
+VyMatik only installs:
+- Network listener (accept database connections)
+- Query/intent engine (parse requests)
+- Multi-tenant management
+- Replication protocol
+- Server API layer
+
+Data path: VyMatik Server → OS Particle API → DEFS → raw disk
+No translation. No files-on-files. Direct.
+
+### Standalone Mode (Linux/Windows + ext4/NTFS)
+OS has none of the VyMatik concepts.
+
+VyMatik installs everything:
+- Particle engine (builds own particle storage in files)
+- Gravity system
+- Density cache
+- Resonance encoding
+- Quantum logging
+- Entropy management
+- Membrane system
+- PLUS the server layer
+
+Data path: VyMatik Server → VyMatik Storage Engine → files on ext4 → raw disk
+Like SQL Server storing .mdf files on NTFS — the filesystem has no idea what's inside.
+
+### The Principle
+Same VyMatik product. Same API. Same capabilities.
+On AuraOS: thin install, OS-speed performance.
+On other OS: full install, self-contained, slightly more overhead.
