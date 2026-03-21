@@ -206,6 +206,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1617,6 +1618,10 @@ mod secret_manager;
 mod secure_boot;
 mod secure_enclave;
 mod secure_ipc;
+mod security_behavioral_biometric;
+mod security_gait_pattern;
+mod security_mouse_pattern;
+mod security_typing_pattern;
 mod self_evolution;
 mod self_healing;
 mod semantic_search;
