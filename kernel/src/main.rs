@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod security_anomaly_login;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
