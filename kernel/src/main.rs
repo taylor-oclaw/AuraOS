@@ -263,6 +263,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1041,8 +1042,12 @@ mod memory_pool;
 mod menu_system;
 mod mesh;
 mod mesh_agent;
+mod mesh_capacity_reporter;
 mod mesh_core;
 mod mesh_orchestrator;
+mod mesh_resource_monitor;
+mod mesh_task_checkpoint;
+mod mesh_task_migrator;
 mod metal_compat;
 mod mfa_handler;
 mod mixture_experts_v2;
