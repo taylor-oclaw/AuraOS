@@ -154,6 +154,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1000,6 +1001,9 @@ mod lang_history_tracker;
 mod lang_mixed_sentence_parse;
 mod lang_preference_mgr;
 mod lang_speech_model_router;
+mod lang_tts_accent_match;
+mod lang_tts_multilingual;
+mod lang_tts_voice_bank;
 mod lang_user_profile;
 mod ldap_client;
 mod linear_attention_v2;
