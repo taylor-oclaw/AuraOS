@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod app_ui_element_interact;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
