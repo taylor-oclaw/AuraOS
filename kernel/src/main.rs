@@ -190,6 +190,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -198,6 +199,8 @@ mod a2a_push_notify;
 mod a2a_server;
 mod a2a_task_handler;
 mod accelerometer_driver;
+mod access_color_blind_protanopia;
+mod access_high_contrast;
 mod accessibility;
 mod account_lockout;
 mod acpi;
@@ -1673,6 +1676,7 @@ mod speech_sentence_complete;
 mod speech_sigmatism;
 mod speech_sign_language_asl;
 mod speech_sign_language_bsl;
+mod speech_sign_language_custom;
 mod speech_sign_language_detect;
 mod speech_sign_language_isl;
 mod speech_sign_language_jsl;
@@ -1688,6 +1692,7 @@ mod speech_therapy_exercise;
 mod speech_therapy_game;
 mod speech_therapy_progress;
 mod speech_toddler_adapt;
+mod speech_user_dignity;
 mod speech_visual_speech;
 mod speech_voice_disorder_detect;
 mod speech_volume_disorder;
