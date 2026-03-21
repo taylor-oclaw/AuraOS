@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod car_obd2_reader;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
