@@ -308,6 +308,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2374,8 +2375,12 @@ mod trace_assurance;
 mod trackpad_driver;
 mod traffic_shaper;
 mod transformer;
+mod travel_assistant;
+mod travel_document_check;
+mod travel_flight_track;
 mod travel_hotel_suggest;
 mod travel_itinerary_build;
+mod travel_visa_check;
 mod tree_view;
 mod triton_compat;
 mod trust_attestation;
