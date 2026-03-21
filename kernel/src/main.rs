@@ -200,6 +200,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -209,10 +210,12 @@ mod a2a_server;
 mod a2a_task_handler;
 mod accelerometer_driver;
 mod access_adhd_mode;
+mod access_ai_chart_describe;
 mod access_ai_document_read;
 mod access_ai_image_describe;
 mod access_ai_scene_describe;
 mod access_autism_sensory;
+mod access_balance_audio;
 mod access_bounce_keys;
 mod access_braille_display;
 mod access_braille_input;
@@ -233,6 +236,7 @@ mod access_head_mouse;
 mod access_high_contrast;
 mod access_large_cursor;
 mod access_live_caption_all;
+mod access_mono_audio;
 mod access_mouse_keys;
 mod access_on_screen_keyboard;
 mod access_one_hand_keyboard;
@@ -246,6 +250,7 @@ mod access_simplified_mode;
 mod access_sip_puff;
 mod access_slow_keys;
 mod access_sticky_keys;
+mod access_subtitle_all_media;
 mod access_switch_access;
 mod access_vibration_alert;
 mod access_visual_alert_sound;
