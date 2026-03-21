@@ -83,6 +83,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -864,6 +865,7 @@ mod mesh_active_active;
 mod mesh_active_passive;
 mod mesh_adequacy_check;
 mod mesh_agent;
+mod mesh_attestation;
 mod mesh_audit_trail_mesh;
 mod mesh_auto_purge;
 mod mesh_backup_site;
@@ -925,6 +927,7 @@ mod mesh_graceful_preempt;
 mod mesh_hipaa_boundary;
 mod mesh_home_devices;
 mod mesh_idle_detector;
+mod mesh_industry_defense;
 mod mesh_industry_education;
 mod mesh_industry_finance;
 mod mesh_industry_government;
@@ -933,6 +936,7 @@ mod mesh_industry_legal;
 mod mesh_itar_boundary;
 mod mesh_jurisdiction_engine;
 mod mesh_jurisdiction_rules;
+mod mesh_key_rotation;
 mod mesh_laptop_desktop_link;
 mod mesh_latency_optimizer;
 mod mesh_legal_hold;
@@ -958,6 +962,7 @@ mod mesh_retention_policy;
 mod mesh_right_to_delete;
 mod mesh_right_to_export;
 mod mesh_schrems_compliance;
+mod mesh_secure_enclave_mesh;
 mod mesh_site_registry;
 mod mesh_site_topology;
 mod mesh_sla_enforcer;
@@ -978,6 +983,7 @@ mod mesh_task_resume;
 mod mesh_task_scheduler;
 mod mesh_team_pool;
 mod mesh_transfer_impact;
+mod mesh_trusted_execution;
 mod mesh_usage_billing;
 mod mesh_wake_on_lan;
 mod mesh_wan_optimizer;
