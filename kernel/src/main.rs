@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod predict_workflow_detect;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
