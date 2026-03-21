@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod mdm_certificate_deploy;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
