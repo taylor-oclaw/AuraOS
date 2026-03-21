@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod lang_accessibility_braille_lang;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
