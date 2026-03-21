@@ -86,6 +86,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -924,6 +925,7 @@ mod mesh_enterprise_scheduler;
 mod mesh_failover_site;
 mod mesh_fedramp_boundary;
 mod mesh_firewall_mesh;
+mod mesh_forensic_capture;
 mod mesh_gdpr_boundary;
 mod mesh_geo_routing;
 mod mesh_gpu_share;
@@ -932,6 +934,7 @@ mod mesh_hipaa_boundary;
 mod mesh_home_devices;
 mod mesh_identity_verify;
 mod mesh_idle_detector;
+mod mesh_incident_report;
 mod mesh_industry_defense;
 mod mesh_industry_education;
 mod mesh_industry_finance;
@@ -1091,6 +1094,8 @@ mod ring_buffer;
 mod route_table;
 mod rtc;
 mod rtc_clock;
+mod runtime_node;
+mod runtime_python;
 mod saml_handler;
 mod sandbox_eval;
 mod sandbox_manager;
