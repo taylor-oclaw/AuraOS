@@ -84,6 +84,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -926,6 +927,7 @@ mod mesh_gpu_share;
 mod mesh_graceful_preempt;
 mod mesh_hipaa_boundary;
 mod mesh_home_devices;
+mod mesh_identity_verify;
 mod mesh_idle_detector;
 mod mesh_industry_defense;
 mod mesh_industry_education;
@@ -940,9 +942,11 @@ mod mesh_key_rotation;
 mod mesh_laptop_desktop_link;
 mod mesh_latency_optimizer;
 mod mesh_legal_hold;
+mod mesh_mTLS_mesh;
 mod mesh_maintenance_window;
 mod mesh_memory_share;
 mod mesh_multi_site;
+mod mesh_network_segment;
 mod mesh_orchestrator;
 mod mesh_overnight_mode;
 mod mesh_owner_detect;
@@ -989,6 +993,7 @@ mod mesh_wake_on_lan;
 mod mesh_wan_optimizer;
 mod mesh_wearable_bridge;
 mod mesh_weekend_mode;
+mod mesh_workload_identity;
 mod mesh_zone_aware;
 mod metal_compat;
 mod mfa_handler;
