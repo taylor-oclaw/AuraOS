@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod offline_usb_sync;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
