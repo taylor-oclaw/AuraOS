@@ -284,6 +284,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1132,6 +1133,8 @@ mod filesystem_btrfs;
 mod filesystem_ext4;
 mod filesystem_fat;
 mod filesystem_ntfs;
+mod finance_bank_connect;
+mod finance_tracker;
 mod fingerprint_driver;
 mod firewall_engine;
 mod flash_attention_v2;
@@ -1898,11 +1901,14 @@ mod relationship_communication_freq;
 mod relationship_contact_enrich;
 mod relationship_context_aware;
 mod relationship_follow_up_suggest;
+mod relationship_gift_suggest;
 mod relationship_graph;
 mod relationship_important_people;
 mod relationship_personal_track;
+mod relationship_preference_learn;
 mod relationship_professional_track;
 mod relationship_reconnect_suggest;
+mod relationship_sentiment_track;
 mod render_pipeline;
 mod resource_monitor;
 mod ring_buffer;
