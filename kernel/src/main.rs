@@ -132,6 +132,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1268,7 +1269,11 @@ mod power_mgmt;
 mod power_profiles;
 mod print_manager;
 mod priority_context_score;
+mod priority_dependency_aware;
+mod priority_effort_estimate;
 mod priority_engine_core;
+mod priority_impact_score;
+mod priority_importance_score;
 mod priority_ml_model;
 mod priority_queue;
 mod privacy_engine;
