@@ -266,6 +266,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -950,6 +951,7 @@ mod digital_twin_preference;
 mod digital_twin_represent;
 mod digital_twin_simulate;
 mod digital_twin_user;
+mod digital_twin_what_if;
 mod disk_partition;
 mod display_calibrate;
 mod display_connector;
@@ -1614,9 +1616,13 @@ mod nlp;
 mod nlp_bridge;
 mod nlp_tokenizer;
 mod notif_sounds;
+mod notification_bundle_smart;
 mod notification_center;
+mod notification_channel_route;
 mod notification_intelligence;
 mod notification_priority_rank;
+mod notification_timing_optimal;
+mod notification_urgent_detect;
 mod notifications;
 mod npu_driver;
 mod npu_scheduler;
