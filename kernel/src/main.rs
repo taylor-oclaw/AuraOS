@@ -87,6 +87,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -994,6 +995,7 @@ mod mesh_task_migrator;
 mod mesh_task_resume;
 mod mesh_task_scheduler;
 mod mesh_team_pool;
+mod mesh_threat_response;
 mod mesh_transfer_impact;
 mod mesh_trusted_execution;
 mod mesh_usage_billing;
@@ -1094,8 +1096,12 @@ mod ring_buffer;
 mod route_table;
 mod rtc;
 mod rtc_clock;
+mod runtime_dotnet;
+mod runtime_go;
+mod runtime_java;
 mod runtime_node;
 mod runtime_python;
+mod runtime_ruby;
 mod saml_handler;
 mod sandbox_eval;
 mod sandbox_manager;
