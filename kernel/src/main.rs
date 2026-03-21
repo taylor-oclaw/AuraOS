@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod voice_translate_realtime;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
