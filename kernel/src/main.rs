@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod miniapp_qr_scan_quick;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
