@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod profile_entrepreneur_personal_on_work;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
