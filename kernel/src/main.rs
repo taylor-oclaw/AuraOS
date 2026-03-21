@@ -343,6 +343,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -641,8 +642,11 @@ mod ai_sec_api_key_detector;
 mod ai_sec_attribute_inference;
 mod ai_sec_backdoor_detect;
 mod ai_sec_behavior_shift_detect;
+mod ai_sec_bias_detect;
+mod ai_sec_bias_mitigate;
 mod ai_sec_cache_attack_model;
 mod ai_sec_confidence_score;
+mod ai_sec_constitutional_enforce;
 mod ai_sec_credit_card_detector;
 mod ai_sec_data_exfil_block;
 mod ai_sec_data_exfil_detect;
@@ -655,6 +659,7 @@ mod ai_sec_dos_rate_limit;
 mod ai_sec_dos_resource_cap;
 mod ai_sec_dos_timeout_enforce;
 mod ai_sec_electromagnetic_leak;
+mod ai_sec_ethical_boundary;
 mod ai_sec_evasion_detect;
 mod ai_sec_excessive_agency_detect;
 mod ai_sec_fact_verify_chain;
