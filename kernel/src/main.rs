@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod perf_battery_saver_smart;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
