@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod health_step_counter;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
