@@ -105,6 +105,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1368,8 +1369,13 @@ mod vlan_manager;
 mod vllm_compat;
 mod voice_always_listen;
 mod voice_command_loop;
+mod voice_context_aware;
+mod voice_context_stack;
+mod voice_continuous_convo;
 mod voice_engine;
+mod voice_follow_up;
 mod voice_intent_confirm;
+mod voice_multi_turn;
 mod voice_noise_cancel;
 mod voice_pipeline;
 mod voice_speaker_identify;
