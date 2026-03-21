@@ -538,6 +538,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1335,8 +1336,14 @@ mod boot_sequence;
 mod buddy_allocator;
 mod calendar_agenda_generate;
 mod calendar_attendee_suggest;
+mod calendar_auto_accept_pattern;
+mod calendar_auto_decline_pattern;
+mod calendar_auto_next_day_auto;
+mod calendar_auto_prep_time_add;
+mod calendar_auto_recurring_accept;
 mod calendar_auto_reschedule;
 mod calendar_auto_suggest_times;
+mod calendar_auto_tentative_pattern;
 mod calendar_buffer_time;
 mod calendar_conflict_detect;
 mod calendar_external_sync;
