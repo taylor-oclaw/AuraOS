@@ -298,6 +298,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -868,6 +869,8 @@ mod bluetooth_mgr;
 mod bluetooth_stack;
 mod boot_sequence;
 mod buddy_allocator;
+mod calendar_conflict_detect;
+mod calendar_optimal_time;
 mod camera_driver;
 mod canvas_2d;
 mod capability_system;
@@ -1079,9 +1082,11 @@ mod email_priority_rank;
 mod email_reply_draft;
 mod email_reply_tone_match;
 mod email_schedule_send;
+mod email_sentiment_flag;
 mod email_snooze_smart;
 mod email_spam_ai;
 mod email_summary_generate;
+mod email_template_suggest;
 mod email_thread_summarize;
 mod email_unsubscribe_detect;
 mod embedding_engine;
