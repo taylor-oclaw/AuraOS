@@ -242,6 +242,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -849,6 +850,9 @@ mod logger;
 mod login_manager;
 mod login_screen;
 mod lookahead_decode;
+mod mam_skill_approve;
+mod mam_skill_block;
+mod mam_skill_push;
 mod mamba_v2;
 mod marketplace_catalog;
 mod marketplace_categories;
@@ -905,6 +909,7 @@ mod mcp_tool_adapter;
 mod mcp_transport_http;
 mod mcp_transport_stdio;
 mod mcp_transport_ws;
+mod mdm_bulk_enroll;
 mod mdm_certificate_deploy;
 mod mdm_container_isolation;
 mod mdm_data_boundary;
@@ -930,6 +935,7 @@ mod mdm_remote_wipe;
 mod mdm_vpn_policy;
 mod mdm_wifi_policy;
 mod mdm_work_profile;
+mod mdm_zero_touch_enroll;
 mod media_controls;
 mod medusa_v2;
 mod mem_pool;
