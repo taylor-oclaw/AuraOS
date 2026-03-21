@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod car_ev_charge_find;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
