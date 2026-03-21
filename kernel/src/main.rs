@@ -167,6 +167,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1006,6 +1007,7 @@ mod lang_accent_turkish;
 mod lang_accent_vietnamese;
 mod lang_autocomplete_multilingual;
 mod lang_autocorrect;
+mod lang_bilingual_assist;
 mod lang_code_switch_detect;
 mod lang_code_switch_response;
 mod lang_core;
@@ -1036,6 +1038,9 @@ mod lang_locale_measurement;
 mod lang_locale_mgr;
 mod lang_locale_number_format;
 mod lang_locale_phone_format;
+mod lang_meeting_live_caption;
+mod lang_meeting_multilingual;
+mod lang_meeting_translate_overlay;
 mod lang_mixed_sentence_parse;
 mod lang_output_language_select;
 mod lang_predictive_text;
