@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod cross_device_copy_paste;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
