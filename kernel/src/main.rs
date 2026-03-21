@@ -161,6 +161,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1011,10 +1012,15 @@ mod lang_input_ime_hindi;
 mod lang_input_ime_japanese;
 mod lang_input_ime_korean;
 mod lang_input_ime_thai;
+mod lang_input_keyboard_layout;
 mod lang_input_method_mgr;
 mod lang_input_voice_typing;
 mod lang_mixed_sentence_parse;
 mod lang_preference_mgr;
+mod lang_script_complex;
+mod lang_script_renderer;
+mod lang_script_rtl;
+mod lang_script_vertical;
 mod lang_speech_model_fine_tune;
 mod lang_speech_model_loader;
 mod lang_speech_model_router;
