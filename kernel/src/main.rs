@@ -419,6 +419,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2245,6 +2246,7 @@ mod people_availability_learn;
 mod people_best_time_contact;
 mod people_calendar_extract;
 mod people_celebration_aware;
+mod people_channel_preference;
 mod people_check_in_suggest;
 mod people_communication_style;
 mod people_congrats_suggest;
@@ -2421,12 +2423,16 @@ mod privacy_engine;
 mod proc_mgr;
 mod proc_sched;
 mod process_table;
+mod profile_mode_child;
 mod profile_mode_core;
 mod profile_mode_creator;
+mod profile_mode_detect;
 mod profile_mode_developer;
+mod profile_mode_family;
 mod profile_mode_hybrid;
 mod profile_mode_personal;
 mod profile_mode_professional;
+mod profile_mode_senior;
 mod profile_mode_student;
 mod progress_bar;
 mod prompt_templates;
