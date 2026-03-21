@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod voice_continuous_convo;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
