@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod email_auto_folder_learn;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
