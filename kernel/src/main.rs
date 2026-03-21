@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod health_hydration_remind;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
