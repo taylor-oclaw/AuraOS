@@ -357,6 +357,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2011,8 +2012,11 @@ mod notification_urgent_detect;
 mod notification_weekly_digest;
 mod notifications;
 mod notify_behavior_learn;
+mod notify_call_active_block;
 mod notify_chat_active_silent;
 mod notify_coding_detect;
+mod notify_context_rule_custom;
+mod notify_context_rule_engine;
 mod notify_early_bird_detect;
 mod notify_email_active_detect;
 mod notify_email_sender_priority;
@@ -2024,6 +2028,7 @@ mod notify_presentation_detect_v2;
 mod notify_reading_detect;
 mod notify_schedule_adaptive;
 mod notify_timezone_travel_adjust;
+mod notify_video_watching_detect;
 mod notify_weekend_pattern;
 mod notify_work_hours_dynamic;
 mod npu_driver;
