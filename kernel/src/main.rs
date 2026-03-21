@@ -294,6 +294,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1062,8 +1063,11 @@ mod dream_cycle;
 mod e1000;
 mod eagle_decode;
 mod elf_loader;
+mod email_category_auto;
 mod email_intelligence;
+mod email_phishing_detect_v2;
 mod email_priority_rank;
+mod email_summary_generate;
 mod embedding_engine;
 mod emmc_driver;
 mod emoji_renderer;
