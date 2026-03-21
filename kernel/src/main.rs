@@ -6,6 +6,7 @@ extern crate alloc;
 
 
 mod people_context_birthday_near;
+mod people_context_anniversary_near;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
