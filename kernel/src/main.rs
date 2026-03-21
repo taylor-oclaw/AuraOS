@@ -290,6 +290,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1037,7 +1038,11 @@ mod dns_cache;
 mod dns_resolver;
 mod document_auto_name;
 mod document_auto_organize;
+mod document_auto_tag;
+mod document_duplicate_detect;
 mod document_intelligence;
+mod document_summary_generate;
+mod document_version_track;
 mod drag_drop;
 mod dream_cycle;
 mod e1000;
@@ -1154,6 +1159,7 @@ mod finance_investment_track;
 mod finance_net_worth;
 mod finance_price_alert;
 mod finance_receipt_scan;
+mod finance_savings_automate;
 mod finance_spending_alert;
 mod finance_subscription_cancel;
 mod finance_subscription_detect;
