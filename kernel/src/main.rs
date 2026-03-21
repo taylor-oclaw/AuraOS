@@ -235,6 +235,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1039,7 +1040,11 @@ mod function_calling;
 mod game_mode_activate;
 mod game_mode_core;
 mod game_mode_notify_silence;
+mod game_mode_overlay;
 mod game_mode_perf_boost;
+mod game_mode_recording;
+mod game_mode_screenshot;
+mod game_mode_streaming;
 mod gdt;
 mod gesture_engine;
 mod gguf;
@@ -1580,6 +1585,7 @@ mod offline_mesh_local;
 mod offline_model_cache;
 mod offline_music_cache;
 mod offline_p2p_sync;
+mod offline_priority_sync;
 mod offline_queue_manager;
 mod offline_retry_engine;
 mod offline_skill_cache;
