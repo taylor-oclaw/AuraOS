@@ -75,6 +75,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -856,6 +857,7 @@ mod mesh_active_active;
 mod mesh_active_passive;
 mod mesh_adequacy_check;
 mod mesh_agent;
+mod mesh_auto_purge;
 mod mesh_backup_site;
 mod mesh_bandwidth_optimizer;
 mod mesh_bandwidth_share;
@@ -879,6 +881,7 @@ mod mesh_data_classification;
 mod mesh_data_flow_map;
 mod mesh_data_locality;
 mod mesh_data_residency;
+mod mesh_data_retention;
 mod mesh_data_sovereignty;
 mod mesh_data_subject_rights;
 mod mesh_data_tagging;
@@ -901,6 +904,7 @@ mod mesh_idle_detector;
 mod mesh_itar_boundary;
 mod mesh_laptop_desktop_link;
 mod mesh_latency_optimizer;
+mod mesh_legal_hold;
 mod mesh_maintenance_window;
 mod mesh_memory_share;
 mod mesh_multi_site;
@@ -918,6 +922,7 @@ mod mesh_qos_guarantees;
 mod mesh_region_aware;
 mod mesh_reserved_compute;
 mod mesh_resource_monitor;
+mod mesh_retention_policy;
 mod mesh_right_to_delete;
 mod mesh_right_to_export;
 mod mesh_schrems_compliance;
@@ -927,6 +932,7 @@ mod mesh_sla_enforcer;
 mod mesh_sleep_resume;
 mod mesh_sox_boundary;
 mod mesh_spot_compute;
+mod mesh_standard_clauses;
 mod mesh_storage_share;
 mod mesh_tablet_bridge;
 mod mesh_task_checkpoint;
