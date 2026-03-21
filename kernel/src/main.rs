@@ -285,6 +285,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1134,6 +1135,10 @@ mod filesystem_ext4;
 mod filesystem_fat;
 mod filesystem_ntfs;
 mod finance_bank_connect;
+mod finance_budget_auto;
+mod finance_spending_alert;
+mod finance_subscription_cancel;
+mod finance_subscription_detect;
 mod finance_tracker;
 mod fingerprint_driver;
 mod firewall_engine;
