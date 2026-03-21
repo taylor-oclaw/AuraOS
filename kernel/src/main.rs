@@ -171,6 +171,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1592,10 +1593,14 @@ mod speech_impediment_calibrate;
 mod speech_impediment_core;
 mod speech_impediment_detector;
 mod speech_impediment_learn;
+mod speech_impediment_profile;
 mod speech_lambdacism;
 mod speech_lisp_lateral;
+mod speech_lisp_palatal;
 mod speech_rhotacism;
 mod speech_sigmatism;
+mod speech_stutter_detect;
+mod speech_stutter_patience;
 mod ssh_client;
 mod ssh_server;
 mod stack_unwinder;
