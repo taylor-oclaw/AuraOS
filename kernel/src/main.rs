@@ -484,6 +484,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2597,7 +2598,11 @@ mod profile_notification_personal_to_work;
 mod profile_notification_work_to_personal;
 mod profile_travel_airport_detect;
 mod profile_travel_conference_mode;
+mod profile_travel_expense_auto;
 mod profile_travel_hotel_detect;
+mod profile_travel_itinerary_context;
+mod profile_travel_per_diem_track;
+mod profile_travel_receipt_capture;
 mod profile_travel_work_detect;
 mod profile_ui_adapt;
 mod profile_ui_dock_adjust;
