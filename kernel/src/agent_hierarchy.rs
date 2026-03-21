@@ -2,14 +2,14 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub struct agenthierarchy {
+pub struct AgentHierarchy {
     entries: Vec<String>,
     active: bool,
 }
 
-impl agenthierarchy {
+impl AgentHierarchy {
     pub fn new() -> Self {
-        agenthierarchy { entries: Vec::new(), active: true }
+        AgentHierarchy { entries: Vec::new(), active: true }
     }
     
     pub fn add(&mut self, entry: &str) {
