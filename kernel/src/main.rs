@@ -527,6 +527,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2623,7 +2624,12 @@ mod plugin_system;
 mod policy_byod_device;
 mod policy_byod_personal_free;
 mod policy_byod_work_container;
+mod policy_company_category_block;
 mod policy_company_device;
+mod policy_company_time_restrict;
+mod policy_company_usage_report;
+mod policy_company_usb_block;
+mod policy_company_website_block;
 mod policy_personal_device;
 mod pop3_client;
 mod post_processing;
