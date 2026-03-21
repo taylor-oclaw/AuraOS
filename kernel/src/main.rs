@@ -449,6 +449,8 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -3022,6 +3024,7 @@ mod tone_group_chat_adapt;
 mod tone_humor_avoid;
 mod tone_humor_match;
 mod tone_humor_safe_detect;
+mod tone_over_explain_avoid;
 mod tone_paragraph_style;
 mod tone_passive_aggressive_avoid;
 mod tone_peer_mode;
@@ -3042,6 +3045,7 @@ mod tone_slang_match;
 mod tone_stranger_mode;
 mod tone_subordinate_mode;
 mod tone_thread_context;
+mod tone_under_explain_avoid;
 mod tone_urgency_match;
 mod tone_vendor_mode;
 mod tool_executor;
