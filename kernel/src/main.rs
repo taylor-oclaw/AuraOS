@@ -348,6 +348,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -646,6 +647,7 @@ mod ai_sec_alignment_test;
 mod ai_sec_api_key_detector;
 mod ai_sec_attribute_inference;
 mod ai_sec_audit_chain_of_custody;
+mod ai_sec_audit_data_sheet;
 mod ai_sec_audit_decision_explain;
 mod ai_sec_audit_log_immutable;
 mod ai_sec_backdoor_detect;
@@ -679,6 +681,9 @@ mod ai_sec_fairness_audit;
 mod ai_sec_gdpr_ai_comply;
 mod ai_sec_hallucination_score;
 mod ai_sec_hate_speech_detect;
+mod ai_sec_incident_contain;
+mod ai_sec_incident_investigate;
+mod ai_sec_incident_response;
 mod ai_sec_indirect_inject_block;
 mod ai_sec_indirect_inject_detect;
 mod ai_sec_iso_42001;
