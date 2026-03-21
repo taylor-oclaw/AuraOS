@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod policy_byod_personal_free;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
