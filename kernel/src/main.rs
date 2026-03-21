@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod ai_sec_dos_timeout_enforce;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
