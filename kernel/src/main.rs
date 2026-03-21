@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod gift_eco_friendly_option;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
