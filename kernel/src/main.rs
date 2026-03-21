@@ -102,6 +102,12 @@ nlp_tokenizer
 progress_bar
 tool_executor;
 
+buddy_allocator
+deadlock_detector
+nlp_tokenizer
+progress_bar
+tool_executor;
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -887,11 +893,13 @@ mod menu_system;
 mod mesh;
 mod mesh_agent;
 mod mesh_bandwidth_share;
+mod mesh_batch_priority;
 mod mesh_batch_queue;
 mod mesh_batch_schedule_window;
 mod mesh_capacity_reporter;
 mod mesh_core;
 mod mesh_cpu_share;
+mod mesh_department_pool;
 mod mesh_enterprise_dashboard;
 mod mesh_enterprise_mesh;
 mod mesh_enterprise_orchestrator;
@@ -901,6 +909,7 @@ mod mesh_graceful_preempt;
 mod mesh_home_devices;
 mod mesh_idle_detector;
 mod mesh_laptop_desktop_link;
+mod mesh_maintenance_window;
 mod mesh_memory_share;
 mod mesh_orchestrator;
 mod mesh_overnight_mode;
@@ -920,8 +929,10 @@ mod mesh_task_checkpoint;
 mod mesh_task_migrator;
 mod mesh_task_resume;
 mod mesh_task_scheduler;
+mod mesh_team_pool;
 mod mesh_wake_on_lan;
 mod mesh_wearable_bridge;
+mod mesh_weekend_mode;
 mod metal_compat;
 mod mfa_handler;
 mod mixture_experts_v2;
