@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod profile_data_crossover_block;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
