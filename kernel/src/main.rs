@@ -293,6 +293,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1041,6 +1042,7 @@ mod dns_resolver;
 mod document_auto_name;
 mod document_auto_organize;
 mod document_auto_tag;
+mod document_comment_smart;
 mod document_contract_analyze;
 mod document_duplicate_detect;
 mod document_expiry_alert;
@@ -1053,12 +1055,15 @@ mod document_search_semantic;
 mod document_signature_request;
 mod document_summary_generate;
 mod document_template_smart;
+mod document_translate_inline;
 mod document_version_track;
 mod drag_drop;
 mod dream_cycle;
 mod e1000;
 mod eagle_decode;
 mod elf_loader;
+mod email_intelligence;
+mod email_priority_rank;
 mod embedding_engine;
 mod emmc_driver;
 mod emoji_renderer;
