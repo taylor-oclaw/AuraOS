@@ -398,6 +398,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2391,6 +2392,8 @@ mod rel_friendship_anniversary;
 mod rel_ghosting_detect;
 mod rel_gift_budget_track;
 mod rel_gift_history;
+mod rel_gift_idea_generate;
+mod rel_gift_wishlist_track;
 mod rel_graduation_detect;
 mod rel_group_smart_create;
 mod rel_group_suggest;
@@ -2409,6 +2412,7 @@ mod rel_linkedin_enrich;
 mod rel_loss_detect;
 mod rel_manager_report;
 mod rel_meeting_history;
+mod rel_memory_share;
 mod rel_mentor_mentee;
 mod rel_mood_adjust_tone;
 mod rel_mood_detect_text;
@@ -2418,6 +2422,7 @@ mod rel_mutual_connect_find;
 mod rel_neighbor;
 mod rel_networking_event_prep;
 mod rel_new_connection_suggest;
+mod rel_occasion_calendar;
 mod rel_pet_name_remember;
 mod rel_preference_remember;
 mod rel_privacy_level_set;
@@ -2441,6 +2446,7 @@ mod rel_strengthening_detect;
 mod rel_text_pref_detect;
 mod rel_thank_you_remind;
 mod rel_topic_suggest;
+mod rel_tradition_remind;
 mod rel_twitter_enrich;
 mod rel_video_pref_detect;
 mod rel_vip_manage;
