@@ -320,6 +320,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -599,10 +600,14 @@ mod ai_safety_registry;
 mod ai_schema_enforcer;
 mod ai_sec_indirect_inject_block;
 mod ai_sec_indirect_inject_detect;
+mod ai_sec_jailbreak_detect;
+mod ai_sec_jailbreak_evolve;
+mod ai_sec_jailbreak_pattern;
 mod ai_sec_prompt_inject_block;
 mod ai_sec_prompt_inject_boundary;
 mod ai_sec_prompt_inject_canary;
 mod ai_sec_prompt_inject_detect;
+mod ai_sec_prompt_inject_monitor;
 mod ai_sec_prompt_inject_sanitize;
 mod ai_structured_handler;
 mod ai_token_budget;
@@ -917,6 +922,7 @@ mod camera_driver;
 mod canvas_2d;
 mod capability_system;
 mod car_android_auto_compat;
+mod car_aura_auto;
 mod car_carplay_compat;
 mod car_connect;
 mod car_diagnostic;
