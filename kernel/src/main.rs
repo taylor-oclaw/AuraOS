@@ -218,6 +218,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1039,9 +1040,13 @@ mod hash_argon2;
 mod hash_blake3;
 mod hdmi_handler;
 mod hdr_handler;
+mod health_break_reminder;
+mod health_hydration_remind;
 mod health_monitor;
 mod health_posture_detect;
 mod health_posture_remind;
+mod health_stretch_remind;
+mod health_twenty_twenty_rule;
 mod hibernate_handler;
 mod homekit_bridge;
 mod hot_reload;
