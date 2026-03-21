@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod parental_gradual_unlock;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
