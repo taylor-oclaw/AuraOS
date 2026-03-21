@@ -300,6 +300,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -872,9 +873,14 @@ mod boot_sequence;
 mod buddy_allocator;
 mod calendar_buffer_time;
 mod calendar_conflict_detect;
+mod calendar_focus_block_auto;
 mod calendar_intelligence;
+mod calendar_meeting_cost;
 mod calendar_optimal_time;
+mod calendar_prep_time;
+mod calendar_recurring_optimize;
 mod calendar_reschedule_suggest;
+mod calendar_travel_time;
 mod camera_driver;
 mod canvas_2d;
 mod capability_system;
