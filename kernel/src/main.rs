@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod app_state_tracker;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
