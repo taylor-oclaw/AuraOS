@@ -220,6 +220,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1045,12 +1046,16 @@ mod health_ambient_noise_monitor;
 mod health_blue_light_auto;
 mod health_blue_light_schedule;
 mod health_break_reminder;
+mod health_breathing_exercise;
 mod health_eye_strain_alert;
 mod health_hearing_protect;
 mod health_hydration_remind;
+mod health_meditation_timer;
 mod health_monitor;
 mod health_posture_detect;
 mod health_posture_remind;
+mod health_stress_detect_typing;
+mod health_stress_detect_usage;
 mod health_stretch_remind;
 mod health_twenty_twenty_rule;
 mod hibernate_handler;
