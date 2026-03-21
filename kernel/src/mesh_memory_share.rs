@@ -1,34 +1,18 @@
 extern crate alloc;
-
 use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct MeshMemoryShare {
-    data: Vec<u8>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl MeshMemoryShare {
     pub fn new() -> Self {
-        MeshMemoryShare { data: Vec::new() }
+        MeshMemoryShare { entries: Vec::new(), active: true }
     }
-
-    pub fn add_data(&mut self, bytes: &[u8]) {
-        self.data.extend_from_slice(bytes);
-    }
-
-    pub fn get_data(&self) -> &[u8] {
-        &self.data
-    }
-
-    pub fn clear_data(&mut self) {
-        self.data.clear();
-    }
-
-    pub fn data_size(&self) -> usize {
-        self.data.len()
-    }
-
-    pub fn append_string(&mut self, s: &str) {
-        self.data.extend_from_slice(s.as_bytes());
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn is_active(&self) -> bool { self.active }
 }

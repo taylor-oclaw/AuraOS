@@ -3,31 +3,16 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct MeshStorageShare {
-    data: Vec<u8>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl MeshStorageShare {
     pub fn new() -> Self {
-        MeshStorageShare { data: Vec::new() }
+        MeshStorageShare { entries: Vec::new(), active: true }
     }
-
-    pub fn store_data(&mut self, data: &[u8]) {
-        self.data.extend_from_slice(data);
-    }
-
-    pub fn retrieve_data(&self) -> &[u8] {
-        &self.data
-    }
-
-    pub fn clear_data(&mut self) {
-        self.data.clear();
-    }
-
-    pub fn append_string(&mut self, s: &str) {
-        self.data.extend_from_slice(s.as_bytes());
-    }
-
-    pub fn get_string(&self) -> Option<&str> {
-        core::str::from_utf8(&self.data).ok()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn is_active(&self) -> bool { self.active }
 }

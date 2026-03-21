@@ -1,69 +1,18 @@
 extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
-use alloc::vec;
 
-pub extern "C" fn mesh_home_devices_init() {
-    // Initialization logic for the module
+pub struct MeshHomeDevices {
+    entries: Vec<String>,
+    active: bool,
 }
 
-pub extern "C" fn mesh_home_devices_exit() {
-    // Cleanup logic for the module
-}
-
-pub struct DeviceManager {
-    devices: Vec<String>,
-}
-
-impl DeviceManager {
+impl MeshHomeDevices {
     pub fn new() -> Self {
-        DeviceManager {
-            devices: Vec::new(),
-        }
+        MeshHomeDevices { entries: Vec::new(), active: true }
     }
-
-    pub fn add_device(&mut self, device_name: &str) {
-        self.devices.push(String::from(device_name));
-    }
-
-    pub fn remove_device(&mut self, device_name: &str) {
-        if let Some(index) = self.devices.iter().position(|d| d == device_name) {
-            self.devices.remove(index);
-        }
-    }
-
-    pub fn list_devices(&self) -> Vec<String> {
-        self.devices.clone()
-    }
-
-    pub fn find_device(&self, device_name: &str) -> Option<&String> {
-        self.devices.iter().find(|&&d| d == device_name)
-    }
-
-    pub fn count_devices(&self) -> usize {
-        self.devices.len()
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_device_manager() {
-        let mut manager = DeviceManager::new();
-        assert_eq!(manager.count_devices(), 0);
-
-        manager.add_device("Light");
-        manager.add_device("Thermostat");
-        assert_eq!(manager.count_devices(), 2);
-        assert_eq!(manager.list_devices(), vec!["Light".to_string(), "Thermostat".to_string()]);
-
-        assert!(manager.find_device("Light").is_some());
-        assert!(manager.find_device("Fan").is_none());
-
-        manager.remove_device("Light");
-        assert_eq!(manager.count_devices(), 1);
-        assert_eq!(manager.list_devices(), vec!["Thermostat".to_string()]);
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn is_active(&self) -> bool { self.active }
 }
