@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod travel_timezone_adjust;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
