@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod enterprise_directory_sync;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
