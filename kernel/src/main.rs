@@ -111,6 +111,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -452,6 +453,9 @@ mod aura_agent_updater;
 mod aura_antivirus;
 mod aura_app_sandbox;
 mod aura_app_store;
+mod aura_assistant_core;
+mod aura_assistant_memory;
+mod aura_assistant_personality;
 mod aura_audio_mgr;
 mod aura_backup_mgr;
 mod aura_bluetooth_mgr;
@@ -1387,6 +1391,7 @@ mod voice_disambiguation;
 mod voice_emotion_detect;
 mod voice_engine;
 mod voice_follow_up;
+mod voice_foreground_action;
 mod voice_intent_confirm;
 mod voice_language_detect;
 mod voice_local_processing;
@@ -1397,6 +1402,7 @@ mod voice_noise_cancel;
 mod voice_offline_mode;
 mod voice_permission_check;
 mod voice_pipeline;
+mod voice_privacy_mute;
 mod voice_response_select;
 mod voice_response_tts;
 mod voice_shortcut_trigger;
