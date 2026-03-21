@@ -282,6 +282,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1890,9 +1891,13 @@ mod raid_manager;
 mod random;
 mod rate_limiter;
 mod raytracing_engine;
+mod relationship_anniversary_remind;
+mod relationship_birthday_remind;
 mod relationship_communication_freq;
 mod relationship_contact_enrich;
+mod relationship_context_aware;
 mod relationship_graph;
+mod relationship_important_people;
 mod render_pipeline;
 mod resource_monitor;
 mod ring_buffer;
