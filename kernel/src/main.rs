@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod ai_sec_agency_scope_limit;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
