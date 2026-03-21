@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod biz_client_account_plan;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
