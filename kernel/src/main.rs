@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod miniapp_email_label;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
