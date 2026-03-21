@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod ai_sec_supply_chain_sbom;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
