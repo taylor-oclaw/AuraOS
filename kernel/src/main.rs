@@ -520,6 +520,8 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1540,6 +1542,11 @@ mod draft_gap_detect;
 mod draft_gap_question;
 mod draft_multiple_options;
 mod draft_partial_complete;
+mod draft_pre_send_attachment_check;
+mod draft_pre_send_date_verify;
+mod draft_pre_send_gaps_remain;
+mod draft_pre_send_spell_check;
+mod draft_pre_send_tone_verify;
 mod draft_smart_core;
 mod draft_template_smart;
 mod drag_drop;
