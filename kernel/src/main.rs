@@ -66,6 +66,12 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+buddy_allocator
+deadlock_detector
+nlp_tokenizer
+progress_bar
+tool_executor;
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -852,11 +858,14 @@ mod mesh;
 mod mesh_agent;
 mod mesh_capacity_reporter;
 mod mesh_core;
+mod mesh_cpu_share;
 mod mesh_graceful_preempt;
 mod mesh_idle_detector;
+mod mesh_memory_share;
 mod mesh_orchestrator;
 mod mesh_owner_detect;
 mod mesh_resource_monitor;
+mod mesh_storage_share;
 mod mesh_task_checkpoint;
 mod mesh_task_migrator;
 mod mesh_task_resume;
