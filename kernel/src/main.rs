@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod enterprise_google_workspace;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
