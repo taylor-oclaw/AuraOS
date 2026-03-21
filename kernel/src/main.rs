@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod speech_impediment_adapt;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
