@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod security_supply_chain_verify;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
