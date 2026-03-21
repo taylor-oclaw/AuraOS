@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod family_hub_subscription_mgr;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
