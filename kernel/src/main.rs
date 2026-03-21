@@ -499,6 +499,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1700,6 +1701,7 @@ mod gift_client_gift;
 mod gift_client_milestone;
 mod gift_conference_swag;
 mod gift_corporate_budget;
+mod gift_cultural_taboo_avoid;
 mod gift_dietary_aware_gift;
 mod gift_eco_friendly_option;
 mod gift_employee_appreciation;
@@ -1708,11 +1710,13 @@ mod gift_employee_promotion;
 mod gift_employee_welcome;
 mod gift_experience_gift;
 mod gift_gift_card_manage;
+mod gift_group_gift_collect;
 mod gift_professional_occasion;
 mod gift_receipt_include;
 mod gift_registry_check;
 mod gift_tax_deductible_flag;
 mod gift_team_milestone;
+mod gift_thank_you_received_log;
 mod global_illumination;
 mod goal_decompose;
 mod google_home_bridge;
@@ -2610,6 +2614,8 @@ mod profile_data_crossover_block;
 mod profile_data_partition;
 mod profile_data_personal_vault;
 mod profile_data_work_vault;
+mod profile_device_no_assume;
+mod profile_device_role_fluid;
 mod profile_feature_both;
 mod profile_feature_gate;
 mod profile_feature_hide;
