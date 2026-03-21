@@ -16,3 +16,7 @@ impl Gdt {
     pub fn count(&self) -> usize { self.entries.len() }
     pub fn is_active(&self) -> bool { self.active }
 }
+
+pub fn init() {
+    // GDT initialization placeholder
+}

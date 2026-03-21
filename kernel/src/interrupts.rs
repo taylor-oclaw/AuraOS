@@ -16,3 +16,18 @@ impl Interrupts {
     pub fn count(&self) -> usize { self.entries.len() }
     pub fn is_active(&self) -> bool { self.active }
 }
+
+pub fn init_idt() {
+    // IDT initialization placeholder
+}
+
+pub static PICS: PicPlaceholder = PicPlaceholder;
+
+pub struct PicPlaceholder;
+impl PicPlaceholder {
+    pub fn lock(&self) -> PicGuard { PicGuard }
+}
+pub struct PicGuard;
+impl PicGuard {
+    pub fn initialize(&self) {}
+}
