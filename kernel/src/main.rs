@@ -66,52 +66,20 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
-buddy_allocator
-deadlock_detector
-nlp_tokenizer
-progress_bar
 tool_executor;
 
-buddy_allocator
-deadlock_detector
-nlp_tokenizer
-progress_bar
 tool_executor;
 
-buddy_allocator
-deadlock_detector
-nlp_tokenizer
-progress_bar
 tool_executor;
 
-buddy_allocator
-deadlock_detector
-nlp_tokenizer
-progress_bar
 tool_executor;
 
-buddy_allocator
-deadlock_detector
-nlp_tokenizer
-progress_bar
 tool_executor;
 
-buddy_allocator
-deadlock_detector
-nlp_tokenizer
-progress_bar
 tool_executor;
 
-buddy_allocator
-deadlock_detector
-nlp_tokenizer
-progress_bar
 tool_executor;
 
-buddy_allocator
-deadlock_detector
-nlp_tokenizer
-progress_bar
 tool_executor;
 
 mod a2a_artifact_handler;
