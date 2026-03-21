@@ -131,6 +131,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -145,6 +146,7 @@ mod acpi;
 mod action_item_assignee;
 mod action_item_auto_execute;
 mod action_item_classifier;
+mod action_item_dashboard;
 mod action_item_deadline;
 mod action_item_delegate;
 mod action_item_dependency;
@@ -153,6 +155,7 @@ mod action_item_escalate;
 mod action_item_parser;
 mod action_item_priority;
 mod action_item_reminder;
+mod action_item_report;
 mod action_item_tracker;
 mod action_item_verify;
 mod agent_access_control;
@@ -1264,6 +1267,9 @@ mod post_processing;
 mod power_mgmt;
 mod power_profiles;
 mod print_manager;
+mod priority_context_score;
+mod priority_engine_core;
+mod priority_ml_model;
 mod priority_queue;
 mod privacy_engine;
 mod proc_mgr;
