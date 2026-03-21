@@ -207,6 +207,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1530,6 +1531,7 @@ mod perf_defrag_smart;
 mod perf_disk_optimizer;
 mod perf_gpu_scheduler;
 mod perf_io_scheduler_smart;
+mod perf_latency_optimizer;
 mod perf_memory_optimizer;
 mod perf_network_optimizer;
 mod perf_process_priority_auto;
@@ -1618,10 +1620,14 @@ mod secret_manager;
 mod secure_boot;
 mod secure_enclave;
 mod secure_ipc;
+mod security_anomaly_login;
 mod security_behavioral_biometric;
+mod security_continuous_auth;
 mod security_gait_pattern;
+mod security_impossible_travel;
 mod security_mouse_pattern;
 mod security_typing_pattern;
+mod security_usage_pattern;
 mod self_evolution;
 mod self_healing;
 mod semantic_search;
