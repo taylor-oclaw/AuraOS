@@ -117,6 +117,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -470,6 +471,7 @@ mod aura_assistant_file_suggest;
 mod aura_assistant_focus_guard;
 mod aura_assistant_follow_up;
 mod aura_assistant_learn_habits;
+mod aura_assistant_meeting_prep;
 mod aura_assistant_memory;
 mod aura_assistant_morning_brief;
 mod aura_assistant_note_taker;
@@ -974,6 +976,10 @@ mod mdm_work_profile;
 mod mdm_zero_touch_enroll;
 mod media_controls;
 mod medusa_v2;
+mod meeting_participant_detect;
+mod meeting_screen_capture;
+mod meeting_speaker_diarize;
+mod meeting_transcribe_realtime;
 mod mem_pool;
 mod memfs;
 mod memory;
