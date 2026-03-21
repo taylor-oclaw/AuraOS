@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod people_source_twitter_dm;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
