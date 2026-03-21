@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod biz_org_chart_change_detect;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
