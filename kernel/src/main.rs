@@ -420,6 +420,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2430,10 +2431,14 @@ mod profile_mode_detect;
 mod profile_mode_developer;
 mod profile_mode_family;
 mod profile_mode_hybrid;
+mod profile_mode_location_trigger;
 mod profile_mode_personal;
 mod profile_mode_professional;
+mod profile_mode_schedule;
 mod profile_mode_senior;
 mod profile_mode_student;
+mod profile_mode_switch;
+mod profile_mode_wifi_trigger;
 mod progress_bar;
 mod prompt_templates;
 mod proximity_sensor;
