@@ -217,6 +217,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -511,10 +512,13 @@ mod analytics_communication_pattern;
 mod analytics_comparison;
 mod analytics_deep_work_track;
 mod analytics_distraction_count;
+mod analytics_export;
 mod analytics_focus_time;
 mod analytics_goal_tracker;
+mod analytics_habit_tracker;
 mod analytics_monthly_report;
 mod analytics_peak_hours;
+mod analytics_privacy_local_only;
 mod analytics_productivity_score;
 mod analytics_screen_time;
 mod analytics_sleep_wake_pattern;
@@ -1036,6 +1040,8 @@ mod hash_blake3;
 mod hdmi_handler;
 mod hdr_handler;
 mod health_monitor;
+mod health_posture_detect;
+mod health_posture_remind;
 mod hibernate_handler;
 mod homekit_bridge;
 mod hot_reload;
