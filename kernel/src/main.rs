@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod profile_wfh_overtime_warn;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
