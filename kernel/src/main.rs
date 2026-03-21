@@ -243,6 +243,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -850,6 +851,9 @@ mod logger;
 mod login_manager;
 mod login_screen;
 mod lookahead_decode;
+mod mam_license_manager;
+mod mam_mandatory_skill;
+mod mam_seat_tracker;
 mod mam_skill_approve;
 mod mam_skill_block;
 mod mam_skill_push;
@@ -920,6 +924,7 @@ mod mdm_device_registry;
 mod mdm_encryption_policy;
 mod mdm_enrollment;
 mod mdm_geofence;
+mod mdm_lost_mode;
 mod mdm_network_policy;
 mod mdm_os_update_push;
 mod mdm_password_policy;
