@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod profile_feature_hide;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
