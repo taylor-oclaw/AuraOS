@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod profile_commute_hands_free;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
