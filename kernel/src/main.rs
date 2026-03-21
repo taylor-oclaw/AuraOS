@@ -6,6 +6,7 @@ extern crate alloc;
 
 
 mod people_source_handwritten_note;
+mod people_context_surface_engine;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
