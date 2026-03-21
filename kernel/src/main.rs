@@ -127,6 +127,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -990,7 +991,10 @@ mod meeting_agenda_pull;
 mod meeting_app_detect;
 mod meeting_assignee_extract;
 mod meeting_audio_capture;
+mod meeting_calendar_link;
 mod meeting_clip_generator;
+mod meeting_confidential_flag;
+mod meeting_consent_handler;
 mod meeting_context_linker;
 mod meeting_deadline_extract;
 mod meeting_decision_extractor;
@@ -1017,6 +1021,7 @@ mod meeting_recording_store;
 mod meeting_recurring_detect;
 mod meeting_screen_capture;
 mod meeting_sentiment_tracker;
+mod meeting_share_handler;
 mod meeting_slack_huddle;
 mod meeting_speaker_diarize;
 mod meeting_summary_generator;
