@@ -102,6 +102,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -349,17 +350,20 @@ mod app_automation_type;
 mod app_automation_wait;
 mod app_close_handler;
 mod app_controller;
+mod app_data_formatter;
 mod app_dom_mutator;
 mod app_dom_navigator;
 mod app_dom_observer;
 mod app_dom_parser;
 mod app_dom_selector;
 mod app_focus_manager;
+mod app_headless_browser;
 mod app_headless_renderer;
 mod app_headless_runner;
 mod app_launcher;
 mod app_marketplace;
 mod app_minimize_restore;
+mod app_ocr_engine_v2;
 mod app_process_monitor;
 mod app_result_extractor;
 mod app_screen_reader;
@@ -372,6 +376,8 @@ mod app_ui_form_filler;
 mod app_ui_image_extract;
 mod app_ui_table_extract;
 mod app_ui_text_extract;
+mod app_visual_grounding;
+mod app_visual_search;
 mod app_web_scraper;
 mod app_window_control;
 mod apps;
