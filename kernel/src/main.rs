@@ -279,6 +279,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -905,19 +906,24 @@ mod container_mkv;
 mod container_mp4;
 mod container_webm;
 mod context_activity_detect;
+mod context_alone_detect;
 mod context_calendar_aware;
+mod context_cooking_detect;
 mod context_driving_detect;
 mod context_engine_core;
 mod context_exercising_detect;
 mod context_inherit;
+mod context_interview_detect;
 mod context_light_aware;
 mod context_location_aware;
 mod context_motion_aware;
 mod context_noise_aware;
+mod context_presentation_detect;
 mod context_relaxing_detect;
 mod context_running_detect;
 mod context_shopping_detect;
 mod context_sleeping_detect;
+mod context_social_detect;
 mod context_time_aware;
 mod context_traffic_aware;
 mod context_traveling_detect;
