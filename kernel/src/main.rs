@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod people_source_meeting_chat;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
