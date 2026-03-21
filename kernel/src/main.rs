@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod profile_commute_podcast_resume;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
