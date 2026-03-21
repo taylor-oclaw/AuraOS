@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod car_android_auto_compat;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
