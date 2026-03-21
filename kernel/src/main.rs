@@ -317,6 +317,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -906,6 +907,8 @@ mod calendar_travel_time;
 mod camera_driver;
 mod canvas_2d;
 mod capability_system;
+mod car_android_auto_compat;
+mod car_carplay_compat;
 mod car_connect;
 mod car_diagnostic;
 mod car_ev_charge_find;
@@ -914,6 +917,9 @@ mod car_insurance_track;
 mod car_maintenance_remind;
 mod car_mileage_track;
 mod car_obd2_reader;
+mod car_parking_find;
+mod car_parking_remember;
+mod car_registration_remind;
 mod car_traffic_avoid;
 mod cellular_modem;
 mod cert_manager;
