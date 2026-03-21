@@ -2,48 +2,17 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn mesh_hipaa_boundary_init() {
-    // Initialization logic for the module
+pub struct MeshHipaaBoundary {
+    entries: Vec<String>,
+    active: bool,
 }
 
-pub extern "C" fn mesh_hipaa_boundary_exit() {
-    // Cleanup logic for the module
-}
-
-pub struct MeshHIPAABoundary {
-    data: Vec<u8>,
-    access_log: Vec<String>,
-}
-
-impl MeshHIPAABoundary {
+impl MeshHipaaBoundary {
     pub fn new() -> Self {
-        MeshHIPAABoundary {
-            data: Vec::new(),
-            access_log: Vec::new(),
-        }
+        MeshHipaaBoundary { entries: Vec::new(), active: true }
     }
-
-    pub fn add_data(&mut self, data: &[u8]) {
-        self.data.extend_from_slice(data);
-        self.log_access("add_data");
-    }
-
-    pub fn get_data(&self) -> &[u8] {
-        self.log_access("get_data");
-        &self.data
-    }
-
-    pub fn clear_data(&mut self) {
-        self.data.clear();
-        self.log_access("clear_data");
-    }
-
-    pub fn log_access(&mut self, action: &str) {
-        let entry = String::from("info");
-        self.access_log.push(entry);
-    }
-
-    pub fn get_access_log(&self) -> &[String] {
-        &self.access_log
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn is_active(&self) -> bool { self.active }
 }

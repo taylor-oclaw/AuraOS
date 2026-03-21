@@ -16,7 +16,3 @@ impl InputRouter {
     pub fn count(&self) -> usize { self.entries.len() }
     pub fn is_active(&self) -> bool { self.active }
 }
-
-pub fn handle_key(_scancode: u8) {
-    // Input router key handler placeholder
-}
