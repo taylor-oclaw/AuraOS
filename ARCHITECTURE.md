@@ -1,7 +1,7 @@
 # AuraOS Architecture — v7 (VyMatik-Native)
 
 ## Philosophy
-AuraOS doesn't have a filesystem. It has a **substrate** — a VyMatik data layer where every piece of data is a Particle with N dimensions, gravitational bonds, entropy decay, and membrane-based sharing. The OS IS VyMatik's native platform.
+AuraOS doesn't have a filesystem. It has a **vymatik data layer** — a VyMatik data layer where every piece of data is a Particle with N dimensions, gravitational bonds, entropy decay, and membrane-based sharing. The OS IS VyMatik's native platform.
 
 ## Ring Architecture
 
@@ -11,7 +11,7 @@ boot/, arch/, hal/, process/, ipc/, power/
 ### Ring 1 — `io/` (raw hardware)
 drivers/ (block, net, gpu, input, audio, display, sensor, biometric, iot), media/ (codecs)
 
-### Ring 2 — `substrate/` (VyMatik data layer)
+### Ring 2 — `vymatik/` (VyMatik data layer)
 The heart of AuraOS. Replaces traditional filesystem.
 - void/ — instance management
 - manifold/ — per-user data worlds
