@@ -3,59 +3,13 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct MeetingSummaryGenerator {
-    topics: Vec<String>,
-    attendees: Vec<String>,
-    summary: String,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl MeetingSummaryGenerator {
-    pub fn new() -> Self {
-        MeetingSummaryGenerator {
-            topics: Vec::new(),
-            attendees: Vec::new(),
-            summary: String::new(),
-        }
-    }
-
-    pub fn add_topic(&mut self, topic: &str) {
-        self.topics.push(topic.to_string());
-    }
-
-    pub fn add_attendee(&mut self, attendee: &str) {
-        self.attendees.push(attendee.to_string());
-    }
-
-    pub fn generate_summary(&mut self) {
-        let mut summary = String::from("Meeting Summary:\n");
-
-        if !self.topics.is_empty() {
-            summary.push_str("Topics Discussed:\n");
-            for (index, topic) in self.topics.iter().enumerate() {
-                summary.push_str(&String::from("info"));
-            }
-        } else {
-            summary.push_str("No topics were discussed.\n");
-        }
-
-        if !self.attendees.is_empty() {
-            summary.push_str("\nAttendees:\n");
-            for (index, attendee) in self.attendees.iter().enumerate() {
-                summary.push_str(&String::from("info"));
-            }
-        } else {
-            summary.push_str("No attendees were present.\n");
-        }
-
-        self.summary = summary;
-    }
-
-    pub fn get_summary(&self) -> &str {
-        &self.summary
-    }
-
-    pub fn clear(&mut self) {
-        self.topics.clear();
-        self.attendees.clear();
-        self.summary.clear();
-    }
+    pub fn new() -> Self { MeetingSummaryGenerator { entries: Vec::new(), active: true } }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn is_active(&self) -> bool { self.active }
 }
