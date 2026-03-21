@@ -519,6 +519,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1531,11 +1532,16 @@ mod document_summary_generate;
 mod document_template_smart;
 mod document_translate_inline;
 mod document_version_track;
+mod draft_fill_confidence_score;
+mod draft_fill_from_crm;
 mod draft_fill_from_memory;
 mod draft_gap_context_search;
 mod draft_gap_detect;
 mod draft_gap_question;
+mod draft_multiple_options;
+mod draft_partial_complete;
 mod draft_smart_core;
+mod draft_template_smart;
 mod drag_drop;
 mod dream_cycle;
 mod e1000;
