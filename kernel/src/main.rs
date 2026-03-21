@@ -66,21 +66,13 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
-tool_executor;
 
-tool_executor;
 
-tool_executor;
 
-tool_executor;
 
-tool_executor;
 
-tool_executor;
 
-tool_executor;
 
-tool_executor;
 
 mod a2a_artifact_handler;
 mod a2a_host;
