@@ -281,6 +281,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -912,6 +913,7 @@ mod context_calendar_aware;
 mod context_confidence_score;
 mod context_cooking_detect;
 mod context_driving_detect;
+mod context_emergency_detect;
 mod context_engine_core;
 mod context_exercising_detect;
 mod context_fusion_engine;
@@ -923,6 +925,7 @@ mod context_light_aware;
 mod context_location_aware;
 mod context_motion_aware;
 mod context_noise_aware;
+mod context_predict_next;
 mod context_presentation_detect;
 mod context_relaxing_detect;
 mod context_running_detect;
@@ -1887,6 +1890,9 @@ mod raid_manager;
 mod random;
 mod rate_limiter;
 mod raytracing_engine;
+mod relationship_communication_freq;
+mod relationship_contact_enrich;
+mod relationship_graph;
 mod render_pipeline;
 mod resource_monitor;
 mod ring_buffer;
