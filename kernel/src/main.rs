@@ -251,6 +251,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -651,6 +652,10 @@ mod color;
 mod color_picker;
 mod color_space_mgr;
 mod command_palette;
+mod company_billing;
+mod company_plan_manager;
+mod company_tenant_manager;
+mod company_usage_meter;
 mod compass_driver;
 mod compat_apfs_read;
 mod compat_bridge;
