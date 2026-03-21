@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod mesh_wake_on_lan;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
