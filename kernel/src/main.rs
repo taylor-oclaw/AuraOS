@@ -181,6 +181,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1599,6 +1600,7 @@ mod sparse_attention_v2;
 mod speculative_decode_v2;
 mod speech_apraxia_detect;
 mod speech_apraxia_pattern_learn;
+mod speech_breathy_voice;
 mod speech_child_adapt;
 mod speech_cleft_palate_adapt;
 mod speech_cluttering_detect;
@@ -1625,6 +1627,7 @@ mod speech_lisp_frontal;
 mod speech_lisp_lateral;
 mod speech_lisp_palatal;
 mod speech_nasal_speech;
+mod speech_never_mock;
 mod speech_patience_mode;
 mod speech_phoneme_custom_map;
 mod speech_phoneme_g_to_d;
@@ -1646,7 +1649,9 @@ mod speech_stutter_wait_mode;
 mod speech_stutter_word_predict;
 mod speech_therapy_assist;
 mod speech_therapy_exercise;
+mod speech_therapy_progress;
 mod speech_toddler_adapt;
+mod speech_voice_disorder_detect;
 mod speech_vowel_distortion;
 mod speech_word_predict_impediment;
 mod ssh_client;
