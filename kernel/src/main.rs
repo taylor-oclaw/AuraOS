@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod speech_apraxia_pattern_learn;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
