@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod marketplace_tax_reporting;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
