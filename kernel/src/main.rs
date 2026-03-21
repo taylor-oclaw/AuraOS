@@ -337,6 +337,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -614,6 +615,7 @@ mod ai_runtime_wasm;
 mod ai_safety_abstract;
 mod ai_safety_registry;
 mod ai_schema_enforcer;
+mod ai_sec_adversarial_input_detect;
 mod ai_sec_agency_action_approval;
 mod ai_sec_agency_audit_trail;
 mod ai_sec_agency_kill_switch;
@@ -621,6 +623,7 @@ mod ai_sec_agency_rollback;
 mod ai_sec_agency_scope_limit;
 mod ai_sec_agent_escape_detect;
 mod ai_sec_agent_goal_drift;
+mod ai_sec_agent_impersonate_detect;
 mod ai_sec_agent_resource_abuse;
 mod ai_sec_api_key_detector;
 mod ai_sec_confidence_score;
