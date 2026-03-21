@@ -291,6 +291,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1039,8 +1040,12 @@ mod dns_resolver;
 mod document_auto_name;
 mod document_auto_organize;
 mod document_auto_tag;
+mod document_contract_analyze;
 mod document_duplicate_detect;
+mod document_form_extract;
 mod document_intelligence;
+mod document_legal_highlight;
+mod document_ocr_smart;
 mod document_summary_generate;
 mod document_version_track;
 mod drag_drop;
