@@ -142,6 +142,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -607,6 +608,7 @@ mod auto_task_code_review;
 mod auto_task_crm_update;
 mod auto_task_data_gather;
 mod auto_task_decomposer;
+mod auto_task_deploy;
 mod auto_task_doc_create;
 mod auto_task_email_draft;
 mod auto_task_email_send;
@@ -616,6 +618,7 @@ mod auto_task_file_organize;
 mod auto_task_form_fill;
 mod auto_task_invoice_create;
 mod auto_task_planner;
+mod auto_task_pr_create;
 mod auto_task_presentation;
 mod auto_task_progress_report;
 mod auto_task_purchase_order;
@@ -623,8 +626,10 @@ mod auto_task_report_generate;
 mod auto_task_research;
 mod auto_task_rollback;
 mod auto_task_sandbox;
+mod auto_task_slack_message;
 mod auto_task_spreadsheet;
 mod auto_task_status_update;
+mod auto_task_teams_message;
 mod auto_task_test_run;
 mod auto_task_ticket_create;
 mod auto_task_travel_book;
@@ -939,6 +944,7 @@ mod key_storage;
 mod keyboard;
 mod knowledge_graph;
 mod kv_cache_v2;
+mod lang_core;
 mod ldap_client;
 mod linear_attention_v2;
 mod llm_engine;
