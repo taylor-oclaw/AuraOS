@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod gift_gift_card_manage;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
