@@ -2,38 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub struct AITokenizerAbstract {
-    tokens: Vec<String>,
+pub struct AiTokenizerAbstract {
+    entries: Vec<String>,
+    active: bool,
 }
 
-impl AITokenizerAbstract {
+impl AiTokenizerAbstract {
     pub fn new() -> Self {
-        AITokenizerAbstract {
-            tokens: Vec::new(),
-        }
+        AiTokenizerAbstract { entries: Vec::new(), active: true }
     }
-
-    pub fn add_token(&mut self, token: String) {
-        self.tokens.push(token);
-    }
-
-    pub fn remove_token(&mut self, index: usize) -> Option<String> {
-        if index < self.tokens.len() {
-            Some(self.tokens.remove(index))
-        } else {
-            None
-        }
-    }
-
-    pub fn get_token(&self, index: usize) -> Option<&String> {
-        self.tokens.get(index)
-    }
-
-    pub fn token_count(&self) -> usize {
-        self.tokens.len()
-    }
-
-    pub fn clear_tokens(&mut self) {
-        self.tokens.clear();
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

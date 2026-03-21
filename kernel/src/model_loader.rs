@@ -1,46 +1,21 @@
 extern crate alloc;
-use alloc::string::{String, ToString};
+use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct ModelLoader {
-    models: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl ModelLoader {
     pub fn new() -> Self {
-        ModelLoader {
-            models: Vec::new(),
-        }
+        ModelLoader { entries: Vec::new(), active: true }
     }
-
-    pub fn load_model(&mut self, model_name: &str) -> Result<(), &'static str> {
-        if self.models.iter().any(|m| m == model_name) {
-            Err("Model already loaded")
-        } else {
-            self.models.push(String::from(model_name));
-            Ok(())
-        }
-    }
-
-    pub fn unload_model(&mut self, model_name: &str) -> Result<(), &'static str> {
-        match self.models.iter().position(|m| m == model_name) {
-            Some(index) => {
-                self.models.remove(index);
-                Ok(())
-            }
-            None => Err("Model not found"),
-        }
-    }
-
-    pub fn list_models(&self) -> Vec<String> {
-        self.models.clone()
-    }
-
-    pub fn is_model_loaded(&self, model_name: &str) -> bool {
-        self.models.iter().any(|m| m == model_name)
-    }
-
-    pub fn count_models(&self) -> usize {
-        self.models.len()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

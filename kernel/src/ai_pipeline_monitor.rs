@@ -2,56 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() {
-    let monitor = AIPipelineMonitor::new();
-    monitor.start_pipeline("model1");
-    monitor.log_status();
-    monitor.stop_pipeline("model2");
-    monitor.add_model("model3");
-    monitor.remove_model("model2");
+pub struct AiPipelineMonitor {
+    entries: Vec<String>,
+    active: bool,
 }
 
-pub struct AIPipelineMonitor {
-    models: Vec<String>,
-    active_pipelines: Vec<String>,
-}
-
-impl AIPipelineMonitor {
+impl AiPipelineMonitor {
     pub fn new() -> Self {
-        AIPipelineMonitor {
-            models: Vec::new(),
-            active_pipelines: Vec::new(),
-        }
+        AiPipelineMonitor { entries: Vec::new(), active: true }
     }
-
-    pub fn add_model(&mut self, model_name: &str) {
-        if !self.models.contains(&model_name.to_string()) {
-            self.models.push(model_name.to_string());
-        }
-    }
-
-    pub fn remove_model(&mut self, model_name: &str) {
-        self.models.retain(|m| m != model_name);
-        self.active_pipelines.retain(|p| p != model_name);
-    }
-
-    pub fn start_pipeline(&mut self, model_name: &str) {
-        if self.models.contains(&model_name.to_string()) && !self.active_pipelines.contains(&model_name.to_string()) {
-            self.active_pipelines.push(model_name.to_string());
-        }
-    }
-
-    pub fn stop_pipeline(&mut self, model_name: &str) {
-        self.active_pipelines.retain(|p| p != model_name);
-    }
-
-    pub fn log_status(&self) {
-        for model in &self.models {
-            if self.active_pipelines.contains(model) {
-                // Simulate logging active pipeline
-            } else {
-                // Simulate logging inactive pipeline
-            }
-        }
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

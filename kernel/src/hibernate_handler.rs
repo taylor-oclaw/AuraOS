@@ -3,46 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct HibernateHandler {
-    state: String,
-    memory_map: Vec<u64>,
-    power_state: u8,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl HibernateHandler {
     pub fn new() -> Self {
-        HibernateHandler {
-            state: String::from("Active"),
-            memory_map: Vec::new(),
-            power_state: 0, // 0 - Active, 1 - Suspended
-        }
+        HibernateHandler { entries: Vec::new(), active: true }
     }
-
-    pub fn suspend(&mut self) {
-        if self.power_state == 0 {
-            self.state = String::from("Suspended");
-            self.power_state = 1;
-        } else {
-        }
-    }
-
-    pub fn resume(&mut self) {
-        if self.power_state == 1 {
-            self.state = String::from("Active");
-            self.power_state = 0;
-        } else {
-        }
-    }
-
-    pub fn add_memory_region(&mut self, start: u64, end: u64) {
-        self.memory_map.push(start);
-        self.memory_map.push(end);
-    }
-
-    pub fn get_memory_regions(&self) -> &Vec<u64> {
-        &self.memory_map
-    }
-
-    pub fn get_state(&self) -> &str {
-        &self.state
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

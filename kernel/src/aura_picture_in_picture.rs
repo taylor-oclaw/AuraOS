@@ -2,54 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_ffi_init() {
-    // Initialization code for the module
-}
-
-pub extern "C" fn rust_ffi_exit() {
-    // Cleanup code for the module
-}
-
 pub struct AuraPictureInPicture {
-    title: String,
-    width: u32,
-    height: u32,
-    position_x: i32,
-    position_y: i32,
-    visible: bool,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl AuraPictureInPicture {
-    pub fn new(title: &str, width: u32, height: u32) -> Self {
-        AuraPictureInPicture {
-            title: String::from(title),
-            width,
-            height,
-            position_x: 0,
-            position_y: 0,
-            visible: false,
-        }
+    pub fn new() -> Self {
+        AuraPictureInPicture { entries: Vec::new(), active: true }
     }
-
-    pub fn set_position(&mut self, x: i32, y: i32) {
-        self.position_x = x;
-        self.position_y = y;
-    }
-
-    pub fn get_position(&self) -> (i32, i32) {
-        (self.position_x, self.position_y)
-    }
-
-    pub fn set_visibility(&mut self, visible: bool) {
-        self.visible = visible;
-    }
-
-    pub fn is_visible(&self) -> bool {
-        self.visible
-    }
-
-    pub fn resize(&mut self, width: u32, height: u32) {
-        self.width = width;
-        self.height = height;
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

@@ -1,36 +1,21 @@
 extern crate alloc;
-
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub struct AuditTrail {
+pub struct OrgAuditTrail {
     entries: Vec<String>,
+    active: bool,
 }
 
-impl AuditTrail {
+impl OrgAuditTrail {
     pub fn new() -> Self {
-        AuditTrail {
-            entries: Vec::new(),
-        }
+        OrgAuditTrail { entries: Vec::new(), active: true }
     }
-
-    pub fn add_entry(&mut self, entry: &str) {
-        self.entries.push(String::from(entry));
-    }
-
-    pub fn get_entries(&self) -> &[String] {
-        &self.entries
-    }
-
-    pub fn clear_entries(&mut self) {
-        self.entries.clear();
-    }
-
-    pub fn count_entries(&self) -> usize {
-        self.entries.len()
-    }
-
-    pub fn find_entry(&self, query: &str) -> Option<&String> {
-        self.entries.iter().find(|entry| entry.contains(query))
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

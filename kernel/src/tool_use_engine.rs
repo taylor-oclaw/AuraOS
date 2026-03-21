@@ -2,50 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_tool_use_engine_init() {
-    // Initialization logic for the module
-}
-
-pub extern "C" fn rust_tool_use_engine_exit() {
-    // Cleanup logic for the module
-}
-
 pub struct ToolUseEngine {
-    commands: Vec<String>,
-    history: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl ToolUseEngine {
     pub fn new() -> Self {
-        ToolUseEngine {
-            commands: Vec::new(),
-            history: Vec::new(),
-        }
+        ToolUseEngine { entries: Vec::new(), active: true }
     }
-
-    pub fn add_command(&mut self, command: String) {
-        self.commands.push(command);
-    }
-
-    pub fn execute_command(&mut self, command: &str) -> Result<String, &'static str> {
-        if let Some(index) = self.commands.iter().position(|c| c == command) {
-            let result = String::from("info");
-            self.history.push(result.clone());
-            Ok(result)
-        } else {
-            Err("Command not found")
-        }
-    }
-
-    pub fn get_command_count(&self) -> usize {
-        self.commands.len()
-    }
-
-    pub fn get_history(&self) -> &Vec<String> {
-        &self.history
-    }
-
-    pub fn clear_history(&mut self) {
-        self.history.clear();
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

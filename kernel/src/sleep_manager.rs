@@ -3,40 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct SleepManager {
-    sleep_times: Vec<u64>,
-    total_sleep_time: u64,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl SleepManager {
     pub fn new() -> Self {
-        SleepManager {
-            sleep_times: Vec::new(),
-            total_sleep_time: 0,
-        }
+        SleepManager { entries: Vec::new(), active: true }
     }
-
-    pub fn add_sleep_time(&mut self, time: u64) {
-        self.sleep_times.push(time);
-        self.total_sleep_time += time;
-    }
-
-    pub fn get_total_sleep_time(&self) -> u64 {
-        self.total_sleep_time
-    }
-
-    pub fn get_average_sleep_time(&self) -> Option<u64> {
-        if self.sleep_times.is_empty() {
-            None
-        } else {
-            Some(self.total_sleep_time / self.sleep_times.len() as u64)
-        }
-    }
-
-    pub fn get_longest_sleep_time(&self) -> Option<u64> {
-        self.sleep_times.iter().max().copied()
-    }
-
-    pub fn get_shortest_sleep_time(&self) -> Option<u64> {
-        self.sleep_times.iter().min().copied()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

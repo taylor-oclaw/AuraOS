@@ -3,47 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct ImapClient {
-    server: String,
-    port: u16,
-    username: String,
-    password: String,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl ImapClient {
-    pub fn new(server: &str, port: u16, username: &str, password: &str) -> Self {
-        ImapClient {
-            server: server.to_string(),
-            port,
-            username: username.to_string(),
-            password: password.to_string(),
-        }
+    pub fn new() -> Self {
+        ImapClient { entries: Vec::new(), active: true }
     }
-
-    pub fn connect(&self) -> Result<(), String> {
-        // Simulate a connection to the IMAP server
-        Ok(())
-    }
-
-    pub fn login(&self) -> Result<(), String> {
-        // Simulate logging into the IMAP server
-        Ok(())
-    }
-
-    pub fn select_mailbox(&self, mailbox: &str) -> Result<(), String> {
-        // Simulate selecting a mailbox
-        Ok(())
-    }
-
-    pub fn fetch_emails(&self) -> Result<Vec<String>, String> {
-        // Simulate fetching emails
-        let mut emails = Vec::new();
-        emails.push(String::from("Email 1"));
-        emails.push(String::from("Email 2"));
-        Ok(emails)
-    }
-
-    pub fn logout(&self) -> Result<(), String> {
-        // Simulate logging out from the IMAP server
-        Ok(())
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

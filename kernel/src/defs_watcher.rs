@@ -2,39 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-#[derive(Debug)]
 pub struct DefsWatcher {
-    definitions: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl DefsWatcher {
     pub fn new() -> Self {
-        DefsWatcher {
-            definitions: Vec::new(),
-        }
+        DefsWatcher { entries: Vec::new(), active: true }
     }
-
-    pub fn add_definition(&mut self, definition: &str) {
-        self.definitions.push(String::from(definition));
-    }
-
-    pub fn remove_definition(&mut self, index: usize) -> Option<String> {
-        if index < self.definitions.len() {
-            Some(self.definitions.remove(index))
-        } else {
-            None
-        }
-    }
-
-    pub fn get_definitions(&self) -> &Vec<String> {
-        &self.definitions
-    }
-
-    pub fn find_definition(&self, definition: &str) -> Option<usize> {
-        self.definitions.iter().position(|d| d == definition)
-    }
-
-    pub fn clear_definitions(&mut self) {
-        self.definitions.clear();
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

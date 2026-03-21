@@ -2,46 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn ai_extension_event_init() {
-    // Initialization logic for the AI extension event module
-}
-
-pub extern "C" fn ai_extension_event_exit() {
-    // Cleanup logic for the AI extension event module
-}
-
 pub struct AiExtensionEvent {
-    events: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl AiExtensionEvent {
     pub fn new() -> Self {
-        AiExtensionEvent {
-            events: Vec::new(),
-        }
+        AiExtensionEvent { entries: Vec::new(), active: true }
     }
-
-    pub fn add_event(&mut self, event: &str) {
-        self.events.push(event.to_string());
-    }
-
-    pub fn remove_event(&mut self, index: usize) -> Option<String> {
-        if index < self.events.len() {
-            Some(self.events.remove(index))
-        } else {
-            None
-        }
-    }
-
-    pub fn get_event(&self, index: usize) -> Option<&String> {
-        self.events.get(index)
-    }
-
-    pub fn list_events(&self) -> &Vec<String> {
-        &self.events
-    }
-
-    pub fn clear_events(&mut self) {
-        self.events.clear();
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

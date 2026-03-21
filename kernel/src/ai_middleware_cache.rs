@@ -2,59 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() -> ! {
-    // Entry point for the kernel module
-    loop {}
+pub struct AiMiddlewareCache {
+    entries: Vec<String>,
+    active: bool,
 }
 
-struct CacheEntry {
-    key: String,
-    value: Vec<u8>,
-}
-
-impl CacheEntry {
-    fn new(key: String, value: Vec<u8>) -> Self {
-        CacheEntry { key, value }
-    }
-}
-
-pub struct AICache {
-    entries: Vec<CacheEntry>,
-}
-
-impl AICache {
+impl AiMiddlewareCache {
     pub fn new() -> Self {
-        AICache { entries: Vec::new() }
+        AiMiddlewareCache { entries: Vec::new(), active: true }
     }
-
-    pub fn insert(&mut self, key: String, value: Vec<u8>) {
-        let entry = CacheEntry::new(key, value);
-        self.entries.push(entry);
-    }
-
-    pub fn get(&self, key: &str) -> Option<&Vec<u8>> {
-        for entry in &self.entries {
-            if entry.key == key {
-                return Some(&entry.value);
-            }
-        }
-        None
-    }
-
-    pub fn remove(&mut self, key: &str) {
-        self.entries.retain(|e| e.key != key);
-    }
-
-    pub fn contains_key(&self, key: &str) -> bool {
-        for entry in &self.entries {
-            if entry.key == key {
-                return true;
-            }
-        }
-        false
-    }
-
-    pub fn clear(&mut self) {
-        self.entries.clear();
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

@@ -2,49 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() -> i32 {
-    0
-}
-
-#[derive(Debug)]
 pub struct AgentCostTracker {
-    agent_name: String,
-    costs: Vec<u32>,
-    total_cost: u32,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl AgentCostTracker {
-    pub fn new(agent_name: &str) -> Self {
-        AgentCostTracker {
-            agent_name: String::from(agent_name),
-            costs: Vec::new(),
-            total_cost: 0,
-        }
+    pub fn new() -> Self {
+        AgentCostTracker { entries: Vec::new(), active: true }
     }
-
-    pub fn add_cost(&mut self, cost: u32) {
-        self.costs.push(cost);
-        self.total_cost += cost;
-    }
-
-    pub fn get_total_cost(&self) -> u32 {
-        self.total_cost
-    }
-
-    pub fn get_average_cost(&self) -> Option<u32> {
-        if self.costs.is_empty() {
-            None
-        } else {
-            Some(self.total_cost / self.costs.len() as u32)
-        }
-    }
-
-    pub fn list_costs(&self) -> &Vec<u32> {
-        &self.costs
-    }
-
-    pub fn clear_costs(&mut self) {
-        self.costs.clear();
-        self.total_cost = 0;
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

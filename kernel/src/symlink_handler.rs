@@ -3,40 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct SymlinkHandler {
-    symlinks: Vec<(String, String)>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl SymlinkHandler {
     pub fn new() -> Self {
-        SymlinkHandler {
-            symlinks: Vec::new(),
-        }
+        SymlinkHandler { entries: Vec::new(), active: true }
     }
-
-    pub fn add_symlink(&mut self, target: &str, link_name: &str) {
-        let target = String::from(target);
-        let link_name = String::from(link_name);
-        self.symlinks.push((target, link_name));
-    }
-
-    pub fn remove_symlink(&mut self, link_name: &str) -> bool {
-        if let Some(index) = self.symlinks.iter().position(|(_, ln)| ln == link_name) {
-            self.symlinks.remove(index);
-            true
-        } else {
-            false
-        }
-    }
-
-    pub fn get_target(&self, link_name: &str) -> Option<&String> {
-        self.symlinks.iter().find_map(|(target, ln)| if ln == link_name { Some(target) } else { None })
-    }
-
-    pub fn list_symlinks(&self) -> Vec<(String, String)> {
-        self.symlinks.clone()
-    }
-
-    pub fn exists(&self, link_name: &str) -> bool {
-        self.symlinks.iter().any(|(_, ln)| ln == link_name)
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

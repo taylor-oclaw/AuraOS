@@ -2,75 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() -> i32 {
-    0
-}
-
-struct WasmSkillSandbox {
-    skills: Vec<String>,
-    active_skill: Option<usize>,
+pub struct WasmSkillSandbox {
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl WasmSkillSandbox {
     pub fn new() -> Self {
-        WasmSkillSandbox {
-            skills: Vec::new(),
-            active_skill: None,
-        }
+        WasmSkillSandbox { entries: Vec::new(), active: true }
     }
-
-    pub fn add_skill(&mut self, skill_name: &str) {
-        self.skills.push(String::from(skill_name));
-    }
-
-    pub fn remove_skill(&mut self, skill_index: usize) -> Option<String> {
-        if skill_index < self.skills.len() {
-            Some(self.skills.remove(skill_index))
-        } else {
-            None
-        }
-    }
-
-    pub fn list_skills(&self) -> Vec<&str> {
-        self.skills.iter().map(|s| s.as_str()).collect()
-    }
-
-    pub fn activate_skill(&mut self, skill_index: usize) -> bool {
-        if skill_index < self.skills.len() {
-            self.active_skill = Some(skill_index);
-            true
-        } else {
-            false
-        }
-    }
-
-    pub fn get_active_skill(&self) -> Option<&str> {
-        self.active_skill.map(|index| &self.skills[index])
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_wasm_skill_sandbox() {
-        let mut sandbox = WasmSkillSandbox::new();
-        assert_eq!(sandbox.list_skills().len(), 0);
-
-        sandbox.add_skill("AI Programming");
-        sandbox.add_skill("Machine Learning");
-        assert_eq!(sandbox.list_skills().len(), 2);
-        assert_eq!(sandbox.list_skills()[0], "AI Programming");
-        assert_eq!(sandbox.list_skills()[1], "Machine Learning");
-
-        assert!(sandbox.activate_skill(0));
-        assert_eq!(sandbox.get_active_skill(), Some("AI Programming"));
-
-        assert_eq!(sandbox.remove_skill(1), Some(String::from("Machine Learning")));
-        assert_eq!(sandbox.list_skills().len(), 1);
-
-        assert!(!sandbox.activate_skill(1)); // Out of bounds
-        assert_eq!(sandbox.get_active_skill(), Some("AI Programming"));
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

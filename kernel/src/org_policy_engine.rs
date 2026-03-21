@@ -2,47 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() -> ! {
-    // Entry point for the kernel module
-    let policy_engine = OrgPolicyEngine::new();
-    policy_engine.initialize_policies();
-    policy_engine.apply_policy("example_policy");
-    policy_engine.log_status();
-    loop {}
-}
-
 pub struct OrgPolicyEngine {
-    policies: Vec<String>,
-    status: String,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl OrgPolicyEngine {
     pub fn new() -> Self {
-        OrgPolicyEngine {
-            policies: Vec::new(),
-            status: String::from("Initialized"),
-        }
+        OrgPolicyEngine { entries: Vec::new(), active: true }
     }
-
-    pub fn initialize_policies(&mut self) {
-        self.policies.push(String::from("policy1"));
-        self.policies.push(String::from("policy2"));
-        self.status = String::from("Policies Initialized");
-    }
-
-    pub fn apply_policy(&mut self, policy_name: &str) {
-        if self.policies.contains(&String::from(policy_name)) {
-            self.status = String::from("info");
-        } else {
-            self.status = String::from("Policy Not Found");
-        }
-    }
-
-    pub fn get_policies(&self) -> Vec<String> {
-        self.policies.clone()
-    }
-
-    pub fn log_status(&self) {
-        // Simulate logging status
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

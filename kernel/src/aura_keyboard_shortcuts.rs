@@ -2,45 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub struct ShortcutManager {
-    shortcuts: Vec<(String, String)>,
+pub struct AuraKeyboardShortcuts {
+    entries: Vec<String>,
+    active: bool,
 }
 
-impl ShortcutManager {
+impl AuraKeyboardShortcuts {
     pub fn new() -> Self {
-        ShortcutManager {
-            shortcuts: Vec::new(),
-        }
+        AuraKeyboardShortcuts { entries: Vec::new(), active: true }
     }
-
-    pub fn add_shortcut(&mut self, key_sequence: &str, action: &str) {
-        self.shortcuts.push((String::from(key_sequence), String::from(action)));
-    }
-
-    pub fn remove_shortcut(&mut self, key_sequence: &str) -> bool {
-        let len_before = self.shortcuts.len();
-        self.shortcuts.retain(|(k, _)| k != key_sequence);
-        self.shortcuts.len() != len_before
-    }
-
-    pub fn get_action(&self, key_sequence: &str) -> Option<&String> {
-        for (k, a) in &self.shortcuts {
-            if k == key_sequence {
-                return Some(a);
-            }
-        }
-        None
-    }
-
-    pub fn list_shortcuts(&self) -> &Vec<(String, String)> {
-        &self.shortcuts
-    }
-
-    pub fn clear(&mut self) {
-        self.shortcuts.clear();
-    }
-
-    pub fn count(&self) -> usize {
-        self.shortcuts.len()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

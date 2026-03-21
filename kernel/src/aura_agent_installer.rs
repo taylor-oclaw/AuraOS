@@ -1,47 +1,21 @@
 extern crate alloc;
-
 use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct AuraAgentInstaller {
-    installed_agents: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl AuraAgentInstaller {
     pub fn new() -> Self {
-        AuraAgentInstaller {
-            installed_agents: Vec::new(),
-        }
+        AuraAgentInstaller { entries: Vec::new(), active: true }
     }
-
-    pub fn install_agent(&mut self, agent_name: &str) -> bool {
-        if !self.is_agent_installed(agent_name) {
-            self.installed_agents.push(String::from(agent_name));
-            true
-        } else {
-            false
-        }
-    }
-
-    pub fn uninstall_agent(&mut self, agent_name: &str) -> bool {
-        let pos = self.installed_agents.iter().position(|x| x == agent_name);
-        if let Some(index) = pos {
-            self.installed_agents.remove(index);
-            true
-        } else {
-            false
-        }
-    }
-
-    pub fn is_agent_installed(&self, agent_name: &str) -> bool {
-        self.installed_agents.contains(&String::from(agent_name))
-    }
-
-    pub fn list_installed_agents(&self) -> Vec<String> {
-        self.installed_agents.clone()
-    }
-
-    pub fn count_installed_agents(&self) -> usize {
-        self.installed_agents.len()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

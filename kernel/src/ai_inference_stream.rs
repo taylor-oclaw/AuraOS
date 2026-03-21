@@ -2,56 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() -> ! {
-    // Entry point for the kernel module
-    let mut stream = AIInferenceStream::new();
-    stream.add_model("model1");
-    stream.add_data(String::from("data1"));
-    stream.process_data();
-    let result = stream.get_result();
-    loop {}
+pub struct AiInferenceStream {
+    entries: Vec<String>,
+    active: bool,
 }
 
-pub struct AIInferenceStream {
-    models: Vec<String>,
-    data: Vec<String>,
-    results: Vec<String>,
-}
-
-impl AIInferenceStream {
+impl AiInferenceStream {
     pub fn new() -> Self {
-        AIInferenceStream {
-            models: Vec::new(),
-            data: Vec::new(),
-            results: Vec::new(),
-        }
+        AiInferenceStream { entries: Vec::new(), active: true }
     }
-
-    pub fn add_model(&mut self, model_name: &str) {
-        self.models.push(model_name.to_string());
-    }
-
-    pub fn add_data(&mut self, data: String) {
-        self.data.push(data);
-    }
-
-    pub fn process_data(&mut self) {
-        for d in &self.data {
-            // Simulate processing data with a model
-            let result = String::from("info");
-            self.results.push(result);
-        }
-    }
-
-    pub fn get_result(&self) -> String {
-        if let Some(last_result) = self.results.last() {
-            last_result.clone()
-        } else {
-            String::from("No results")
-        }
-    }
-
-    pub fn clear_data(&mut self) {
-        self.data.clear();
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

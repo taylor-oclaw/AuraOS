@@ -2,38 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub struct Symlink {
-    target: String,
-    links: Vec<String>,
+pub struct DefsSymlink {
+    entries: Vec<String>,
+    active: bool,
 }
 
-impl Symlink {
-    pub fn new(target: &str) -> Self {
-        Symlink {
-            target: String::from(target),
-            links: Vec::new(),
-        }
+impl DefsSymlink {
+    pub fn new() -> Self {
+        DefsSymlink { entries: Vec::new(), active: true }
     }
-
-    pub fn add_link(&mut self, link_name: &str) {
-        if !self.links.contains(&String::from(link_name)) {
-            self.links.push(String::from(link_name));
-        }
-    }
-
-    pub fn remove_link(&mut self, link_name: &str) {
-        self.links.retain(|link| *link != String::from(link_name));
-    }
-
-    pub fn get_target(&self) -> &str {
-        &self.target
-    }
-
-    pub fn list_links(&self) -> Vec<&str> {
-        self.links.iter().map(|s| s.as_str()).collect()
-    }
-
-    pub fn has_link(&self, link_name: &str) -> bool {
-        self.links.contains(&String::from(link_name))
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

@@ -2,48 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() -> ! {
-    // Entry point for the kernel module
-    let mut accelerator = AiAcceleratorAbstract::new();
-    accelerator.initialize();
-    loop {}
-}
-
 pub struct AiAcceleratorAbstract {
-    name: String,
-    capabilities: Vec<String>,
-    initialized: bool,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl AiAcceleratorAbstract {
     pub fn new() -> Self {
-        AiAcceleratorAbstract {
-            name: String::from("AI-Accelerator"),
-            capabilities: Vec::new(),
-            initialized: false,
-        }
+        AiAcceleratorAbstract { entries: Vec::new(), active: true }
     }
-
-    pub fn initialize(&mut self) {
-        if !self.initialized {
-            self.capabilities.push(String::from("Inference"));
-            self.capabilities.push(String::from("Training"));
-            self.capabilities.push(String::from("Optimization"));
-            self.capabilities.push(String::from("Quantization"));
-            self.capabilities.push(String::from("Debugging"));
-            self.initialized = true;
-        }
-    }
-
-    pub fn is_initialized(&self) -> bool {
-        self.initialized
-    }
-
-    pub fn get_name(&self) -> &str {
-        &self.name
-    }
-
-    pub fn list_capabilities(&self) -> Vec<&str> {
-        self.capabilities.iter().map(|c| c.as_str()).collect()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

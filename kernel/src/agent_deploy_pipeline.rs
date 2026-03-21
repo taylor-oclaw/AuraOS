@@ -2,67 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn agent_deploy_pipeline_init() {
-    // Initialization logic for the module
-}
-
-pub extern "C" fn agent_deploy_pipeline_exit() {
-    // Cleanup logic for the module
-}
-
 pub struct AgentDeployPipeline {
-    tasks: Vec<String>,
-    status: String,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl AgentDeployPipeline {
     pub fn new() -> Self {
-        AgentDeployPipeline {
-            tasks: Vec::new(),
-            status: String::from("Idle"),
-        }
+        AgentDeployPipeline { entries: Vec::new(), active: true }
     }
-
-    pub fn add_task(&mut self, task: &str) {
-        self.tasks.push(String::from(task));
-    }
-
-    pub fn get_tasks(&self) -> &[String] {
-        &self.tasks
-    }
-
-    pub fn start_pipeline(&mut self) {
-        if !self.tasks.is_empty() {
-            self.status = String::from("Running");
-            // Simulate task execution
-            for task in &self.tasks {
-                // Placeholder for actual task execution logic
-            }
-            self.status = String::from("Completed");
-        } else {
-            self.status = String::from("No tasks to execute");
-        }
-    }
-
-    pub fn get_status(&self) -> &str {
-        &self.status
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_agent_deploy_pipeline() {
-        let mut pipeline = AgentDeployPipeline::new();
-        assert_eq!(pipeline.get_status(), "Idle");
-
-        pipeline.add_task("Task 1");
-        pipeline.add_task("Task 2");
-        assert_eq!(pipeline.get_tasks().len(), 2);
-
-        pipeline.start_pipeline();
-        assert_eq!(pipeline.get_status(), "Completed");
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

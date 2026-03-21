@@ -1,70 +1,21 @@
 extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
-use alloc::vec;
 
 pub struct SkillDependencyMgr {
-    skills: Vec<String>,
-    dependencies: Vec<Vec<usize>>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl SkillDependencyMgr {
     pub fn new() -> Self {
-        SkillDependencyMgr {
-            skills: Vec::new(),
-            dependencies: Vec::new(),
-        }
+        SkillDependencyMgr { entries: Vec::new(), active: true }
     }
-
-    pub fn add_skill(&mut self, skill_name: &str) -> usize {
-        let index = self.skills.len();
-        self.skills.push(String::from(skill_name));
-        self.dependencies.push(Vec::new());
-        index
-    }
-
-    pub fn add_dependency(&mut self, dependent_skill_index: usize, dependency_skill_index: usize) {
-        if dependent_skill_index < self.skills.len() && dependency_skill_index < self.skills.len() {
-            self.dependencies[dependent_skill_index].push(dependency_skill_index);
-        }
-    }
-
-    pub fn get_dependencies(&self, skill_index: usize) -> Option<&Vec<usize>> {
-        if skill_index < self.skills.len() {
-            Some(&self.dependencies[skill_index])
-        } else {
-            None
-        }
-    }
-
-    pub fn is_valid_dependency_graph(&self) -> bool {
-        let mut visited = vec![false; self.skills.len()];
-        let mut rec_stack = vec![false; self.skills.len()];
-
-        for i in 0..self.skills.len() {
-            if !visited[i] && self.is_cyclic_util(i, &mut visited, &mut rec_stack) {
-                return false;
-            }
-        }
-
-        true
-    }
-
-    fn is_cyclic_util(&self, v: usize, visited: &mut [bool], rec_stack: &mut [bool]) -> bool {
-        if !visited[v] {
-            visited[v] = true;
-            rec_stack[v] = true;
-
-            for i in &self.dependencies[v] {
-                if !visited[*i] && self.is_cyclic_util(*i, visited, rec_stack) {
-                    return true;
-                } else if rec_stack[*i] {
-                    return true;
-                }
-            }
-        }
-
-        rec_stack[v] = false;
-        false
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

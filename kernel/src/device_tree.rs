@@ -3,65 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct DeviceTree {
-    nodes: Vec<Node>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl DeviceTree {
     pub fn new() -> Self {
-        DeviceTree { nodes: Vec::new() }
+        DeviceTree { entries: Vec::new(), active: true }
     }
-
-    pub fn add_node(&mut self, node: Node) {
-        self.nodes.push(node);
-    }
-
-    pub fn get_node_by_name(&self, name: &str) -> Option<&Node> {
-        self.nodes.iter().find(|n| n.name == name)
-    }
-
-    pub fn remove_node_by_name(&mut self, name: &str) {
-        self.nodes.retain(|n| n.name != name);
-    }
-
-    pub fn list_nodes(&self) -> Vec<String> {
-        self.nodes.iter().map(|n| n.name.clone()).collect()
-    }
-}
-
-pub struct Node {
-    name: String,
-    properties: Vec<Property>,
-}
-
-impl Node {
-    pub fn new(name: String, properties: Vec<Property>) -> Self {
-        Node { name, properties }
-    }
-
-    pub fn add_property(&mut self, property: Property) {
-        self.properties.push(property);
-    }
-
-    pub fn get_property_by_name(&self, name: &str) -> Option<&Property> {
-        self.properties.iter().find(|p| p.name == name)
-    }
-
-    pub fn remove_property_by_name(&mut self, name: &str) {
-        self.properties.retain(|p| p.name != name);
-    }
-}
-
-pub struct Property {
-    name: String,
-    value: Vec<u8>,
-}
-
-impl Property {
-    pub fn new(name: String, value: Vec<u8>) -> Self {
-        Property { name, value }
-    }
-
-    pub fn get_value(&self) -> &[u8] {
-        &self.value
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

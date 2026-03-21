@@ -2,51 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() -> ! {
-    // Entry point for the kernel module
-    let mut log = SkillAuditLog::new();
-    log.log_event("Module initialized");
-    log.add_skill("AI Analysis");
-    log.add_skill("Machine Learning");
-    log.add_skill("Natural Language Processing");
-    log.add_skill("Computer Vision");
-    log.log_event("Skills added");
-
-    loop {}
-}
-
 pub struct SkillAuditLog {
-    events: Vec<String>,
-    skills: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl SkillAuditLog {
     pub fn new() -> Self {
-        SkillAuditLog {
-            events: Vec::new(),
-            skills: Vec::new(),
-        }
+        SkillAuditLog { entries: Vec::new(), active: true }
     }
-
-    pub fn log_event(&mut self, event: &str) {
-        self.events.push(event.to_string());
-    }
-
-    pub fn add_skill(&mut self, skill: &str) {
-        if !self.skills.contains(&skill.to_string()) {
-            self.skills.push(skill.to_string());
-        }
-    }
-
-    pub fn remove_skill(&mut self, skill: &str) {
-        self.skills.retain(|s| s != skill);
-    }
-
-    pub fn get_events(&self) -> &[String] {
-        &self.events
-    }
-
-    pub fn get_skills(&self) -> &[String] {
-        &self.skills
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

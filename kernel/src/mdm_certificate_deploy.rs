@@ -2,46 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn mdm_certificate_deploy_init() {
-    // Initialization logic for the module
-}
-
-pub extern "C" fn mdm_certificate_deploy_exit() {
-    // Cleanup logic for the module
-}
-
 pub struct MdmCertificateDeploy {
-    certificates: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl MdmCertificateDeploy {
     pub fn new() -> Self {
-        MdmCertificateDeploy {
-            certificates: Vec::new(),
-        }
+        MdmCertificateDeploy { entries: Vec::new(), active: true }
     }
-
-    pub fn add_certificate(&mut self, certificate: String) {
-        self.certificates.push(certificate);
-    }
-
-    pub fn remove_certificate(&mut self, index: usize) -> Option<String> {
-        if index < self.certificates.len() {
-            Some(self.certificates.remove(index))
-        } else {
-            None
-        }
-    }
-
-    pub fn get_certificate(&self, index: usize) -> Option<&String> {
-        self.certificates.get(index)
-    }
-
-    pub fn list_certificates(&self) -> &Vec<String> {
-        &self.certificates
-    }
-
-    pub fn clear_certificates(&mut self) {
-        self.certificates.clear();
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

@@ -2,57 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() {
-    let mut negotiator = AsfVersionNegotiator::new();
-    negotiator.add_version("1.0");
-    negotiator.add_version("2.0");
-    negotiator.add_version("3.0");
-
-    if negotiator.supports_version("2.0") {
-    } else {
-    }
-
-    let latest = negotiator.get_latest_version();
-
-    let versions = negotiator.get_all_versions();
-    for version in versions.iter() {
-    }
-}
-
 pub struct AsfVersionNegotiator {
-    versions: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl AsfVersionNegotiator {
     pub fn new() -> Self {
-        AsfVersionNegotiator {
-            versions: Vec::new(),
-        }
+        AsfVersionNegotiator { entries: Vec::new(), active: true }
     }
-
-    pub fn add_version(&mut self, version: &str) {
-        self.versions.push(String::from(version));
-    }
-
-    pub fn supports_version(&self, version: &str) -> bool {
-        self.versions.contains(&String::from(version))
-    }
-
-    pub fn get_latest_version(&self) -> String {
-        if let Some(version) = self.versions.iter().max() {
-            version.clone()
-        } else {
-            String::new()
-        }
-    }
-
-    pub fn get_all_versions(&self) -> Vec<String> {
-        self.versions.clone()
-    }
-
-    pub fn remove_version(&mut self, version: &str) {
-        if let Some(index) = self.versions.iter().position(|v| v == version) {
-            self.versions.remove(index);
-        }
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

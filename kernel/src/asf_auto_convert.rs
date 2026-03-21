@@ -2,49 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() {
-    let mut converter = asf_auto_convert::AutoConverter::new();
-    converter.add_conversion("AI", "Artificial Intelligence");
-    converter.add_conversion("ML", "Machine Learning");
-    converter.add_conversion("DL", "Deep Learning");
-
-    let converted_text = converter.convert_text("This is an AI example. We use ML and DL techniques.");
+pub struct AsfAutoConvert {
+    entries: Vec<String>,
+    active: bool,
 }
 
-mod asf_auto_convert {
-    extern crate alloc;
-    use alloc::string::String;
-    use alloc::vec::Vec;
-
-    pub struct AutoConverter {
-        conversions: Vec<(String, String)>,
+impl AsfAutoConvert {
+    pub fn new() -> Self {
+        AsfAutoConvert { entries: Vec::new(), active: true }
     }
-
-    impl AutoConverter {
-        pub fn new() -> Self {
-            AutoConverter {
-                conversions: Vec::new(),
-            }
-        }
-
-        pub fn add_conversion(&mut self, abbreviation: &str, full_form: &str) {
-            self.conversions.push((abbreviation.to_string(), full_form.to_string()));
-        }
-
-        pub fn convert_text(&self, text: &str) -> String {
-            let mut converted = String::from(text);
-            for (abbrev, full_form) in &self.conversions {
-                converted = converted.replace(abbrev, full_form);
-            }
-            converted
-        }
-
-        pub fn get_conversions(&self) -> Vec<(String, String)> {
-            self.conversions.clone()
-        }
-
-        pub fn remove_conversion(&mut self, abbreviation: &str) {
-            self.conversions.retain(|&(ref abbr, _)| abbr != abbreviation);
-        }
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

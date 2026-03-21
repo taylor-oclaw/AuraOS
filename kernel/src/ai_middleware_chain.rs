@@ -2,39 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub struct AIMiddlewareChain {
-    middlewares: Vec<String>,
+pub struct AiMiddlewareChain {
+    entries: Vec<String>,
+    active: bool,
 }
 
-impl AIMiddlewareChain {
+impl AiMiddlewareChain {
     pub fn new() -> Self {
-        AIMiddlewareChain {
-            middlewares: Vec::new(),
-        }
+        AiMiddlewareChain { entries: Vec::new(), active: true }
     }
-
-    pub fn add_middleware(&mut self, middleware_name: &str) {
-        self.middlewares.push(String::from(middleware_name));
-    }
-
-    pub fn remove_middleware(&mut self, middleware_name: &str) -> bool {
-        if let Some(index) = self.middlewares.iter().position(|m| m == middleware_name) {
-            self.middlewares.remove(index);
-            true
-        } else {
-            false
-        }
-    }
-
-    pub fn get_middlewares(&self) -> Vec<String> {
-        self.middlewares.clone()
-    }
-
-    pub fn has_middleware(&self, middleware_name: &str) -> bool {
-        self.middlewares.contains(&String::from(middleware_name))
-    }
-
-    pub fn clear_middlewares(&mut self) {
-        self.middlewares.clear();
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

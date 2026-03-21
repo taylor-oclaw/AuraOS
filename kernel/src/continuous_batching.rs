@@ -2,44 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub struct ContinuousBatcher {
-    batch_size: usize,
-    current_batch: Vec<String>,
+pub struct ContinuousBatching {
+    entries: Vec<String>,
+    active: bool,
 }
 
-impl ContinuousBatcher {
-    pub fn new(batch_size: usize) -> Self {
-        ContinuousBatcher {
-            batch_size,
-            current_batch: Vec::new(),
-        }
+impl ContinuousBatching {
+    pub fn new() -> Self {
+        ContinuousBatching { entries: Vec::new(), active: true }
     }
-
-    pub fn add_item(&mut self, item: String) {
-        if self.current_batch.len() >= self.batch_size {
-            self.flush();
-        }
-        self.current_batch.push(item);
-    }
-
-    pub fn flush(&mut self) -> Vec<String> {
-        let batch = core::mem::take(&mut self.current_batch);
-        // Simulate sending the batch to a processing unit
-        process_batch(batch.clone());
-        batch
-    }
-
-    pub fn is_full(&self) -> bool {
-        self.current_batch.len() >= self.batch_size
-    }
-
-    pub fn get_current_batch_size(&self) -> usize {
-        self.current_batch.len()
-    }
-}
-
-fn process_batch(batch: Vec<String>) {
-    // Placeholder for actual processing logic
-    for item in batch {
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

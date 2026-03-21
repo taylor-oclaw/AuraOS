@@ -2,50 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() {
-    let bridge = GoogleHomeBridge::new();
-    bridge.initialize();
-    bridge.add_device("Living Room Light");
-    bridge.add_device("Kitchen Lamp");
-    bridge.list_devices();
-    bridge.remove_device("Living Room Light");
-    bridge.list_devices();
-}
-
 pub struct GoogleHomeBridge {
-    devices: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl GoogleHomeBridge {
     pub fn new() -> Self {
-        GoogleHomeBridge {
-            devices: Vec::new(),
-        }
+        GoogleHomeBridge { entries: Vec::new(), active: true }
     }
-
-    pub fn initialize(&mut self) {
-    }
-
-    pub fn add_device(&mut self, device_name: &str) {
-        self.devices.push(String::from(device_name));
-    }
-
-    pub fn remove_device(&mut self, device_name: &str) {
-        if let Some(index) = self.devices.iter().position(|x| x == device_name) {
-            self.devices.remove(index);
-        } else {
-        }
-    }
-
-    pub fn list_devices(&self) {
-        if self.devices.is_empty() {
-        } else {
-            for device in &self.devices {
-            }
-        }
-    }
-
-    pub fn get_device_count(&self) -> usize {
-        self.devices.len()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

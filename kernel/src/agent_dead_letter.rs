@@ -3,37 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct AgentDeadLetter {
-    messages: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl AgentDeadLetter {
     pub fn new() -> Self {
-        AgentDeadLetter {
-            messages: Vec::new(),
-        }
+        AgentDeadLetter { entries: Vec::new(), active: true }
     }
-
-    pub fn add_message(&mut self, message: String) {
-        self.messages.push(message);
-    }
-
-    pub fn get_messages(&self) -> &Vec<String> {
-        &self.messages
-    }
-
-    pub fn remove_message(&mut self, index: usize) -> Option<String> {
-        if index < self.messages.len() {
-            Some(self.messages.remove(index))
-        } else {
-            None
-        }
-    }
-
-    pub fn clear_messages(&mut self) {
-        self.messages.clear();
-    }
-
-    pub fn message_count(&self) -> usize {
-        self.messages.len()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

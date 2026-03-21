@@ -1,73 +1,21 @@
 extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
-use alloc::vec;
 
-pub extern "C" fn rust_start() -> i32 {
-    0
+pub struct OpenapiSkillAdapter {
+    entries: Vec<String>,
+    active: bool,
 }
 
-struct OpenAPISkillAdapter {
-    skills: Vec<String>,
-    active_skill: Option<usize>,
-}
-
-impl OpenAPISkillAdapter {
+impl OpenapiSkillAdapter {
     pub fn new() -> Self {
-        OpenAPISkillAdapter {
-            skills: Vec::new(),
-            active_skill: None,
-        }
+        OpenapiSkillAdapter { entries: Vec::new(), active: true }
     }
-
-    pub fn add_skill(&mut self, skill_name: &str) {
-        self.skills.push(String::from(skill_name));
-    }
-
-    pub fn remove_skill(&mut self, skill_index: usize) -> Option<String> {
-        if skill_index < self.skills.len() {
-            Some(self.skills.remove(skill_index))
-        } else {
-            None
-        }
-    }
-
-    pub fn list_skills(&self) -> Vec<&str> {
-        self.skills.iter().map(|s| s.as_str()).collect()
-    }
-
-    pub fn activate_skill(&mut self, skill_index: usize) -> bool {
-        if skill_index < self.skills.len() {
-            self.active_skill = Some(skill_index);
-            true
-        } else {
-            false
-        }
-    }
-
-    pub fn get_active_skill(&self) -> Option<&str> {
-        self.active_skill.map(|index| &self.skills[index])
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_openapi_skill_adapter() {
-        let mut adapter = OpenAPISkillAdapter::new();
-        assert_eq!(adapter.list_skills(), vec![]);
-
-        adapter.add_skill("Skill1");
-        adapter.add_skill("Skill2");
-        assert_eq!(adapter.list_skills(), vec!["Skill1", "Skill2"]);
-
-        assert!(adapter.activate_skill(0));
-        assert_eq!(adapter.get_active_skill(), Some("Skill1"));
-
-        let removed_skill = adapter.remove_skill(1);
-        assert_eq!(removed_skill, Some(String::from("Skill2")));
-        assert_eq!(adapter.list_skills(), vec!["Skill1"]);
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

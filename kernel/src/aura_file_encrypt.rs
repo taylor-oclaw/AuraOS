@@ -2,55 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_ffi_init() {
-    // Initialize the module if needed
-}
-
-pub extern "C" fn rust_ffi_exit() {
-    // Clean up the module if needed
-}
-
 pub struct AuraFileEncrypt {
-    key: Vec<u8>,
-    encrypted_data: Vec<u8>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl AuraFileEncrypt {
-    pub fn new(key: &[u8]) -> Self {
-        AuraFileEncrypt {
-            key: key.to_vec(),
-            encrypted_data: Vec::new(),
-        }
+    pub fn new() -> Self {
+        AuraFileEncrypt { entries: Vec::new(), active: true }
     }
-
-    pub fn encrypt(&mut self, data: &[u8]) {
-        // Simple XOR encryption for demonstration purposes
-        self.encrypted_data.clear();
-        for (i, &byte) in data.iter().enumerate() {
-            let encrypted_byte = byte ^ self.key[i % self.key.len()];
-            self.encrypted_data.push(encrypted_byte);
-        }
-    }
-
-    pub fn decrypt(&self, encrypted_data: &[u8]) -> Vec<u8> {
-        // Simple XOR decryption for demonstration purposes
-        let mut decrypted_data = Vec::new();
-        for (i, &byte) in encrypted_data.iter().enumerate() {
-            let decrypted_byte = byte ^ self.key[i % self.key.len()];
-            decrypted_data.push(decrypted_byte);
-        }
-        decrypted_data
-    }
-
-    pub fn get_encrypted_data(&self) -> &[u8] {
-        &self.encrypted_data
-    }
-
-    pub fn set_key(&mut self, key: &[u8]) {
-        self.key = key.to_vec();
-    }
-
-    pub fn clear_encrypted_data(&mut self) {
-        self.encrypted_data.clear();
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

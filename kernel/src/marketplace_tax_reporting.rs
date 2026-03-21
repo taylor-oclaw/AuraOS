@@ -3,50 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct MarketplaceTaxReporting {
-    transactions: Vec<Transaction>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl MarketplaceTaxReporting {
     pub fn new() -> Self {
-        MarketplaceTaxReporting {
-            transactions: Vec::new(),
-        }
+        MarketplaceTaxReporting { entries: Vec::new(), active: true }
     }
-
-    pub fn add_transaction(&mut self, transaction: Transaction) {
-        self.transactions.push(transaction);
-    }
-
-    pub fn total_sales(&self) -> u32 {
-        self.transactions.iter().map(|t| t.amount).sum()
-    }
-
-    pub fn calculate_tax(&self, tax_rate: f32) -> f32 {
-        (self.total_sales() as f32 * tax_rate) / 100.0
-    }
-
-    pub fn list_transactions(&self) -> Vec<String> {
-        self.transactions.iter().map(|t| t.to_string()).collect()
-    }
-
-    pub fn clear_transactions(&mut self) {
-        self.transactions.clear();
-    }
-}
-
-#[derive(Debug)]
-pub struct Transaction {
-    id: u32,
-    amount: u32,
-    description: String,
-}
-
-impl Transaction {
-    pub fn new(id: u32, amount: u32, description: String) -> Self {
-        Transaction { id, amount, description }
-    }
-
-    pub fn to_string(&self) -> String {
-        String::from("info")
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

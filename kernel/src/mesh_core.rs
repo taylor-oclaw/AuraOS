@@ -2,64 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-mod mesh_core {
-    use super::*;
-
-    pub struct MeshNode {
-        id: u32,
-        name: String,
-        neighbors: Vec<u32>,
-    }
-
-    impl MeshNode {
-        pub fn new(id: u32, name: &str) -> Self {
-            MeshNode {
-                id,
-                name: String::from(name),
-                neighbors: Vec::new(),
-            }
-        }
-
-        pub fn add_neighbor(&mut self, neighbor_id: u32) {
-            if !self.neighbors.contains(&neighbor_id) {
-                self.neighbors.push(neighbor_id);
-            }
-        }
-
-        pub fn remove_neighbor(&mut self, neighbor_id: u32) {
-            self.neighbors.retain(|&id| id != neighbor_id);
-        }
-
-        pub fn get_neighbors(&self) -> &Vec<u32> {
-            &self.neighbors
-        }
-
-        pub fn has_neighbor(&self, neighbor_id: u32) -> bool {
-            self.neighbors.contains(&neighbor_id)
-        }
-
-        pub fn get_name(&self) -> &str {
-            &self.name
-        }
-    }
+pub struct MeshCore {
+    entries: Vec<String>,
+    active: bool,
 }
 
-#[cfg(test)]
-mod tests {
-    use super::mesh_core::*;
-
-    #[test]
-    fn test_mesh_node() {
-        let mut node = MeshNode::new(1, "Node1");
-        assert_eq!(node.get_name(), "Node1");
-        assert!(!node.has_neighbor(2));
-
-        node.add_neighbor(2);
-        assert!(node.has_neighbor(2));
-        assert_eq!(node.get_neighbors().len(), 1);
-
-        node.remove_neighbor(2);
-        assert!(!node.has_neighbor(2));
-        assert_eq!(node.get_neighbors().len(), 0);
+impl MeshCore {
+    pub fn new() -> Self {
+        MeshCore { entries: Vec::new(), active: true }
     }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

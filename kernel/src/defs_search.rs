@@ -3,40 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct DefsSearch {
-    definitions: Vec<(String, String)>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl DefsSearch {
     pub fn new() -> Self {
-        DefsSearch {
-            definitions: Vec::new(),
-        }
+        DefsSearch { entries: Vec::new(), active: true }
     }
-
-    pub fn add_definition(&mut self, term: &str, definition: &str) {
-        let term = String::from(term);
-        let definition = String::from(definition);
-        self.definitions.push((term, definition));
-    }
-
-    pub fn get_definition(&self, term: &str) -> Option<&String> {
-        for (t, def) in &self.definitions {
-            if t == term {
-                return Some(def);
-            }
-        }
-        None
-    }
-
-    pub fn remove_definition(&mut self, term: &str) {
-        self.definitions.retain(|(t, _)| t != term);
-    }
-
-    pub fn list_terms(&self) -> Vec<&String> {
-        self.definitions.iter().map(|(term, _)| term).collect()
-    }
-
-    pub fn count_definitions(&self) -> usize {
-        self.definitions.len()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

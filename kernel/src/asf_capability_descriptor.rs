@@ -3,35 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct AsfCapabilityDescriptor {
-    capabilities: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl AsfCapabilityDescriptor {
     pub fn new() -> Self {
-        AsfCapabilityDescriptor {
-            capabilities: Vec::new(),
-        }
+        AsfCapabilityDescriptor { entries: Vec::new(), active: true }
     }
-
-    pub fn add_capability(&mut self, capability: &str) {
-        self.capabilities.push(String::from(capability));
-    }
-
-    pub fn has_capability(&self, capability: &str) -> bool {
-        self.capabilities.contains(&String::from(capability))
-    }
-
-    pub fn remove_capability(&mut self, capability: &str) {
-        if let Some(index) = self.capabilities.iter().position(|c| c == capability) {
-            self.capabilities.remove(index);
-        }
-    }
-
-    pub fn list_capabilities(&self) -> Vec<String> {
-        self.capabilities.clone()
-    }
-
-    pub fn count_capabilities(&self) -> usize {
-        self.capabilities.len()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

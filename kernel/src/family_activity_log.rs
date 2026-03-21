@@ -3,37 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct FamilyActivityLog {
-    activities: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl FamilyActivityLog {
     pub fn new() -> Self {
-        FamilyActivityLog {
-            activities: Vec::new(),
-        }
+        FamilyActivityLog { entries: Vec::new(), active: true }
     }
-
-    pub fn add_activity(&mut self, activity: String) {
-        self.activities.push(activity);
-    }
-
-    pub fn get_activities(&self) -> &Vec<String> {
-        &self.activities
-    }
-
-    pub fn remove_activity(&mut self, index: usize) -> Option<String> {
-        if index < self.activities.len() {
-            Some(self.activities.remove(index))
-        } else {
-            None
-        }
-    }
-
-    pub fn count_activities(&self) -> usize {
-        self.activities.len()
-    }
-
-    pub fn find_activity(&self, activity: &str) -> Option<usize> {
-        self.activities.iter().position(|a| a == activity)
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

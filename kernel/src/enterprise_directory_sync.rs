@@ -4,34 +4,18 @@ use alloc::vec::Vec;
 
 pub struct EnterpriseDirectorySync {
     entries: Vec<String>,
+    active: bool,
 }
 
 impl EnterpriseDirectorySync {
     pub fn new() -> Self {
-        EnterpriseDirectorySync {
-            entries: Vec::new(),
-        }
+        EnterpriseDirectorySync { entries: Vec::new(), active: true }
     }
-
-    pub fn add_entry(&mut self, entry: String) {
-        if !self.entries.contains(&entry) {
-            self.entries.push(entry);
-        }
-    }
-
-    pub fn remove_entry(&mut self, entry: &str) {
-        self.entries.retain(|e| e != entry);
-    }
-
-    pub fn contains_entry(&self, entry: &str) -> bool {
-        self.entries.iter().any(|e| e == entry)
-    }
-
-    pub fn list_entries(&self) -> Vec<String> {
-        self.entries.clone()
-    }
-
-    pub fn clear_entries(&mut self) {
-        self.entries.clear();
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

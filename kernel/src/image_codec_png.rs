@@ -1,52 +1,21 @@
 extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
-use alloc::vec;
 
-pub struct PngCodec {
-    width: u32,
-    height: u32,
-    data: Vec<u8>,
+pub struct ImageCodecPng {
+    entries: Vec<String>,
+    active: bool,
 }
 
-impl PngCodec {
-    pub fn new(width: u32, height: u32) -> Self {
-        let size = (width * height * 4) as usize; // RGBA
-        PngCodec {
-            width,
-            height,
-            data: vec![0; size],
-        }
+impl ImageCodecPng {
+    pub fn new() -> Self {
+        ImageCodecPng { entries: Vec::new(), active: true }
     }
-
-    pub fn set_pixel(&mut self, x: u32, y: u32, r: u8, g: u8, b: u8, a: u8) {
-        if x < self.width && y < self.height {
-            let index = ((y * self.width + x) * 4) as usize;
-            self.data[index] = r;
-            self.data[index + 1] = g;
-            self.data[index + 2] = b;
-            self.data[index + 3] = a;
-        }
-    }
-
-    pub fn get_pixel(&self, x: u32, y: u32) -> Option<(u8, u8, u8, u8)> {
-        if x < self.width && y < self.height {
-            let index = ((y * self.width + x) * 4) as usize;
-            Some((self.data[index], self.data[index + 1], self.data[index + 2], self.data[index + 3]))
-        } else {
-            None
-        }
-    }
-
-    pub fn width(&self) -> u32 {
-        self.width
-    }
-
-    pub fn height(&self) -> u32 {
-        self.height
-    }
-
-    pub fn data(&self) -> &[u8] {
-        &self.data
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

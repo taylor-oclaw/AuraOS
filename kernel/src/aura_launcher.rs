@@ -2,54 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_ffi_init() {
-    // Initialize the module
-}
-
-pub extern "C" fn rust_ffi_exit() {
-    // Clean up the module
-}
-
-struct AuraLauncher {
-    processes: Vec<String>,
-    max_processes: usize,
+pub struct AuraLauncher {
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl AuraLauncher {
-    pub fn new(max_processes: usize) -> Self {
-        AuraLauncher {
-            processes: Vec::new(),
-            max_processes,
-        }
+    pub fn new() -> Self {
+        AuraLauncher { entries: Vec::new(), active: true }
     }
-
-    pub fn start_process(&mut self, process_name: &str) -> Result<(), &'static str> {
-        if self.processes.len() >= self.max_processes {
-            return Err("Maximum number of processes reached");
-        }
-        self.processes.push(process_name.to_string());
-        Ok(())
-    }
-
-    pub fn stop_process(&mut self, process_name: &str) -> Result<(), &'static str> {
-        let pos = self
-            .processes
-            .iter()
-            .position(|p| p == process_name)
-            .ok_or("Process not found")?;
-        self.processes.remove(pos);
-        Ok(())
-    }
-
-    pub fn list_processes(&self) -> Vec<String> {
-        self.processes.clone()
-    }
-
-    pub fn get_process_count(&self) -> usize {
-        self.processes.len()
-    }
-
-    pub fn is_process_running(&self, process_name: &str) -> bool {
-        self.processes.contains(&process_name.to_string())
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

@@ -2,41 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub enum BtDeviceType { Headphones, Keyboard, Mouse, Speaker, Phone, Unknown }
-pub enum BtState { Off, Discovering, Connected, Pairing }
-
-pub struct BtDevice {
-    pub address: [u8; 6],
-    pub name: String,
-    pub device_type: BtDeviceType,
-    pub paired: bool,
-    pub connected: bool,
-    pub signal: i8,
+pub struct BluetoothMgr {
+    entries: Vec<String>,
+    active: bool,
 }
 
-pub struct BluetoothManager {
-    pub state: BtState,
-    pub devices: Vec<BtDevice>,
-    pub enabled: bool,
-}
-
-impl BluetoothManager {
+impl BluetoothMgr {
     pub fn new() -> Self {
-        Self { state: BtState::Off, devices: Vec::new(), enabled: false }
+        BluetoothMgr { entries: Vec::new(), active: true }
     }
-    pub fn enable(&mut self) { self.enabled = true; }
-    pub fn disable(&mut self) { self.enabled = false; self.state = BtState::Off; }
-    pub fn start_discovery(&mut self) { if self.enabled { self.state = BtState::Discovering; } }
-    pub fn pair(&mut self, addr: [u8; 6]) -> bool {
-        if let Some(d) = self.devices.iter_mut().find(|d| d.address == addr) {
-            d.paired = true; true
-        } else { false }
-    }
-    pub fn connect(&mut self, addr: [u8; 6]) -> bool {
-        if let Some(d) = self.devices.iter_mut().find(|d| d.address == addr && d.paired) {
-            d.connected = true; self.state = BtState::Connected; true
-        } else { false }
-    }
-    pub fn disconnect_all(&mut self) { for d in &mut self.devices { d.connected = false; } }
-    pub fn connected_count(&self) -> usize { self.devices.iter().filter(|d| d.connected).count() }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

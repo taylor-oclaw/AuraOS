@@ -3,59 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct GlobalIllumination {
-    lights: Vec<String>,
-    objects: Vec<String>,
-    environment_map: String,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl GlobalIllumination {
     pub fn new() -> Self {
-        GlobalIllumination {
-            lights: Vec::new(),
-            objects: Vec::new(),
-            environment_map: String::from("default_env_map"),
-        }
+        GlobalIllumination { entries: Vec::new(), active: true }
     }
-
-    pub fn add_light(&mut self, light_name: &str) {
-        self.lights.push(String::from(light_name));
-    }
-
-    pub fn remove_light(&mut self, light_name: &str) -> bool {
-        if let Some(index) = self.lights.iter().position(|x| x == light_name) {
-            self.lights.remove(index);
-            true
-        } else {
-            false
-        }
-    }
-
-    pub fn add_object(&mut self, object_name: &str) {
-        self.objects.push(String::from(object_name));
-    }
-
-    pub fn remove_object(&mut self, object_name: &str) -> bool {
-        if let Some(index) = self.objects.iter().position(|x| x == object_name) {
-            self.objects.remove(index);
-            true
-        } else {
-            false
-        }
-    }
-
-    pub fn set_environment_map(&mut self, map_name: &str) {
-        self.environment_map = String::from(map_name);
-    }
-
-    pub fn get_lights(&self) -> Vec<String> {
-        self.lights.clone()
-    }
-
-    pub fn get_objects(&self) -> Vec<String> {
-        self.objects.clone()
-    }
-
-    pub fn get_environment_map(&self) -> String {
-        self.environment_map.clone()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

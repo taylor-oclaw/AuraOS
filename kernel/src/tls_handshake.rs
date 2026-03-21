@@ -3,62 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct TlsHandshake {
-    // Example fields for a TLS handshake module
-    client_hello: Vec<u8>,
-    server_hello: Vec<u8>,
-    session_id: Vec<u8>,
-    cipher_suite: String,
-    compression_method: u8,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl TlsHandshake {
     pub fn new() -> Self {
-        TlsHandshake {
-            client_hello: Vec::new(),
-            server_hello: Vec::new(),
-            session_id: Vec::new(),
-            cipher_suite: String::from("TLS_AES_128_GCM_SHA256"),
-            compression_method: 0, // No compression
-        }
+        TlsHandshake { entries: Vec::new(), active: true }
     }
-
-    pub fn set_client_hello(&mut self, hello: Vec<u8>) {
-        self.client_hello = hello;
-    }
-
-    pub fn get_client_hello(&self) -> &Vec<u8> {
-        &self.client_hello
-    }
-
-    pub fn set_server_hello(&mut self, hello: Vec<u8>) {
-        self.server_hello = hello;
-    }
-
-    pub fn get_server_hello(&self) -> &Vec<u8> {
-        &self.server_hello
-    }
-
-    pub fn set_session_id(&mut self, session_id: Vec<u8>) {
-        self.session_id = session_id;
-    }
-
-    pub fn get_session_id(&self) -> &Vec<u8> {
-        &self.session_id
-    }
-
-    pub fn set_cipher_suite(&mut self, cipher_suite: String) {
-        self.cipher_suite = cipher_suite;
-    }
-
-    pub fn get_cipher_suite(&self) -> &String {
-        &self.cipher_suite
-    }
-
-    pub fn set_compression_method(&mut self, method: u8) {
-        self.compression_method = method;
-    }
-
-    pub fn get_compression_method(&self) -> u8 {
-        self.compression_method
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

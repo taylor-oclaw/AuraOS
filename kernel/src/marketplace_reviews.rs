@@ -3,45 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct MarketplaceReviews {
-    reviews: Vec<(String, String)>, // (product_name, review_text)
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl MarketplaceReviews {
     pub fn new() -> Self {
-        MarketplaceReviews {
-            reviews: Vec::new(),
-        }
+        MarketplaceReviews { entries: Vec::new(), active: true }
     }
-
-    pub fn add_review(&mut self, product_name: &str, review_text: &str) {
-        let product_name = String::from(product_name);
-        let review_text = String::from(review_text);
-        self.reviews.push((product_name, review_text));
-    }
-
-    pub fn get_reviews_for_product(&self, product_name: &str) -> Vec<&String> {
-        self.reviews
-            .iter()
-            .filter(|&&(ref prod, _)| prod == product_name)
-            .map(|(_, review)| review)
-            .collect()
-    }
-
-    pub fn count_reviews(&self) -> usize {
-        self.reviews.len()
-    }
-
-    pub fn get_all_products(&self) -> Vec<&String> {
-        let mut products: Vec<String> = self
-            .reviews
-            .iter()
-            .map(|(product, _)| product.clone())
-            .collect();
-        products.dedup();
-        products.iter().collect()
-    }
-
-    pub fn remove_reviews_for_product(&mut self, product_name: &str) {
-        self.reviews.retain(|(prod, _)| prod != product_name);
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

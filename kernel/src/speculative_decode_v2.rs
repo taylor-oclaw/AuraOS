@@ -2,55 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() -> i32 {
-    0
+pub struct SpeculativeDecodeV2 {
+    entries: Vec<String>,
+    active: bool,
 }
 
-pub struct SpeculativeDecoder {
-    buffer: Vec<u8>,
-    decoded_data: Vec<String>,
-}
-
-impl SpeculativeDecoder {
+impl SpeculativeDecodeV2 {
     pub fn new() -> Self {
-        SpeculativeDecoder {
-            buffer: Vec::new(),
-            decoded_data: Vec::new(),
-        }
+        SpeculativeDecodeV2 { entries: Vec::new(), active: true }
     }
-
-    pub fn add_to_buffer(&mut self, data: &[u8]) {
-        self.buffer.extend_from_slice(data);
-    }
-
-    pub fn decode_buffer(&mut self) {
-        // Simple speculative decoding logic
-        let mut current_string = String::new();
-        for &byte in &self.buffer {
-            if byte.is_ascii_alphanumeric() || byte == b' ' {
-                current_string.push(byte as char);
-            } else {
-                if !current_string.is_empty() {
-                    self.decoded_data.push(current_string.clone());
-                    current_string.clear();
-                }
-            }
-        }
-        if !current_string.is_empty() {
-            self.decoded_data.push(current_string);
-        }
-        self.buffer.clear(); // Clear buffer after decoding
-    }
-
-    pub fn get_decoded_data(&self) -> &[String] {
-        &self.decoded_data
-    }
-
-    pub fn clear_decoded_data(&mut self) {
-        self.decoded_data.clear();
-    }
-
-    pub fn buffer_size(&self) -> usize {
-        self.buffer.len()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

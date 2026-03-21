@@ -2,43 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub struct KVCachev2 {
-    cache: Vec<(String, String)>,
+pub struct KvCacheV2 {
+    entries: Vec<String>,
+    active: bool,
 }
 
-impl KVCachev2 {
+impl KvCacheV2 {
     pub fn new() -> Self {
-        KVCachev2 { cache: Vec::new() }
+        KvCacheV2 { entries: Vec::new(), active: true }
     }
-
-    pub fn set(&mut self, key: &str, value: &str) {
-        for entry in self.cache.iter_mut() {
-            if entry.0 == key {
-                entry.1 = String::from(value);
-                return;
-            }
-        }
-        self.cache.push((String::from(key), String::from(value)));
-    }
-
-    pub fn get(&self, key: &str) -> Option<&String> {
-        for (k, v) in self.cache.iter() {
-            if k == key {
-                return Some(v);
-            }
-        }
-        None
-    }
-
-    pub fn delete(&mut self, key: &str) {
-        self.cache.retain(|(k, _)| k != key);
-    }
-
-    pub fn clear(&mut self) {
-        self.cache.clear();
-    }
-
-    pub fn size(&self) -> usize {
-        self.cache.len()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

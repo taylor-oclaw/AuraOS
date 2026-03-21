@@ -2,47 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() -> i32 {
-    0
+pub struct DefsVersioning {
+    entries: Vec<String>,
+    active: bool,
 }
 
-mod defs_versioning {
-    use super::*;
-
-    pub struct VersionManager {
-        versions: Vec<String>,
+impl DefsVersioning {
+    pub fn new() -> Self {
+        DefsVersioning { entries: Vec::new(), active: true }
     }
-
-    impl VersionManager {
-        pub fn new() -> Self {
-            VersionManager {
-                versions: Vec::new(),
-            }
-        }
-
-        pub fn add_version(&mut self, version: &str) {
-            self.versions.push(String::from(version));
-        }
-
-        pub fn get_latest_version(&self) -> Option<&String> {
-            self.versions.last()
-        }
-
-        pub fn remove_version(&mut self, version: &str) -> bool {
-            if let Some(index) = self.versions.iter().position(|v| v == version) {
-                self.versions.remove(index);
-                true
-            } else {
-                false
-            }
-        }
-
-        pub fn list_versions(&self) -> Vec<&String> {
-            self.versions.iter().collect()
-        }
-
-        pub fn has_version(&self, version: &str) -> bool {
-            self.versions.contains(&String::from(version))
-        }
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

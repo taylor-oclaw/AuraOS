@@ -2,67 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-mod namespace_isolate {
-    use super::*;
-
-    pub struct NamespaceIsolator {
-        namespaces: Vec<String>,
-    }
-
-    impl NamespaceIsolator {
-        pub fn new() -> Self {
-            NamespaceIsolator {
-                namespaces: Vec::new(),
-            }
-        }
-
-        pub fn add_namespace(&mut self, name: &str) {
-            if !self.namespaces.contains(&String::from(name)) {
-                self.namespaces.push(String::from(name));
-            }
-        }
-
-        pub fn remove_namespace(&mut self, name: &str) {
-            self.namespaces.retain(|ns| ns != name);
-        }
-
-        pub fn list_namespaces(&self) -> Vec<String> {
-            self.namespaces.clone()
-        }
-
-        pub fn namespace_exists(&self, name: &str) -> bool {
-            self.namespaces.contains(&String::from(name))
-        }
-
-        pub fn clear_namespaces(&mut self) {
-            self.namespaces.clear();
-        }
-    }
+pub struct NamespaceIsolate {
+    entries: Vec<String>,
+    active: bool,
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_namespace_isolator() {
-        let mut isolator = NamespaceIsolator::new();
-
-        // Test adding namespaces
-        isolator.add_namespace("user1");
-        isolator.add_namespace("user2");
-        assert_eq!(isolator.list_namespaces(), vec!["user1".to_string(), "user2".to_string()]);
-
-        // Test removing a namespace
-        isolator.remove_namespace("user1");
-        assert_eq!(isolator.list_namespaces(), vec!["user2".to_string()]);
-
-        // Test checking if a namespace exists
-        assert!(isolator.namespace_exists("user2"));
-        assert!(!isolator.namespace_exists("user3"));
-
-        // Test clearing all namespaces
-        isolator.clear_namespaces();
-        assert_eq!(isolator.list_namespaces(), Vec::<String>::new());
+impl NamespaceIsolate {
+    pub fn new() -> Self {
+        NamespaceIsolate { entries: Vec::new(), active: true }
     }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

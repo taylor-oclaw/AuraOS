@@ -2,45 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() {
-    // Entry point for the kernel module
-    let policy = MdmPolicyEnforcer::new();
-    policy.apply_policy("example_policy");
-}
-
 pub struct MdmPolicyEnforcer {
-    policies: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl MdmPolicyEnforcer {
     pub fn new() -> Self {
-        MdmPolicyEnforcer {
-            policies: Vec::new(),
-        }
+        MdmPolicyEnforcer { entries: Vec::new(), active: true }
     }
-
-    pub fn add_policy(&mut self, policy_name: &str) {
-        self.policies.push(String::from(policy_name));
-    }
-
-    pub fn remove_policy(&mut self, policy_name: &str) {
-        if let Some(index) = self.policies.iter().position(|p| p == policy_name) {
-            self.policies.remove(index);
-        }
-    }
-
-    pub fn list_policies(&self) -> Vec<String> {
-        self.policies.clone()
-    }
-
-    pub fn apply_policy(&self, policy_name: &str) {
-        if self.policies.contains(&String::from(policy_name)) {
-            // Simulate applying a policy
-        } else {
-        }
-    }
-
-    pub fn check_policy(&self, policy_name: &str) -> bool {
-        self.policies.contains(&String::from(policy_name))
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

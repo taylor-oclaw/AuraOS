@@ -3,48 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct TimerSubsystem {
-    timers: Vec<Timer>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl TimerSubsystem {
     pub fn new() -> Self {
-        TimerSubsystem {
-            timers: Vec::new(),
-        }
+        TimerSubsystem { entries: Vec::new(), active: true }
     }
-
-    pub fn add_timer(&mut self, name: String, duration: u64) {
-        let timer = Timer { name, duration };
-        self.timers.push(timer);
-    }
-
-    pub fn remove_timer(&mut self, name: &str) -> bool {
-        if let Some(index) = self.timers.iter().position(|t| t.name == name) {
-            self.timers.remove(index);
-            true
-        } else {
-            false
-        }
-    }
-
-    pub fn get_timer_duration(&self, name: &str) -> Option<u64> {
-        self.timers.iter().find(|t| t.name == name).map(|t| t.duration)
-    }
-
-    pub fn list_timers(&self) -> Vec<String> {
-        self.timers.iter().map(|t| t.name.clone()).collect()
-    }
-
-    pub fn tick(&mut self, elapsed: u64) {
-        for timer in &mut self.timers {
-            if timer.duration > 0 {
-                timer.duration -= elapsed;
-            }
-        }
-    }
-}
-
-struct Timer {
-    name: String,
-    duration: u64,
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

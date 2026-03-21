@@ -3,33 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct AgentCodeGenerator {
-    code: Vec<u8>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl AgentCodeGenerator {
     pub fn new() -> Self {
-        AgentCodeGenerator { code: Vec::new() }
+        AgentCodeGenerator { entries: Vec::new(), active: true }
     }
-
-    pub fn add_code(&mut self, byte: u8) {
-        self.code.push(byte);
-    }
-
-    pub fn get_code(&self) -> &[u8] {
-        &self.code
-    }
-
-    pub fn clear_code(&mut self) {
-        self.code.clear();
-    }
-
-    pub fn code_length(&self) -> usize {
-        self.code.len()
-    }
-
-    pub fn append_string(&mut self, s: &str) {
-        for byte in s.as_bytes() {
-            self.add_code(*byte);
-        }
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

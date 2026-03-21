@@ -2,69 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() {
-    // Entry point for the kernel module
+pub struct AiInferenceQueue {
+    entries: Vec<String>,
+    active: bool,
 }
 
-pub struct AIInferenceQueue {
-    queue: Vec<String>,
-}
-
-impl AIInferenceQueue {
+impl AiInferenceQueue {
     pub fn new() -> Self {
-        AIInferenceQueue {
-            queue: Vec::new(),
-        }
+        AiInferenceQueue { entries: Vec::new(), active: true }
     }
-
-    pub fn enqueue(&mut self, task: String) {
-        self.queue.push(task);
-    }
-
-    pub fn dequeue(&mut self) -> Option<String> {
-        if self.queue.is_empty() {
-            None
-        } else {
-            Some(self.queue.remove(0))
-        }
-    }
-
-    pub fn peek(&self) -> Option<&String> {
-        self.queue.first()
-    }
-
-    pub fn size(&self) -> usize {
-        self.queue.len()
-    }
-
-    pub fn clear(&mut self) {
-        self.queue.clear();
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_queue_operations() {
-        let mut queue = AIInferenceQueue::new();
-
-        assert_eq!(queue.size(), 0);
-        assert!(queue.peek().is_none());
-
-        queue.enqueue(String::from("Task1"));
-        queue.enqueue(String::from("Task2"));
-
-        assert_eq!(queue.size(), 2);
-        assert_eq!(queue.peek(), Some(&String::from("Task1")));
-
-        let task = queue.dequeue();
-        assert_eq!(task, Some(String::from("Task1")));
-        assert_eq!(queue.size(), 1);
-
-        queue.clear();
-        assert_eq!(queue.size(), 0);
-        assert!(queue.peek().is_none());
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

@@ -3,55 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct MarketplaceRefundHandler {
-    refunds: Vec<Refund>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl MarketplaceRefundHandler {
     pub fn new() -> Self {
-        MarketplaceRefundHandler {
-            refunds: Vec::new(),
-        }
+        MarketplaceRefundHandler { entries: Vec::new(), active: true }
     }
-
-    pub fn add_refund(&mut self, refund: Refund) {
-        self.refunds.push(refund);
-    }
-
-    pub fn get_refund_by_id(&self, id: u32) -> Option<&Refund> {
-        self.refunds.iter().find(|r| r.id == id)
-    }
-
-    pub fn remove_refund_by_id(&mut self, id: u32) -> bool {
-        let pos = self.refunds.iter().position(|r| r.id == id);
-        if let Some(index) = pos {
-            self.refunds.remove(index);
-            true
-        } else {
-            false
-        }
-    }
-
-    pub fn list_all_refunds(&self) -> Vec<&Refund> {
-        self.refunds.iter().collect()
-    }
-
-    pub fn count_refunds(&self) -> usize {
-        self.refunds.len()
-    }
-}
-
-pub struct Refund {
-    id: u32,
-    amount: u64,
-    reason: String,
-}
-
-impl Refund {
-    pub fn new(id: u32, amount: u64, reason: &str) -> Self {
-        Refund {
-            id,
-            amount,
-            reason: String::from(reason),
-        }
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

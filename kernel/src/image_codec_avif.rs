@@ -2,60 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_image_codec_avif_init() {
-    // Initialization logic for the module
-}
-
-pub extern "C" fn rust_image_codec_avif_exit() {
-    // Cleanup logic for the module
-}
-
 pub struct ImageCodecAvif {
-    data: Vec<u8>,
-    width: u32,
-    height: u32,
-    format: String,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl ImageCodecAvif {
-    pub fn new(data: Vec<u8>, width: u32, height: u32, format: &str) -> Self {
-        ImageCodecAvif {
-            data,
-            width,
-            height,
-            format: String::from(format),
-        }
+    pub fn new() -> Self {
+        ImageCodecAvif { entries: Vec::new(), active: true }
     }
-
-    pub fn get_data(&self) -> &[u8] {
-        &self.data
-    }
-
-    pub fn set_data(&mut self, data: Vec<u8>) {
-        self.data = data;
-    }
-
-    pub fn get_width(&self) -> u32 {
-        self.width
-    }
-
-    pub fn set_width(&mut self, width: u32) {
-        self.width = width;
-    }
-
-    pub fn get_height(&self) -> u32 {
-        self.height
-    }
-
-    pub fn set_height(&mut self, height: u32) {
-        self.height = height;
-    }
-
-    pub fn get_format(&self) -> &str {
-        &self.format
-    }
-
-    pub fn set_format(&mut self, format: &str) {
-        self.format = String::from(format);
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

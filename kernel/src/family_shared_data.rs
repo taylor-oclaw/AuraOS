@@ -2,45 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() {
-    // Entry point for the kernel module
-}
-
 pub struct FamilySharedData {
-    members: Vec<String>,
-    family_name: String,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl FamilySharedData {
-    pub fn new(family_name: &str) -> Self {
-        FamilySharedData {
-            members: Vec::new(),
-            family_name: String::from(family_name),
-        }
+    pub fn new() -> Self {
+        FamilySharedData { entries: Vec::new(), active: true }
     }
-
-    pub fn add_member(&mut self, member_name: &str) {
-        self.members.push(String::from(member_name));
-    }
-
-    pub fn remove_member(&mut self, member_name: &str) -> bool {
-        if let Some(index) = self.members.iter().position(|m| m == member_name) {
-            self.members.remove(index);
-            true
-        } else {
-            false
-        }
-    }
-
-    pub fn get_members(&self) -> &[String] {
-        &self.members
-    }
-
-    pub fn get_family_name(&self) -> &str {
-        &self.family_name
-    }
-
-    pub fn has_member(&self, member_name: &str) -> bool {
-        self.members.contains(&String::from(member_name))
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

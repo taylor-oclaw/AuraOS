@@ -2,54 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() {
-    // Entry point for the kernel module
-    let engine = AgentRetrievalEngine::new();
-    engine.initialize();
-    engine.add_agent(String::from("Agent1"), String::from("Task1"));
-    engine.add_agent(String::from("Agent2"), String::from("Task2"));
-    engine.list_agents();
-    if let Some(task) = engine.get_task_for_agent("Agent1") {
-    }
-    engine.remove_agent("Agent2");
-    engine.list_agents();
-}
-
 pub struct AgentRetrievalEngine {
-    agents: Vec<(String, String)>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl AgentRetrievalEngine {
     pub fn new() -> Self {
-        AgentRetrievalEngine { agents: Vec::new() }
+        AgentRetrievalEngine { entries: Vec::new(), active: true }
     }
-
-    pub fn initialize(&mut self) {
-        // Initialization logic
-    }
-
-    pub fn add_agent(&mut self, name: String, task: String) {
-        self.agents.push((name, task));
-    }
-
-    pub fn remove_agent(&mut self, name: &str) {
-        if let Some(index) = self.agents.iter().position(|(agent_name, _)| agent_name == name) {
-            let removed_agent = self.agents.remove(index);
-        } else {
-        }
-    }
-
-    pub fn list_agents(&self) {
-        if self.agents.is_empty() {
-        } else {
-            for (name, task) in &self.agents {
-            }
-        }
-    }
-
-    pub fn get_task_for_agent(&self, name: &str) -> Option<String> {
-        self.agents.iter()
-            .find(|(agent_name, _)| agent_name == name)
-            .map(|(_, task)| task.clone())
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

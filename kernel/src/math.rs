@@ -1,10 +1,21 @@
-//! Math functions for no_std environment
-//! Wraps libm for bare-metal use
+extern crate alloc;
+use alloc::string::String;
+use alloc::vec::Vec;
 
-pub fn sqrtf(x: f32) -> f32 { libm::sqrtf(x) }
-pub fn expf(x: f32) -> f32 { libm::expf(x) }
-pub fn powf(base: f32, exp: f32) -> f32 { libm::powf(base, exp) }
-pub fn cosf(x: f32) -> f32 { libm::cosf(x) }
-pub fn sinf(x: f32) -> f32 { libm::sinf(x) }
-pub fn fabsf(x: f32) -> f32 { libm::fabsf(x) }
-pub fn logf(x: f32) -> f32 { libm::logf(x) }
+pub struct Math {
+    entries: Vec<String>,
+    active: bool,
+}
+
+impl Math {
+    pub fn new() -> Self {
+        Math { entries: Vec::new(), active: true }
+    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
+}

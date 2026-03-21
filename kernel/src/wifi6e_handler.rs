@@ -1,64 +1,21 @@
 extern crate alloc;
-
 use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct Wifi6eHandler {
-    // Example fields for a wifi handler module
-    interface_name: String,
-    connected_devices: Vec<String>,
-    channel: u8,
-    ssid: String,
-    is_enabled: bool,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl Wifi6eHandler {
-    pub fn new(interface_name: &str, ssid: &str) -> Self {
-        Wifi6eHandler {
-            interface_name: String::from(interface_name),
-            connected_devices: Vec::new(),
-            channel: 1, // Default channel
-            ssid: String::from(ssid),
-            is_enabled: false,
-        }
+    pub fn new() -> Self {
+        Wifi6eHandler { entries: Vec::new(), active: true }
     }
-
-    pub fn enable(&mut self) {
-        self.is_enabled = true;
-        // Simulate enabling the wifi interface
-    }
-
-    pub fn disable(&mut self) {
-        self.is_enabled = false;
-        // Simulate disabling the wifi interface
-    }
-
-    pub fn set_channel(&mut self, channel: u8) {
-        if channel > 0 && channel < 14 {
-            self.channel = channel;
-            // Simulate setting the wifi channel
-        } else {
-        }
-    }
-
-    pub fn connect_device(&mut self, device_mac: &str) {
-        let mac_str = String::from(device_mac);
-        if !self.connected_devices.contains(&mac_str) {
-            self.connected_devices.push(mac_str);
-            // Simulate connecting a device
-        } else {
-        }
-    }
-
-    pub fn disconnect_device(&mut self, device_mac: &str) {
-        if let Some(index) = self.connected_devices.iter().position(|x| x == device_mac) {
-            self.connected_devices.remove(index);
-            // Simulate disconnecting a device
-        } else {
-        }
-    }
-
-    pub fn list_connected_devices(&self) -> Vec<String> {
-        self.connected_devices.clone()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

@@ -2,43 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub struct FamilyRoleManager {
-    roles: Vec<String>,
+pub struct FamilyRoleMgr {
+    entries: Vec<String>,
+    active: bool,
 }
 
-impl FamilyRoleManager {
+impl FamilyRoleMgr {
     pub fn new() -> Self {
-        FamilyRoleManager {
-            roles: Vec::new(),
-        }
+        FamilyRoleMgr { entries: Vec::new(), active: true }
     }
-
-    pub fn add_role(&mut self, role: String) {
-        if !self.roles.contains(&role) {
-            self.roles.push(role);
-        }
-    }
-
-    pub fn remove_role(&mut self, role: &str) -> bool {
-        let index = self.roles.iter().position(|r| r == role);
-        match index {
-            Some(i) => {
-                self.roles.remove(i);
-                true
-            }
-            None => false,
-        }
-    }
-
-    pub fn has_role(&self, role: &str) -> bool {
-        self.roles.contains(&String::from(role))
-    }
-
-    pub fn list_roles(&self) -> Vec<String> {
-        self.roles.clone()
-    }
-
-    pub fn count_roles(&self) -> usize {
-        self.roles.len()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

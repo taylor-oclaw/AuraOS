@@ -1,54 +1,21 @@
 extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
-use alloc::vec;
-
-pub extern "C" fn iris_scanner_init() {
-    // Initialization logic for the iris scanner module
-}
-
-pub extern "C" fn iris_scanner_exit() {
-    // Cleanup logic for the iris scanner module
-}
 
 pub struct IrisScanner {
-    scanned_iris: Vec<u8>,
-    scan_results: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl IrisScanner {
     pub fn new() -> Self {
-        IrisScanner {
-            scanned_iris: Vec::new(),
-            scan_results: Vec::new(),
-        }
+        IrisScanner { entries: Vec::new(), active: true }
     }
-
-    pub fn start_scan(&mut self) -> bool {
-        // Simulate starting a scan
-        self.scanned_iris = vec![0; 1024]; // Example data
-        true
-    }
-
-    pub fn is_scan_complete(&self) -> bool {
-        !self.scanned_iris.is_empty()
-    }
-
-    pub fn get_scan_results(&mut self) -> Option<&Vec<String>> {
-        if self.scan_results.is_empty() {
-            self.analyze_scan();
-        }
-        Some(&self.scan_results)
-    }
-
-    fn analyze_scan(&mut self) {
-        // Simulate analysis of the scanned iris data
-        self.scan_results.push(String::from("Iris pattern detected"));
-        self.scan_results.push(String::from("No anomalies found"));
-    }
-
-    pub fn clear_scan_data(&mut self) {
-        self.scanned_iris.clear();
-        self.scan_results.clear();
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

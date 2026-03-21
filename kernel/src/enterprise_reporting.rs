@@ -2,42 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn enterprise_reporting_init() {
-    // Initialization logic for the module
-}
-
-pub extern "C" fn enterprise_reporting_exit() {
-    // Cleanup logic for the module
-}
-
 pub struct EnterpriseReporting {
-    reports: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl EnterpriseReporting {
     pub fn new() -> Self {
-        EnterpriseReporting {
-            reports: Vec::new(),
-        }
+        EnterpriseReporting { entries: Vec::new(), active: true }
     }
-
-    pub fn add_report(&mut self, report: String) {
-        self.reports.push(report);
-    }
-
-    pub fn get_reports(&self) -> &Vec<String> {
-        &self.reports
-    }
-
-    pub fn clear_reports(&mut self) {
-        self.reports.clear();
-    }
-
-    pub fn has_reports(&self) -> bool {
-        !self.reports.is_empty()
-    }
-
-    pub fn report_count(&self) -> usize {
-        self.reports.len()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

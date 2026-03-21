@@ -2,51 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn zigbee_handler_init() {
-    // Initialization logic for the Zigbee handler module
-}
-
-pub extern "C" fn zigbee_handler_exit() {
-    // Cleanup logic for the Zigbee handler module
-}
-
 pub struct ZigbeeHandler {
-    devices: Vec<String>,
-    messages: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl ZigbeeHandler {
     pub fn new() -> Self {
-        ZigbeeHandler {
-            devices: Vec::new(),
-            messages: Vec::new(),
-        }
+        ZigbeeHandler { entries: Vec::new(), active: true }
     }
-
-    pub fn add_device(&mut self, device_id: &str) {
-        self.devices.push(device_id.to_string());
-    }
-
-    pub fn remove_device(&mut self, device_id: &str) -> bool {
-        if let Some(index) = self.devices.iter().position(|d| d == device_id) {
-            self.devices.remove(index);
-            true
-        } else {
-            false
-        }
-    }
-
-    pub fn list_devices(&self) -> Vec<String> {
-        self.devices.clone()
-    }
-
-    pub fn send_message(&mut self, message: &str) {
-        self.messages.push(message.to_string());
-    }
-
-    pub fn receive_messages(&mut self) -> Vec<String> {
-        let messages = self.messages.clone();
-        self.messages.clear();
-        messages
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

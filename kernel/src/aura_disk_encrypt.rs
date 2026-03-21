@@ -3,36 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct AuraDiskEncrypt {
-    key: Vec<u8>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl AuraDiskEncrypt {
-    pub fn new(key: Vec<u8>) -> Self {
-        AuraDiskEncrypt { key }
+    pub fn new() -> Self {
+        AuraDiskEncrypt { entries: Vec::new(), active: true }
     }
-
-    pub fn encrypt(&self, data: &[u8]) -> Vec<u8> {
-        let mut encrypted_data = Vec::new();
-        for (i, &byte) in data.iter().enumerate() {
-            let key_byte = self.key[i % self.key.len()];
-            encrypted_data.push(byte ^ key_byte);
-        }
-        encrypted_data
-    }
-
-    pub fn decrypt(&self, encrypted_data: &[u8]) -> Vec<u8> {
-        self.encrypt(encrypted_data)
-    }
-
-    pub fn set_key(&mut self, new_key: Vec<u8>) {
-        self.key = new_key;
-    }
-
-    pub fn get_key_size(&self) -> usize {
-        self.key.len()
-    }
-
-    pub fn is_key_empty(&self) -> bool {
-        self.key.is_empty()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

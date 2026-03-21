@@ -2,40 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() {
-    // Entry point for the kernel module
+pub struct AiDatasetManager {
+    entries: Vec<String>,
+    active: bool,
 }
 
-struct AIDatasetManager {
-    datasets: Vec<String>,
-}
-
-impl AIDatasetManager {
+impl AiDatasetManager {
     pub fn new() -> Self {
-        AIDatasetManager {
-            datasets: Vec::new(),
-        }
+        AiDatasetManager { entries: Vec::new(), active: true }
     }
-
-    pub fn add_dataset(&mut self, name: &str) {
-        self.datasets.push(String::from(name));
-    }
-
-    pub fn remove_dataset(&mut self, name: &str) {
-        if let Some(index) = self.datasets.iter().position(|d| d == name) {
-            self.datasets.remove(index);
-        }
-    }
-
-    pub fn list_datasets(&self) -> Vec<String> {
-        self.datasets.clone()
-    }
-
-    pub fn dataset_exists(&self, name: &str) -> bool {
-        self.datasets.contains(&String::from(name))
-    }
-
-    pub fn get_dataset_count(&self) -> usize {
-        self.datasets.len()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

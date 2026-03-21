@@ -3,53 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct AuraSplitView {
-    title: String,
-    content_left: Vec<String>,
-    content_right: Vec<String>,
-    selected_index: usize,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl AuraSplitView {
-    pub fn new(title: &str) -> Self {
-        AuraSplitView {
-            title: String::from(title),
-            content_left: Vec::new(),
-            content_right: Vec::new(),
-            selected_index: 0,
-        }
+    pub fn new() -> Self {
+        AuraSplitView { entries: Vec::new(), active: true }
     }
-
-    pub fn add_to_left(&mut self, item: &str) {
-        self.content_left.push(String::from(item));
-    }
-
-    pub fn add_to_right(&mut self, item: &str) {
-        self.content_right.push(String::from(item));
-    }
-
-    pub fn get_title(&self) -> &str {
-        &self.title
-    }
-
-    pub fn select_next(&mut self) {
-        if self.selected_index < self.content_left.len() + self.content_right.len() - 1 {
-            self.selected_index += 1;
-        }
-    }
-
-    pub fn select_previous(&mut self) {
-        if self.selected_index > 0 {
-            self.selected_index -= 1;
-        }
-    }
-
-    pub fn get_selected_item(&self) -> Option<&str> {
-        if self.selected_index < self.content_left.len() {
-            Some(&self.content_left[self.selected_index])
-        } else if self.selected_index < self.content_left.len() + self.content_right.len() {
-            Some(&self.content_right[self.selected_index - self.content_left.len()])
-        } else {
-            None
-        }
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

@@ -2,44 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn triton_compat_init() -> i32 {
-    0
-}
-
-pub extern "C" fn triton_compat_exit() -> i32 {
-    0
-}
-
 pub struct TritonCompat {
-    data: Vec<u8>,
-    name: String,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl TritonCompat {
-    pub fn new(name: &str) -> Self {
-        TritonCompat {
-            data: Vec::new(),
-            name: String::from(name),
-        }
+    pub fn new() -> Self {
+        TritonCompat { entries: Vec::new(), active: true }
     }
-
-    pub fn add_data(&mut self, byte: u8) {
-        self.data.push(byte);
-    }
-
-    pub fn get_data(&self) -> &[u8] {
-        &self.data
-    }
-
-    pub fn clear_data(&mut self) {
-        self.data.clear();
-    }
-
-    pub fn set_name(&mut self, name: &str) {
-        self.name = String::from(name);
-    }
-
-    pub fn get_name(&self) -> &str {
-        &self.name
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

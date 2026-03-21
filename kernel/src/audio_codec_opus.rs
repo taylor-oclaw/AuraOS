@@ -3,71 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct AudioCodecOpus {
-    sample_rate: u32,
-    channels: u8,
-    bit_rate: u32,
-    complexity: u8,
-    packet_loss_percentage: u8,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl AudioCodecOpus {
-    pub fn new(sample_rate: u32, channels: u8, bit_rate: u32) -> Self {
-        AudioCodecOpus {
-            sample_rate,
-            channels,
-            bit_rate,
-            complexity: 10, // Default complexity
-            packet_loss_percentage: 0, // No packet loss by default
-        }
+    pub fn new() -> Self {
+        AudioCodecOpus { entries: Vec::new(), active: true }
     }
-
-    pub fn set_complexity(&mut self, complexity: u8) {
-        if complexity <= 10 {
-            self.complexity = complexity;
-        } else {
-            panic!("Complexity must be between 0 and 10");
-        }
-    }
-
-    pub fn get_complexity(&self) -> u8 {
-        self.complexity
-    }
-
-    pub fn set_packet_loss_percentage(&mut self, packet_loss_percentage: u8) {
-        if packet_loss_percentage <= 100 {
-            self.packet_loss_percentage = packet_loss_percentage;
-        } else {
-            panic!("Packet loss percentage must be between 0 and 100");
-        }
-    }
-
-    pub fn get_packet_loss_percentage(&self) -> u8 {
-        self.packet_loss_percentage
-    }
-
-    pub fn encode(&self, input: &[u8]) -> Result<Vec<u8>, String> {
-        // Simulate encoding logic
-        if input.is_empty() {
-            return Err(String::from("Input data is empty"));
-        }
-        let mut encoded_data = Vec::new();
-        // Dummy encoding process
-        for byte in input {
-            encoded_data.push(byte + 1); // Simple transformation
-        }
-        Ok(encoded_data)
-    }
-
-    pub fn decode(&self, input: &[u8]) -> Result<Vec<u8>, String> {
-        // Simulate decoding logic
-        if input.is_empty() {
-            return Err(String::from("Input data is empty"));
-        }
-        let mut decoded_data = Vec::new();
-        // Dummy decoding process
-        for byte in input {
-            decoded_data.push(byte - 1); // Simple transformation
-        }
-        Ok(decoded_data)
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

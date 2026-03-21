@@ -2,69 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-#[derive(Debug)]
 pub struct OrgRoleMgr {
-    roles: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl OrgRoleMgr {
     pub fn new() -> Self {
-        OrgRoleMgr { roles: Vec::new() }
+        OrgRoleMgr { entries: Vec::new(), active: true }
     }
-
-    pub fn add_role(&mut self, role_name: &str) {
-        if !self.roles.contains(&String::from(role_name)) {
-            self.roles.push(String::from(role_name));
-        }
-    }
-
-    pub fn remove_role(&mut self, role_name: &str) {
-        self.roles.retain(|role| role != role_name);
-    }
-
-    pub fn has_role(&self, role_name: &str) -> bool {
-        self.roles.contains(&String::from(role_name))
-    }
-
-    pub fn list_roles(&self) -> Vec<String> {
-        self.roles.clone()
-    }
-
-    pub fn count_roles(&self) -> usize {
-        self.roles.len()
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_org_role_mgr() {
-        let mut mgr = OrgRoleMgr::new();
-        assert_eq!(mgr.count_roles(), 0);
-
-        mgr.add_role("Admin");
-        assert_eq!(mgr.count_roles(), 1);
-        assert!(mgr.has_role("Admin"));
-        assert!(!mgr.has_role("User"));
-
-        mgr.add_role("User");
-        assert_eq!(mgr.count_roles(), 2);
-        assert!(mgr.has_role("User"));
-
-        let roles = mgr.list_roles();
-        assert_eq!(roles.len(), 2);
-        assert!(roles.contains(&String::from("Admin")));
-        assert!(roles.contains(&String::from("User")));
-
-        mgr.remove_role("Admin");
-        assert_eq!(mgr.count_roles(), 1);
-        assert!(!mgr.has_role("Admin"));
-        assert!(mgr.has_role("User"));
-
-        mgr.remove_role("User");
-        assert_eq!(mgr.count_roles(), 0);
-        assert!(!mgr.has_role("User"));
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

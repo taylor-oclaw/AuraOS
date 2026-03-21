@@ -1,72 +1,21 @@
 extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
-use alloc::vec;
-
-pub extern "C" fn key_exchange_kyber_init() -> i32 {
-    0
-}
-
-pub extern "C" fn key_exchange_kyber_exit() -> i32 {
-    0
-}
 
 pub struct KeyExchangeKyber {
-    private_key: Vec<u8>,
-    public_key: Vec<u8>,
-    shared_secret: Vec<u8>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl KeyExchangeKyber {
     pub fn new() -> Self {
-        KeyExchangeKyber {
-            private_key: Vec::new(),
-            public_key: Vec::new(),
-            shared_secret: Vec::new(),
-        }
+        KeyExchangeKyber { entries: Vec::new(), active: true }
     }
-
-    pub fn generate_keys(&mut self) {
-        // Simulate key generation
-        self.private_key = vec![1, 2, 3];
-        self.public_key = vec![4, 5, 6];
-    }
-
-    pub fn get_public_key(&self) -> &[u8] {
-        &self.public_key
-    }
-
-    pub fn compute_shared_secret(&mut self, other_public_key: &[u8]) {
-        // Simulate shared secret computation
-        self.shared_secret = vec![7, 8, 9];
-    }
-
-    pub fn get_shared_secret(&self) -> &[u8] {
-        &self.shared_secret
-    }
-
-    pub fn clear_keys(&mut self) {
-        self.private_key.clear();
-        self.public_key.clear();
-        self.shared_secret.clear();
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_key_exchange_kyber() {
-        let mut kyber = KeyExchangeKyber::new();
-        kyber.generate_keys();
-        assert_eq!(kyber.get_public_key(), &[4, 5, 6]);
-
-        kyber.compute_shared_secret(&[10, 11, 12]);
-        assert_eq!(kyber.get_shared_secret(), &[7, 8, 9]);
-
-        kyber.clear_keys();
-        assert!(kyber.get_public_key().is_empty());
-        assert!(kyber.get_shared_secret().is_empty());
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

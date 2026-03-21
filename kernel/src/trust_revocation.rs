@@ -3,35 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct TrustRevocation {
-    revoked_list: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl TrustRevocation {
     pub fn new() -> Self {
-        TrustRevocation {
-            revoked_list: Vec::new(),
-        }
+        TrustRevocation { entries: Vec::new(), active: true }
     }
-
-    pub fn add_revoked(&mut self, identifier: &str) {
-        if !self.revoked_list.contains(&identifier.to_string()) {
-            self.revoked_list.push(identifier.to_string());
-        }
-    }
-
-    pub fn remove_revoked(&mut self, identifier: &str) {
-        self.revoked_list.retain(|id| id != identifier);
-    }
-
-    pub fn is_revoked(&self, identifier: &str) -> bool {
-        self.revoked_list.contains(&identifier.to_string())
-    }
-
-    pub fn list_all_revoked(&self) -> Vec<String> {
-        self.revoked_list.clone()
-    }
-
-    pub fn clear_all_revoked(&mut self) {
-        self.revoked_list.clear();
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

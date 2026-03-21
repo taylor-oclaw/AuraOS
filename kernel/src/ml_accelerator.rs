@@ -1,69 +1,21 @@
 extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
-use alloc::vec;
-
-pub extern "C" fn ml_accelerator_init() {
-    // Initialization logic for the ML accelerator module
-}
-
-pub extern "C" fn ml_accelerator_exit() {
-    // Cleanup logic for the ML accelerator module
-}
 
 pub struct MlAccelerator {
-    model_name: String,
-    parameters: Vec<u8>,
-    input_buffer: Vec<f32>,
-    output_buffer: Vec<f32>,
-    is_initialized: bool,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl MlAccelerator {
-    pub fn new(model_name: &str, parameters_size: usize) -> Self {
-        MlAccelerator {
-            model_name: String::from(model_name),
-            parameters: vec![0; parameters_size],
-            input_buffer: Vec::new(),
-            output_buffer: Vec::new(),
-            is_initialized: false,
-        }
+    pub fn new() -> Self {
+        MlAccelerator { entries: Vec::new(), active: true }
     }
-
-    pub fn load_parameters(&mut self, params: &[u8]) -> Result<(), &'static str> {
-        if params.len() != self.parameters.len() {
-            return Err("Parameter size mismatch");
-        }
-        self.parameters.copy_from_slice(params);
-        Ok(())
-    }
-
-    pub fn set_input_buffer(&mut self, input: Vec<f32>) {
-        self.input_buffer = input;
-    }
-
-    pub fn get_output_buffer(&self) -> &[f32] {
-        &self.output_buffer
-    }
-
-    pub fn initialize(&mut self) -> Result<(), &'static str> {
-        if self.parameters.is_empty() || self.input_buffer.is_empty() {
-            return Err("Model not properly configured");
-        }
-        // Simulate initialization logic
-        self.is_initialized = true;
-        Ok(())
-    }
-
-    pub fn run_inference(&mut self) -> Result<(), &'static str> {
-        if !self.is_initialized {
-            return Err("Accelerator not initialized");
-        }
-        // Simulate inference logic
-        self.output_buffer.resize(self.input_buffer.len(), 0.0);
-        for (i, &value) in self.input_buffer.iter().enumerate() {
-            self.output_buffer[i] = value * 2.0; // Simple transformation
-        }
-        Ok(())
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

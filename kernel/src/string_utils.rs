@@ -1,60 +1,21 @@
 extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
-use alloc::format;
 
-pub fn pad_left(s: &str, width: usize, ch: char) -> String {
-    if s.len() >= width {
-        return String::from(s);
-    }
-    let padding: String = core::iter::repeat(ch).take(width - s.len()).collect();
-    let mut result = padding;
-    result.push_str(s);
-    result
+pub struct StringUtils {
+    entries: Vec<String>,
+    active: bool,
 }
 
-pub fn pad_right(s: &str, width: usize, ch: char) -> String {
-    let mut result = String::from(s);
-    while result.len() < width {
-        result.push(ch);
+impl StringUtils {
+    pub fn new() -> Self {
+        StringUtils { entries: Vec::new(), active: true }
     }
-    result
-}
-
-pub fn truncate(s: &str, max_len: usize) -> String {
-    if s.len() <= max_len {
-        String::from(s)
-    } else {
-        let mut r = String::from(&s[..max_len.min(s.len())]);
-        r.push_str("...");
-        r
-    }
-}
-
-pub fn to_uppercase_char(c: char) -> char {
-    if c >= 97 as char && c <= 122 as char {
-        (c as u8 - 32) as char
-    } else {
-        c
-    }
-}
-
-pub fn to_lowercase_char(c: char) -> char {
-    if c >= 65 as char && c <= 90 as char {
-        (c as u8 + 32) as char
-    } else {
-        c
-    }
-}
-
-pub fn format_size_bytes(bytes: u64) -> String {
-    if bytes < 1024 {
-        String::from("info")
-    } else if bytes < 1024 * 1024 {
-        String::from("info")
-    } else if bytes < 1024 * 1024 * 1024 {
-        String::from("info")
-    } else {
-        String::from("info")
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

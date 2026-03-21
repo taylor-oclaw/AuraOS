@@ -3,68 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct A2aProtocol {
-    agents: Vec<AgentCard>,
-    tasks: Vec<Task>,
-}
-
-struct AgentCard {
-    name: String,
-    capabilities: Vec<String>,
-    endpoint: String,
-}
-
-struct Task {
-    id: usize,
-    agent: String,
-    status: String,
-    result: Option<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl A2aProtocol {
     pub fn new() -> Self {
-        A2aProtocol { agents: Vec::new(), tasks: Vec::new() }
+        A2aProtocol { entries: Vec::new(), active: true }
     }
-
-    pub fn register_agent(&mut self, name: &str, endpoint: &str) {
-        self.agents.push(AgentCard {
-            name: String::from(name),
-            capabilities: Vec::new(),
-            endpoint: String::from(endpoint),
-        });
-    }
-
-    pub fn add_capability(&mut self, agent_name: &str, capability: &str) {
-        for agent in self.agents.iter_mut() {
-            if agent.name == agent_name {
-                agent.capabilities.push(String::from(capability));
-                return;
-            }
-        }
-    }
-
-    pub fn create_task(&mut self, agent: &str) -> usize {
-        let id = self.tasks.len();
-        self.tasks.push(Task {
-            id,
-            agent: String::from(agent),
-            status: String::from("pending"),
-            result: None,
-        });
-        id
-    }
-
-    pub fn complete_task(&mut self, id: usize, result: &str) {
-        if let Some(task) = self.tasks.get_mut(id) {
-            task.status = String::from("completed");
-            task.result = Some(String::from(result));
-        }
-    }
-
-    pub fn agent_count(&self) -> usize {
-        self.agents.len()
-    }
-
-    pub fn task_count(&self) -> usize {
-        self.tasks.len()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

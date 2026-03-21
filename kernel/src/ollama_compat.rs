@@ -1,60 +1,21 @@
 extern crate alloc;
-
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() -> ! {
-    // Entry point for the kernel module
-    let mut ollama = OllamaCompat::new();
-    ollama.initialize_system();
-    ollama.load_ai_model("gpt-4");
-    ollama.process_input("Hello, AI!");
-    ollama.generate_response();
-    ollama.shutdown_system();
-
-    loop {}
-}
-
 pub struct OllamaCompat {
-    system_initialized: bool,
-    ai_model_loaded: String,
-    input_buffer: Vec<u8>,
-    response_buffer: Vec<u8>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl OllamaCompat {
     pub fn new() -> Self {
-        OllamaCompat {
-            system_initialized: false,
-            ai_model_loaded: String::new(),
-            input_buffer: Vec::new(),
-            response_buffer: Vec::new(),
-        }
+        OllamaCompat { entries: Vec::new(), active: true }
     }
-
-    pub fn initialize_system(&mut self) {
-        // Simulate system initialization
-        self.system_initialized = true;
-    }
-
-    pub fn load_ai_model(&mut self, model_name: &str) {
-        // Simulate loading an AI model
-        self.ai_model_loaded = String::from(model_name);
-    }
-
-    pub fn process_input(&mut self, input: &str) {
-        // Simulate processing user input
-        self.input_buffer.extend_from_slice(input.as_bytes());
-    }
-
-    pub fn generate_response(&mut self) {
-        // Simulate generating a response
-        let response = "Hello! How can I assist you today?";
-        self.response_buffer.extend_from_slice(response.as_bytes());
-    }
-
-    pub fn shutdown_system(&mut self) {
-        // Simulate system shutdown
-        self.system_initialized = false;
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

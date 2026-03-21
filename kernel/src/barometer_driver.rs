@@ -2,80 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() -> i32 {
-    0
-}
-
-struct BarometerDriver {
-    pressure: u32,
-    temperature: i32,
-    altitude: f32,
-    sea_level_pressure: u32,
-    calibration_offset: i32,
+pub struct BarometerDriver {
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl BarometerDriver {
-    pub fn new(pressure: u32, temperature: i32) -> Self {
-        BarometerDriver {
-            pressure,
-            temperature,
-            altitude: 0.0,
-            sea_level_pressure: 101325,
-            calibration_offset: 0,
-        }
+    pub fn new() -> Self {
+        BarometerDriver { entries: Vec::new(), active: true }
     }
-
-    pub fn set_pressure(&mut self, pressure: u32) {
-        self.pressure = pressure;
-    }
-
-    pub fn get_pressure(&self) -> u32 {
-        self.pressure
-    }
-
-    pub fn set_temperature(&mut self, temperature: i32) {
-        self.temperature = temperature;
-    }
-
-    pub fn get_temperature(&self) -> i32 {
-        self.temperature
-    }
-
-    pub fn calculate_altitude(&mut self) {
-        let pressure_ratio = (self.pressure as f32 / self.sea_level_pressure as f32).powf(1.0 / 5.256);
-        self.altitude = 44330.0 * (1.0 - pressure_ratio);
-    }
-
-    pub fn get_altitude(&self) -> f32 {
-        self.altitude
-    }
-}
-
-pub extern "C" fn barometer_init(pressure: u32, temperature: i32) -> *mut BarometerDriver {
-    let driver = Box::new(BarometerDriver::new(pressure, temperature));
-    Box::leak(driver)
-}
-
-pub extern "C" fn barometer_set_pressure(driver: *mut BarometerDriver, pressure: u32) {
-    unsafe { (*driver).set_pressure(pressure); }
-}
-
-pub extern "C" fn barometer_get_pressure(driver: *const BarometerDriver) -> u32 {
-    unsafe { (*driver).get_pressure() }
-}
-
-pub extern "C" fn barometer_set_temperature(driver: *mut BarometerDriver, temperature: i32) {
-    unsafe { (*driver).set_temperature(temperature); }
-}
-
-pub extern "C" fn barometer_get_temperature(driver: *const BarometerDriver) -> i32 {
-    unsafe { (*driver).get_temperature() }
-}
-
-pub extern "C" fn barometer_calculate_altitude(driver: *mut BarometerDriver) {
-    unsafe { (*driver).calculate_altitude(); }
-}
-
-pub extern "C" fn barometer_get_altitude(driver: *const BarometerDriver) -> f32 {
-    unsafe { (*driver).get_altitude() }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

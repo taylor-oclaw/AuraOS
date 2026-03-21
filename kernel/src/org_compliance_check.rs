@@ -2,63 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() -> ! {
-    // Entry point for the kernel module
-    let mut checker = OrgComplianceCheck::new();
-    checker.add_policy("No unauthorized access");
-    checker.add_policy("Data encryption required");
-    checker.add_policy("Regular security audits");
-
-    if checker.is_compliant() {
-    } else {
-        for violation in checker.get_violations() {
-        }
-    }
-
-    loop {}
-}
-
 pub struct OrgComplianceCheck {
-    policies: Vec<String>,
-    violations: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl OrgComplianceCheck {
     pub fn new() -> Self {
-        OrgComplianceCheck {
-            policies: Vec::new(),
-            violations: Vec::new(),
-        }
+        OrgComplianceCheck { entries: Vec::new(), active: true }
     }
-
-    pub fn add_policy(&mut self, policy: &str) {
-        self.policies.push(String::from(policy));
-    }
-
-    pub fn check_compliance(&mut self) {
-        // Simulate compliance checks
-        for policy in &self.policies {
-            if !self.is_policy_met(policy) {
-                self.violations.push(String::from("info"));
-            }
-        }
-    }
-
-    fn is_policy_met(&self, policy: &str) -> bool {
-        // Placeholder logic to determine if a policy is met
-        match policy {
-            "No unauthorized access" => true,
-            "Data encryption required" => false,
-            "Regular security audits" => true,
-            _ => false,
-        }
-    }
-
-    pub fn is_compliant(&self) -> bool {
-        self.violations.is_empty()
-    }
-
-    pub fn get_violations(&self) -> &Vec<String> {
-        &self.violations
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

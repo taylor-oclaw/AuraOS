@@ -264,6 +264,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -390,6 +391,12 @@ mod agent_self_reflection;
 mod agent_service_mesh;
 mod agent_skill_library;
 mod agent_snapshot;
+mod agent_snapshot
+buddy_allocator
+deadlock_detector
+nlp_tokenizer
+progress_bar
+tool_executor;
 mod agent_source_validator;
 mod agent_stream_processor;
 mod agent_streaming_output;

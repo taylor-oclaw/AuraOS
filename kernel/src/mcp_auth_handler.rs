@@ -2,55 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() -> i32 {
-    0
+pub struct McpAuthHandler {
+    entries: Vec<String>,
+    active: bool,
 }
 
-struct MCPAuthHandler {
-    users: Vec<String>,
-    sessions: Vec<(String, String)>, // (username, session_token)
-}
-
-impl MCPAuthHandler {
+impl McpAuthHandler {
     pub fn new() -> Self {
-        MCPAuthHandler {
-            users: Vec::new(),
-            sessions: Vec::new(),
-        }
+        McpAuthHandler { entries: Vec::new(), active: true }
     }
-
-    pub fn add_user(&mut self, username: &str) {
-        if !self.users.contains(&String::from(username)) {
-            self.users.push(String::from(username));
-        }
-    }
-
-    pub fn remove_user(&mut self, username: &str) {
-        self.users.retain(|u| u != username);
-        self.sessions.retain(|(u, _)| u != username);
-    }
-
-    pub fn authenticate(&mut self, username: &str, password: &str) -> bool {
-        if self.users.contains(&String::from(username)) {
-            // Simulate password check
-            let session_token = String::from("info"); // Simplified token generation
-            self.sessions.push((String::from(username), session_token));
-            true
-        } else {
-            false
-        }
-    }
-
-    pub fn validate_session(&self, session_token: &str) -> Option<&str> {
-        for (username, token) in &self.sessions {
-            if token == session_token {
-                return Some(username);
-            }
-        }
-        None
-    }
-
-    pub fn end_session(&mut self, session_token: &str) {
-        self.sessions.retain(|(_, token)| token != session_token);
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

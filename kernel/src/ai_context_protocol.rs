@@ -2,61 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-#[derive(Debug)]
-pub struct AIContext {
-    context_id: u32,
-    data: Vec<u8>,
-    metadata: String,
+pub struct AiContextProtocol {
+    entries: Vec<String>,
+    active: bool,
 }
 
-impl AIContext {
-    pub fn new(context_id: u32, initial_data: &[u8], metadata: &str) -> Self {
-        AIContext {
-            context_id,
-            data: initial_data.to_vec(),
-            metadata: String::from(metadata),
-        }
+impl AiContextProtocol {
+    pub fn new() -> Self {
+        AiContextProtocol { entries: Vec::new(), active: true }
     }
-
-    pub fn get_context_id(&self) -> u32 {
-        self.context_id
-    }
-
-    pub fn set_metadata(&mut self, new_metadata: &str) {
-        self.metadata = String::from(new_metadata);
-    }
-
-    pub fn append_data(&mut self, additional_data: &[u8]) {
-        self.data.extend_from_slice(additional_data);
-    }
-
-    pub fn get_data(&self) -> &[u8] {
-        &self.data
-    }
-
-    pub fn clear_data(&mut self) {
-        self.data.clear();
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_ai_context() {
-        let mut context = AIContext::new(1, b"initial", "metadata");
-        assert_eq!(context.get_context_id(), 1);
-        assert_eq!(context.get_data(), b"initial");
-        assert_eq!(context.metadata, "metadata");
-
-        context.set_metadata("new_metadata");
-        assert_eq!(context.metadata, "new_metadata");
-
-        context.append_data(b"_data");
-        assert_eq!(context.get_data(), b"initial_data");
-
-        context.clear_data();
-        assert_eq!(context.get_data(), b"");
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

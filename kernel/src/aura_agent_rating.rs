@@ -2,51 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_ffi_init() {
-    // Initialization code if needed
-}
-
-pub extern "C" fn rust_ffi_exit() {
-    // Cleanup code if needed
-}
-
 pub struct AuraAgentRating {
-    agent_id: String,
-    ratings: Vec<u8>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl AuraAgentRating {
-    pub fn new(agent_id: &str) -> Self {
-        AuraAgentRating {
-            agent_id: String::from(agent_id),
-            ratings: Vec::new(),
-        }
+    pub fn new() -> Self {
+        AuraAgentRating { entries: Vec::new(), active: true }
     }
-
-    pub fn add_rating(&mut self, rating: u8) {
-        if rating > 0 && rating <= 100 {
-            self.ratings.push(rating);
-        }
-    }
-
-    pub fn get_average_rating(&self) -> Option<u8> {
-        if self.ratings.is_empty() {
-            None
-        } else {
-            let total: u32 = self.ratings.iter().map(|&r| r as u32).sum();
-            Some((total / self.ratings.len() as u32) as u8)
-        }
-    }
-
-    pub fn get_max_rating(&self) -> Option<u8> {
-        self.ratings.iter().cloned().max()
-    }
-
-    pub fn get_min_rating(&self) -> Option<u8> {
-        self.ratings.iter().cloned().min()
-    }
-
-    pub fn get_ratings_count(&self) -> usize {
-        self.ratings.len()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

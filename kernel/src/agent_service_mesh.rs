@@ -1,54 +1,21 @@
 extern crate alloc;
-
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn agent_service_mesh_init() {
-    // Initialization logic for the module
-}
-
-pub extern "C" fn agent_service_mesh_exit() {
-    // Cleanup logic for the module
-}
-
 pub struct AgentServiceMesh {
-    services: Vec<String>,
-    policies: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl AgentServiceMesh {
     pub fn new() -> Self {
-        AgentServiceMesh {
-            services: Vec::new(),
-            policies: Vec::new(),
-        }
+        AgentServiceMesh { entries: Vec::new(), active: true }
     }
-
-    pub fn add_service(&mut self, service_name: &str) {
-        self.services.push(String::from(service_name));
-    }
-
-    pub fn remove_service(&mut self, service_name: &str) {
-        if let Some(index) = self.services.iter().position(|s| s == service_name) {
-            self.services.remove(index);
-        }
-    }
-
-    pub fn list_services(&self) -> Vec<String> {
-        self.services.clone()
-    }
-
-    pub fn add_policy(&mut self, policy: &str) {
-        self.policies.push(String::from(policy));
-    }
-
-    pub fn remove_policy(&mut self, policy: &str) {
-        if let Some(index) = self.policies.iter().position(|p| p == policy) {
-            self.policies.remove(index);
-        }
-    }
-
-    pub fn list_policies(&self) -> Vec<String> {
-        self.policies.clone()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

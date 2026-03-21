@@ -3,39 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct MedusaV2 {
-    name: String,
-    age: u32,
-    abilities: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl MedusaV2 {
-    pub fn new(name: &str, age: u32) -> Self {
-        MedusaV2 {
-            name: String::from(name),
-            age,
-            abilities: Vec::new(),
-        }
+    pub fn new() -> Self {
+        MedusaV2 { entries: Vec::new(), active: true }
     }
-
-    pub fn add_ability(&mut self, ability: &str) {
-        self.abilities.push(String::from(ability));
-    }
-
-    pub fn get_name(&self) -> &str {
-        &self.name
-    }
-
-    pub fn get_age(&self) -> u32 {
-        self.age
-    }
-
-    pub fn list_abilities(&self) -> &[String] {
-        &self.abilities
-    }
-
-    pub fn remove_ability(&mut self, ability: &str) {
-        if let Some(index) = self.abilities.iter().position(|a| a == ability) {
-            self.abilities.remove(index);
-        }
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

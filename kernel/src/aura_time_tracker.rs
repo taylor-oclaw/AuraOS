@@ -3,33 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct AuraTimeTracker {
-    events: Vec<(String, u64)>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl AuraTimeTracker {
     pub fn new() -> Self {
-        AuraTimeTracker {
-            events: Vec::new(),
-        }
+        AuraTimeTracker { entries: Vec::new(), active: true }
     }
-
-    pub fn add_event(&mut self, event_name: String, timestamp: u64) {
-        self.events.push((event_name, timestamp));
-    }
-
-    pub fn get_events(&self) -> &Vec<(String, u64)> {
-        &self.events
-    }
-
-    pub fn get_latest_event(&self) -> Option<&(String, u64)> {
-        self.events.last()
-    }
-
-    pub fn clear_events(&mut self) {
-        self.events.clear();
-    }
-
-    pub fn count_events(&self) -> usize {
-        self.events.len()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

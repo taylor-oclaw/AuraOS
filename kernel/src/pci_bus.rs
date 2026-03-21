@@ -3,45 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct PciBus {
-    devices: Vec<PciDevice>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl PciBus {
     pub fn new() -> Self {
-        PciBus {
-            devices: Vec::new(),
-        }
+        PciBus { entries: Vec::new(), active: true }
     }
-
-    pub fn add_device(&mut self, device: PciDevice) {
-        self.devices.push(device);
-    }
-
-    pub fn get_device_count(&self) -> usize {
-        self.devices.len()
-    }
-
-    pub fn find_device_by_id(&self, vendor_id: u16, device_id: u16) -> Option<&PciDevice> {
-        self.devices.iter().find(|&d| d.vendor_id == vendor_id && d.device_id == device_id)
-    }
-
-    pub fn list_devices(&self) -> Vec<String> {
-        let mut device_list = Vec::new();
-        for device in &self.devices {
-            device_list.push(String::from("info"));
-        }
-        device_list
-    }
-
-    pub fn remove_device(&mut self, vendor_id: u16, device_id: u16) -> Option<PciDevice> {
-        let index = self.devices.iter().position(|d| d.vendor_id == vendor_id && d.device_id == device_id)?;
-        Some(self.devices.remove(index))
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }
-
-pub struct PciDevice {
-    pub vendor_id: u16,
-    pub device_id: u16,
-    // Add more fields as necessary
-}
-

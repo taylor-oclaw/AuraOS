@@ -2,59 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn ai_realtime_voice_init() {
-    // Initialization logic for the AI-native operating system kernel module
-}
-
-pub extern "C" fn ai_realtime_voice_exit() {
-    // Cleanup logic for the AI-native operating system kernel module
-}
-
-pub struct AiRealTimeVoice {
-    name: String,
-    version: String,
-    features: Vec<String>,
+pub struct AiRealtimeVoice {
+    entries: Vec<String>,
     active: bool,
-    error_code: u32,
 }
 
-impl AiRealTimeVoice {
-    pub fn new(name: &str, version: &str) -> Self {
-        AiRealTimeVoice {
-            name: String::from(name),
-            version: String::from(version),
-            features: Vec::new(),
-            active: false,
-            error_code: 0,
-        }
+impl AiRealtimeVoice {
+    pub fn new() -> Self {
+        AiRealtimeVoice { entries: Vec::new(), active: true }
     }
-
-    pub fn activate(&mut self) {
-        self.active = true;
-    }
-
-    pub fn deactivate(&mut self) {
-        self.active = false;
-    }
-
-    pub fn add_feature(&mut self, feature: &str) {
-        self.features.push(String::from(feature));
-    }
-
-    pub fn remove_feature(&mut self, feature: &str) -> bool {
-        if let Some(index) = self.features.iter().position(|f| f == feature) {
-            self.features.remove(index);
-            true
-        } else {
-            false
-        }
-    }
-
-    pub fn get_error_code(&self) -> u32 {
-        self.error_code
-    }
-
-    pub fn set_error_code(&mut self, code: u32) {
-        self.error_code = code;
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

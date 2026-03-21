@@ -1,72 +1,21 @@
 extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
-use alloc::vec;
 
-mod enterprise_dlp_rules {
-    use super::*;
-
-    pub struct DLPConfig {
-        rules: Vec<String>,
-        enabled: bool,
-    }
-
-    impl DLPConfig {
-        pub fn new() -> Self {
-            DLPConfig {
-                rules: Vec::new(),
-                enabled: false,
-            }
-        }
-
-        pub fn enable(&mut self) {
-            self.enabled = true;
-        }
-
-        pub fn disable(&mut self) {
-            self.enabled = false;
-        }
-
-        pub fn is_enabled(&self) -> bool {
-            self.enabled
-        }
-
-        pub fn add_rule(&mut self, rule: String) {
-            if !self.rules.contains(&rule) {
-                self.rules.push(rule);
-            }
-        }
-
-        pub fn remove_rule(&mut self, rule: &str) {
-            self.rules.retain(|r| r != rule);
-        }
-
-        pub fn list_rules(&self) -> Vec<String> {
-            self.rules.clone()
-        }
-    }
+pub struct EnterpriseDlpRules {
+    entries: Vec<String>,
+    active: bool,
 }
 
-#[cfg(test)]
-mod tests {
-    use super::enterprise_dlp_rules::*;
-
-    #[test]
-    fn test_dlp_config() {
-        let mut config = DLPConfig::new();
-        assert!(!config.is_enabled());
-
-        config.enable();
-        assert!(config.is_enabled());
-
-        config.disable();
-        assert!(!config.is_enabled());
-
-        config.add_rule(String::from("rule1"));
-        config.add_rule(String::from("rule2"));
-        assert_eq!(config.list_rules(), vec![String::from("rule1"), String::from("rule2")]);
-
-        config.remove_rule("rule1");
-        assert_eq!(config.list_rules(), vec![String::from("rule2")]);
+impl EnterpriseDlpRules {
+    pub fn new() -> Self {
+        EnterpriseDlpRules { entries: Vec::new(), active: true }
     }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

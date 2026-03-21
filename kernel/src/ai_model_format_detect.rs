@@ -1,58 +1,21 @@
 extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
-use alloc::vec;
 
-#[derive(Debug)]
-pub struct AIModelFormatDetect {
-    supported_formats: Vec<String>,
+pub struct AiModelFormatDetect {
+    entries: Vec<String>,
+    active: bool,
 }
 
-impl AIModelFormatDetect {
+impl AiModelFormatDetect {
     pub fn new() -> Self {
-        AIModelFormatDetect {
-            supported_formats: vec![
-                String::from("ONNX"),
-                String::from("TensorFlow SavedModel"),
-                String::from("PyTorch TorchScript"),
-                String::from("Caffe"),
-                String::from("MXNet"),
-            ],
-        }
+        AiModelFormatDetect { entries: Vec::new(), active: true }
     }
-
-    pub fn is_format_supported(&self, format: &str) -> bool {
-        self.supported_formats.contains(&String::from(format))
-    }
-
-    pub fn add_format_support(&mut self, format: &str) {
-        if !self.is_format_supported(format) {
-            self.supported_formats.push(String::from(format));
-        }
-    }
-
-    pub fn remove_format_support(&mut self, format: &str) {
-        self.supported_formats.retain(|f| f != format);
-    }
-
-    pub fn list_supported_formats(&self) -> Vec<String> {
-        self.supported_formats.clone()
-    }
-
-    pub fn detect_format(&self, model_data: &[u8]) -> Option<&String> {
-        // Simple heuristic based on file header
-        if model_data.len() >= 4 && &model_data[0..4] == b"ONNX" {
-            Some(&self.supported_formats[0])
-        } else if model_data.len() >= 3 && &model_data[0..3] == b"TFS" {
-            Some(&self.supported_formats[1])
-        } else if model_data.len() >= 8 && &model_data[0..8] == b"TORCHSCR" {
-            Some(&self.supported_formats[2])
-        } else if model_data.len() >= 4 && &model_data[0..4] == b"CFF " {
-            Some(&self.supported_formats[3])
-        } else if model_data.len() >= 8 && &model_data[0..8] == b"MXNET " {
-            Some(&self.supported_formats[4])
-        } else {
-            None
-        }
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

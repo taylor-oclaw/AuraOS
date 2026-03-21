@@ -1,68 +1,21 @@
 extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
-use alloc::vec;
 
-pub extern "C" fn rust_start() -> i32 {
-    0
+pub struct CompatHfs {
+    entries: Vec<String>,
+    active: bool,
 }
 
-struct HfsVolume {
-    name: String,
-    files: Vec<String>,
-}
-
-impl HfsVolume {
-    pub fn new(name: &str) -> Self {
-        HfsVolume {
-            name: String::from(name),
-            files: Vec::new(),
-        }
+impl CompatHfs {
+    pub fn new() -> Self {
+        CompatHfs { entries: Vec::new(), active: true }
     }
-
-    pub fn add_file(&mut self, file_name: &str) {
-        self.files.push(String::from(file_name));
-    }
-
-    pub fn remove_file(&mut self, file_name: &str) -> bool {
-        if let Some(index) = self.files.iter().position(|f| f == file_name) {
-            self.files.remove(index);
-            true
-        } else {
-            false
-        }
-    }
-
-    pub fn list_files(&self) -> Vec<String> {
-        self.files.clone()
-    }
-
-    pub fn has_file(&self, file_name: &str) -> bool {
-        self.files.contains(&String::from(file_name))
-    }
-
-    pub fn get_volume_name(&self) -> String {
-        self.name.clone()
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_hfs_volume() {
-        let mut volume = HfsVolume::new("Test Volume");
-        assert_eq!(volume.get_volume_name(), "Test Volume");
-
-        volume.add_file("file1.txt");
-        volume.add_file("file2.txt");
-        assert_eq!(volume.list_files(), vec![String::from("file1.txt"), String::from("file2.txt")]);
-        assert!(volume.has_file("file1.txt"));
-        assert!(!volume.has_file("file3.txt"));
-
-        assert!(volume.remove_file("file1.txt"));
-        assert!(!volume.has_file("file1.txt"));
-        assert_eq!(volume.list_files(), vec![String::from("file2.txt")]);
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

@@ -3,35 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct IntentParser {
-    intents: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl IntentParser {
     pub fn new() -> Self {
-        IntentParser {
-            intents: Vec::new(),
-        }
+        IntentParser { entries: Vec::new(), active: true }
     }
-
-    pub fn add_intent(&mut self, intent: &str) {
-        self.intents.push(String::from(intent));
-    }
-
-    pub fn remove_intent(&mut self, intent: &str) {
-        if let Some(index) = self.intents.iter().position(|i| i == intent) {
-            self.intents.remove(index);
-        }
-    }
-
-    pub fn get_intents(&self) -> &[String] {
-        &self.intents
-    }
-
-    pub fn has_intent(&self, intent: &str) -> bool {
-        self.intents.contains(&String::from(intent))
-    }
-
-    pub fn clear_intents(&mut self) {
-        self.intents.clear();
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

@@ -1,39 +1,21 @@
 extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
-use alloc::vec;
 
 pub struct AccelerometerDriver {
-    // Simulated sensor data
-    x: i32,
-    y: i32,
-    z: i32,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl AccelerometerDriver {
     pub fn new() -> Self {
-        AccelerometerDriver { x: 0, y: 0, z: 0 }
+        AccelerometerDriver { entries: Vec::new(), active: true }
     }
-
-    pub fn read_x(&self) -> i32 {
-        self.x
-    }
-
-    pub fn read_y(&self) -> i32 {
-        self.y
-    }
-
-    pub fn read_z(&self) -> i32 {
-        self.z
-    }
-
-    pub fn update_data(&mut self, x: i32, y: i32, z: i32) {
-        self.x = x;
-        self.y = y;
-        self.z = z;
-    }
-
-    pub fn get_acceleration_vector(&self) -> Vec<i32> {
-        vec![self.x, self.y, self.z]
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

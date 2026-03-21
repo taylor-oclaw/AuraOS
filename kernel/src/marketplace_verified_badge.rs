@@ -3,46 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct MarketplaceVerifiedBadge {
-    name: String,
-    description: String,
-    version: u32,
-    is_verified: bool,
-    features: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl MarketplaceVerifiedBadge {
-    pub fn new(name: &str, description: &str, version: u32) -> Self {
-        MarketplaceVerifiedBadge {
-            name: String::from(name),
-            description: String::from(description),
-            version,
-            is_verified: false,
-            features: Vec::new(),
-        }
+    pub fn new() -> Self {
+        MarketplaceVerifiedBadge { entries: Vec::new(), active: true }
     }
-
-    pub fn verify(&mut self) {
-        self.is_verified = true;
-    }
-
-    pub fn add_feature(&mut self, feature: &str) {
-        self.features.push(String::from(feature));
-    }
-
-    pub fn remove_feature(&mut self, feature: &str) -> bool {
-        if let Some(index) = self.features.iter().position(|f| f == feature) {
-            self.features.remove(index);
-            true
-        } else {
-            false
-        }
-    }
-
-    pub fn get_features(&self) -> &[String] {
-        &self.features
-    }
-
-    pub fn is_verified(&self) -> bool {
-        self.is_verified
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

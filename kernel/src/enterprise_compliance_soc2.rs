@@ -2,57 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() {
-    // Entry point for the kernel module
-    let compliance_module = EnterpriseComplianceSoc2::new();
-    compliance_module.initialize_system();
-    compliance_module.log_compliance_status();
-    compliance_module.update_policy("New Security Policy");
-    compliance_module.audit_logs();
-    compliance_module.generate_report();
-}
-
 pub struct EnterpriseComplianceSoc2 {
-    policies: Vec<String>,
-    logs: Vec<String>,
-    status: String,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl EnterpriseComplianceSoc2 {
     pub fn new() -> Self {
-        EnterpriseComplianceSoc2 {
-            policies: Vec::new(),
-            logs: Vec::new(),
-            status: String::from("Initialized"),
-        }
+        EnterpriseComplianceSoc2 { entries: Vec::new(), active: true }
     }
-
-    pub fn initialize_system(&mut self) {
-        self.status = String::from("System Initialized");
-        self.logs.push(String::from("System initialization complete"));
-    }
-
-    pub fn log_compliance_status(&self) {
-        // Simulate logging compliance status
-        self.logs.push(String::from("info"));
-    }
-
-    pub fn update_policy(&mut self, policy: &str) {
-        self.policies.push(String::from(policy));
-        self.logs.push(String::from("info"));
-    }
-
-    pub fn audit_logs(&self) -> Vec<String> {
-        // Return a copy of the logs for auditing
-        self.logs.clone()
-    }
-
-    pub fn generate_report(&self) -> String {
-        let mut report = String::from("Compliance Report:\n");
-        for log in &self.logs {
-            report.push_str(log);
-            report.push('\n');
-        }
-        report
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

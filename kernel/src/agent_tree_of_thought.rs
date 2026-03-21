@@ -2,45 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-#[derive(Debug)]
-pub struct AgentTreeNode {
-    name: String,
-    children: Vec<AgentTreeNode>,
+pub struct AgentTreeOfThought {
+    entries: Vec<String>,
+    active: bool,
 }
 
-impl AgentTreeNode {
-    pub fn new(name: &str) -> Self {
-        AgentTreeNode {
-            name: String::from(name),
-            children: Vec::new(),
-        }
+impl AgentTreeOfThought {
+    pub fn new() -> Self {
+        AgentTreeOfThought { entries: Vec::new(), active: true }
     }
-
-    pub fn add_child(&mut self, child: AgentTreeNode) {
-        self.children.push(child);
-    }
-
-    pub fn get_name(&self) -> &str {
-        &self.name
-    }
-
-    pub fn has_children(&self) -> bool {
-        !self.children.is_empty()
-    }
-
-    pub fn get_children_count(&self) -> usize {
-        self.children.len()
-    }
-
-    pub fn find_child_by_name(&self, name: &str) -> Option<&AgentTreeNode> {
-        self.children.iter().find(|child| child.name == name)
-    }
-}
-
-pub extern "C" fn agent_tree_of_thought_init() {
-    // Initialization logic for the module
-}
-
-pub extern "C" fn agent_tree_of_thought_exit() {
-    // Cleanup logic for the module
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

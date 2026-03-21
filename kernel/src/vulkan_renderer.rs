@@ -2,54 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() -> ! {
-    // Initialize the Vulkan renderer module
-    let mut renderer = VulkanRenderer::new();
-
-    // Example usage of the VulkanRenderer methods
-    renderer.initialize();
-    renderer.create_window("AI Native OS", 1920, 1080);
-    renderer.load_shader("path/to/vertex_shader.spv");
-    renderer.load_shader("path/to/fragment_shader.spv");
-    renderer.render_frame();
-
-    loop {
-        // Main loop logic
-    }
-}
-
 pub struct VulkanRenderer {
-    window_title: String,
-    width: u32,
-    height: u32,
-    shaders: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl VulkanRenderer {
     pub fn new() -> Self {
-        VulkanRenderer {
-            window_title: String::from("Default Window"),
-            width: 800,
-            height: 600,
-            shaders: Vec::new(),
-        }
+        VulkanRenderer { entries: Vec::new(), active: true }
     }
-
-    pub fn initialize(&mut self) {
-        // Initialize Vulkan instance, device, and swap chain
-    }
-
-    pub fn create_window(&mut self, title: &str, width: u32, height: u32) {
-        self.window_title = String::from(title);
-        self.width = width;
-        self.height = height;
-    }
-
-    pub fn load_shader(&mut self, path: &str) {
-        self.shaders.push(String::from(path));
-    }
-
-    pub fn render_frame(&self) {
-        // Render a frame using the loaded shaders
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

@@ -3,49 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct CellularModem {
-    modem_id: String,
-    signal_strength: u8,
-    connected: bool,
-    network_type: String,
-    ip_address: Option<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl CellularModem {
-    pub fn new(modem_id: &str) -> Self {
-        CellularModem {
-            modem_id: String::from(modem_id),
-            signal_strength: 0,
-            connected: false,
-            network_type: String::new(),
-            ip_address: None,
-        }
+    pub fn new() -> Self {
+        CellularModem { entries: Vec::new(), active: true }
     }
-
-    pub fn connect(&mut self, network_type: &str) {
-        // Simulate connecting to a network
-        self.connected = true;
-        self.network_type = String::from(network_type);
-        self.signal_strength = 85; // Example signal strength
-        self.ip_address = Some(String::from("192.168.1.100")); // Example IP address
-    }
-
-    pub fn disconnect(&mut self) {
-        // Simulate disconnecting from the network
-        self.connected = false;
-        self.network_type.clear();
-        self.signal_strength = 0;
-        self.ip_address = None;
-    }
-
-    pub fn is_connected(&self) -> bool {
-        self.connected
-    }
-
-    pub fn get_signal_strength(&self) -> u8 {
-        self.signal_strength
-    }
-
-    pub fn get_ip_address(&self) -> Option<&str> {
-        self.ip_address.as_deref()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

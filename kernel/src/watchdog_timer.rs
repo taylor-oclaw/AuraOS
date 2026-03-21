@@ -3,48 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct WatchdogTimer {
-    name: String,
-    timeout: u64,
-    is_active: bool,
-    reset_count: u32,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl WatchdogTimer {
-    pub fn new(name: &str, timeout: u64) -> Self {
-        WatchdogTimer {
-            name: String::from(name),
-            timeout,
-            is_active: false,
-            reset_count: 0,
-        }
+    pub fn new() -> Self {
+        WatchdogTimer { entries: Vec::new(), active: true }
     }
-
-    pub fn start(&mut self) {
-        if !self.is_active {
-            self.is_active = true;
-            // Simulate starting the timer
-        }
-    }
-
-    pub fn stop(&mut self) {
-        if self.is_active {
-            self.is_active = false;
-            // Simulate stopping the timer
-        }
-    }
-
-    pub fn reset(&mut self) {
-        if self.is_active {
-            self.reset_count += 1;
-            // Simulate resetting the timer
-        }
-    }
-
-    pub fn get_timeout(&self) -> u64 {
-        self.timeout
-    }
-
-    pub fn is_running(&self) -> bool {
-        self.is_active
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

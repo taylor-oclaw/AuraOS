@@ -2,63 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() -> i32 {
-    0
-}
-
-struct MarketplaceDisputeHandler {
-    disputes: Vec<Dispute>,
+pub struct MarketplaceDisputeHandler {
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl MarketplaceDisputeHandler {
     pub fn new() -> Self {
-        MarketplaceDisputeHandler {
-            disputes: Vec::new(),
-        }
+        MarketplaceDisputeHandler { entries: Vec::new(), active: true }
     }
-
-    pub fn add_dispute(&mut self, dispute: Dispute) {
-        self.disputes.push(dispute);
-    }
-
-    pub fn get_dispute_count(&self) -> usize {
-        self.disputes.len()
-    }
-
-    pub fn resolve_dispute(&mut self, dispute_id: u32) -> bool {
-        if let Some(index) = self.disputes.iter().position(|d| d.id == dispute_id) {
-            self.disputes.remove(index);
-            true
-        } else {
-            false
-        }
-    }
-
-    pub fn list_disputes(&self) -> Vec<Dispute> {
-        self.disputes.clone()
-    }
-}
-
-struct Dispute {
-    id: u32,
-    buyer_id: String,
-    seller_id: String,
-    description: String,
-    status: String,
-}
-
-impl Dispute {
-    pub fn new(id: u32, buyer_id: &str, seller_id: &str, description: &str) -> Self {
-        Dispute {
-            id,
-            buyer_id: String::from(buyer_id),
-            seller_id: String::from(seller_id),
-            description: String::from(description),
-            status: String::from("Open"),
-        }
-    }
-
-    pub fn update_status(&mut self, new_status: &str) {
-        self.status = String::from(new_status);
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

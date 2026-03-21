@@ -2,46 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() {
-    // Entry point for the kernel module
+pub struct AiMemoryIndex {
+    entries: Vec<String>,
+    active: bool,
 }
 
-pub struct AIMemoryIndex {
-    index: Vec<(String, usize)>,
-}
-
-impl AIMemoryIndex {
+impl AiMemoryIndex {
     pub fn new() -> Self {
-        AIMemoryIndex { index: Vec::new() }
+        AiMemoryIndex { entries: Vec::new(), active: true }
     }
-
-    pub fn add_entry(&mut self, key: String, value: usize) {
-        self.index.push((key, value));
-    }
-
-    pub fn get_value(&self, key: &str) -> Option<usize> {
-        for (k, v) in &self.index {
-            if k == key {
-                return Some(*v);
-            }
-        }
-        None
-    }
-
-    pub fn remove_entry(&mut self, key: &str) {
-        self.index.retain(|(k, _)| k != key);
-    }
-
-    pub fn contains_key(&self, key: &str) -> bool {
-        for (k, _) in &self.index {
-            if k == key {
-                return true;
-            }
-        }
-        false
-    }
-
-    pub fn get_all_keys(&self) -> Vec<String> {
-        self.index.iter().map(|(k, _)| k.clone()).collect()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

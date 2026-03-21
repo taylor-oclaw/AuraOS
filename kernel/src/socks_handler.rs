@@ -3,43 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct SocksHandler {
-    connections: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl SocksHandler {
     pub fn new() -> Self {
-        SocksHandler {
-            connections: Vec::new(),
-        }
+        SocksHandler { entries: Vec::new(), active: true }
     }
-
-    pub fn add_connection(&mut self, address: &str) {
-        let addr = String::from(address);
-        if !self.connections.contains(&addr) {
-            self.connections.push(addr);
-        }
-    }
-
-    pub fn remove_connection(&mut self, address: &str) -> bool {
-        let pos = self.connections.iter().position(|x| x == address);
-        match pos {
-            Some(index) => {
-                self.connections.remove(index);
-                true
-            }
-            None => false,
-        }
-    }
-
-    pub fn list_connections(&self) -> Vec<String> {
-        self.connections.clone()
-    }
-
-    pub fn has_connection(&self, address: &str) -> bool {
-        self.connections.contains(&String::from(address))
-    }
-
-    pub fn clear_connections(&mut self) {
-        self.connections.clear();
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

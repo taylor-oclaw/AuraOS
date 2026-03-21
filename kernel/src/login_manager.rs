@@ -3,39 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct LoginManager {
-    users: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl LoginManager {
     pub fn new() -> Self {
-        LoginManager { users: Vec::new() }
+        LoginManager { entries: Vec::new(), active: true }
     }
-
-    pub fn add_user(&mut self, username: &str) {
-        if !self.users.contains(&username.to_string()) {
-            self.users.push(username.to_string());
-        }
-    }
-
-    pub fn remove_user(&mut self, username: &str) -> bool {
-        let index = self.users.iter().position(|u| u == username);
-        if let Some(i) = index {
-            self.users.remove(i);
-            true
-        } else {
-            false
-        }
-    }
-
-    pub fn user_exists(&self, username: &str) -> bool {
-        self.users.contains(&username.to_string())
-    }
-
-    pub fn list_users(&self) -> Vec<String> {
-        self.users.clone()
-    }
-
-    pub fn count_users(&self) -> usize {
-        self.users.len()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

@@ -3,33 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct TrustDelegationChain {
-    chain: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl TrustDelegationChain {
     pub fn new() -> Self {
-        TrustDelegationChain { chain: Vec::new() }
+        TrustDelegationChain { entries: Vec::new(), active: true }
     }
-
-    pub fn add_trustee(&mut self, trustee: &str) {
-        self.chain.push(String::from(trustee));
-    }
-
-    pub fn remove_trustee(&mut self, trustee: &str) {
-        if let Some(pos) = self.chain.iter().position(|t| t == trustee) {
-            self.chain.remove(pos);
-        }
-    }
-
-    pub fn get_chain_length(&self) -> usize {
-        self.chain.len()
-    }
-
-    pub fn is_trusted(&self, trustee: &str) -> bool {
-        self.chain.contains(&String::from(trustee))
-    }
-
-    pub fn list_trustees(&self) -> Vec<String> {
-        self.chain.clone()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

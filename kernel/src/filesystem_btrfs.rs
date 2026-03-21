@@ -2,52 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn filesystem_btrfs_init() -> i32 {
-    // Initialization logic for the Btrfs filesystem module
-    0
-}
-
-pub extern "C" fn filesystem_btrfs_exit() {
-    // Cleanup logic for the Btrfs filesystem module
-}
-
 pub struct FilesystemBtrfs {
-    name: String,
-    mount_point: String,
-    files: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl FilesystemBtrfs {
-    pub fn new(name: &str, mount_point: &str) -> Self {
-        FilesystemBtrfs {
-            name: String::from(name),
-            mount_point: String::from(mount_point),
-            files: Vec::new(),
-        }
+    pub fn new() -> Self {
+        FilesystemBtrfs { entries: Vec::new(), active: true }
     }
-
-    pub fn add_file(&mut self, file_name: &str) {
-        self.files.push(String::from(file_name));
-    }
-
-    pub fn remove_file(&mut self, file_name: &str) -> bool {
-        if let Some(index) = self.files.iter().position(|f| f == file_name) {
-            self.files.remove(index);
-            true
-        } else {
-            false
-        }
-    }
-
-    pub fn list_files(&self) -> Vec<String> {
-        self.files.clone()
-    }
-
-    pub fn is_file_present(&self, file_name: &str) -> bool {
-        self.files.contains(&String::from(file_name))
-    }
-
-    pub fn get_mount_point(&self) -> String {
-        self.mount_point.clone()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

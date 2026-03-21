@@ -2,36 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub struct MCPProtocol {
-    data: Vec<u8>,
-    header: String,
+pub struct McpProtocol {
+    entries: Vec<String>,
+    active: bool,
 }
 
-impl MCPProtocol {
-    pub fn new(header: &str) -> Self {
-        MCPProtocol {
-            data: Vec::new(),
-            header: String::from(header),
-        }
+impl McpProtocol {
+    pub fn new() -> Self {
+        McpProtocol { entries: Vec::new(), active: true }
     }
-
-    pub fn add_data(&mut self, data: &[u8]) {
-        self.data.extend_from_slice(data);
-    }
-
-    pub fn get_header(&self) -> &str {
-        &self.header
-    }
-
-    pub fn get_data(&self) -> &[u8] {
-        &self.data
-    }
-
-    pub fn clear_data(&mut self) {
-        self.data.clear();
-    }
-
-    pub fn data_length(&self) -> usize {
-        self.data.len()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

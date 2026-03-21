@@ -2,48 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() {
-    // Entry point for the kernel module
+pub struct McpTransportWs {
+    entries: Vec<String>,
+    active: bool,
 }
 
-struct MCPTransportWS {
-    connection_status: String,
-    messages: Vec<String>,
-    buffer_size: usize,
-}
-
-impl MCPTransportWS {
-    pub fn new(buffer_size: usize) -> Self {
-        MCPTransportWS {
-            connection_status: String::from("Disconnected"),
-            messages: Vec::new(),
-            buffer_size,
-        }
+impl McpTransportWs {
+    pub fn new() -> Self {
+        McpTransportWs { entries: Vec::new(), active: true }
     }
-
-    pub fn connect(&mut self) {
-        // Simulate a connection
-        self.connection_status = String::from("Connected");
-    }
-
-    pub fn disconnect(&mut self) {
-        // Simulate a disconnection
-        self.connection_status = String::from("Disconnected");
-    }
-
-    pub fn is_connected(&self) -> bool {
-        self.connection_status == "Connected"
-    }
-
-    pub fn send_message(&mut self, message: &str) {
-        if self.is_connected() && message.len() <= self.buffer_size {
-            self.messages.push(String::from(message));
-        }
-    }
-
-    pub fn receive_messages(&mut self) -> Vec<String> {
-        let messages = self.messages.clone();
-        self.messages.clear();
-        messages
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

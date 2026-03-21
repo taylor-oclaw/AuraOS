@@ -3,53 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct SudoHandler {
-    users: Vec<String>,
-    commands: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl SudoHandler {
     pub fn new() -> Self {
-        SudoHandler {
-            users: Vec::new(),
-            commands: Vec::new(),
-        }
+        SudoHandler { entries: Vec::new(), active: true }
     }
-
-    pub fn add_user(&mut self, user: String) {
-        if !self.users.contains(&user) {
-            self.users.push(user);
-        }
-    }
-
-    pub fn remove_user(&mut self, user: &str) -> bool {
-        let index = self.users.iter().position(|u| u == user);
-        match index {
-            Some(i) => {
-                self.users.remove(i);
-                true
-            }
-            None => false,
-        }
-    }
-
-    pub fn add_command(&mut self, command: String) {
-        if !self.commands.contains(&command) {
-            self.commands.push(command);
-        }
-    }
-
-    pub fn remove_command(&mut self, command: &str) -> bool {
-        let index = self.commands.iter().position(|c| c == command);
-        match index {
-            Some(i) => {
-                self.commands.remove(i);
-                true
-            }
-            None => false,
-        }
-    }
-
-    pub fn can_execute(&self, user: &str, command: &str) -> bool {
-        self.users.contains(&user.to_string()) && self.commands.contains(&command.to_string())
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

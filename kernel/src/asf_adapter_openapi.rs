@@ -2,60 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn asf_adapter_openapi_init() {
-    // Initialization logic for the module
+pub struct AsfAdapterOpenapi {
+    entries: Vec<String>,
+    active: bool,
 }
 
-pub extern "C" fn asf_adapter_openapi_exit() {
-    // Cleanup logic for the module
-}
-
-pub struct OpenAPIAdapter {
-    base_url: String,
-    api_key: String,
-    endpoints: Vec<String>,
-}
-
-impl OpenAPIAdapter {
-    pub fn new(base_url: &str, api_key: &str) -> Self {
-        OpenAPIAdapter {
-            base_url: String::from(base_url),
-            api_key: String::from(api_key),
-            endpoints: Vec::new(),
-        }
+impl AsfAdapterOpenapi {
+    pub fn new() -> Self {
+        AsfAdapterOpenapi { entries: Vec::new(), active: true }
     }
-
-    pub fn add_endpoint(&mut self, endpoint: &str) {
-        self.endpoints.push(String::from(endpoint));
-    }
-
-    pub fn get_base_url(&self) -> &str {
-        &self.base_url
-    }
-
-    pub fn get_api_key(&self) -> &str {
-        &self.api_key
-    }
-
-    pub fn list_endpoints(&self) -> &[String] {
-        &self.endpoints
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_openapi_adapter() {
-        let mut adapter = OpenAPIAdapter::new("https://api.example.com", "secret_key");
-        assert_eq!(adapter.get_base_url(), "https://api.example.com");
-        assert_eq!(adapter.get_api_key(), "secret_key");
-
-        adapter.add_endpoint("/users");
-        adapter.add_endpoint("/posts");
-        assert_eq!(adapter.list_endpoints().len(), 2);
-        assert_eq!(adapter.list_endpoints()[0], "/users");
-        assert_eq!(adapter.list_endpoints()[1], "/posts");
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

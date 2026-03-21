@@ -2,55 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn ufs_driver_init() -> i32 {
-    // Initialization logic for the UFS driver
-    0
+pub struct UfsDriver {
+    entries: Vec<String>,
+    active: bool,
 }
 
-pub extern "C" fn ufs_driver_exit() {
-    // Cleanup logic for the UFS driver
-}
-
-pub struct UFSDriver {
-    devices: Vec<String>,
-    current_device: Option<usize>,
-}
-
-impl UFSDriver {
+impl UfsDriver {
     pub fn new() -> Self {
-        UFSDriver {
-            devices: Vec::new(),
-            current_device: None,
-        }
+        UfsDriver { entries: Vec::new(), active: true }
     }
-
-    pub fn add_device(&mut self, device_name: &str) {
-        self.devices.push(String::from(device_name));
-    }
-
-    pub fn remove_device(&mut self, device_name: &str) -> bool {
-        if let Some(index) = self.devices.iter().position(|d| d == device_name) {
-            self.devices.remove(index);
-            true
-        } else {
-            false
-        }
-    }
-
-    pub fn list_devices(&self) -> Vec<String> {
-        self.devices.clone()
-    }
-
-    pub fn select_device(&mut self, device_name: &str) -> bool {
-        if let Some(index) = self.devices.iter().position(|d| d == device_name) {
-            self.current_device = Some(index);
-            true
-        } else {
-            false
-        }
-    }
-
-    pub fn get_current_device(&self) -> Option<&String> {
-        self.current_device.map(|index| &self.devices[index])
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

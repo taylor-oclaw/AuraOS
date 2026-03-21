@@ -3,54 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct Pop3Client {
-    server: String,
-    port: u16,
-    username: String,
-    password: String,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl Pop3Client {
-    pub fn new(server: &str, port: u16, username: &str, password: &str) -> Self {
-        Pop3Client {
-            server: server.to_string(),
-            port,
-            username: username.to_string(),
-            password: password.to_string(),
-        }
+    pub fn new() -> Self {
+        Pop3Client { entries: Vec::new(), active: true }
     }
-
-    pub fn connect(&self) -> Result<(), String> {
-        // Simulate a connection to the POP3 server
-        Ok(())
-    }
-
-    pub fn login(&self) -> Result<(), String> {
-        // Simulate logging in to the POP3 server
-        Ok(())
-    }
-
-    pub fn list_messages(&self) -> Result<Vec<String>, String> {
-        // Simulate listing messages on the server
-        let mut messages = Vec::new();
-        messages.push("Message 1".to_string());
-        messages.push("Message 2".to_string());
-        Ok(messages)
-    }
-
-    pub fn retrieve_message(&self, message_id: usize) -> Result<String, String> {
-        // Simulate retrieving a specific message
-        match message_id {
-            0 => Ok("Content of Message 1".to_string()),
-            1 => Ok("Content of Message 2".to_string()),
-            _ => Err("Message not found".to_string()),
-        }
-    }
-
-    pub fn delete_message(&self, message_id: usize) -> Result<(), String> {
-        // Simulate deleting a specific message
-        match message_id {
-            0 | 1 => Ok(()),
-            _ => Err("Message not found".to_string()),
-        }
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

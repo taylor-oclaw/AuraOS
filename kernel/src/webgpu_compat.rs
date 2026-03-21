@@ -2,50 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() {
-    // Entry point for the kernel module
+pub struct WebgpuCompat {
+    entries: Vec<String>,
+    active: bool,
 }
 
-pub struct WebGPUModule {
-    devices: Vec<String>,
-    current_device_index: usize,
-}
-
-impl WebGPUModule {
+impl WebgpuCompat {
     pub fn new() -> Self {
-        WebGPUModule {
-            devices: Vec::new(),
-            current_device_index: 0,
-        }
+        WebgpuCompat { entries: Vec::new(), active: true }
     }
-
-    pub fn add_device(&mut self, device_name: &str) {
-        self.devices.push(String::from(device_name));
-    }
-
-    pub fn remove_device(&mut self, device_name: &str) -> bool {
-        if let Some(index) = self.devices.iter().position(|d| d == device_name) {
-            self.devices.remove(index);
-            true
-        } else {
-            false
-        }
-    }
-
-    pub fn list_devices(&self) -> Vec<String> {
-        self.devices.clone()
-    }
-
-    pub fn select_device(&mut self, device_name: &str) -> bool {
-        if let Some(index) = self.devices.iter().position(|d| d == device_name) {
-            self.current_device_index = index;
-            true
-        } else {
-            false
-        }
-    }
-
-    pub fn get_current_device(&self) -> Option<&String> {
-        self.devices.get(self.current_device_index)
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

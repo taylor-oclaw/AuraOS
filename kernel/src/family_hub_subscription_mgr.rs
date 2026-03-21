@@ -3,42 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct FamilyHubSubscriptionMgr {
-    subscriptions: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl FamilyHubSubscriptionMgr {
     pub fn new() -> Self {
-        FamilyHubSubscriptionMgr {
-            subscriptions: Vec::new(),
-        }
+        FamilyHubSubscriptionMgr { entries: Vec::new(), active: true }
     }
-
-    pub fn add_subscription(&mut self, subscription: String) {
-        if !self.subscriptions.contains(&subscription) {
-            self.subscriptions.push(subscription);
-        }
-    }
-
-    pub fn remove_subscription(&mut self, subscription: &str) -> bool {
-        let index = self.subscriptions.iter().position(|s| s == subscription);
-        match index {
-            Some(i) => {
-                self.subscriptions.remove(i);
-                true
-            }
-            None => false,
-        }
-    }
-
-    pub fn has_subscription(&self, subscription: &str) -> bool {
-        self.subscriptions.contains(&String::from(subscription))
-    }
-
-    pub fn list_subscriptions(&self) -> Vec<String> {
-        self.subscriptions.clone()
-    }
-
-    pub fn count_subscriptions(&self) -> usize {
-        self.subscriptions.len()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

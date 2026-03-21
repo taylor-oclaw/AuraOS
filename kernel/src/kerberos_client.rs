@@ -2,60 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() {
-    // Entry point for the kernel module
-    let client = KerberosClient::new(String::from("example.com"));
-    client.authenticate();
-    client.request_ticket(String::from("service1"));
-    client.request_ticket(String::from("service2"));
-    client.renew_ticket();
-    client.logout();
-}
-
 pub struct KerberosClient {
-    realm: String,
-    tickets: Vec<String>,
-    authenticated: bool,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl KerberosClient {
-    pub fn new(realm: String) -> Self {
-        KerberosClient {
-            realm,
-            tickets: Vec::new(),
-            authenticated: false,
-        }
+    pub fn new() -> Self {
+        KerberosClient { entries: Vec::new(), active: true }
     }
-
-    pub fn authenticate(&mut self) {
-        // Simulate authentication process
-        self.authenticated = true;
-    }
-
-    pub fn request_ticket(&mut self, service: String) {
-        if self.authenticated {
-            self.tickets.push(service.clone());
-        } else {
-        }
-    }
-
-    pub fn renew_ticket(&mut self) {
-        if self.authenticated && !self.tickets.is_empty() {
-            let last_service = self.tickets.pop().unwrap();
-            self.tickets.push(last_service.clone());
-        } else {
-        }
-    }
-
-    pub fn logout(&mut self) {
-        if self.authenticated {
-            self.authenticated = false;
-            self.tickets.clear();
-        } else {
-        }
-    }
-
-    pub fn list_tickets(&self) -> Vec<String> {
-        self.tickets.clone()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

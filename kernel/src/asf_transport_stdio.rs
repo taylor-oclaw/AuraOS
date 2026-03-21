@@ -2,53 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn asf_transport_stdio_init() {
-    // Initialization logic for the module
+pub struct AsfTransportStdio {
+    entries: Vec<String>,
+    active: bool,
 }
 
-pub extern "C" fn asf_transport_stdio_exit() {
-    // Cleanup logic for the module
-}
-
-pub struct StdioTransport {
-    buffer: Vec<u8>,
-}
-
-impl StdioTransport {
+impl AsfTransportStdio {
     pub fn new() -> Self {
-        StdioTransport {
-            buffer: Vec::new(),
-        }
+        AsfTransportStdio { entries: Vec::new(), active: true }
     }
-
-    pub fn write(&mut self, data: &[u8]) -> usize {
-        let len = data.len();
-        self.buffer.extend_from_slice(data);
-        len
-    }
-
-    pub fn read(&mut self, buf: &mut [u8]) -> usize {
-        let len = buf.len().min(self.buffer.len());
-        buf[..len].copy_from_slice(&self.buffer[..len]);
-        self.buffer.drain(..len);
-        len
-    }
-
-    pub fn clear(&mut self) {
-        self.buffer.clear();
-    }
-
-    pub fn size(&self) -> usize {
-        self.buffer.len()
-    }
-
-    pub fn to_string(&self) -> String {
-        let mut result = String::new();
-        for &byte in &self.buffer {
-            if byte.is_ascii() {
-                result.push(byte as char);
-            }
-        }
-        result
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

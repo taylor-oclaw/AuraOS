@@ -2,67 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() -> ! {
-    // Entry point for the kernel module
-    let handler = AiVisionHandler::new();
-    handler.initialize_system();
-    loop {}
-}
-
 pub struct AiVisionHandler {
-    initialized: bool,
-    image_buffer: Vec<u8>,
-    processed_images: Vec<String>,
-    error_log: String,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl AiVisionHandler {
     pub fn new() -> Self {
-        AiVisionHandler {
-            initialized: false,
-            image_buffer: Vec::new(),
-            processed_images: Vec::new(),
-            error_log: String::from(""),
-        }
+        AiVisionHandler { entries: Vec::new(), active: true }
     }
-
-    pub fn initialize_system(&mut self) {
-        if !self.initialized {
-            // Simulate system initialization
-            self.initialized = true;
-            self.error_log.push_str("System initialized\n");
-        } else {
-            self.error_log.push_str("System already initialized\n");
-        }
-    }
-
-    pub fn load_image(&mut self, image_data: Vec<u8>) -> bool {
-        if self.initialized {
-            self.image_buffer = image_data;
-            true
-        } else {
-            self.error_log.push_str("System not initialized to load image\n");
-            false
-        }
-    }
-
-    pub fn process_image(&mut self) -> Option<String> {
-        if self.initialized && !self.image_buffer.is_empty() {
-            // Simulate image processing
-            let processed_image = String::from("Processed Image");
-            self.processed_images.push(processed_image.clone());
-            Some(processed_image)
-        } else {
-            self.error_log.push_str("No image to process or system not initialized\n");
-            None
-        }
-    }
-
-    pub fn get_processed_images(&self) -> Vec<String> {
-        self.processed_images.clone()
-    }
-
-    pub fn clear_error_log(&mut self) {
-        self.error_log.clear();
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

@@ -2,53 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() {
-    let bridge = HomekitBridge::new();
-    bridge.initialize();
-    bridge.add_device(String::from("Light"));
-    bridge.add_device(String::from("Thermostat"));
-    bridge.list_devices();
-    bridge.remove_device(String::from("Light"));
-    bridge.list_devices();
-}
-
 pub struct HomekitBridge {
-    devices: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl HomekitBridge {
     pub fn new() -> Self {
-        HomekitBridge {
-            devices: Vec::new(),
-        }
+        HomekitBridge { entries: Vec::new(), active: true }
     }
-
-    pub fn initialize(&mut self) {
-    }
-
-    pub fn add_device(&mut self, device_name: String) {
-        if !self.devices.contains(&device_name) {
-            self.devices.push(device_name);
-        } else {
-        }
-    }
-
-    pub fn remove_device(&mut self, device_name: String) {
-        if let Some(index) = self.devices.iter().position(|x| *x == device_name) {
-            let removed_device = self.devices.remove(index);
-        } else {
-        }
-    }
-
-    pub fn list_devices(&self) {
-        if self.devices.is_empty() {
-        } else {
-            for device in &self.devices {
-            }
-        }
-    }
-
-    pub fn get_device_count(&self) -> usize {
-        self.devices.len()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

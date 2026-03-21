@@ -2,58 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn marketplace_developer_sdk_init() {
-    // Initialization logic for the SDK
+pub struct MarketplaceDeveloperSdk {
+    entries: Vec<String>,
+    active: bool,
 }
 
-pub extern "C" fn marketplace_developer_sdk_exit() {
-    // Cleanup logic for the SDK
-}
-
-pub struct MarketplaceDeveloperSDK {
-    apps: Vec<String>,
-    developers: Vec<String>,
-}
-
-impl MarketplaceDeveloperSDK {
+impl MarketplaceDeveloperSdk {
     pub fn new() -> Self {
-        MarketplaceDeveloperSDK {
-            apps: Vec::new(),
-            developers: Vec::new(),
-        }
+        MarketplaceDeveloperSdk { entries: Vec::new(), active: true }
     }
-
-    pub fn add_app(&mut self, app_name: &str) {
-        self.apps.push(String::from(app_name));
-    }
-
-    pub fn remove_app(&mut self, app_name: &str) -> bool {
-        if let Some(index) = self.apps.iter().position(|x| x == app_name) {
-            self.apps.remove(index);
-            true
-        } else {
-            false
-        }
-    }
-
-    pub fn list_apps(&self) -> Vec<String> {
-        self.apps.clone()
-    }
-
-    pub fn add_developer(&mut self, developer_name: &str) {
-        self.developers.push(String::from(developer_name));
-    }
-
-    pub fn remove_developer(&mut self, developer_name: &str) -> bool {
-        if let Some(index) = self.developers.iter().position(|x| x == developer_name) {
-            self.developers.remove(index);
-            true
-        } else {
-            false
-        }
-    }
-
-    pub fn list_developers(&self) -> Vec<String> {
-        self.developers.clone()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

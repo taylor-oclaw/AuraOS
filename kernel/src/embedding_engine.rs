@@ -2,44 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn embedding_engine_init() {
-    // Initialization logic for the embedding engine module
-}
-
-pub extern "C" fn embedding_engine_exit() {
-    // Cleanup logic for the embedding engine module
-}
-
 pub struct EmbeddingEngine {
-    data: Vec<u8>,
-    metadata: String,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl EmbeddingEngine {
-    pub fn new(data: Vec<u8>, metadata: &str) -> Self {
-        EmbeddingEngine {
-            data,
-            metadata: String::from(metadata),
-        }
+    pub fn new() -> Self {
+        EmbeddingEngine { entries: Vec::new(), active: true }
     }
-
-    pub fn get_data(&self) -> &[u8] {
-        &self.data
-    }
-
-    pub fn set_data(&mut self, new_data: Vec<u8>) {
-        self.data = new_data;
-    }
-
-    pub fn get_metadata(&self) -> &str {
-        &self.metadata
-    }
-
-    pub fn set_metadata(&mut self, new_metadata: &str) {
-        self.metadata = String::from(new_metadata);
-    }
-
-    pub fn append_to_data(&mut self, additional_data: &[u8]) {
-        self.data.extend_from_slice(additional_data);
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

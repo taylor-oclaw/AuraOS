@@ -3,59 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct SshServer {
-    users: Vec<String>,
-    sessions: Vec<Session>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl SshServer {
     pub fn new() -> Self {
-        SshServer {
-            users: Vec::new(),
-            sessions: Vec::new(),
-        }
+        SshServer { entries: Vec::new(), active: true }
     }
-
-    pub fn add_user(&mut self, username: &str) {
-        if !self.users.contains(&username.to_string()) {
-            self.users.push(username.to_string());
-        }
-    }
-
-    pub fn remove_user(&mut self, username: &str) {
-        self.users.retain(|user| user != username);
-    }
-
-    pub fn authenticate(&self, username: &str, password: &str) -> bool {
-        // For simplicity, assume all users have the same password
-        self.users.contains(&username.to_string())
-    }
-
-    pub fn start_session(&mut self, username: &str) -> Option<usize> {
-        if self.authenticate(username, "") {
-            let session_id = self.sessions.len();
-            self.sessions.push(Session::new(username));
-            Some(session_id)
-        } else {
-            None
-        }
-    }
-
-    pub fn end_session(&mut self, session_id: usize) {
-        if session_id < self.sessions.len() {
-            self.sessions.remove(session_id);
-        }
-    }
-}
-
-struct Session {
-    username: String,
-    // Add more session-related fields as needed
-}
-
-impl Session {
-    fn new(username: &str) -> Self {
-        Session {
-            username: username.to_string(),
-        }
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

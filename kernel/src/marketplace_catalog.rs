@@ -3,45 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct MarketplaceCatalog {
-    items: Vec<Item>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl MarketplaceCatalog {
     pub fn new() -> Self {
-        MarketplaceCatalog { items: Vec::new() }
+        MarketplaceCatalog { entries: Vec::new(), active: true }
     }
-
-    pub fn add_item(&mut self, item: Item) {
-        self.items.push(item);
-    }
-
-    pub fn remove_item(&mut self, id: u32) -> Option<Item> {
-        let index = self.items.iter().position(|item| item.id == id)?;
-        Some(self.items.remove(index))
-    }
-
-    pub fn get_item_by_id(&self, id: u32) -> Option<&Item> {
-        self.items.iter().find(|item| item.id == id)
-    }
-
-    pub fn list_items(&self) -> &[Item] {
-        &self.items
-    }
-
-    pub fn count_items(&self) -> usize {
-        self.items.len()
-    }
-}
-
-pub struct Item {
-    pub id: u32,
-    pub name: String,
-    pub price: u64,
-    pub description: String,
-}
-
-impl Item {
-    pub fn new(id: u32, name: String, price: u64, description: String) -> Self {
-        Item { id, name, price, description }
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

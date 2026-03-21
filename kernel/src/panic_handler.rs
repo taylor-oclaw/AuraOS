@@ -1,48 +1,21 @@
 extern crate alloc;
 use alloc::string::String;
-use core::fmt::Write;
+use alloc::vec::Vec;
 
-struct SerialWriter;
-
-impl SerialWriter {
-    fn write_byte(&self, byte: u8) {
-        unsafe {
-            core::arch::asm!("out dx, al", in("dx") 0x3F8u16, in("al") byte);
-        }
-    }
+pub struct PanicHandler {
+    entries: Vec<String>,
+    active: bool,
 }
 
-impl core::fmt::Write for SerialWriter {
-    fn write_str(&mut self, s: &str) -> core::fmt::Result {
-        for b in s.bytes() {
-            self.write_byte(b);
-        }
-        Ok(())
+impl PanicHandler {
+    pub fn new() -> Self {
+        PanicHandler { entries: Vec::new(), active: true }
     }
-}
-
-pub struct PanicRecord {
-    pub file: Option<String>,
-    pub line: u32,
-    pub message: Option<String>
-}
-
-pub fn log_panic(info: &core::panic::PanicInfo) -> PanicRecord {
-    let mut w = SerialWriter;
-    let _ = write!(w, "KERNEL PANIC: {}", info);
-    let file = info.location().map(|l| String::from(l.file()));
-    let line = info.location().map(|l| l.line()).unwrap_or(0);
-    PanicRecord {
-        file,
-        line,
-        message: None
-    }
-}
-
-pub fn halt_loop() -> ! {
-    loop {
-        unsafe {
-            core::arch::asm!("hlt");
-        }
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

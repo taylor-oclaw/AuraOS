@@ -2,51 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn display_calibrate_init() {
-    // Initialization logic for the module
+pub struct DisplayCalibrate {
+    entries: Vec<String>,
+    active: bool,
 }
 
-pub extern "C" fn display_calibrate_exit() {
-    // Cleanup logic for the module
-}
-
-pub struct DisplayCalibrator {
-    width: u32,
-    height: u32,
-    calibration_data: Vec<u8>,
-    status: String,
-}
-
-impl DisplayCalibrator {
-    pub fn new(width: u32, height: u32) -> Self {
-        DisplayCalibrator {
-            width,
-            height,
-            calibration_data: Vec::new(),
-            status: String::from("Initialized"),
-        }
+impl DisplayCalibrate {
+    pub fn new() -> Self {
+        DisplayCalibrate { entries: Vec::new(), active: true }
     }
-
-    pub fn set_width(&mut self, width: u32) {
-        self.width = width;
-        self.status = String::from("Width updated");
-    }
-
-    pub fn set_height(&mut self, height: u32) {
-        self.height = height;
-        self.status = String::from("Height updated");
-    }
-
-    pub fn load_calibration_data(&mut self, data: Vec<u8>) {
-        self.calibration_data = data;
-        self.status = String::from("Calibration data loaded");
-    }
-
-    pub fn get_resolution(&self) -> (u32, u32) {
-        (self.width, self.height)
-    }
-
-    pub fn is_calibrated(&self) -> bool {
-        !self.calibration_data.is_empty()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

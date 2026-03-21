@@ -3,44 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct GroupManager {
-    groups: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl GroupManager {
     pub fn new() -> Self {
-        GroupManager {
-            groups: Vec::new(),
-        }
+        GroupManager { entries: Vec::new(), active: true }
     }
-
-    pub fn add_group(&mut self, group_name: &str) -> bool {
-        if !self.groups.contains(&String::from(group_name)) {
-            self.groups.push(String::from(group_name));
-            true
-        } else {
-            false
-        }
-    }
-
-    pub fn remove_group(&mut self, group_name: &str) -> bool {
-        let pos = self.groups.iter().position(|g| g == group_name);
-        if let Some(index) = pos {
-            self.groups.remove(index);
-            true
-        } else {
-            false
-        }
-    }
-
-    pub fn list_groups(&self) -> Vec<String> {
-        self.groups.clone()
-    }
-
-    pub fn group_exists(&self, group_name: &str) -> bool {
-        self.groups.contains(&String::from(group_name))
-    }
-
-    pub fn number_of_groups(&self) -> usize {
-        self.groups.len()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

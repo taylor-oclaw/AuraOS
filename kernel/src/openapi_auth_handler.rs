@@ -2,39 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub struct OpenApiAuthHandler {
-    api_keys: Vec<String>,
+pub struct OpenapiAuthHandler {
+    entries: Vec<String>,
+    active: bool,
 }
 
-impl OpenApiAuthHandler {
+impl OpenapiAuthHandler {
     pub fn new() -> Self {
-        OpenApiAuthHandler {
-            api_keys: Vec::new(),
-        }
+        OpenapiAuthHandler { entries: Vec::new(), active: true }
     }
-
-    pub fn add_api_key(&mut self, key: &str) {
-        self.api_keys.push(key.to_string());
-    }
-
-    pub fn remove_api_key(&mut self, key: &str) -> bool {
-        if let Some(index) = self.api_keys.iter().position(|k| k == key) {
-            self.api_keys.remove(index);
-            true
-        } else {
-            false
-        }
-    }
-
-    pub fn is_valid_api_key(&self, key: &str) -> bool {
-        self.api_keys.contains(&key.to_string())
-    }
-
-    pub fn list_api_keys(&self) -> Vec<String> {
-        self.api_keys.clone()
-    }
-
-    pub fn clear_api_keys(&mut self) {
-        self.api_keys.clear();
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

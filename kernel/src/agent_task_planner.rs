@@ -2,47 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() -> i32 {
-    0
-}
-
 pub struct AgentTaskPlanner {
-    tasks: Vec<String>,
-    completed_tasks: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl AgentTaskPlanner {
     pub fn new() -> Self {
-        AgentTaskPlanner {
-            tasks: Vec::new(),
-            completed_tasks: Vec::new(),
-        }
+        AgentTaskPlanner { entries: Vec::new(), active: true }
     }
-
-    pub fn add_task(&mut self, task: String) {
-        self.tasks.push(task);
-    }
-
-    pub fn complete_task(&mut self, task_index: usize) -> Option<String> {
-        if let Some(task) = self.tasks.get(task_index).cloned() {
-            self.tasks.remove(task_index);
-            self.completed_tasks.push(task.clone());
-            Some(task)
-        } else {
-            None
-        }
-    }
-
-    pub fn get_pending_tasks(&self) -> Vec<String> {
-        self.tasks.clone()
-    }
-
-    pub fn get_completed_tasks(&self) -> Vec<String> {
-        self.completed_tasks.clone()
-    }
-
-    pub fn clear_all_tasks(&mut self) {
-        self.tasks.clear();
-        self.completed_tasks.clear();
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

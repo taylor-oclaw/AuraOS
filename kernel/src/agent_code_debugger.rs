@@ -2,58 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() {
-    let mut debugger = AgentCodeDebugger::new();
-    debugger.set_breakpoint(1);
-    debugger.run();
-    if debugger.is_stopped_at_breakpoint() {
-    }
-    let code = debugger.get_code_at_line(1);
-}
-
 pub struct AgentCodeDebugger {
-    code_lines: Vec<String>,
-    breakpoints: Vec<usize>,
-    current_line: usize,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl AgentCodeDebugger {
     pub fn new() -> Self {
-        AgentCodeDebugger {
-            code_lines: Vec::new(),
-            breakpoints: Vec::new(),
-            current_line: 0,
-        }
+        AgentCodeDebugger { entries: Vec::new(), active: true }
     }
-
-    pub fn add_code(&mut self, code: &str) {
-        self.code_lines.push(String::from(code));
-    }
-
-    pub fn set_breakpoint(&mut self, line_number: usize) {
-        if line_number < self.code_lines.len() {
-            self.breakpoints.push(line_number);
-        }
-    }
-
-    pub fn run(&mut self) {
-        for (i, _) in self.code_lines.iter().enumerate() {
-            self.current_line = i;
-            if self.breakpoints.contains(&self.current_line) {
-                break;
-            }
-        }
-    }
-
-    pub fn is_stopped_at_breakpoint(&self) -> bool {
-        self.breakpoints.contains(&self.current_line)
-    }
-
-    pub fn get_code_at_line(&self, line_number: usize) -> Option<&str> {
-        if line_number < self.code_lines.len() {
-            Some(&self.code_lines[line_number])
-        } else {
-            None
-        }
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

@@ -3,45 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct AiRuntimeAbstract {
-    name: String,
-    version: u32,
-    features: Vec<String>,
-    memory_usage: usize,
-    processing_power: f32,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl AiRuntimeAbstract {
-    pub fn new(name: &str, version: u32) -> Self {
-        AiRuntimeAbstract {
-            name: String::from(name),
-            version,
-            features: Vec::new(),
-            memory_usage: 0,
-            processing_power: 0.0,
-        }
+    pub fn new() -> Self {
+        AiRuntimeAbstract { entries: Vec::new(), active: true }
     }
-
-    pub fn add_feature(&mut self, feature: &str) {
-        self.features.push(String::from(feature));
-    }
-
-    pub fn get_features(&self) -> &[String] {
-        &self.features
-    }
-
-    pub fn set_memory_usage(&mut self, usage: usize) {
-        self.memory_usage = usage;
-    }
-
-    pub fn get_memory_usage(&self) -> usize {
-        self.memory_usage
-    }
-
-    pub fn set_processing_power(&mut self, power: f32) {
-        self.processing_power = power;
-    }
-
-    pub fn get_processing_power(&self) -> f32 {
-        self.processing_power
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

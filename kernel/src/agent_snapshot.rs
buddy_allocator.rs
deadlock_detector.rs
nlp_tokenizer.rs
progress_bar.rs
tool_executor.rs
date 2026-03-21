@@ -2,14 +2,29 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub struct FamilyHubPetTracker {
+pub struct AgentSnapshot
+buddyAllocator
+deadlockDetector
+nlpTokenizer
+progressBar
+toolExecutor {
     entries: Vec<String>,
     active: bool,
 }
 
-impl FamilyHubPetTracker {
+impl AgentSnapshot
+buddyAllocator
+deadlockDetector
+nlpTokenizer
+progressBar
+toolExecutor {
     pub fn new() -> Self {
-        FamilyHubPetTracker { entries: Vec::new(), active: true }
+        AgentSnapshot
+buddyAllocator
+deadlockDetector
+nlpTokenizer
+progressBar
+toolExecutor { entries: Vec::new(), active: true }
     }
     pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
     pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }

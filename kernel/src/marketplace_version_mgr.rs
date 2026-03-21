@@ -2,43 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-#[derive(Debug)]
 pub struct MarketplaceVersionMgr {
-    versions: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl MarketplaceVersionMgr {
     pub fn new() -> Self {
-        MarketplaceVersionMgr {
-            versions: Vec::new(),
-        }
+        MarketplaceVersionMgr { entries: Vec::new(), active: true }
     }
-
-    pub fn add_version(&mut self, version: String) {
-        if !self.versions.contains(&version) {
-            self.versions.push(version);
-        }
-    }
-
-    pub fn remove_version(&mut self, version: &str) -> bool {
-        let pos = self.versions.iter().position(|v| v == version);
-        if let Some(index) = pos {
-            self.versions.remove(index);
-            true
-        } else {
-            false
-        }
-    }
-
-    pub fn get_versions(&self) -> &[String] {
-        &self.versions
-    }
-
-    pub fn has_version(&self, version: &str) -> bool {
-        self.versions.contains(&version.to_string())
-    }
-
-    pub fn count_versions(&self) -> usize {
-        self.versions.len()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

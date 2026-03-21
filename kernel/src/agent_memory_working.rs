@@ -2,52 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() {
-    // Entry point for the kernel module
-    let mut memory = AgentMemoryWorking::new();
-    memory.store_data("key1", "value1");
-    memory.store_data("key2", "value2");
-    if let Some(value) = memory.retrieve_data("key1") {
-    }
-    memory.delete_data("key2");
-    if let Some(count) = memory.data_count() {
-    }
-}
-
 pub struct AgentMemoryWorking {
-    data_store: Vec<(String, String)>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl AgentMemoryWorking {
     pub fn new() -> Self {
-        AgentMemoryWorking {
-            data_store: Vec::new(),
-        }
+        AgentMemoryWorking { entries: Vec::new(), active: true }
     }
-
-    pub fn store_data(&mut self, key: &str, value: &str) {
-        let entry = (String::from(key), String::from(value));
-        self.data_store.push(entry);
-    }
-
-    pub fn retrieve_data(&self, key: &str) -> Option<&String> {
-        for (k, v) in &self.data_store {
-            if k == key {
-                return Some(v);
-            }
-        }
-        None
-    }
-
-    pub fn delete_data(&mut self, key: &str) {
-        self.data_store.retain(|(k, _)| k != key);
-    }
-
-    pub fn data_count(&self) -> Option<usize> {
-        Some(self.data_store.len())
-    }
-
-    pub fn clear_all(&mut self) {
-        self.data_store.clear();
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

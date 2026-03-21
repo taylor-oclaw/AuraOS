@@ -2,52 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub struct SkillManifest {
-    name: String,
-    version: u32,
-    description: String,
-    dependencies: Vec<String>,
-    features: Vec<String>,
+pub struct SkillManifestParser {
+    entries: Vec<String>,
+    active: bool,
 }
 
-impl SkillManifest {
-    pub fn new(name: &str, version: u32, description: &str) -> Self {
-        SkillManifest {
-            name: String::from(name),
-            version,
-            description: String::from(description),
-            dependencies: Vec::new(),
-            features: Vec::new(),
-        }
+impl SkillManifestParser {
+    pub fn new() -> Self {
+        SkillManifestParser { entries: Vec::new(), active: true }
     }
-
-    pub fn add_dependency(&mut self, dependency: &str) {
-        self.dependencies.push(String::from(dependency));
-    }
-
-    pub fn remove_dependency(&mut self, dependency: &str) {
-        self.dependencies.retain(|d| d != dependency);
-    }
-
-    pub fn has_feature(&self, feature: &str) -> bool {
-        self.features.contains(&String::from(feature))
-    }
-
-    pub fn add_feature(&mut self, feature: &str) {
-        if !self.has_feature(feature) {
-            self.features.push(String::from(feature));
-        }
-    }
-
-    pub fn remove_feature(&mut self, feature: &str) {
-        self.features.retain(|f| f != feature);
-    }
-
-    pub fn get_dependencies(&self) -> Vec<String> {
-        self.dependencies.clone()
-    }
-
-    pub fn get_features(&self) -> Vec<String> {
-        self.features.clone()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

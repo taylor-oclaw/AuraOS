@@ -1,52 +1,21 @@
 extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
-use alloc::vec;
 
-pub extern "C" fn rust_start() -> i32 {
-    0
-}
-
-struct AgentCodeReviewer {
-    codebase: Vec<String>,
-    review_comments: Vec<String>,
+pub struct AgentCodeReviewer {
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl AgentCodeReviewer {
     pub fn new() -> Self {
-        AgentCodeReviewer {
-            codebase: Vec::new(),
-            review_comments: Vec::new(),
-        }
+        AgentCodeReviewer { entries: Vec::new(), active: true }
     }
-
-    pub fn add_code(&mut self, code: String) {
-        self.codebase.push(code);
-    }
-
-    pub fn get_code(&self, index: usize) -> Option<&String> {
-        self.codebase.get(index)
-    }
-
-    pub fn review_code(&mut self) {
-        for code in &self.codebase {
-            let comment = self.analyze_code(code);
-            self.review_comments.push(comment);
-        }
-    }
-
-    fn analyze_code(&self, code: &str) -> String {
-        // Simple analysis logic
-        if code.contains("TODO") {
-            String::from("info")
-        } else if code.contains("panic!") {
-            String::from("info")
-        } else {
-            String::from("info")
-        }
-    }
-
-    pub fn get_review_comments(&self) -> &Vec<String> {
-        &self.review_comments
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

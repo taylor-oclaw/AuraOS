@@ -2,56 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub struct OAuthClient {
-    client_id: String,
-    client_secret: String,
-    access_token: Option<String>,
-    refresh_token: Option<String>,
-    token_expiry: u64, // Unix timestamp in seconds
+pub struct OauthClient {
+    entries: Vec<String>,
+    active: bool,
 }
 
-impl OAuthClient {
-    pub fn new(client_id: &str, client_secret: &str) -> Self {
-        OAuthClient {
-            client_id: String::from(client_id),
-            client_secret: String::from(client_secret),
-            access_token: None,
-            refresh_token: None,
-            token_expiry: 0,
-        }
+impl OauthClient {
+    pub fn new() -> Self {
+        OauthClient { entries: Vec::new(), active: true }
     }
-
-    pub fn set_access_token(&mut self, token: &str, expiry: u64) {
-        self.access_token = Some(String::from(token));
-        self.token_expiry = expiry;
-    }
-
-    pub fn get_access_token(&self) -> Option<&String> {
-        if let Some(ref token) = self.access_token {
-            if self.token_expiry > 0 && self.token_expiry > current_time() {
-                return Some(token);
-            }
-        }
-        None
-    }
-
-    pub fn set_refresh_token(&mut self, token: &str) {
-        self.refresh_token = Some(String::from(token));
-    }
-
-    pub fn get_refresh_token(&self) -> Option<&String> {
-        self.refresh_token.as_ref()
-    }
-
-    pub fn is_token_expired(&self) -> bool {
-        if let Some(_) = self.access_token {
-            return self.token_expiry <= current_time();
-        }
-        true
-    }
-}
-
-fn current_time() -> u64 {
-    // Placeholder for getting the current time in seconds since epoch
-    0
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

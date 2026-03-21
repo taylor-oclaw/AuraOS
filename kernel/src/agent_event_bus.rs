@@ -3,41 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct AgentEventBus {
-    subscribers: Vec<String>,
-    events: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl AgentEventBus {
     pub fn new() -> Self {
-        AgentEventBus {
-            subscribers: Vec::new(),
-            events: Vec::new(),
-        }
+        AgentEventBus { entries: Vec::new(), active: true }
     }
-
-    pub fn subscribe(&mut self, subscriber_id: &str) {
-        if !self.subscribers.contains(&subscriber_id.to_string()) {
-            self.subscribers.push(subscriber_id.to_string());
-        }
-    }
-
-    pub fn unsubscribe(&mut self, subscriber_id: &str) {
-        self.subscribers.retain(|s| s != subscriber_id);
-    }
-
-    pub fn publish_event(&mut self, event: &str) {
-        self.events.push(event.to_string());
-        self.notify_subscribers(event);
-    }
-
-    fn notify_subscribers(&self, event: &str) {
-        for subscriber in &self.subscribers {
-            // Simulate notification logic
-            // In a real kernel module, this would involve more complex interactions
-        }
-    }
-
-    pub fn get_events(&self) -> Vec<String> {
-        self.events.clone()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

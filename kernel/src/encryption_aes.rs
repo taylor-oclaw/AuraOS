@@ -3,55 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct EncryptionAes {
-    key: Vec<u8>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl EncryptionAes {
-    pub fn new(key: &[u8]) -> Self {
-        EncryptionAes {
-            key: key.to_vec(),
-        }
+    pub fn new() -> Self {
+        EncryptionAes { entries: Vec::new(), active: true }
     }
-
-    pub fn encrypt(&self, plaintext: &[u8]) -> Result<Vec<u8>, String> {
-        if self.key.len() != 16 && self.key.len() != 24 && self.key.len() != 32 {
-            return Err(String::from("Invalid key length"));
-        }
-        // Placeholder for encryption logic
-        let mut ciphertext = plaintext.to_vec();
-        // Simulate encryption by XORing with the key
-        for (i, byte) in ciphertext.iter_mut().enumerate() {
-            *byte ^= self.key[i % self.key.len()];
-        }
-        Ok(ciphertext)
-    }
-
-    pub fn decrypt(&self, ciphertext: &[u8]) -> Result<Vec<u8>, String> {
-        if self.key.len() != 16 && self.key.len() != 24 && self.key.len() != 32 {
-            return Err(String::from("Invalid key length"));
-        }
-        // Placeholder for decryption logic
-        let mut plaintext = ciphertext.to_vec();
-        // Simulate decryption by XORing with the key
-        for (i, byte) in plaintext.iter_mut().enumerate() {
-            *byte ^= self.key[i % self.key.len()];
-        }
-        Ok(plaintext)
-    }
-
-    pub fn set_key(&mut self, new_key: &[u8]) -> Result<(), String> {
-        if new_key.len() != 16 && new_key.len() != 24 && new_key.len() != 32 {
-            return Err(String::from("Invalid key length"));
-        }
-        self.key = new_key.to_vec();
-        Ok(())
-    }
-
-    pub fn get_key_length(&self) -> usize {
-        self.key.len()
-    }
-
-    pub fn is_valid_key_length(&self, key_length: usize) -> bool {
-        key_length == 16 || key_length == 24 || key_length == 32
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

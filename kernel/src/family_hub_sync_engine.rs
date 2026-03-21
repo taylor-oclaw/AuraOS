@@ -1,48 +1,21 @@
 extern crate alloc;
-
 use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct FamilyHubSyncEngine {
-    devices: Vec<String>,
-    sync_status: bool,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl FamilyHubSyncEngine {
     pub fn new() -> Self {
-        FamilyHubSyncEngine {
-            devices: Vec::new(),
-            sync_status: false,
-        }
+        FamilyHubSyncEngine { entries: Vec::new(), active: true }
     }
-
-    pub fn add_device(&mut self, device_name: &str) {
-        if !self.devices.contains(&device_name.to_string()) {
-            self.devices.push(device_name.to_string());
-        }
-    }
-
-    pub fn remove_device(&mut self, device_name: &str) {
-        self.devices.retain(|d| d != device_name);
-    }
-
-    pub fn list_devices(&self) -> Vec<String> {
-        self.devices.clone()
-    }
-
-    pub fn start_sync(&mut self) {
-        if !self.sync_status {
-            // Simulate sync process
-            self.sync_status = true;
-            // Additional logic for starting sync can be added here
-        }
-    }
-
-    pub fn stop_sync(&mut self) {
-        if self.sync_status {
-            // Simulate stopping sync process
-            self.sync_status = false;
-            // Additional logic for stopping sync can be added here
-        }
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

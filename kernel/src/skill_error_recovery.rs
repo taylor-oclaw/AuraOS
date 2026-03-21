@@ -2,41 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() -> ! {
-    // Entry point for the kernel module
-    loop {}
-}
-
-struct SkillErrorRecovery {
-    errors: Vec<String>,
-    recovery_steps: Vec<String>,
+pub struct SkillErrorRecovery {
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl SkillErrorRecovery {
     pub fn new() -> Self {
-        SkillErrorRecovery {
-            errors: Vec::new(),
-            recovery_steps: Vec::new(),
-        }
+        SkillErrorRecovery { entries: Vec::new(), active: true }
     }
-
-    pub fn add_error(&mut self, error: String) {
-        self.errors.push(error);
-    }
-
-    pub fn get_errors(&self) -> &Vec<String> {
-        &self.errors
-    }
-
-    pub fn add_recovery_step(&mut self, step: String) {
-        self.recovery_steps.push(step);
-    }
-
-    pub fn get_recovery_steps(&self) -> &Vec<String> {
-        &self.recovery_steps
-    }
-
-    pub fn clear_errors(&mut self) {
-        self.errors.clear();
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

@@ -2,76 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() -> i32 {
-    0
-}
-
-pub struct Episode {
-    id: u32,
-    events: Vec<String>,
-}
-
-impl Episode {
-    pub fn new(id: u32) -> Self {
-        Episode {
-            id,
-            events: Vec::new(),
-        }
-    }
-
-    pub fn add_event(&mut self, event: String) {
-        self.events.push(event);
-    }
-
-    pub fn get_events(&self) -> &Vec<String> {
-        &self.events
-    }
-
-    pub fn remove_event(&mut self, index: usize) -> Option<String> {
-        if index < self.events.len() {
-            Some(self.events.remove(index))
-        } else {
-            None
-        }
-    }
-
-    pub fn clear_events(&mut self) {
-        self.events.clear();
-    }
-}
-
 pub struct AgentMemoryEpisodic {
-    episodes: Vec<Episode>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl AgentMemoryEpisodic {
     pub fn new() -> Self {
-        AgentMemoryEpisodic {
-            episodes: Vec::new(),
-        }
+        AgentMemoryEpisodic { entries: Vec::new(), active: true }
     }
-
-    pub fn add_episode(&mut self, episode: Episode) {
-        self.episodes.push(episode);
-    }
-
-    pub fn get_episodes(&self) -> &Vec<Episode> {
-        &self.episodes
-    }
-
-    pub fn remove_episode(&mut self, index: usize) -> Option<Episode> {
-        if index < self.episodes.len() {
-            Some(self.episodes.remove(index))
-        } else {
-            None
-        }
-    }
-
-    pub fn clear_episodes(&mut self) {
-        self.episodes.clear();
-    }
-
-    pub fn find_episode_by_id(&self, id: u32) -> Option<&Episode> {
-        self.episodes.iter().find(|episode| episode.id == id)
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

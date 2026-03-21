@@ -1,44 +1,21 @@
 extern crate alloc;
-
 use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct EnterpriseConsole {
-    commands: Vec<String>,
-    history: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl EnterpriseConsole {
     pub fn new() -> Self {
-        EnterpriseConsole {
-            commands: Vec::new(),
-            history: Vec::new(),
-        }
+        EnterpriseConsole { entries: Vec::new(), active: true }
     }
-
-    pub fn add_command(&mut self, command: String) {
-        self.commands.push(command);
-    }
-
-    pub fn execute_command(&mut self, command: &str) -> Option<String> {
-        if let Some(index) = self.commands.iter().position(|c| c == command) {
-            let result = String::from("info");
-            self.history.push(result.clone());
-            Some(result)
-        } else {
-            None
-        }
-    }
-
-    pub fn list_commands(&self) -> Vec<String> {
-        self.commands.clone()
-    }
-
-    pub fn get_history(&self) -> Vec<String> {
-        self.history.clone()
-    }
-
-    pub fn clear_history(&mut self) {
-        self.history.clear();
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

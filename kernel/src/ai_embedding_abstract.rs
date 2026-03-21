@@ -2,52 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() -> ! {
-    // Entry point for the kernel module
-    loop {}
+pub struct AiEmbeddingAbstract {
+    entries: Vec<String>,
+    active: bool,
 }
 
-struct AIEmbeddingAbstract {
-    embeddings: Vec<Vec<f32>>,
-    labels: Vec<String>,
-}
-
-impl AIEmbeddingAbstract {
+impl AiEmbeddingAbstract {
     pub fn new() -> Self {
-        AIEmbeddingAbstract {
-            embeddings: Vec::new(),
-            labels: Vec::new(),
-        }
+        AiEmbeddingAbstract { entries: Vec::new(), active: true }
     }
-
-    pub fn add_embedding(&mut self, embedding: Vec<f32>, label: String) {
-        self.embeddings.push(embedding);
-        self.labels.push(label);
-    }
-
-    pub fn get_embedding(&self, index: usize) -> Option<&Vec<f32>> {
-        self.embeddings.get(index)
-    }
-
-    pub fn get_label(&self, index: usize) -> Option<&String> {
-        self.labels.get(index)
-    }
-
-    pub fn find_by_label(&self, label: &str) -> Vec<usize> {
-        let mut indices = Vec::new();
-        for (i, l) in self.labels.iter().enumerate() {
-            if l == label {
-                indices.push(i);
-            }
-        }
-        indices
-    }
-
-    pub fn remove_embedding(&mut self, index: usize) -> Option<(Vec<f32>, String)> {
-        if index < self.embeddings.len() && index < self.labels.len() {
-            Some((self.embeddings.remove(index), self.labels.remove(index)))
-        } else {
-            None
-        }
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

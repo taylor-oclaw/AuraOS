@@ -1,45 +1,21 @@
 extern crate alloc;
+use alloc::string::String;
+use alloc::vec::Vec;
 
-#[derive(Clone, Copy)]
-pub enum CursorStyle {
-    Arrow,
-    Hand,
-    Text,
-    Wait,
-    Crosshair,
+pub struct Cursor {
+    entries: Vec<String>,
+    active: bool,
 }
 
-const ARROW_BITMAP: [u16; 16] = [
-    0b1000000000000000,
-    0b1100000000000000,
-    0b1110000000000000,
-    0b1111000000000000,
-    0b1111100000000000,
-    0b1111110000000000,
-    0b1111111000000000,
-    0b1111100000000000,
-    0b1101100000000000,
-    0b1000110000000000,
-    0b0000110000000000,
-    0b0000011000000000,
-    0b0000011000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-];
-
-pub fn draw_cursor(buf: &mut [u32], stride: usize, x: usize, y: usize, _style: &CursorStyle, color: u32) {
-    let bitmap = &ARROW_BITMAP;
-    for row in 0..16 {
-        if y + row >= buf.len() / stride { break; }
-        for col in 0..16 {
-            if x + col >= stride { break; }
-            if (bitmap[row] >> (15 - col)) & 1 == 1 {
-                let idx = (y + row) * stride + (x + col);
-                if idx < buf.len() {
-                    buf[idx] = color;
-                }
-            }
-        }
+impl Cursor {
+    pub fn new() -> Self {
+        Cursor { entries: Vec::new(), active: true }
     }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

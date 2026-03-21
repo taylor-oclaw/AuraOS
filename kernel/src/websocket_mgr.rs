@@ -1,38 +1,21 @@
 extern crate alloc;
-
-use alloc::string::{String, ToString};
+use alloc::string::String;
 use alloc::vec::Vec;
 
-pub struct WebSocketManager {
-    connections: Vec<String>,
+pub struct WebsocketMgr {
+    entries: Vec<String>,
+    active: bool,
 }
 
-impl WebSocketManager {
+impl WebsocketMgr {
     pub fn new() -> Self {
-        WebSocketManager {
-            connections: Vec::new(),
-        }
+        WebsocketMgr { entries: Vec::new(), active: true }
     }
-
-    pub fn add_connection(&mut self, connection_id: &str) {
-        if !self.connections.iter().any(|c| c == connection_id) {
-            self.connections.push(String::from(connection_id));
-        }
-    }
-
-    pub fn remove_connection(&mut self, connection_id: &str) {
-        self.connections.retain(|conn| conn != connection_id);
-    }
-
-    pub fn get_connections(&self) -> Vec<String> {
-        self.connections.clone()
-    }
-
-    pub fn has_connection(&self, connection_id: &str) -> bool {
-        self.connections.iter().any(|c| c == connection_id)
-    }
-
-    pub fn count_connections(&self) -> usize {
-        self.connections.len()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

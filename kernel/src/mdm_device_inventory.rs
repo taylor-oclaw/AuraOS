@@ -2,65 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-#[derive(Debug)]
-pub struct Device {
-    pub name: String,
-    pub vendor: String,
-    pub model: String,
-    pub serial_number: String,
+pub struct MdmDeviceInventory {
+    entries: Vec<String>,
+    active: bool,
 }
 
-impl Device {
-    pub fn new(name: &str, vendor: &str, model: &str, serial_number: &str) -> Self {
-        Device {
-            name: String::from(name),
-            vendor: String::from(vendor),
-            model: String::from(model),
-            serial_number: String::from(serial_number),
-        }
-    }
-
-    pub fn get_name(&self) -> &str {
-        &self.name
-    }
-
-    pub fn get_vendor(&self) -> &str {
-        &self.vendor
-    }
-
-    pub fn get_model(&self) -> &str {
-        &self.model
-    }
-
-    pub fn get_serial_number(&self) -> &str {
-        &self.serial_number
-    }
-}
-
-pub struct DeviceInventory {
-    devices: Vec<Device>,
-}
-
-impl DeviceInventory {
+impl MdmDeviceInventory {
     pub fn new() -> Self {
-        DeviceInventory {
-            devices: Vec::new(),
-        }
+        MdmDeviceInventory { entries: Vec::new(), active: true }
     }
-
-    pub fn add_device(&mut self, device: Device) {
-        self.devices.push(device);
-    }
-
-    pub fn remove_device_by_serial(&mut self, serial_number: &str) {
-        self.devices.retain(|d| d.serial_number != serial_number);
-    }
-
-    pub fn get_device_count(&self) -> usize {
-        self.devices.len()
-    }
-
-    pub fn list_devices(&self) -> Vec<&Device> {
-        self.devices.iter().collect()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

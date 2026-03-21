@@ -3,45 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct LookaheadDecode {
-    buffer: Vec<u8>,
-    decoded_data: Vec<u8>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl LookaheadDecode {
     pub fn new() -> Self {
-        LookaheadDecode {
-            buffer: Vec::new(),
-            decoded_data: Vec::new(),
-        }
+        LookaheadDecode { entries: Vec::new(), active: true }
     }
-
-    pub fn add_data(&mut self, data: &[u8]) {
-        self.buffer.extend_from_slice(data);
-    }
-
-    pub fn decode(&mut self) -> Result<(), &'static str> {
-        if self.buffer.is_empty() {
-            return Err("No data to decode");
-        }
-
-        // Simple decoding logic for demonstration purposes
-        // This is a placeholder for actual decoding logic
-        for &byte in &self.buffer {
-            self.decoded_data.push(byte + 1); // Example transformation
-        }
-
-        Ok(())
-    }
-
-    pub fn get_decoded_data(&self) -> &[u8] {
-        &self.decoded_data
-    }
-
-    pub fn clear_buffer(&mut self) {
-        self.buffer.clear();
-    }
-
-    pub fn clear_decoded_data(&mut self) {
-        self.decoded_data.clear();
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

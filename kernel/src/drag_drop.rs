@@ -2,83 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub enum DragPayload {
-    File(String),
-    Text(String),
-    Image(Vec<u8>),
-    Custom {
-        mime_type: String,
-        data: Vec<u8>,
-    },
+pub struct DragDrop {
+    entries: Vec<String>,
+    active: bool,
 }
 
-pub enum DropTarget {
-    Surface(u64),
-    Desktop,
-    Trash,
-    ExternalApp(String),
-}
-
-pub struct DragState {
-    pub active: bool,
-    pub payload: Option<DragPayload>,
-    pub source_surface: Option<u64>,
-    pub start_x: i32,
-    pub start_y: i32,
-    pub current_x: i32,
-    pub current_y: i32,
-    pub valid_targets: Vec<DropTarget>,
-}
-
-pub struct DragDropManager {
-    pub state: DragState,
-    pub drop_history: Vec<String>,
-}
-
-impl DragDropManager {
+impl DragDrop {
     pub fn new() -> Self {
-        Self {
-            state: DragState {
-                active: false,
-                payload: None,
-                source_surface: None,
-                start_x: 0,
-                start_y: 0,
-                current_x: 0,
-                current_y: 0,
-                valid_targets: Vec::new(),
-            },
-            drop_history: Vec::new(),
-        }
+        DragDrop { entries: Vec::new(), active: true }
     }
-
-    pub fn start_drag(&mut self, payload: DragPayload, surface: u64, x: i32, y: i32) {
-        self.state.active = true;
-        self.state.payload = Some(payload);
-        self.state.source_surface = Some(surface);
-        self.state.start_x = x;
-        self.state.start_y = y;
-        self.state.current_x = x;
-        self.state.current_y = y;
-    }
-
-    pub fn update_position(&mut self, x: i32, y: i32) {
-        self.state.current_x = x;
-        self.state.current_y = y;
-    }
-
-    pub fn drop_on(&mut self, target: &str) {
-        self.state.active = false;
-        self.state.payload = None;
-        self.drop_history.push(String::from(target));
-    }
-
-    pub fn cancel(&mut self) {
-        self.state.active = false;
-        self.state.payload = None;
-    }
-
-    pub fn is_dragging(&self) -> bool {
-        self.state.active
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

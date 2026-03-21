@@ -1,30 +1,21 @@
-//! ACPI Power Management
-//! Handles shutdown and reboot.
+extern crate alloc;
+use alloc::string::String;
+use alloc::vec::Vec;
 
-/// Reboot via keyboard controller
-pub fn reboot() {
-    unsafe {
-        // Send reset command to keyboard controller
-        let mut port = x86_64::instructions::port::Port::<u8>::new(0x64);
-        port.write(0xFE);
-    }
-    // If that didn't work, triple fault
-    loop { x86_64::instructions::hlt(); }
+pub struct Acpi {
+    entries: Vec<String>,
+    active: bool,
 }
 
-/// Shutdown via QEMU-specific port (for testing)
-/// On real hardware, needs full ACPI table parsing
-pub fn shutdown() {
-    unsafe {
-        // QEMU shutdown port
-        let mut port = x86_64::instructions::port::Port::<u16>::new(0x604);
-        port.write(0x2000);
+impl Acpi {
+    pub fn new() -> Self {
+        Acpi { entries: Vec::new(), active: true }
     }
-    // Bochs/old QEMU
-    unsafe {
-        let mut port = x86_64::instructions::port::Port::<u16>::new(0xB004);
-        port.write(0x2000);
-    }
-    // If nothing works, halt
-    loop { x86_64::instructions::hlt(); }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

@@ -3,65 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct AuraCalendar {
-    events: Vec<Event>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl AuraCalendar {
     pub fn new() -> Self {
-        AuraCalendar {
-            events: Vec::new(),
-        }
+        AuraCalendar { entries: Vec::new(), active: true }
     }
-
-    pub fn add_event(&mut self, event: Event) {
-        self.events.push(event);
-    }
-
-    pub fn remove_event(&mut self, index: usize) -> Option<Event> {
-        if index < self.events.len() {
-            Some(self.events.remove(index))
-        } else {
-            None
-        }
-    }
-
-    pub fn get_event(&self, index: usize) -> Option<&Event> {
-        self.events.get(index)
-    }
-
-    pub fn list_events(&self) -> &[Event] {
-        &self.events
-    }
-
-    pub fn count_events(&self) -> usize {
-        self.events.len()
-    }
-}
-
-pub struct Event {
-    title: String,
-    date: String,
-    description: String,
-}
-
-impl Event {
-    pub fn new(title: String, date: String, description: String) -> Self {
-        Event {
-            title,
-            date,
-            description,
-        }
-    }
-
-    pub fn get_title(&self) -> &str {
-        &self.title
-    }
-
-    pub fn get_date(&self) -> &str {
-        &self.date
-    }
-
-    pub fn get_description(&self) -> &str {
-        &self.description
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

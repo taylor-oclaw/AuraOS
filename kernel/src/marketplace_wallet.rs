@@ -3,53 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct MarketplaceWallet {
-    balance: u64,
-    transactions: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl MarketplaceWallet {
-    pub fn new(initial_balance: u64) -> Self {
-        MarketplaceWallet {
-            balance: initial_balance,
-            transactions: Vec::new(),
-        }
+    pub fn new() -> Self {
+        MarketplaceWallet { entries: Vec::new(), active: true }
     }
-
-    pub fn get_balance(&self) -> u64 {
-        self.balance
-    }
-
-    pub fn deposit(&mut self, amount: u64) -> bool {
-        if amount == 0 {
-            return false;
-        }
-        self.balance += amount;
-        let transaction = String::from("info");
-        self.transactions.push(transaction);
-        true
-    }
-
-    pub fn withdraw(&mut self, amount: u64) -> bool {
-        if amount == 0 || amount > self.balance {
-            return false;
-        }
-        self.balance -= amount;
-        let transaction = String::from("info");
-        self.transactions.push(transaction);
-        true
-    }
-
-    pub fn transfer(&mut self, recipient: &str, amount: u64) -> bool {
-        if amount == 0 || amount > self.balance {
-            return false;
-        }
-        self.balance -= amount;
-        let transaction = String::from("info");
-        self.transactions.push(transaction);
-        true
-    }
-
-    pub fn get_transaction_history(&self) -> &Vec<String> {
-        &self.transactions
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

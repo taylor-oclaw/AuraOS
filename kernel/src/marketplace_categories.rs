@@ -3,35 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct MarketplaceCategories {
-    categories: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl MarketplaceCategories {
     pub fn new() -> Self {
-        MarketplaceCategories {
-            categories: Vec::new(),
-        }
+        MarketplaceCategories { entries: Vec::new(), active: true }
     }
-
-    pub fn add_category(&mut self, category_name: &str) {
-        if !self.categories.contains(&String::from(category_name)) {
-            self.categories.push(String::from(category_name));
-        }
-    }
-
-    pub fn remove_category(&mut self, category_name: &str) {
-        self.categories.retain(|cat| cat != category_name);
-    }
-
-    pub fn get_categories(&self) -> Vec<String> {
-        self.categories.clone()
-    }
-
-    pub fn has_category(&self, category_name: &str) -> bool {
-        self.categories.contains(&String::from(category_name))
-    }
-
-    pub fn count_categories(&self) -> usize {
-        self.categories.len()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

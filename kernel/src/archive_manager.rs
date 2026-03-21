@@ -3,36 +3,19 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct ArchiveManager {
-    archives: Vec<String>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl ArchiveManager {
     pub fn new() -> Self {
-        ArchiveManager {
-            archives: Vec::new(),
-        }
+        ArchiveManager { entries: Vec::new(), active: true }
     }
-
-    pub fn add_archive(&mut self, archive_name: &str) {
-        let name = String::from(archive_name);
-        if !self.archives.contains(&name) {
-            self.archives.push(name);
-        }
-    }
-
-    pub fn remove_archive(&mut self, archive_name: &str) {
-        self.archives.retain(|a| a != archive_name);
-    }
-
-    pub fn list_archives(&self) -> Vec<String> {
-        self.archives.clone()
-    }
-
-    pub fn contains_archive(&self, archive_name: &str) -> bool {
-        self.archives.contains(&String::from(archive_name))
-    }
-
-    pub fn count_archives(&self) -> usize {
-        self.archives.len()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }

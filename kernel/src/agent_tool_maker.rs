@@ -1,46 +1,21 @@
 extern crate alloc;
-
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() {
-    let mut tool = AgentToolMaker::new();
-    tool.add_tool("tool1", "description of tool1");
-    tool.add_tool("tool2", "description of tool2");
-    tool.remove_tool("tool1");
-    let tools = tool.list_tools();
-    for tool in tools.iter() {
-    }
-    let description = tool.get_tool_description("tool2").unwrap_or_else(|| String::from("Tool not found"));
-}
-
 pub struct AgentToolMaker {
-    tools: Vec<(String, String)>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl AgentToolMaker {
     pub fn new() -> Self {
-        AgentToolMaker { tools: Vec::new() }
+        AgentToolMaker { entries: Vec::new(), active: true }
     }
-
-    pub fn add_tool(&mut self, name: &str, description: &str) {
-        self.tools.push((String::from(name), String::from(description)));
-    }
-
-    pub fn remove_tool(&mut self, name: &str) {
-        self.tools.retain(|&(ref tool_name, _)| tool_name != name);
-    }
-
-    pub fn list_tools(&self) -> Vec<String> {
-        self.tools.iter().map(|(name, _)| name.clone()).collect()
-    }
-
-    pub fn get_tool_description(&self, name: &str) -> Option<String> {
-        for (tool_name, desc) in &self.tools {
-            if tool_name == name {
-                return Some(desc.clone());
-            }
-        }
-        None
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }
