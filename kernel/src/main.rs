@@ -114,6 +114,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -458,6 +459,9 @@ mod aura_app_store;
 mod aura_assistant_brief;
 mod aura_assistant_context;
 mod aura_assistant_core;
+mod aura_assistant_distraction_block;
+mod aura_assistant_evening_recap;
+mod aura_assistant_focus_guard;
 mod aura_assistant_learn_habits;
 mod aura_assistant_memory;
 mod aura_assistant_personality;
@@ -466,6 +470,7 @@ mod aura_assistant_proactive;
 mod aura_assistant_remind;
 mod aura_assistant_routine;
 mod aura_assistant_schedule;
+mod aura_assistant_smart_notify;
 mod aura_assistant_suggest;
 mod aura_audio_mgr;
 mod aura_backup_mgr;
