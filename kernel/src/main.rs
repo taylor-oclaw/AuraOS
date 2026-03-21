@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod parental_safe_search;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
