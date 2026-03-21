@@ -353,6 +353,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -685,6 +686,7 @@ mod ai_sec_ethical_boundary;
 mod ai_sec_eu_ai_act_comply;
 mod ai_sec_evasion_detect;
 mod ai_sec_excessive_agency_detect;
+mod ai_sec_face_swap_detect;
 mod ai_sec_fact_verify_chain;
 mod ai_sec_fairness_audit;
 mod ai_sec_gdpr_ai_comply;
@@ -756,6 +758,7 @@ mod ai_sec_sleeper_agent_detect;
 mod ai_sec_social_engineer_detect;
 mod ai_sec_source_require;
 mod ai_sec_ssn_detector;
+mod ai_sec_steganography_detect;
 mod ai_sec_supply_chain_pin;
 mod ai_sec_supply_chain_sbom;
 mod ai_sec_supply_chain_scan;
@@ -2004,6 +2007,9 @@ mod notification_timing_optimal;
 mod notification_urgent_detect;
 mod notification_weekly_digest;
 mod notifications;
+mod notify_behavior_learn;
+mod notify_night_owl_detect;
+mod notify_schedule_adaptive;
 mod npu_driver;
 mod npu_scheduler;
 mod ntp_sync;
