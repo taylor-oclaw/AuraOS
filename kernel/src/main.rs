@@ -364,6 +364,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1982,6 +1983,7 @@ mod metal_compat;
 mod mfa_handler;
 mod miniapp_animation;
 mod miniapp_calendar_event;
+mod miniapp_calendar_reschedule;
 mod miniapp_container;
 mod miniapp_core;
 mod miniapp_dismiss;
@@ -2003,6 +2005,8 @@ mod miniapp_renderer;
 mod miniapp_snap_corner;
 mod miniapp_snap_edge;
 mod miniapp_stack_manager;
+mod miniapp_task_complete;
+mod miniapp_task_snooze;
 mod mixture_experts_v2;
 mod ml_accelerator;
 mod model_loader;
