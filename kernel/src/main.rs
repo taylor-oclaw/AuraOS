@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod rel_friendship_anniversary;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
