@@ -388,6 +388,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2337,6 +2338,7 @@ mod random;
 mod rate_limiter;
 mod raytracing_engine;
 mod rel_achievement_celebrate;
+mod rel_allergy_remember;
 mod rel_alumni_network;
 mod rel_apology_draft;
 mod rel_baby_born_detect;
@@ -2350,6 +2352,7 @@ mod rel_conflict_cool_down;
 mod rel_conflict_detect;
 mod rel_contact_decay_prevent;
 mod rel_contact_frequency_optimal;
+mod rel_conversation_history;
 mod rel_conversation_starter;
 mod rel_cultural_aware_greet;
 mod rel_debt_social_track;
@@ -2374,6 +2377,7 @@ mod rel_life_event_detect;
 mod rel_life_event_support;
 mod rel_loss_detect;
 mod rel_manager_report;
+mod rel_meeting_history;
 mod rel_mentor_mentee;
 mod rel_mood_adjust_tone;
 mod rel_mood_detect_text;
@@ -2391,6 +2395,7 @@ mod rel_retirement_detect;
 mod rel_shared_experience_find;
 mod rel_shared_interest_find;
 mod rel_social_media_pref;
+mod rel_spouse_name_remember;
 mod rel_strengthening_detect;
 mod rel_text_pref_detect;
 mod rel_thank_you_remind;
