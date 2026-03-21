@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod access_dyslexia_font;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
