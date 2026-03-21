@@ -429,6 +429,9 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
+
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2970,8 +2973,12 @@ mod tls_engine;
 mod tls_handshake;
 mod token_healing;
 mod tokenizer;
+mod tone_context_personal;
+mod tone_context_switch;
 mod tone_engine_core;
+mod tone_per_person_evolve;
 mod tone_per_person_profile;
+mod tone_same_person_personal_mode;
 mod tool_executor;
 mod tool_use_engine;
 mod tooltip_system;
