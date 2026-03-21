@@ -489,6 +489,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2571,6 +2572,7 @@ mod profile_coffee_shop_detect;
 mod profile_coffee_shop_screen_guard;
 mod profile_coffee_shop_vpn;
 mod profile_commute_detect;
+mod profile_commute_email_triage;
 mod profile_commute_hands_free;
 mod profile_commute_podcast_resume;
 mod profile_data_crossover_allow;
@@ -2585,6 +2587,8 @@ mod profile_feature_personal_only;
 mod profile_feature_professional_only;
 mod profile_feature_suggest;
 mod profile_feature_unlock;
+mod profile_freelance_client_switch;
+mod profile_freelance_invoice_trigger;
 mod profile_mode_app_trigger;
 mod profile_mode_calendar_trigger;
 mod profile_mode_child;
@@ -2606,6 +2610,7 @@ mod profile_mode_time_trigger;
 mod profile_mode_wifi_trigger;
 mod profile_notification_personal_to_work;
 mod profile_notification_work_to_personal;
+mod profile_side_hustle_mode;
 mod profile_travel_airport_detect;
 mod profile_travel_conference_mode;
 mod profile_travel_cowork_space_detect;
@@ -2623,6 +2628,7 @@ mod profile_ui_personal_layout;
 mod profile_ui_professional_layout;
 mod profile_ui_theme_switch;
 mod profile_ui_widgets_adjust;
+mod profile_volunteer_mode;
 mod profile_wfh_app_based_switch;
 mod profile_wfh_break_personal;
 mod profile_wfh_detect;
