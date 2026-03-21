@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod photo_enhance_auto;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
