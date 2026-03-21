@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod lang_email_reply_match_lang;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
