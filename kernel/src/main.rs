@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod mam_skill_block;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
