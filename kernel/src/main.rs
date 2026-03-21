@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod auto_task_email_send;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
