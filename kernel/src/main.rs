@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod people_context_shared_plan;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
