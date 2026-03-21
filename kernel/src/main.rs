@@ -393,6 +393,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2360,6 +2361,9 @@ mod rel_contact_decay_prevent;
 mod rel_contact_dedup;
 mod rel_contact_frequency_optimal;
 mod rel_contact_merge;
+mod rel_contact_permission;
+mod rel_contact_share_family;
+mod rel_contact_share_team;
 mod rel_conversation_history;
 mod rel_conversation_starter;
 mod rel_cultural_aware_greet;
@@ -2400,6 +2404,7 @@ mod rel_networking_event_prep;
 mod rel_new_connection_suggest;
 mod rel_pet_name_remember;
 mod rel_preference_remember;
+mod rel_privacy_level_set;
 mod rel_promotion_detect;
 mod rel_public_info_enrich;
 mod rel_recommendation_draft;
