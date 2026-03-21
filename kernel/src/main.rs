@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod photo_auto_album_sort;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
