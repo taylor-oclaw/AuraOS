@@ -214,6 +214,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -503,7 +504,11 @@ mod alexa_bridge;
 mod allocator;
 mod ambient_light_sensor;
 mod analytics_app_usage;
+mod analytics_communication_pattern;
+mod analytics_focus_time;
+mod analytics_productivity_score;
 mod analytics_screen_time;
+mod analytics_sleep_wake_pattern;
 mod animation_system;
 mod anomaly_detector;
 mod anthropic_compat;
