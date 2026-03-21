@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod smart_home_dashboard;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
