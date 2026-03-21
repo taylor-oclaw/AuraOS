@@ -244,6 +244,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -737,6 +738,7 @@ mod encryption_aes_gcm;
 mod encryption_chacha20;
 mod encryption_rsa;
 mod encryption_xchacha20;
+mod enterprise_console;
 mod entropy_pool;
 mod env;
 mod ethernet;
@@ -851,12 +853,15 @@ mod logger;
 mod login_manager;
 mod login_screen;
 mod lookahead_decode;
+mod mam_auto_update;
 mod mam_license_manager;
 mod mam_mandatory_skill;
 mod mam_seat_tracker;
+mod mam_silent_install;
 mod mam_skill_approve;
 mod mam_skill_block;
 mod mam_skill_push;
+mod mam_version_pin;
 mod mamba_v2;
 mod marketplace_catalog;
 mod marketplace_categories;
