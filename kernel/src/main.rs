@@ -480,6 +480,8 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1256,6 +1258,7 @@ mod biz_org_chart_visual;
 mod biz_project_people_map;
 mod biz_stakeholder_map;
 mod biz_stakeholder_sentiment;
+mod biz_succession_plan;
 mod biz_team_capacity_plan;
 mod biz_team_workload_view;
 mod biz_vendor_contract;
@@ -2596,8 +2599,11 @@ mod profile_ui_personal_layout;
 mod profile_ui_professional_layout;
 mod profile_ui_theme_switch;
 mod profile_ui_widgets_adjust;
+mod profile_wfh_break_personal;
 mod profile_wfh_detect;
 mod profile_wfh_hybrid_schedule;
+mod profile_wfh_meeting_auto_switch;
+mod profile_wfh_overtime_warn;
 mod profile_wfh_work_hours_flex;
 mod progress_bar;
 mod prompt_templates;
