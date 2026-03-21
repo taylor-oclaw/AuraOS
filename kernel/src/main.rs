@@ -319,6 +319,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -596,8 +597,11 @@ mod ai_runtime_wasm;
 mod ai_safety_abstract;
 mod ai_safety_registry;
 mod ai_schema_enforcer;
+mod ai_sec_indirect_inject_block;
+mod ai_sec_indirect_inject_detect;
 mod ai_sec_prompt_inject_block;
 mod ai_sec_prompt_inject_boundary;
+mod ai_sec_prompt_inject_canary;
 mod ai_sec_prompt_inject_detect;
 mod ai_sec_prompt_inject_sanitize;
 mod ai_structured_handler;
