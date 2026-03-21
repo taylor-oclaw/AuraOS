@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod game_mode_mod_support;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
