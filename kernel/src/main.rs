@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod mesh_right_to_export;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
