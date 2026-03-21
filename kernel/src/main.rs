@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod access_visual_alert_sound;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
