@@ -48,7 +48,7 @@ impl EnterpriseOkta {
             } else {
                 None
             }
-        }
+        })
     }
 
     pub fn list_users(&self) -> Vec<String> {

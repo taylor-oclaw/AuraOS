@@ -172,7 +172,7 @@ fn parse_term(chars: &mut core::iter::Peekable<core::str::Chars>) -> Option<f64>
             '*' => lhs * rhs,
             '/' => lhs / rhs,
             _ => unreachable!(),
-        };
+        });
     }
     Some(lhs)
 }

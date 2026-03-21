@@ -62,6 +62,6 @@ impl EnterpriseAIUsageAnalytics {
         for (resource, percentage) in &self.usage_stats {
             // Simulate reporting usage statistics
             // In a real scenario, this would involve sending data to a monitoring system
-        }
+        })
     }
 }

@@ -42,7 +42,7 @@ impl MdmEncryptionPolicy {
     pub fn add_allowed_algorithm(&mut self, algorithm: &str) {
         if !self.allowed_algorithms.contains(&String::from(algorithm)) {
             self.allowed_algorithms.push(String::from(algorithm));
-        }
+        })
     }
 
     pub fn remove_allowed_algorithm(&mut self, algorithm: &str) {

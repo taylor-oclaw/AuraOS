@@ -16,7 +16,7 @@ impl SmtpClient {
             port,
             username: username.to_string(),
             password: password.to_string(),
-        }
+        })
     }
 
     pub fn connect(&self) -> Result<(), String> {

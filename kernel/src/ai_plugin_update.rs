@@ -51,7 +51,7 @@ impl AiPluginUpdate {
             for dep in &plugin.dependencies {
                 // Simulate printing dependencies
             }
-        }
+        })
     }
 
     pub fn get_plugin_version(&self, plugin_name: &str) -> Option<String> {

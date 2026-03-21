@@ -24,7 +24,7 @@ impl SkillTimeoutHandler {
             true
         } else {
             false
-        }
+        })
     }
 
     pub fn get_timeout(&self, skill_name: &str) -> Option<u64> {
@@ -34,7 +34,7 @@ impl SkillTimeoutHandler {
             } else {
                 None
             }
-        }
+        })
     }
 
     pub fn has_expired(&self, current_time: u64) -> Vec<String> {

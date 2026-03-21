@@ -26,7 +26,7 @@ impl FamilyHubInvite {
         } else {
             self.members.push(name);
             Ok(())
-        }
+        })
     }
 
     pub fn remove_member(&mut self, name: &str) -> Result<(), String> {
@@ -35,7 +35,7 @@ impl FamilyHubInvite {
             Ok(())
         } else {
             Err(String::from("Member not found"))
-        }
+        })
     }
 
     pub fn list_members(&self) -> Vec<String> {

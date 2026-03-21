@@ -93,7 +93,7 @@ mod mdm_password_policy {
                 requirements.push(String::from("Special character"));
             }
             requirements
-        }
+        })
     }
 }
 
@@ -121,4 +121,4 @@ mod tests {
             ]
         ;
     }
-}
+)}

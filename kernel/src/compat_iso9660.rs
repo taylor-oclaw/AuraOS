@@ -12,7 +12,7 @@ impl CompatISO9660 {
         CompatISO9660 {
             volume_descriptor,
             root_directory,
-        }
+        })
     }
 
     pub fn get_volume_label(&self) -> Option<String> {
@@ -113,4 +113,4 @@ impl CompatISO9660 {
         // locate the file's extent descriptors, and read the data from the appropriate sectors.
         None
     }
-}
+)}

@@ -20,7 +20,7 @@ impl HttpClient {
         HttpClient {
             base_url: String::from(base_url),
             headers: Vec::new(),
-        }
+        })
     }
 
     pub fn add_header(&mut self, key: &str, value: &str) {
@@ -68,4 +68,4 @@ mod tests {
         ;
         assert_eq!(client.delete("/api").unwrap(), "DELETE http://example.com/api");
     }
-}
+)}

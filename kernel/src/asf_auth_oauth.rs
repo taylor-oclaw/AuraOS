@@ -26,7 +26,7 @@ impl OAuthToken {
             expires_in,
             refresh_token: None,
             scope: Vec::new(),
-        }
+        })
     }
 
     pub fn set_refresh_token(&mut self, refresh_token: &str) {

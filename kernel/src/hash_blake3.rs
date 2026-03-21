@@ -55,7 +55,7 @@ mod blake3 {
             for i in 0..8 {
                 self.state[i] ^= chunk_state[i];
             }
-        }
+        })
     }
 }
 

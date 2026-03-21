@@ -38,7 +38,7 @@ impl CollisionDetector {
                     collisions.push(Collision {
                         object1_id: self.objects[i].id,
                         object2_id: self.objects[j].id,
-                    };
+                    });
                 }
             }
         }

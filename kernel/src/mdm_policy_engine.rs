@@ -62,6 +62,6 @@ impl MdmPolicyEngine {
             actions.len()
         } else {
             0
-        }
+        })
     }
 }

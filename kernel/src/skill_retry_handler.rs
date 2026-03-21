@@ -79,10 +79,10 @@ fn main() {
     let mut handler = SkillRetryHandler::new("AI Task", 3, 1000);
 
     handler.set_success_callback(|| {
-    };
+    });
 
     handler.set_failure_callback(|| {
-    };
+    });
 
     while !handler.attempt_skill() {}
 }

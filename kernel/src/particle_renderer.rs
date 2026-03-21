@@ -23,7 +23,7 @@ impl Particle {
             color,
             size,
             lifetime,
-        }
+        })
     }
 
     pub fn update(&mut self, delta_time: f32) {
@@ -55,7 +55,7 @@ impl ParticleRenderer {
     pub fn new() -> Self {
         ParticleRenderer {
             particles: Vec::new(),
-        }
+        })
     }
 
     pub fn add_particle(&mut self, particle: Particle) {

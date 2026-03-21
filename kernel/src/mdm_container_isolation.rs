@@ -37,7 +37,7 @@ impl ContainerIsolation {
                 true
             }
             None => false,
-        }
+        })
     }
 
     pub fn list_containers(&self) -> Vec<String> {

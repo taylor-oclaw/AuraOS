@@ -54,7 +54,7 @@ impl SAMLToken {
             } else {
                 None
             }
-        }
+        })
     }
 }
 

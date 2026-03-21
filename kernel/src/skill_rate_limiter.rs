@@ -69,6 +69,6 @@ mod skill_rate_limiter {
             self.call_records.iter()
                 .filter(|(&(ref k, timestamp), _)| k.0 == skill_name && timestamp >= (now - self.limits.get(skill_name).map_or(Duration::from_secs(0), |&(_, tw)| tw)).as_secs())
                 .fold(0, |acc, &(_, count)| acc + count)
-        }
+        })
     }
 }

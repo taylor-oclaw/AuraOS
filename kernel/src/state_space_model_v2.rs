@@ -36,7 +36,7 @@ impl StateSpaceModel {
     pub fn update_observation(&mut self, observation: f32, state_index: usize) {
         if let Some(obs_vec) = self.observation_matrix.get_mut(state_index) {
             obs_vec.push(observation);
-        }
+        })
     }
 
     pub fn get_initial_probabilities(&self) -> &Vec<f32> {
@@ -53,7 +53,7 @@ impl StateSpaceModel {
             if let Some(cell) = row.get_mut(to_state) {
                 *cell = probability;
             }
-        }
+        })
     }
 
     pub fn calculate_likelihood(&self, observations: &[f32]) -> f32 {
