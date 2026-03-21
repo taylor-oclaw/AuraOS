@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod enterprise_skill_approval;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
