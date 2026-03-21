@@ -467,6 +467,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1180,9 +1181,13 @@ mod behavior;
 mod belief_revision;
 mod bidi_text;
 mod biz_client_company_info;
+mod biz_client_contact_blocker;
+mod biz_client_contact_decision_maker;
 mod biz_client_contract;
 mod biz_client_contract_value;
 mod biz_client_directory;
+mod biz_client_interaction_log;
+mod biz_client_satisfaction;
 mod biz_client_size;
 mod biz_coworker_ask_expert;
 mod biz_coworker_department;
