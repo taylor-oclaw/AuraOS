@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod gift_client_deal_close;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
