@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod email_auto_snooze_pattern;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
