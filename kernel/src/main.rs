@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod security_evil_twin_detect;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
