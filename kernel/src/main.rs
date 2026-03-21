@@ -93,6 +93,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -323,9 +324,12 @@ mod animation_system;
 mod anomaly_detector;
 mod anthropic_compat;
 mod anti_aliasing;
+mod app_close_handler;
 mod app_controller;
 mod app_launcher;
 mod app_marketplace;
+mod app_minimize_restore;
+mod app_window_control;
 mod apps;
 mod archive_manager;
 mod arp;
@@ -522,6 +526,7 @@ mod compat_linux_threads;
 mod compat_macos_mach;
 mod compat_ntfs;
 mod compat_wine_core;
+mod compat_wine_gdi;
 mod compat_wine_registry;
 mod compositor;
 mod compute_shader;
