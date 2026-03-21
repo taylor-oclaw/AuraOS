@@ -478,6 +478,8 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1246,6 +1248,7 @@ mod biz_crm_task_create;
 mod biz_crm_touchpoint_track;
 mod biz_handoff_knowledge;
 mod biz_handoff_relationship;
+mod biz_meeting_attendee_brief;
 mod biz_meeting_client_brief;
 mod biz_meeting_stakeholder_brief;
 mod biz_org_chart_change_detect;
@@ -2593,6 +2596,9 @@ mod profile_ui_personal_layout;
 mod profile_ui_professional_layout;
 mod profile_ui_theme_switch;
 mod profile_ui_widgets_adjust;
+mod profile_wfh_detect;
+mod profile_wfh_hybrid_schedule;
+mod profile_wfh_work_hours_flex;
 mod progress_bar;
 mod prompt_templates;
 mod proximity_sensor;
