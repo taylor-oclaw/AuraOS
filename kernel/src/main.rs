@@ -270,6 +270,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -902,8 +903,13 @@ mod coreml_compat;
 mod cost_accounting;
 mod cpu_hotplug;
 mod crash_reporter;
+mod cross_device_browser_tab_sync;
+mod cross_device_call_transfer;
+mod cross_device_clipboard;
 mod cross_device_core;
+mod cross_device_file_transfer;
 mod cross_device_handoff;
+mod cross_device_notification_sync;
 mod crucible_parser;
 mod crypto;
 mod crypto_engine;
