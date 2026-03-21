@@ -97,6 +97,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -327,12 +328,15 @@ mod animation_system;
 mod anomaly_detector;
 mod anthropic_compat;
 mod anti_aliasing;
+mod app_accessibility_tree;
 mod app_automation_assert;
 mod app_automation_chain;
 mod app_automation_click;
 mod app_automation_core;
 mod app_automation_drag;
+mod app_automation_macro;
 mod app_automation_navigate;
+mod app_automation_replay;
 mod app_automation_scroll;
 mod app_automation_select;
 mod app_automation_type;
@@ -344,6 +348,7 @@ mod app_launcher;
 mod app_marketplace;
 mod app_minimize_restore;
 mod app_process_monitor;
+mod app_screen_reader;
 mod app_state_tracker;
 mod app_switch_handler;
 mod app_window_control;
