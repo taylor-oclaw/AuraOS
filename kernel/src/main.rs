@@ -389,6 +389,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2369,6 +2370,7 @@ mod rel_graduation_detect;
 mod rel_holiday_greet;
 mod rel_illness_detect;
 mod rel_interest_group;
+mod rel_introduction_track;
 mod rel_job_change_detect;
 mod rel_kid_name_remember;
 mod rel_life_event_condolence;
@@ -2386,14 +2388,18 @@ mod rel_mutual_connect_find;
 mod rel_neighbor;
 mod rel_networking_event_prep;
 mod rel_new_connection_suggest;
+mod rel_pet_name_remember;
 mod rel_preference_remember;
 mod rel_promotion_detect;
+mod rel_referral_track;
 mod rel_religious_aware;
 mod rel_response_time_expect;
 mod rel_response_time_track;
 mod rel_retirement_detect;
 mod rel_shared_experience_find;
+mod rel_shared_file_history;
 mod rel_shared_interest_find;
+mod rel_shared_project_track;
 mod rel_social_media_pref;
 mod rel_spouse_name_remember;
 mod rel_strengthening_detect;
