@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod digital_twin_what_if;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
