@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod calendar_auto_no_friday_late;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
