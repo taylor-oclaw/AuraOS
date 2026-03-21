@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod speech_therapy_game;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
