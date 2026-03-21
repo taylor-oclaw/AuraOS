@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod smart_home_schedule_manager;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
