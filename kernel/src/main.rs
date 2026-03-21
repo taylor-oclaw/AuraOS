@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod aura_assistant_note_taker;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
