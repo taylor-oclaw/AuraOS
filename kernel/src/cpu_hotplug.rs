@@ -3,42 +3,16 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct CpuHotplug {
-    cpus: Vec<u32>,
+    entries: Vec<String>,
+    active: bool,
 }
 
 impl CpuHotplug {
     pub fn new() -> Self {
-        CpuHotplug { cpus: Vec::new() }
+        CpuHotplug { entries: Vec::new(), active: true }
     }
-
-    pub fn add_cpu(&mut self, cpu_id: u32) -> bool {
-        if !self.cpus.contains(&cpu_id) {
-            self.cpus.push(cpu_id);
-            true
-        } else {
-            false
-        }
-    }
-
-    pub fn remove_cpu(&mut self, cpu_id: u32) -> bool {
-        let pos = self.cpus.iter().position(|&x| x == cpu_id);
-        if let Some(index) = pos {
-            self.cpus.remove(index);
-            true
-        } else {
-            false
-        }
-    }
-
-    pub fn list_cpus(&self) -> Vec<u32> {
-        self.cpus.clone()
-    }
-
-    pub fn is_cpu_online(&self, cpu_id: u32) -> bool {
-        self.cpus.contains(&cpu_id)
-    }
-
-    pub fn count_cpus(&self) -> usize {
-        self.cpus.len()
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn is_active(&self) -> bool { self.active }
 }
