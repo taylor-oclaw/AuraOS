@@ -373,6 +373,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1999,6 +2000,7 @@ mod miniapp_container;
 mod miniapp_core;
 mod miniapp_custom_builder;
 mod miniapp_delivery_track;
+mod miniapp_developer_sdk;
 mod miniapp_dismiss;
 mod miniapp_email_archive;
 mod miniapp_email_forward;
@@ -2320,6 +2322,9 @@ mod raid_manager;
 mod random;
 mod rate_limiter;
 mod raytracing_engine;
+mod rel_colleague_team;
+mod rel_friend_close;
+mod rel_manager_report;
 mod rel_mentor_mentee;
 mod relationship_anniversary_remind;
 mod relationship_birthday_remind;
