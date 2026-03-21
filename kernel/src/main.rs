@@ -253,6 +253,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -655,6 +656,7 @@ mod color_space_mgr;
 mod command_palette;
 mod company_billing;
 mod company_plan_manager;
+mod company_support_portal;
 mod company_tenant_manager;
 mod company_usage_meter;
 mod compass_driver;
@@ -789,6 +791,9 @@ mod face_recognition;
 mod family_activity_log;
 mod family_hub_core;
 mod family_hub_encryption;
+mod family_hub_invite;
+mod family_hub_member_mgr;
+mod family_hub_role_mgr;
 mod family_hub_vault;
 mod family_invite_handler;
 mod family_member_mgr;
