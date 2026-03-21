@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod health_hearing_protect;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
