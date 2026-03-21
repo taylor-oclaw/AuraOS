@@ -417,6 +417,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2296,6 +2297,7 @@ mod people_privacy_consent;
 mod people_privacy_level;
 mod people_pronoun_remember;
 mod people_remember_prompt;
+mod people_response_style_match;
 mod people_seasonal_context;
 mod people_sensitive_topic;
 mod people_shared_memory;
@@ -2418,6 +2420,9 @@ mod privacy_engine;
 mod proc_mgr;
 mod proc_sched;
 mod process_table;
+mod profile_mode_core;
+mod profile_mode_personal;
+mod profile_mode_professional;
 mod progress_bar;
 mod prompt_templates;
 mod proximity_sensor;
