@@ -261,6 +261,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1734,11 +1735,16 @@ mod predict_app_usage;
 mod predict_app_warmup;
 mod predict_app_wifi_pattern;
 mod predict_calendar_context;
+mod predict_commute_detect;
 mod predict_file_access;
 mod predict_file_preload;
 mod predict_file_recent_smart;
+mod predict_intent_from_context;
 mod predict_next_action;
+mod predict_routine_learn;
+mod predict_routine_suggest;
 mod predict_search_suggest;
+mod predict_travel_mode;
 mod predict_website_dns_prefetch;
 mod predict_website_preload;
 mod predict_website_prerender;
