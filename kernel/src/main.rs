@@ -236,6 +236,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -850,6 +851,7 @@ mod marketplace_certification;
 mod marketplace_changelog;
 mod marketplace_cli_publish;
 mod marketplace_core;
+mod marketplace_demo_mode;
 mod marketplace_developer_sdk;
 mod marketplace_dispute_handler;
 mod marketplace_family_share;
@@ -872,6 +874,7 @@ mod marketplace_refund_handler;
 mod marketplace_report_abuse;
 mod marketplace_revenue_split;
 mod marketplace_reviews;
+mod marketplace_screenshot_mgr;
 mod marketplace_search;
 mod marketplace_subscription;
 mod marketplace_tax_reporting;
@@ -897,9 +900,12 @@ mod mcp_tool_adapter;
 mod mcp_transport_http;
 mod mcp_transport_stdio;
 mod mcp_transport_ws;
+mod mdm_device_compliance;
 mod mdm_device_inventory;
 mod mdm_device_registry;
 mod mdm_enrollment;
+mod mdm_remote_lock;
+mod mdm_remote_wipe;
 mod media_controls;
 mod medusa_v2;
 mod mem_pool;
