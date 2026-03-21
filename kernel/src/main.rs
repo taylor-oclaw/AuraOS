@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod email_unsubscribe_detect;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
