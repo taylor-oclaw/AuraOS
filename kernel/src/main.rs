@@ -208,6 +208,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1623,9 +1624,13 @@ mod secure_ipc;
 mod security_anomaly_login;
 mod security_behavioral_biometric;
 mod security_continuous_auth;
+mod security_deepfake_detect_audio;
+mod security_deepfake_detect_image;
+mod security_deepfake_detect_video;
 mod security_gait_pattern;
 mod security_impossible_travel;
 mod security_mouse_pattern;
+mod security_phishing_detect;
 mod security_typing_pattern;
 mod security_usage_pattern;
 mod self_evolution;
