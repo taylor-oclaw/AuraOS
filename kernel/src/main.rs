@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod ai_sec_electromagnetic_leak;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
