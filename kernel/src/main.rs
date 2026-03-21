@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod auto_task_status_update;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
