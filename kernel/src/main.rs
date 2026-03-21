@@ -401,6 +401,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2222,6 +2223,7 @@ mod password_hasher;
 mod pci;
 mod pci_bus;
 mod pcie_gen5;
+mod people_memory_core;
 mod perf_app_preloader;
 mod perf_background_throttle;
 mod perf_bandwidth_predict;
@@ -2406,6 +2408,7 @@ mod rel_illness_detect;
 mod rel_instagram_enrich;
 mod rel_interest_group;
 mod rel_introduction_track;
+mod rel_invoice_remind;
 mod rel_job_change_detect;
 mod rel_kid_name_remember;
 mod rel_life_event_condolence;
@@ -2426,8 +2429,11 @@ mod rel_mutual_connect_find;
 mod rel_neighbor;
 mod rel_networking_event_prep;
 mod rel_new_connection_suggest;
+mod rel_non_compete_track;
 mod rel_occasion_calendar;
+mod rel_payment_remind;
 mod rel_pet_name_remember;
+mod rel_photo_share_suggest;
 mod rel_preference_remember;
 mod rel_privacy_level_set;
 mod rel_professional_follow_up;
