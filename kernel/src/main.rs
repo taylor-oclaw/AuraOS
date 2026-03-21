@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod game_mode_recording;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
