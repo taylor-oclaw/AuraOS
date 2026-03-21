@@ -358,6 +358,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1974,6 +1975,7 @@ mod mesh_zero_trust_mesh;
 mod mesh_zone_aware;
 mod metal_compat;
 mod mfa_handler;
+mod miniapp_core;
 mod mixture_experts_v2;
 mod ml_accelerator;
 mod model_loader;
@@ -2023,6 +2025,10 @@ mod notify_email_sender_priority;
 mod notify_email_vip_silent;
 mod notify_focus_app_detect;
 mod notify_gaming_active_block;
+mod notify_learn_click_pattern;
+mod notify_learn_response_time;
+mod notify_learn_snooze_pattern;
+mod notify_music_listening_adjust;
 mod notify_night_owl_detect;
 mod notify_presentation_detect_v2;
 mod notify_reading_detect;
