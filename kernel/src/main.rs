@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod health_vision_test;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
