@@ -201,6 +201,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -232,6 +233,7 @@ mod access_eye_track_navigate;
 mod access_filter_keys;
 mod access_flash_screen_alert;
 mod access_focus_indicator;
+mod access_haptic_feedback;
 mod access_head_mouse;
 mod access_high_contrast;
 mod access_large_cursor;
@@ -1512,7 +1514,11 @@ mod password_hasher;
 mod pci;
 mod pci_bus;
 mod pcie_gen5;
+mod perf_app_preloader;
 mod perf_profiler;
+mod perf_resource_forecast;
+mod perf_usage_pattern_learn;
+mod perf_workload_predictor;
 mod permissions;
 mod physics_engine;
 mod pipe_system;
