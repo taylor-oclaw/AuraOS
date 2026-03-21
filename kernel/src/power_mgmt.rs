@@ -1,52 +1,18 @@
 extern crate alloc;
 use alloc::string::String;
+use alloc::vec::Vec;
 
-pub enum PowerState {
-    Running,
-    Idle,
-    Sleeping,
-    Hibernating,
-    ShuttingDown,
+pub struct PowerMgmt {
+    entries: Vec<String>,
+    active: bool,
 }
 
-pub struct PowerManager {
-    pub state: PowerState,
-    pub uptime_ticks: u64,
-}
-
-impl PowerManager {
+impl PowerMgmt {
     pub fn new() -> Self {
-        PowerManager {
-            state: PowerState::Running,
-            uptime_ticks: 0,
-        }
+        PowerMgmt { entries: Vec::new(), active: true }
     }
-
-    pub fn idle(&mut self) {
-        self.state = PowerState::Idle;
-    }
-
-    pub fn sleep(&mut self) {
-        self.state = PowerState::Sleeping;
-    }
-
-    pub fn wake(&mut self) {
-        self.state = PowerState::Running;
-    }
-
-    pub fn shutdown(&mut self) {
-        self.state = PowerState::ShuttingDown;
-    }
-
-    pub fn tick(&mut self) {
-        self.uptime_ticks += 1;
-    }
-
-    pub fn current_state(&self) -> &PowerState {
-        &self.state
-    }
-
-    pub unsafe fn acpi_shutdown() {
-        core::arch::asm!("out dx, al", in("dx") 0x604u16, in("al") 0x00u8);
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn is_active(&self) -> bool { self.active }
 }
