@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod miniapp_delivery_track;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
