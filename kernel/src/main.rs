@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod draft_fill_confidence_score;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
