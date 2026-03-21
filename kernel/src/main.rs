@@ -267,6 +267,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1619,8 +1620,11 @@ mod notif_sounds;
 mod notification_bundle_smart;
 mod notification_center;
 mod notification_channel_route;
+mod notification_focus_aware;
 mod notification_intelligence;
+mod notification_meeting_aware;
 mod notification_priority_rank;
+mod notification_snooze_smart;
 mod notification_timing_optimal;
 mod notification_urgent_detect;
 mod notifications;
