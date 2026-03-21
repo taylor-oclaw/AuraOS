@@ -280,6 +280,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -908,10 +909,14 @@ mod container_webm;
 mod context_activity_detect;
 mod context_alone_detect;
 mod context_calendar_aware;
+mod context_confidence_score;
 mod context_cooking_detect;
 mod context_driving_detect;
 mod context_engine_core;
 mod context_exercising_detect;
+mod context_fusion_engine;
+mod context_history_track;
+mod context_inference_engine;
 mod context_inherit;
 mod context_interview_detect;
 mod context_light_aware;
