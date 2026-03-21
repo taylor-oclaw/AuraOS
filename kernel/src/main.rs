@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod predict_website_dns_prefetch;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
