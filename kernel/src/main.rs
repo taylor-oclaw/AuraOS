@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod travel_offline_map;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
