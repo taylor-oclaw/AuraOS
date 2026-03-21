@@ -104,6 +104,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -357,6 +358,7 @@ mod app_dom_navigator;
 mod app_dom_observer;
 mod app_dom_parser;
 mod app_dom_selector;
+mod app_element_detector;
 mod app_focus_manager;
 mod app_headless_browser;
 mod app_headless_renderer;
@@ -1367,7 +1369,11 @@ mod vllm_compat;
 mod voice_always_listen;
 mod voice_command_loop;
 mod voice_engine;
+mod voice_intent_confirm;
+mod voice_noise_cancel;
 mod voice_pipeline;
+mod voice_speaker_identify;
+mod voice_to_intent;
 mod voice_wake_word;
 mod vpn_client;
 mod vpn_wireguard;
