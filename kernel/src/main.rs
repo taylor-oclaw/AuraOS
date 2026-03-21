@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod profile_cross_device_identity;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
