@@ -6,6 +6,7 @@ extern crate alloc;
 
 
 mod profile_per_device_notification;
+mod profile_per_device_apps;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
