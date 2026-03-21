@@ -211,6 +211,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1625,6 +1626,7 @@ mod secure_enclave;
 mod secure_ipc;
 mod security_anomaly_login;
 mod security_behavioral_biometric;
+mod security_bluetooth_threat;
 mod security_continuous_auth;
 mod security_deepfake_detect_audio;
 mod security_deepfake_detect_image;
@@ -1638,10 +1640,15 @@ mod security_phishing_detect;
 mod security_phishing_email_scan;
 mod security_phishing_sms_scan;
 mod security_phishing_url_scan;
+mod security_ransomware_detect;
+mod security_ransomware_honeypot;
+mod security_ransomware_rollback;
 mod security_ransomware_shield;
 mod security_screen_capture_guard;
 mod security_typing_pattern;
 mod security_usage_pattern;
+mod security_usb_threat_scan;
+mod security_wifi_threat_detect;
 mod self_evolution;
 mod self_healing;
 mod semantic_search;
