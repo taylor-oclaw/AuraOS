@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod lang_tts_multilingual;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
