@@ -157,6 +157,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1009,7 +1010,10 @@ mod lang_translate_chat;
 mod lang_translate_document;
 mod lang_translate_email;
 mod lang_translate_engine;
+mod lang_translate_formal_informal;
+mod lang_translate_idiom_handler;
 mod lang_translate_realtime;
+mod lang_translate_slang_handler;
 mod lang_translate_subtitle;
 mod lang_tts_accent_match;
 mod lang_tts_emotion_voice;
