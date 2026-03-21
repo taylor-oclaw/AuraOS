@@ -335,6 +335,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -655,6 +656,7 @@ mod ai_sec_output_sanitize;
 mod ai_sec_output_sql_detect;
 mod ai_sec_output_validate;
 mod ai_sec_output_xss_detect;
+mod ai_sec_overreliance_warn;
 mod ai_sec_password_detector;
 mod ai_sec_pii_detector;
 mod ai_sec_plugin_audit;
@@ -669,6 +671,8 @@ mod ai_sec_prompt_inject_canary;
 mod ai_sec_prompt_inject_detect;
 mod ai_sec_prompt_inject_monitor;
 mod ai_sec_prompt_inject_sanitize;
+mod ai_sec_rogue_agent_contain;
+mod ai_sec_rogue_agent_detect;
 mod ai_sec_sensitive_data_classify;
 mod ai_sec_sensitive_data_detect;
 mod ai_sec_sensitive_data_mask;
@@ -679,6 +683,7 @@ mod ai_sec_supply_chain_sbom;
 mod ai_sec_supply_chain_scan;
 mod ai_sec_supply_chain_verify;
 mod ai_sec_training_audit;
+mod ai_sec_uncertainty_flag;
 mod ai_structured_handler;
 mod ai_token_budget;
 mod ai_tokenizer_abstract;
