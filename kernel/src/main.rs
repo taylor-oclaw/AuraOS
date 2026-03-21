@@ -89,6 +89,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -503,6 +504,8 @@ mod compat_ext4;
 mod compat_fat32;
 mod compat_hfs;
 mod compat_iso9660;
+mod compat_linux_abi;
+mod compat_linux_syscall;
 mod compat_ntfs;
 mod compositor;
 mod compute_shader;
@@ -1102,9 +1105,12 @@ mod runtime_go;
 mod runtime_java;
 mod runtime_manager;
 mod runtime_node;
+mod runtime_package_bridge;
 mod runtime_python;
 mod runtime_resource_limit;
 mod runtime_ruby;
+mod runtime_sandbox;
+mod runtime_swift;
 mod runtime_version_mgr;
 mod saml_handler;
 mod sandbox_eval;
