@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod mdm_os_update_push;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
