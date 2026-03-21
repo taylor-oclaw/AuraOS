@@ -6,6 +6,7 @@ extern crate alloc;
 
 
 mod driver_framework_hot_unplug;
+mod driver_framework_error_handle;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
