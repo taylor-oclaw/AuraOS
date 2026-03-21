@@ -524,6 +524,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1550,12 +1551,17 @@ mod draft_pre_send_date_verify;
 mod draft_pre_send_fact_check;
 mod draft_pre_send_gaps_remain;
 mod draft_pre_send_promise_check;
+mod draft_pre_send_read_aloud;
 mod draft_pre_send_reply_all_warn;
 mod draft_pre_send_sensitivity_scan;
 mod draft_pre_send_spell_check;
 mod draft_pre_send_tone_verify;
+mod draft_queue_batch_approve;
+mod draft_queue_priority_sort;
+mod draft_schedule_send;
 mod draft_smart_core;
 mod draft_template_smart;
+mod draft_undo_send;
 mod drag_drop;
 mod dream_cycle;
 mod e1000;
