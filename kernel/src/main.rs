@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod people_detail_food_pref;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
