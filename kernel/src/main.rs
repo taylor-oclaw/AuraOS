@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod music_auto_volume_context;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
