@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod speech_never_mock;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
