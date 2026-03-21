@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod tone_group_chat_adapt;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
