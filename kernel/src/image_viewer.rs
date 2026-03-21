@@ -47,7 +47,7 @@ impl ImageViewer {
             format,
             pixels,
             path: String::from(path)
-        });
+        };
         self.current_index = self.images.len() - 1;
     }
 
@@ -88,4 +88,4 @@ impl ImageViewer {
     pub fn current(&self) -> Option<&ImageData> {
         self.images.get(self.current_index)
     }
-}
+)}

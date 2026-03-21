@@ -23,7 +23,7 @@ impl EthernetFrame {
             src_mac: src,
             ethertype,
             payload: data[14..].to_vec(),
-        })
+        }
     }
 
     pub fn to_bytes(&self) -> Vec<u8> {
@@ -46,4 +46,4 @@ impl EthernetFrame {
     pub fn is_ipv6(&self) -> bool {
         self.ethertype == 0x86DD
     }
-}
+)}

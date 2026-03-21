@@ -38,7 +38,7 @@ impl AgentMemoryStore {
                 access_count: 0,
                 persistent,
                 agent_id,
-            });
+            };
         }
     }
 
@@ -71,4 +71,4 @@ impl AgentMemoryStore {
     pub fn total_size(&self) -> usize {
         self.entries.iter().map(|e| e.value.len()).sum()
     }
-}
+)}

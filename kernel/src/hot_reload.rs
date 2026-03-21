@@ -38,7 +38,7 @@ impl HotReloader {
             bytecode_hash: [0; 16],
             loaded: true,
             reload_count: 0
-        });
+        };
         id
     }
 
@@ -64,4 +64,4 @@ impl HotReloader {
     pub fn total_reloads(&self) -> u32 {
         self.apps.iter().map(|a| a.reload_count).sum()
     }
-}
+)}

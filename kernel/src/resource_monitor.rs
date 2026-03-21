@@ -50,7 +50,7 @@ impl ResourceMonitor {
             disk_used_bytes: disk,
             agent_count: agents,
             active_tasks: tasks
-        });
+        };
         if self.snapshots.len() > self.max_snapshots {
             self.snapshots.remove(0);
         }
@@ -69,7 +69,7 @@ impl ResourceMonitor {
                 io_writes: 0,
                 network_bytes_sent: 0,
                 network_bytes_recv: 0
-            });
+            };
         }
     }
 
@@ -87,4 +87,4 @@ impl ResourceMonitor {
     pub fn total_memory_used(&self) -> u64 {
         self.agent_usage.iter().map(|a| a.memory_bytes).sum()
     }
-}
+))}

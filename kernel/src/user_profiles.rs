@@ -40,7 +40,7 @@ impl ProfileManager {
             active: false,
             created_at: 0,
             last_login: 0
-        });
+        };
         id
     }
 
@@ -77,4 +77,4 @@ impl ProfileManager {
     pub fn current_user(&self) -> Option<&UserProfile> {
         self.active_profile.and_then(|id| self.profiles.iter().find(|p| p.id == id))
     }
-}
+)}

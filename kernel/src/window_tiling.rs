@@ -68,7 +68,7 @@ impl TilingManager {
             y,
             w,
             h,
-        });
+        };
     }
 
     pub fn untile(&mut self, surface_id: u64) {
@@ -78,4 +78,4 @@ impl TilingManager {
     pub fn get_tile(&self, surface_id: u64) -> Option<&TiledWindow> {
         self.tiled.iter().find(|t| t.surface_id == surface_id)
     }
-}
+)}

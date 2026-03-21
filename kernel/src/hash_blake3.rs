@@ -55,7 +55,7 @@ mod blake3 {
             for i in 0..8 {
                 self.state[i] ^= chunk_state[i];
             }
-        })
+        }
     }
 }
 
@@ -76,4 +76,4 @@ mod tests {
             &[0x7a, 0x2e, 0x4b, 0x5c, 0x18, 0x9d, 0x3f, 0x64, 0x8f, 0x9b, 0x2b, 0x7a, 0x8e, 0x8e, 0x5c, 0x18]
         ;
     }
-}
+)}

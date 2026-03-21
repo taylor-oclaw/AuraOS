@@ -47,7 +47,7 @@ impl BackupManager {
             size_bytes: 0,
             file_count: 0,
             auto_created: auto
-        });
+        };
         if self.snapshots.len() > self.max_snapshots {
             self.snapshots.remove(0);
         }
@@ -82,4 +82,4 @@ impl BackupManager {
     pub fn snapshot_count(&self) -> usize {
         self.snapshots.len()
     }
-}
+)}

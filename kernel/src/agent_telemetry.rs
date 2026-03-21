@@ -56,7 +56,7 @@ impl AgentTelemetry {
             value,
             timestamp: 0,
             tags: Vec::new(),
-        });
+        };
         if self.events.len() > self.max_events {
             self.events.remove(0);
         }
@@ -72,7 +72,7 @@ impl AgentTelemetry {
             end_ts: None,
             parent_span: parent,
             status: SpanStatus::Running,
-        });
+        };
         id
     }
 
@@ -98,4 +98,4 @@ impl AgentTelemetry {
     pub fn event_count(&self) -> usize {
         self.events.len()
     }
-}
+))}

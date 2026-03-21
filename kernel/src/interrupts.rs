@@ -41,7 +41,7 @@ impl ChainedPics {
     }
 }
 
-pub static PICS: Mutex<ChainedPics> = Mutex::new(unsafe { ChainedPics::new(PIC_1_OFFSET, PIC_2_OFFSET) });
+pub static PICS: Mutex<ChainedPics> = Mutex::new(unsafe { ChainedPics::new(PIC_1_OFFSET, PIC_2_OFFSET) };
 
 #[derive(Debug, Clone, Copy)]
 #[repr(u8)]
@@ -64,7 +64,7 @@ static IDT: spin::Lazy<InterruptDescriptorTable> = spin::Lazy::new(|| {
     idt[InterruptIndex::Keyboard as u8 as usize].set_handler_fn(keyboard_interrupt_handler);
 
     idt
-});
+};
 
 pub fn init_idt() {
     IDT.load();
@@ -96,4 +96,4 @@ extern "x86-interrupt" fn keyboard_interrupt_handler(_stack_frame: InterruptStac
         // Send EOI to PIC1
         core::arch::asm!("out dx, al", in("al") 0x20u8, in("dx") 0x20u16);
     }
-}
+))}

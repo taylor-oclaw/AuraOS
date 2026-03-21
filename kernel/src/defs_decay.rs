@@ -45,7 +45,7 @@ impl DecayEngine {
             action,
             pattern: String::from(pattern),
             enabled: true,
-        });
+        };
     }
 
     pub fn track_file(&mut self, inode: InodeNum, last_access: u64, policy: &str) {
@@ -79,4 +79,4 @@ impl DecayEngine {
     pub fn policy_count(&self) -> usize {
         self.policies.len()
     }
-}
+)}

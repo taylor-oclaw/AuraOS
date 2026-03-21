@@ -76,7 +76,7 @@ pub fn parse_ethernet(data: &[u8]) -> Option<EthernetFrame<'_>> {
         src_mac: MacAddr(copy_mac(&data[6..12])),
         ethertype: read_u16_be(&data[12..14]),
         payload: &data[14..],
-    })
+    }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -197,7 +197,7 @@ pub fn parse_ipv4(data: &[u8]) -> Option<Ipv4Packet<'_>> {
         src_ip: IpAddr(copy_ip(&data[12..16])),
         dst_ip: IpAddr(copy_ip(&data[16..20])),
         payload: &data[header_len..total_length_usize],
-    })
+    }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -228,7 +228,7 @@ pub fn parse_icmp(data: &[u8]) -> Option<IcmpPacket<'_>> {
         identifier: read_u16_be(&data[4..6]),
         sequence: read_u16_be(&data[6..8]),
         payload: &data[8..],
-    })
+    }
 }
 
 pub fn create_icmp_echo_request(identifier: u16, sequence: u16, payload: &[u8]) -> Vec<u8> {
@@ -263,7 +263,7 @@ pub fn parse_udp(data: &[u8]) -> Option<UdpPacket<'_>> {
         dst_port: read_u16_be(&data[2..4]),
         length,
         payload: &data[8..length_usize],
-    })
+    }
 }
 
 fn create_arp_packet(
@@ -335,4 +335,4 @@ fn internet_checksum(data: &[u8]) -> u16 {
     }
 
     !(sum as u16)
-}
+))))}

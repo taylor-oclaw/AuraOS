@@ -50,7 +50,7 @@ impl InterruptController {
             enabled: true,
             fire_count: 0,
             priority
-        });
+        };
     }
 
     pub fn fire(&mut self, irq: u8) -> bool {
@@ -96,4 +96,4 @@ impl InterruptController {
     pub fn handler_count(&self) -> usize {
         self.handlers.len()
     }
-}
+)}

@@ -46,7 +46,7 @@ impl Fat32 {
             total_sectors,
             fat_size,
             root_cluster
-        })
+        }
     }
 
     pub fn read_fat_entry(&self, cluster: u32) -> u32 {
@@ -70,7 +70,7 @@ impl Fat32 {
             is_dir,
             size,
             first_cluster
-        })
+        }
     }
 
     pub fn list_dir(&self, cluster: u32, disk: &[u8]) -> Vec<DirEntry> {
@@ -98,4 +98,4 @@ impl Fat32 {
         ((cluster - 2) * self.bpb.sectors_per_cluster as u32 * self.bpb.bytes_per_sector as u32 + 
          (self.bpb.reserved_sectors as u32 + self.bpb.num_fats as u32 * self.bpb.fat_size) * self.bpb.bytes_per_sector as u32) as usize
     }
-}
+))}

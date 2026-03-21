@@ -37,7 +37,7 @@ impl ContainerIsolation {
                 true
             }
             None => false,
-        })
+        }
     }
 
     pub fn list_containers(&self) -> Vec<String> {
@@ -82,4 +82,4 @@ mod tests {
         isolation.clear_containers();
         assert_eq!(isolation.list_containers(), Vec::<String>::new());
     }
-}
+)}

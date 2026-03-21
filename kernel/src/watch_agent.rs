@@ -62,7 +62,7 @@ impl WatchAgent {
             triggered_count: 0,
             last_triggered: None,
             check_interval_secs: interval
-        });
+        };
         id
     }
 
@@ -86,4 +86,4 @@ impl WatchAgent {
     pub fn rule_count(&self) -> usize {
         self.rules.len()
     }
-}
+)}

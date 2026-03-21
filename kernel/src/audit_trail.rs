@@ -53,7 +53,7 @@ impl AuditTrail {
             action,
             success,
             risk_level: risk
-        });
+        };
         if self.entries.len() > self.max_entries {
             self.entries.remove(0);
         }
@@ -75,4 +75,4 @@ impl AuditTrail {
     pub fn entry_count(&self) -> usize {
         self.entries.len()
     }
-}
+)}

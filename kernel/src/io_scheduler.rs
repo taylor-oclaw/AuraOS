@@ -51,7 +51,7 @@ impl IoScheduler {
             agent_id: agent,
             submitted_at: 0,
             completed: false
-        });
+        };
         id
     }
 
@@ -86,4 +86,4 @@ impl IoScheduler {
     pub fn stats(&self) -> (u64, u64, u64, u64) {
         (self.reads, self.writes, self.bytes_read, self.bytes_written)
     }
-}
+)}

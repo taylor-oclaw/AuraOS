@@ -112,7 +112,7 @@ impl Tokenizer {
             eos_id,
             pad_id,
             model_type: TokenizerModel::BPE,
-        })
+        }
     }
 
     /// Encode text to token IDs (simple greedy tokenization)
@@ -167,4 +167,4 @@ impl Tokenizer {
     pub fn vocab_size(&self) -> usize {
         self.vocab.len()
     }
-}
+)}

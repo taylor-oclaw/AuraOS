@@ -38,7 +38,7 @@ impl ContextManager {
                         source_agent: entry.source_agent,
                         inherited: true,
                         override_allowed: true,
-                    });
+                    };
                 }
             }
         }
@@ -64,7 +64,7 @@ impl ContextManager {
                     source_agent: agent_id,
                     inherited: false,
                     override_allowed: true,
-                });
+                };
             }
         }
     }
@@ -83,4 +83,4 @@ impl ContextManager {
             .map(|c| c.entries.len())
             .unwrap_or(0)
     }
-}
+))}

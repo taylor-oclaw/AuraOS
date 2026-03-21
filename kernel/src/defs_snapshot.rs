@@ -36,7 +36,7 @@ impl SnapshotTree {
             inode,
             description: String::from(desc),
             changed_blocks: changed,
-        });
+        };
         if self.versions.len() as u64 > self.max_versions {
             self.versions.remove(0);
         }
@@ -66,4 +66,4 @@ impl SnapshotTree {
     pub fn total_changed_blocks(&self) -> usize {
         self.versions.iter().map(|v| v.changed_blocks.len()).sum()
     }
-}
+)}

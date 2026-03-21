@@ -44,7 +44,7 @@ impl FederatedLearning {
             aggregated: None,
             participants: Vec::new(),
             completed: false,
-        });
+        };
         id
     }
 
@@ -96,4 +96,4 @@ impl FederatedLearning {
     pub fn total_rounds(&self) -> usize {
         self.rounds.len()
     }
-}
+)}

@@ -38,7 +38,7 @@ impl ElfLoader {
             section_header_offset: u64::from_le_bytes(data[0x28..0x30].try_into().unwrap()),
             num_program_headers: u16::from_le_bytes(data[0x38..0x3A].try_into().unwrap()),
             num_section_headers: u16::from_le_bytes(data[0x3C..0x3E].try_into().unwrap())
-        })
+        }
     }
 
     pub fn parse_program_headers(data: &[u8], header: &ElfHeader) -> Vec<ProgramHeader> {
@@ -59,7 +59,7 @@ impl ElfLoader {
                 mem_size: u64::from_le_bytes(data[start+0x28..start+0x30].try_into().unwrap()),
                 flags: u32::from_le_bytes(data[start+0x30..start+0x34].try_into().unwrap()),
                 segment_type: u32::from_le_bytes(data[start+0x00..start+0x04].try_into().unwrap())
-            });
+            };
         }
 
         program_headers
@@ -76,4 +76,4 @@ impl ElfLoader {
             None
         }
     }
-}
+))}

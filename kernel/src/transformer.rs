@@ -49,7 +49,7 @@ impl ModelConfig {
             max_seq_len: get_u32("context_length").unwrap_or(2048),
             head_dim: hidden / heads,
             rope_theta: 10000.0, // Default, can be overridden
-        })
+        }
     }
 }
 
@@ -221,4 +221,4 @@ pub fn generate_token(
     
     // For now, return EOS to indicate "not yet implemented"
     2 // EOS token
-}
+)}

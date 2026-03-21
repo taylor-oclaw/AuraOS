@@ -58,7 +58,7 @@ impl DeviceManager {
             status: DeviceStatus::Initializing,
             vendor_id,
             device_id,
-        });
+        };
         self.next_id += 1;
         id
     }
@@ -96,4 +96,4 @@ impl DeviceManager {
     fn list_all(&self) -> &[Device] {
         &self.devices
     }
-}
+)}

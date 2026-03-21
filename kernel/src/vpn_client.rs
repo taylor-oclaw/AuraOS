@@ -53,7 +53,7 @@ impl VpnClient {
             protocol: proto,
             private_key: [0; 32],
             dns: [8, 8, 8, 8],
-        });
+        };
     }
 
     pub fn connect(&mut self, idx: usize) -> bool {
@@ -76,4 +76,4 @@ impl VpnClient {
     pub fn is_connected(&self) -> bool {
         matches!(self.state, VpnState::Connected)
     }
-}
+)}

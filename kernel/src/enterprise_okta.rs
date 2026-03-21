@@ -48,7 +48,7 @@ impl EnterpriseOkta {
             } else {
                 None
             }
-        })
+        }
     }
 
     pub fn list_users(&self) -> Vec<String> {
@@ -66,4 +66,4 @@ impl User {
     fn new(username: String, role: String, password: String) -> Self {
         User { username, role, password }
     }
-}
+)}

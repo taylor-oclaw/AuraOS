@@ -91,7 +91,7 @@ impl KernelOrchestrator {
             dependencies: deps.to_vec(),
             parent_intent: None,
             progress_pct: 0,
-        });
+        };
         id
     }
 
@@ -145,4 +145,4 @@ impl KernelOrchestrator {
             eta_ms: 0,
         }
     }
-}
+)}

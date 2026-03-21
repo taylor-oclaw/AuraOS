@@ -85,7 +85,7 @@ impl GossipProtocol {
                                 max_hops: msg.max_hops,
                                 seen_by: msg.seen_by.clone(),
                                 timestamp: msg.timestamp,
-                            });
+                            };
                         }
                     }
                 }
@@ -96,4 +96,4 @@ impl GossipProtocol {
     pub fn node_count(&self) -> usize {
         self.nodes.len()
     }
-}
+)}

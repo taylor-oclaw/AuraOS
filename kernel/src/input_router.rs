@@ -157,7 +157,7 @@ fn process_input(input: &str) -> Vec<String> {
 /// Global input state
 static INPUT: spin::Lazy<spin::Mutex<InputState>> = spin::Lazy::new(|| {
     spin::Mutex::new(InputState::new())
-});
+};
 
 pub fn handle_key(c: char) {
     INPUT.lock().handle_char(c);
@@ -165,4 +165,4 @@ pub fn handle_key(c: char) {
 
 pub fn display_lines() -> Vec<String> {
     INPUT.lock().display_lines()
-}
+)}

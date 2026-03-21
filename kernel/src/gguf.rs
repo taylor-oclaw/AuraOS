@@ -294,7 +294,7 @@ pub fn parse(data: &[u8]) -> Result<GgufFile, &'static str> {
             dimensions,
             tensor_type: TensorType::from_u32(ttype),
             offset,
-        });
+        };
     }
 
     // Alignment padding to data section
@@ -307,7 +307,7 @@ pub fn parse(data: &[u8]) -> Result<GgufFile, &'static str> {
         metadata,
         tensors,
         data_offset,
-    })
+    }
 }
 
 /// Get a metadata value by key
@@ -363,4 +363,4 @@ impl GgufFile {
             })
             .sum()
     }
-}
+))}

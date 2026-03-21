@@ -36,7 +36,7 @@ impl ServiceDiscovery {
             agent_id: agent,
             metadata: Vec::new(),
             discovered_at: 0
-        });
+        };
     }
 
     pub fn scan(&mut self) {
@@ -58,4 +58,4 @@ impl ServiceDiscovery {
     pub fn discovered_count(&self) -> usize {
         self.services.len()
     }
-}
+)}

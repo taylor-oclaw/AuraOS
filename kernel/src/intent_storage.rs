@@ -67,7 +67,7 @@ impl IntentStorage {
                     shared_with: Vec::new(),
                     replicas: 1,
                     importance: 0.5,
-                });
+                };
                 id
             }
             StorageIntent::Forget { query } => {
@@ -99,4 +99,4 @@ impl IntentStorage {
     pub fn cleanup_expired(&mut self, now: u64) {
         self.items.retain(|i| i.ttl.map(|ttl| i.created_at + ttl > now).unwrap_or(true));
     }
-}
+)}

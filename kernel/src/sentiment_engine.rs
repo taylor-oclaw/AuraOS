@@ -86,7 +86,7 @@ impl SentimentEngine {
             confidence,
             agent_id,
             timestamp: 0,
-        });
+        };
 
         if is_mixed { Sentiment::Mixed }
         else if is_positive { Sentiment::Positive }
@@ -109,4 +109,4 @@ impl SentimentEngine {
     pub fn total(&self) -> usize {
         self.results.len()
     }
-}
+)}

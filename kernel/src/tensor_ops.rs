@@ -55,7 +55,7 @@ impl TensorOps {
                 result[i * other.cols + j] = sum;
             }
         }
-        Some(TensorOps { data: result, rows: self.rows, cols: other.cols })
+        Some(TensorOps { data: result, rows: self.rows, cols: other.cols }
     }
 
     pub fn transpose(&self) -> TensorOps {
@@ -85,4 +85,4 @@ impl TensorOps {
         }
         total
     }
-}
+)}

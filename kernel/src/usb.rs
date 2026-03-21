@@ -57,9 +57,9 @@ pub fn detect(pci_devices: &[crate::pci::PciDevice]) -> Vec<UsbController> {
                 function: dev.function,
                 controller_type: UsbControllerType::from_prog_if(dev.prog_if),
                 base_address: bar0 & 0xFFFFFFF0,
-            });
+            };
         }
     }
 
     controllers
-}
+)}

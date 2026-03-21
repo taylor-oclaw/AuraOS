@@ -51,7 +51,7 @@ impl CameraDriver {
             height: 1080,
             fps: 30,
             facing: CameraFacing::Front
-        });
+        };
     }
 
     pub fn start_preview(&mut self, camera_id: u64) -> bool {
@@ -78,4 +78,4 @@ impl CameraDriver {
     pub fn privacy_light_on(&self) -> bool {
         self.privacy_indicator
     }
-}
+)}

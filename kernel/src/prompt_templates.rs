@@ -87,6 +87,6 @@ impl PromptManager {
             variables: vars,
             category: String::from(cat),
             usage_count: 0,
-        });
+        };
     }
-}
+)}

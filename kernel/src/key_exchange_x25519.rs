@@ -47,7 +47,7 @@ impl KeyExchangeX25519 {
         KeyExchangeX25519 {
             secret_key,
             public_key,
-        })
+        }
     }
 
     pub fn get_public_key(&self) -> [u8; 32] {
@@ -69,4 +69,4 @@ impl KeyExchangeX25519 {
         // Placeholder for actual verification logic
         true
     }
-}
+)}

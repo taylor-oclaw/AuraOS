@@ -73,7 +73,7 @@ impl IpPacket {
             src: IpAddr(src),
             dst: IpAddr(dst),
             payload: data[header_len..].to_vec()
-        })
+        }
     }
 }
 
@@ -111,4 +111,4 @@ impl NetworkStack {
     pub fn default_interface(&self) -> Option<&NetworkInterface> {
         self.interfaces.iter().find(|i| i.up)
     }
-}
+)}

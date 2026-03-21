@@ -46,7 +46,7 @@ impl ConsensusEngine {
             deadline,
             resolved: false,
             approved: None,
-        });
+        };
         id
     }
 
@@ -81,4 +81,4 @@ impl ConsensusEngine {
     pub fn total(&self) -> usize {
         self.proposals.len()
     }
-}
+)}

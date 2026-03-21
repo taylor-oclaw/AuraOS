@@ -44,7 +44,7 @@ impl MultiMonitor {
             primary,
             enabled: true,
             scale: 1.0,
-        });
+        };
         id
     }
 
@@ -69,4 +69,4 @@ impl MultiMonitor {
     pub fn count(&self) -> usize {
         self.monitors.iter().filter(|m| m.enabled).count()
     }
-}
+)}

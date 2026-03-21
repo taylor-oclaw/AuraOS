@@ -77,7 +77,7 @@ fn data_read() -> Option<u8> {
         Some(unsafe {
             let mut port = x86_64::instructions::port::Port::<u8>::new(0x60);
             port.read()
-        })
+        }
     } else {
         None
     }
@@ -185,4 +185,4 @@ pub fn poll(screen_width: i32, screen_height: i32) -> bool {
     MOUSE_BUTTONS.store(buttons, Ordering::Relaxed);
     
     true
-}
+)}

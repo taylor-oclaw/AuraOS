@@ -40,7 +40,7 @@ impl AgentVersioning {
             created_at: 0,
             active: true,
             performance_score: score
-        });
+        };
         self.current_version = version;
         version
     }
@@ -76,4 +76,4 @@ impl AgentVersioning {
     pub fn version_count(&self) -> usize {
         self.versions.len()
     }
-}
+)}

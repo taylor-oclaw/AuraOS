@@ -43,7 +43,7 @@ impl SearchIndexer {
                 tags, 
                 last_indexed: 0, 
                 file_size: size 
-            });
+            };
             self.total_indexed += 1;
         }
     }
@@ -68,4 +68,4 @@ impl SearchIndexer {
     pub fn entry_count(&self) -> usize {
         self.entries.len()
     }
-}
+)}

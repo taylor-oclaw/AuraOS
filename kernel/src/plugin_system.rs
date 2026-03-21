@@ -50,7 +50,7 @@ impl PluginSystem {
             hooks,
             priority: 50,
             memory_bytes: 0,
-        });
+        };
         Some(id)
     }
 
@@ -90,4 +90,4 @@ impl PluginSystem {
     pub fn total(&self) -> usize {
         self.plugins.len()
     }
-}
+)}

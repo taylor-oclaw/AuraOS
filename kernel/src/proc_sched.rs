@@ -46,7 +46,7 @@ impl Scheduler {
             priority,
             cpu_time: 0,
             memory_kb: 0,
-        });
+        };
 
         pid
     }
@@ -132,4 +132,4 @@ impl Scheduler {
     pub fn list_processes(&self) -> &[Process] {
         &self.processes
     }
-}
+)}

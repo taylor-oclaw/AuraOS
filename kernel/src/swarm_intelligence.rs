@@ -50,7 +50,7 @@ impl SwarmIntelligence {
             fitness: 0.0,
             best_position: (x, y),
             best_fitness: 0.0,
-        });
+        };
         id
     }
 
@@ -87,4 +87,4 @@ impl SwarmIntelligence {
     pub fn agent_count(&self) -> usize {
         self.agents.len()
     }
-}
+)}

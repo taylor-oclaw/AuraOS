@@ -137,7 +137,7 @@ impl GestureEngine {
         };
 
         self.touch_points.clear();
-        Some(Gesture::Swipe { start, end, direction: dir })
+        Some(Gesture::Swipe { start, end, direction: dir }
     }
 
     pub fn get_action(&self, gesture_name: &str) -> Option<&str> {
@@ -146,4 +146,4 @@ impl GestureEngine {
             .find(|b| b.gesture == gesture_name && b.enabled)
             .map(|b| b.action.as_str())
     }
-}
+)}

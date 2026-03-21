@@ -40,7 +40,7 @@ impl IdentityManager {
             capabilities,
             trust_level: trust,
             revoked: false
-        });
+        };
         id
     }
 
@@ -61,4 +61,4 @@ impl IdentityManager {
     pub fn trusted_agents(&self) -> Vec<u64> {
         self.certificates.iter().filter(|c| !c.revoked && c.trust_level > 0.5).map(|c| c.agent_id).collect()
     }
-}
+)}

@@ -69,7 +69,7 @@ impl NotificationCenter {
             response: None,
             created_at: 0,
             read: false,
-        });
+        };
         id
     }
 
@@ -86,7 +86,7 @@ impl NotificationCenter {
             requester: String::from(requester),
             recipient: String::from(recipient),
             data_zone: zone,
-        });
+        };
         if let Some(n) = self.notifications.iter_mut().find(|n| n.id == id) {
             n.requires_response = true;
             n.actions = vec![
@@ -115,4 +115,4 @@ impl NotificationCenter {
             .filter(|n| !n.read && matches!(n.priority, NotifPriority::Critical))
             .collect()
     }
-}
+))}

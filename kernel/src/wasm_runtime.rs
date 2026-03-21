@@ -71,7 +71,7 @@ impl WasmRuntime {
             imports: Vec::new(),
             exports: Vec::new(),
             sandboxed: true
-        });
+        };
         id
     }
 
@@ -90,7 +90,7 @@ impl WasmRuntime {
             running: false,
             exit_code: None,
             capabilities: Vec::new()
-        });
+        };
         Some(id)
     }
 
@@ -119,4 +119,4 @@ impl WasmRuntime {
             inst.exit_code = Some(exit_code);
         }
     }
-}
+))}

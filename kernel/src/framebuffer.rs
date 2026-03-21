@@ -201,7 +201,7 @@ macro_rules! fb_print {
         $crate::framebuffer::with_writer(|w| {
             use core::fmt::Write;
             w.write_fmt(format_args!($($arg)*)).unwrap();
-        })
+        }
     };
 }
 
@@ -209,4 +209,4 @@ macro_rules! fb_print {
 macro_rules! fb_println {
     () => ($crate::fb_print!("\n"));
     ($($arg:tt)*) => ($crate::fb_print!("{}\n", format_args!($($arg)*)));
-}
+)}

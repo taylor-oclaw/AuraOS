@@ -63,7 +63,7 @@ impl TieredCache {
             created: 0,
             last_hit: 0,
             size_bytes: size
-        });
+        };
         if self.l1_hot.len() > self.l1_max {
             if let Some(evicted) = self.l1_hot.pop() {
                 self.l2_warm.push(evicted);
@@ -90,4 +90,4 @@ impl TieredCache {
     pub fn total_entries(&self) -> usize {
         self.l1_hot.len() + self.l2_warm.len() + self.l3_cold.len() + self.l4_archive.len() + self.l5_disk.len()
     }
-}
+)}

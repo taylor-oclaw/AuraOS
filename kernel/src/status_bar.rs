@@ -48,7 +48,7 @@ impl StatusBar {
             position: pos,
             visible: true,
             clickable,
-        });
+        };
         id
     }
 
@@ -63,4 +63,4 @@ impl StatusBar {
         items.sort_by_key(|i| i.position);
         items
     }
-}
+)}

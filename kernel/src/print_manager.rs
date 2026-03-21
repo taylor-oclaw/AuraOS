@@ -62,7 +62,7 @@ impl PrintManager {
             online: true,
             paper_size: String::from("A4"),
             color,
-        });
+        };
         id
     }
 
@@ -77,7 +77,7 @@ impl PrintManager {
             copies,
             status: PrintJobStatus::Queued,
             submitted_at: 0,
-        });
+        };
         id
     }
 
@@ -93,4 +93,4 @@ impl PrintManager {
             .filter(|j| matches!(j.status, PrintJobStatus::Queued | PrintJobStatus::Printing(_)))
             .count()
     }
-}
+))}

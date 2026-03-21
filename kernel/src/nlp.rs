@@ -239,7 +239,7 @@ pub fn respond(intent: &Intent) {
             framebuffer::with_writer(|w| {
                 let fb = unsafe { w.raw_buffer() };
                 crate::desktop::render(fb, 1280, 3);
-            });
+            };
         }
         Intent::SetTimezone => {
             framebuffer::with_writer(|w| w.set_fg(0, 255, 180));
@@ -276,4 +276,4 @@ pub fn respond(intent: &Intent) {
             crate::fb_println!("  anything you say. Hang tight!");
         }
     }
-}
+)}

@@ -86,7 +86,7 @@ impl AtaDrive {
             serial: decode_ata_string(&identify_words[10..20]),
             sector_count,
             supports_lba48,
-        })
+        }
     }
 
     pub fn read_sector(&self, lba: u64, buf: &mut [u8; 512]) -> Result<(), AtaError> {
@@ -133,7 +133,7 @@ impl AtaDrive {
             CMD_FLUSH_CACHE_EXT
         } else {
             CMD_FLUSH_CACHE
-        });
+        };
         self.wait_for_command_completion()
     }
 
@@ -334,7 +334,7 @@ pub fn detect() -> [Option<DetectedDrive>; 4] {
     let mut detected = [None, None, None, None];
     for (index, drive) in drives.into_iter().enumerate() {
         if let Ok(info) = drive.detect() {
-            detected[index] = Some(DetectedDrive { drive, info });
+            detected[index] = Some(DetectedDrive { drive, info };
         }
     }
     detected
@@ -353,4 +353,4 @@ fn decode_ata_string(words: &[u16]) -> String {
     }
 
     String::from(value.trim_matches(|c| c == ' ' || c == '\0'))
-}
+)))}

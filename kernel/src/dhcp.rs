@@ -122,10 +122,10 @@ impl DhcpClient {
             gateway,
             dns,
             lease_time,
-        })
+        }
     }
 
     pub fn is_bound(&self) -> bool {
         self.state == DhcpState::Bound
     }
-}
+)}

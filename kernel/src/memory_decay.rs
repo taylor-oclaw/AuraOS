@@ -44,7 +44,7 @@ impl MemoryDecay {
             strength: 1.0,
             tags,
             consolidated: false
-        });
+        };
         id
     }
 
@@ -92,4 +92,4 @@ impl MemoryDecay {
     pub fn total(&self) -> usize {
         self.memories.len()
     }
-}
+)}

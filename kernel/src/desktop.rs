@@ -8,7 +8,7 @@ use crate::framebuffer;
 
 static DESKTOP: spin::Lazy<spin::Mutex<Option<Desktop>>> = spin::Lazy::new(|| {
     spin::Mutex::new(None)
-});
+};
 
 pub struct Desktop {
     pub manager: SurfaceManager,
@@ -236,4 +236,4 @@ pub fn is_active() -> bool {
     } else {
         false
     }
-}
+)}

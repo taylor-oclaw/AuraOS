@@ -48,7 +48,7 @@ impl SelfHealing {
             max_restarts: 5,
             error_log: Vec::new(),
             uptime_secs: 0,
-        });
+        };
     }
 
     pub fn heartbeat(&mut self, agent_id: u64) {
@@ -84,4 +84,4 @@ impl SelfHealing {
     pub fn healthy_count(&self) -> usize {
         self.agents.iter().filter(|a| matches!(a.status, HealthStatus::Healthy)).count()
     }
-}
+)}

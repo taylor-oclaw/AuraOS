@@ -41,7 +41,7 @@ impl KnowledgeGraph {
             connections: Vec::new(),
             access_count: 0,
             created_at: 0,
-        });
+        };
         id
     }
 
@@ -71,4 +71,4 @@ impl KnowledgeGraph {
     pub fn node_count(&self) -> usize {
         self.nodes.len()
     }
-}
+)}

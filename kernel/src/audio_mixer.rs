@@ -44,7 +44,7 @@ impl AudioMixer {
             muted: false,
             samples: Vec::new(),
             position: 0
-        });
+        };
         idx
     }
 
@@ -91,4 +91,4 @@ impl AudioMixer {
     pub fn is_playing(&self) -> bool {
         self.channels.iter().any(|c| !c.muted && c.position < c.samples.len())
     }
-}
+)}

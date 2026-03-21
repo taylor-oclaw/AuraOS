@@ -46,7 +46,7 @@ impl PermissionEngine {
             shared_with: Vec::new(),
             encrypted: false,
             audit_log: Vec::new(),
-        });
+        };
     }
 
     pub fn grant(&mut self, file_id: u64, cap_name: &str, trust: f32) {
@@ -90,4 +90,4 @@ impl PermissionEngine {
             perm.shared_with.retain(|a| *a != agent_id);
         }
     }
-}
+)}

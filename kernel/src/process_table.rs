@@ -56,7 +56,7 @@ impl ProcessTable {
             memory_bytes: 0,
             started_at: 0,
             exit_code: None,
-        });
+        };
         Some(pid)
     }
 
@@ -99,4 +99,4 @@ impl ProcessTable {
     pub fn total(&self) -> usize {
         self.processes.len()
     }
-}
+)}

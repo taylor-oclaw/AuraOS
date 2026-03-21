@@ -77,7 +77,7 @@ impl IdentityStore {
             typing_pattern: false,
             preferences: UserPreferences::default_prefs(),
             created_at: 0, // TODO: RTC
-        });
+        };
         
         // Auto-activate if first user
         if self.users.len() == 1 {
@@ -135,4 +135,4 @@ impl IdentityStore {
         
         Some(data)
     }
-}
+)}

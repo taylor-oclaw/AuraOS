@@ -52,7 +52,7 @@ impl SystemConfig {
             category: String::from(category),
             description: String::from(desc),
             user_modified: false,
-        });
+        };
     }
 
     pub fn get(&self, key: &str) -> Option<&ConfigValue> {
@@ -69,4 +69,4 @@ impl SystemConfig {
     pub fn by_category(&self, cat: &str) -> Vec<&ConfigEntry> {
         self.entries.iter().filter(|e| e.category == cat).collect()
     }
-}
+)}

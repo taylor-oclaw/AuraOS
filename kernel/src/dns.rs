@@ -113,7 +113,7 @@ impl DnsResolver {
                             name: String::from("example.com"), // Placeholder for actual name parsing
                             ip,
                             ttl,
-                        });
+                        };
                     }
                 }
             } else {
@@ -126,4 +126,4 @@ impl DnsResolver {
     pub fn cached_lookup(&self, name: &str) -> Option<&DnsRecord> {
         self.cache.iter().find(|record| record.name == name)
     }
-}
+)}

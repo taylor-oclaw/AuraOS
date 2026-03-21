@@ -54,7 +54,7 @@ impl GoalDecomposer {
             status: GoalStatus::Pending,
             total_cost: 0,
             requester_agent: requester,
-        });
+        };
         id
     }
 
@@ -77,7 +77,7 @@ impl GoalDecomposer {
                 llm_tier_needed: tier,
                 estimated_cost: cost,
                 dependencies: deps,
-            });
+            };
             g.status = GoalStatus::Decomposed;
         }
         sub_id
@@ -110,4 +110,4 @@ impl GoalDecomposer {
             .filter(|g| !matches!(g.status, GoalStatus::Completed))
             .collect()
     }
-}
+))}

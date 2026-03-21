@@ -49,7 +49,7 @@ impl AgentReflection {
             confidence,
             applied: false,
             timestamp: 0,
-        });
+        };
         id
     }
 
@@ -78,4 +78,4 @@ impl AgentReflection {
     pub fn total(&self) -> usize {
         self.reflections.len()
     }
-}
+)}

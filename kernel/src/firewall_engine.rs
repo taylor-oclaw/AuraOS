@@ -60,7 +60,7 @@ impl Firewall {
             agent_id: None,
             enabled: true,
             hit_count: 0,
-        });
+        };
         id
     }
 
@@ -91,4 +91,4 @@ impl Firewall {
     pub fn disable(&mut self) {
         self.enabled = false;
     }
-}
+)}

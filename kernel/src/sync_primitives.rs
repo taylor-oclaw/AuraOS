@@ -42,7 +42,7 @@ impl<T> Mutex<T> {
                 lock: &self.locked as *const _,
                 data: self.data.get(),
                 _marker: core::marker::PhantomData,
-            })
+            }
         } else {
             None
         }
@@ -71,4 +71,4 @@ impl<T> Drop for MutexGuard<'_, T> {
     fn drop(&mut self) {
         unsafe { (*self.lock).store(false, Ordering::Release); }
     }
-}
+)}

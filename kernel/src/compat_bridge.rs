@@ -91,7 +91,7 @@ impl CompatBridge {
             port,
             encrypted,
             authenticated: false,
-        });
+        };
 
         self.connections.last().unwrap()
     }
@@ -99,4 +99,4 @@ impl CompatBridge {
     pub fn active_connections(&self) -> usize {
         self.connections.len()
     }
-}
+)}

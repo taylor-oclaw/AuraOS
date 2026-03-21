@@ -45,7 +45,7 @@ impl IcmpPacket {
             id: u16::from_be_bytes([data[4], data[5]]),
             seq: u16::from_be_bytes([data[6], data[7]]),
             data: data[8..].to_vec(),
-        })
+        }
     }
 
     pub fn is_echo_reply(&self) -> bool {
@@ -67,4 +67,4 @@ fn checksum(data: &[u8]) -> u16 {
         sum = (sum & 0xFFFF) + (sum >> 16);
     }
     !(sum as u16)
-}
+)}

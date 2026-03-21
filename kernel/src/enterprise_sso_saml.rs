@@ -54,7 +54,7 @@ impl SAMLToken {
             } else {
                 None
             }
-        })
+        }
     }
 }
 
@@ -64,4 +64,4 @@ pub extern "C" fn enterprise_sso_saml_init() {
 
 pub extern "C" fn enterprise_sso_saml_exit() {
     // Cleanup code for the module
-}
+)}

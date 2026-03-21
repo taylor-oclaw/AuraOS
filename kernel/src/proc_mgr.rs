@@ -57,7 +57,7 @@ impl ProcessManager {
             open_fds: Vec::new(),
             exit_code: None,
             created_at: 0,
-        });
+        };
         pid
     }
 
@@ -90,4 +90,4 @@ impl ProcessManager {
     pub fn process_count(&self) -> usize {
         self.processes.len()
     }
-}
+)}

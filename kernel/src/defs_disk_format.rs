@@ -65,10 +65,10 @@ impl DiskSuperblock {
                 l.copy_from_slice(&data[92..156]);
                 l
             }
-        })
+        }
     }
 
     pub fn is_valid(&self) -> bool {
         self.magic == DEFS_MAGIC
     }
-}
+)}

@@ -179,7 +179,7 @@ impl SurfaceManager {
             z_order: self.surfaces.len() as i32,
             content: SurfaceContent::Empty,
             decoration,
-        });
+        };
 
         self.focus(id);
         id
@@ -393,4 +393,4 @@ impl SurfaceManager {
     pub fn surface_count(&self) -> usize {
         self.surfaces.len()
     }
-}
+)}

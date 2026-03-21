@@ -85,7 +85,7 @@ impl PlaybookManager {
             description: String::from(desc),
             steps: pb_steps,
             usage_count: 0,
-        });
+        };
     }
 
     pub fn find_for_role(&self, role: &str) -> Vec<&Playbook> {
@@ -101,4 +101,4 @@ impl PlaybookManager {
     pub fn count(&self) -> usize {
         self.playbooks.len()
     }
-}
+)}

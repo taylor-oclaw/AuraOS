@@ -64,7 +64,7 @@ impl TaskQueue {
             result: None,
             retry_count: 0,
             max_retries: 3,
-        });
+        };
         Some(id)
     }
 
@@ -108,4 +108,4 @@ impl TaskQueue {
     pub fn total(&self) -> usize {
         self.tasks.len()
     }
-}
+)}

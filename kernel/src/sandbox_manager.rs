@@ -47,7 +47,7 @@ impl SandboxManager {
             cpu_used_ms: 0, 
             violations: Vec::new(), 
             active: true 
-        });
+        };
         id
     }
 
@@ -86,4 +86,4 @@ impl SandboxManager {
             s.active = false;
         }
     }
-}
+)}

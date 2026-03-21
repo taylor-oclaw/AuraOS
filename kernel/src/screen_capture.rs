@@ -54,7 +54,7 @@ impl ScreenCapture {
             height: h,
             timestamp: 0,
             region,
-        });
+        };
         id
     }
 
@@ -69,7 +69,7 @@ impl ScreenCapture {
             fps,
             started_at: 0,
             active: true,
-        });
+        };
         id
     }
 
@@ -89,4 +89,4 @@ impl ScreenCapture {
     pub fn screenshot_count(&self) -> usize {
         self.screenshots.len()
     }
-}
+))}

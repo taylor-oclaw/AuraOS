@@ -48,7 +48,7 @@ impl TraceAssurance {
             timestamp: 0,
             verified: false,
             parent_trace: None,
-        });
+        };
         id
     }
 
@@ -78,4 +78,4 @@ impl TraceAssurance {
     pub fn total(&self) -> usize {
         self.traces.len()
     }
-}
+)}

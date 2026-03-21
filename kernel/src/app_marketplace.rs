@@ -68,7 +68,7 @@ impl AppMarketplace {
             trust_score: 0.5,
             downloads: 0,
             status: AppStatus::Available,
-        });
+        };
         id
     }
 
@@ -93,4 +93,4 @@ impl AppMarketplace {
         sorted.sort_by(|a, b| b.trust_score.partial_cmp(&a.trust_score).unwrap_or(core::cmp::Ordering::Equal));
         sorted
     }
-}
+)}

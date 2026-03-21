@@ -46,7 +46,7 @@ impl AgentEconomics {
             total_spent: 0,
             earnings: 0,
             transactions: Vec::new(),
-        });
+        };
     }
 
     pub fn charge(&mut self, agent_id: u64, amount: u64, desc: &str) -> bool {
@@ -61,7 +61,7 @@ impl AgentEconomics {
                     agent_id,
                     timestamp: 0,
                     is_debit: true,
-                });
+                };
                 return true;
             }
         }
@@ -77,7 +77,7 @@ impl AgentEconomics {
                 agent_id,
                 timestamp: 0,
                 is_debit: false,
-            });
+            };
         }
     }
 
@@ -94,4 +94,4 @@ impl AgentEconomics {
     pub fn remaining(&self) -> u64 {
         self.total_budget.saturating_sub(self.total_spent)
     }
-}
+)))}

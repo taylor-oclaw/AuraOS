@@ -34,7 +34,7 @@ impl TimerManager {
             remaining_ms: interval_ms,
             repeating,
             active: true,
-        });
+        };
         self.next_id += 1;
         id
     }
@@ -90,4 +90,4 @@ impl TimerManager {
     fn list_timers(&self) -> &[Timer] {
         &self.timers
     }
-}
+)}

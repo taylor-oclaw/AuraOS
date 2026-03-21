@@ -53,7 +53,7 @@ impl PrivacyEngine {
             can_share_externally: share,
             data_retention_hours: retention,
             anonymize_logs: true,
-        });
+        };
     }
 
     pub fn check_access(&mut self, agent_id: u64, classification: &DataClassification) -> bool {
@@ -68,7 +68,7 @@ impl PrivacyEngine {
                     description: String::from("Unauthorized data access attempt"),
                     severity: 8,
                     timestamp: 0,
-                });
+                };
             }
             allowed
         } else {
@@ -83,4 +83,4 @@ impl PrivacyEngine {
     pub fn agent_violations(&self, agent_id: u64) -> Vec<&PrivacyViolation> {
         self.violations.iter().filter(|v| v.agent_id == agent_id).collect()
     }
-}
+))}

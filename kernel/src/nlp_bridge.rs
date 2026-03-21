@@ -86,7 +86,7 @@ impl NlpBridge {
                     risk_level: proposal.risk_level,
                     requires_approval: proposal.requires_approval,
                     approved: false,
-                });
+                };
                 return Some(proposal);
             }
         }
@@ -101,4 +101,4 @@ impl NlpBridge {
             None
         }
     }
-}
+)}

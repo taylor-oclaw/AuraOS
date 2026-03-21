@@ -58,7 +58,7 @@ impl DeviceManager {
             io_base: None,
             irq: None,
             capabilities: Vec::new(),
-        });
+        };
         id
     }
 
@@ -99,4 +99,4 @@ impl DeviceManager {
     pub fn ready_count(&self) -> usize {
         self.devices.iter().filter(|d| matches!(d.status, DeviceStatus::Ready)).count()
     }
-}
+)}

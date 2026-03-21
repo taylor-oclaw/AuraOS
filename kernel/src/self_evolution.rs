@@ -62,7 +62,7 @@ impl SelfEvolution {
             module: String::from(module),
             severity,
             detected_at: 0
-        });
+        };
         id
     }
 
@@ -79,7 +79,7 @@ impl SelfEvolution {
             test_passed: false,
             pr_url: None,
             status: FixStatus::Fixing
-        });
+        };
         true
     }
 
@@ -106,4 +106,4 @@ impl SelfEvolution {
     pub fn pending_fixes(&self) -> usize {
         self.fixes.iter().filter(|f| matches!(f.status, FixStatus::Testing)).count()
     }
-}
+))}

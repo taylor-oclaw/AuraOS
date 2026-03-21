@@ -64,7 +64,7 @@ impl AnomalyDetector {
             description: String::from(desc),
             detected_at: 0,
             resolved: false,
-        });
+        };
         id
     }
 
@@ -89,4 +89,4 @@ impl AnomalyDetector {
     pub fn total(&self) -> usize {
         self.anomalies.len()
     }
-}
+)}

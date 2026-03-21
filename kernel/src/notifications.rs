@@ -41,7 +41,7 @@ impl NotificationManager {
             timestamp,
             read: false,
             source: String::from(source),
-        });
+        };
         id
     }
 
@@ -65,4 +65,4 @@ impl NotificationManager {
         let start = self.notifications.len().saturating_sub(count);
         &self.notifications[start..]
     }
-}
+)}

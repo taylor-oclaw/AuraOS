@@ -90,7 +90,7 @@ impl AgentHierarchy {
             task: None,
             cost_spent: 0,
             cost_budget: self.total_budget / 10,
-        });
+        };
         if let Some(pid) = parent {
             if let Some(p) = self.agents.iter_mut().find(|a| a.id == pid) {
                 p.children.push(id);
@@ -109,7 +109,7 @@ impl AgentHierarchy {
             status: AgentStatus::Idle,
             story_points: points,
             dependencies: deps.to_vec(),
-        });
+        };
         id
     }
 
@@ -134,4 +134,4 @@ impl AgentHierarchy {
     pub fn over_budget(&self) -> bool {
         self.total_cost() > self.total_budget
     }
-}
+))}

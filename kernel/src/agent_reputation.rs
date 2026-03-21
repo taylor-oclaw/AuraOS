@@ -30,7 +30,7 @@ impl AgentReputation {
             score,
             reason: String::from(reason),
             timestamp: 0,
-        });
+        };
         self.update_cache(to);
     }
 
@@ -66,4 +66,4 @@ impl AgentReputation {
     pub fn total_ratings(&self) -> usize {
         self.entries.len()
     }
-}
+)}

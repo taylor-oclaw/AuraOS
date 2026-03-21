@@ -48,7 +48,7 @@ impl VideoDecoder {
             data,
             pts_ms,
             keyframe,
-        });
+        };
         self.frames_decoded += 1;
         if self.buffer.len() > self.max_buffer {
             self.buffer.remove(0);
@@ -70,4 +70,4 @@ impl VideoDecoder {
     pub fn seek(&mut self) {
         self.buffer.clear();
     }
-}
+)}

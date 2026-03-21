@@ -53,7 +53,7 @@ impl StateSpaceModel {
             if let Some(cell) = row.get_mut(to_state) {
                 *cell = probability;
             }
-        })
+        }
     }
 
     pub fn calculate_likelihood(&self, observations: &[f32]) -> f32 {
@@ -67,4 +67,4 @@ impl StateSpaceModel {
         }
         likelihood
     }
-}
+)}

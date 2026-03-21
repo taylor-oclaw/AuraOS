@@ -48,7 +48,7 @@ impl Constitution {
             enforced: true,
             violation_count: 0,
             severity,
-        });
+        };
     }
 
     pub fn check_action(&mut self, action: &str) -> bool {
@@ -76,4 +76,4 @@ impl Constitution {
     pub fn rule_count(&self) -> usize {
         self.rules.len()
     }
-}
+)}

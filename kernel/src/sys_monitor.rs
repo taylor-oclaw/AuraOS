@@ -54,7 +54,7 @@ impl SystemMonitor {
             state,
             cpu_usage: cpu,
             memory_kb: mem
-        });
+        };
         self.system.process_count = self.processes.len() as u32;
     }
 
@@ -89,4 +89,4 @@ impl SystemMonitor {
         sorted.truncate(n);
         sorted
     }
-}
+)}

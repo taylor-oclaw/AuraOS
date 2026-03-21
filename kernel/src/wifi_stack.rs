@@ -76,7 +76,7 @@ impl WifiManager {
                 gateway: [192, 168, 1, 1],
                 dns: [8, 8, 8, 8],
                 connected_at: 0,
-            });
+            };
             self.state = WifiState::Connected;
             if !self.saved_networks.contains(&String::from(ssid)) {
                 self.saved_networks.push(String::from(ssid));
@@ -100,4 +100,4 @@ impl WifiManager {
     pub fn signal_strength(&self) -> Option<i8> {
         self.current_connection.as_ref().map(|c| c.network.signal_strength)
     }
-}
+)}

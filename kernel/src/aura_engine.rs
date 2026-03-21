@@ -265,7 +265,7 @@ impl HardwareProfile {
 /// System-wide engine instance
 static ENGINE: spin::Lazy<spin::Mutex<AuraEngine>> = spin::Lazy::new(|| {
     spin::Mutex::new(AuraEngine::new())
-});
+};
 
 /// Get the Aura Engine status for display
 pub fn status_string() -> String {
@@ -277,4 +277,4 @@ pub fn status_string() -> String {
         engine.local_models.len(),
         engine.cloud_providers.len()
     )
-}
+)}

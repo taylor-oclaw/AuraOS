@@ -47,7 +47,7 @@ impl MediaControls {
             duration_ms,
             position_ms: 0,
             state: PlayState::Playing,
-        });
+        };
     }
 
     pub fn pause(&mut self) {
@@ -89,4 +89,4 @@ impl MediaControls {
     pub fn is_playing(&self) -> bool {
         self.now_playing.as_ref().map(|np| matches!(np.state, PlayState::Playing)).unwrap_or(false)
     }
-}
+)}

@@ -42,7 +42,7 @@ impl CoalitionManager {
             formed_at: 0,
             active: true,
             total_value: 0,
-        });
+        };
         id
     }
 
@@ -85,4 +85,4 @@ impl CoalitionManager {
     pub fn total(&self) -> usize {
         self.coalitions.len()
     }
-}
+)}

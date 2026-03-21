@@ -388,7 +388,7 @@ impl PermissionManager {
             tier: action.tier(),
             approved,
             user_confirmed: approved,
-        });
+        };
     }
 }
 
@@ -444,4 +444,4 @@ pub fn generate_key() -> Option<[u8; 32]> {
     } else {
         None
     }
-}
+)}

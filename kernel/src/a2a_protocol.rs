@@ -2,110 +2,69 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub enum A2AMessageType {
-    Request,
-    Response,
-    Notify,
-    Stream,
-    Error,
+pub struct A2aProtocol {
+    agents: Vec<AgentCard>,
+    tasks: Vec<Task>,
 }
 
-pub struct A2AMessage {
-    pub id: u64,
-    pub from_agent: u64,
-    pub to_agent: u64,
-    pub msg_type: A2AMessageType,
-    pub method: String,
-    pub payload: Vec<u8>,
-    pub correlation_id: Option<u64>,
-    pub timestamp: u64,
+struct AgentCard {
+    name: String,
+    capabilities: Vec<String>,
+    endpoint: String,
 }
 
-pub struct A2AEndpoint {
-    pub agent_id: u64,
-    pub capabilities: Vec<String>,
-    pub version: u32,
+struct Task {
+    id: usize,
+    agent: String,
+    status: String,
+    result: Option<String>,
 }
 
-pub struct A2AProtocol {
-    pub endpoints: Vec<A2AEndpoint>,
-    pub messages: Vec<A2AMessage>,
-    pub next_id: u64,
-    pub delivered: u64,
-    pub failed: u64,
-}
-
-impl A2AProtocol {
+impl A2aProtocol {
     pub fn new() -> Self {
-        Self {
-            endpoints: Vec::new(),
-            messages: Vec::new(),
-            next_id: 1,
-            delivered: 0,
-            failed: 0,
-        }
+        A2aProtocol { agents: Vec::new(), tasks: Vec::new() }
     }
 
-    pub fn register(&mut self, agent_id: u64, capabilities: Vec<String>) {
-        self.endpoints.push(A2AEndpoint {
-            agent_id,
-            capabilities,
-            version: 1,
+    pub fn register_agent(&mut self, name: &str, endpoint: &str) {
+        self.agents.push(AgentCard {
+            name: String::from(name),
+            capabilities: Vec::new(),
+            endpoint: String::from(endpoint),
         });
     }
 
-    pub fn send(&mut self, from: u64, to: u64, method: &str, payload: Vec<u8>) -> u64 {
-        let id = self.next_id;
-        self.next_id += 1;
-        if self.endpoints.iter().any(|e| e.agent_id == to) {
-            self.messages.push(A2AMessage {
-                id,
-                from_agent: from,
-                to_agent: to,
-                msg_type: A2AMessageType::Request,
-                method: String::from(method),
-                payload,
-                correlation_id: None,
-                timestamp: 0,
-            });
-            self.delivered += 1;
-        } else {
-            self.failed += 1;
+    pub fn add_capability(&mut self, agent_name: &str, capability: &str) {
+        for agent in self.agents.iter_mut() {
+            if agent.name == agent_name {
+                agent.capabilities.push(String::from(capability));
+                return;
+            }
         }
-        id
     }
 
-    pub fn reply(&mut self, original_id: u64, from: u64, to: u64, payload: Vec<u8>) -> u64 {
-        let id = self.next_id;
-        self.next_id += 1;
-        self.messages.push(A2AMessage {
+    pub fn create_task(&mut self, agent: &str) -> usize {
+        let id = self.tasks.len();
+        self.tasks.push(Task {
             id,
-            from_agent: from,
-            to_agent: to,
-            msg_type: A2AMessageType::Response,
-            method: String::new(),
-            payload,
-            correlation_id: Some(original_id),
-            timestamp: 0,
+            agent: String::from(agent),
+            status: String::from("pending"),
+            result: None,
         });
-        self.delivered += 1;
         id
     }
 
-    pub fn find_capable(&self, capability: &str) -> Vec<u64> {
-        self.endpoints.iter()
-            .filter(|e| e.capabilities.iter().any(|c| c == capability))
-            .map(|e| e.agent_id)
-            .collect()
+    pub fn complete_task(&mut self, id: usize, result: &str) {
+        if let Some(task) = self.tasks.get_mut(id) {
+            task.status = String::from("completed");
+            task.result = Some(String::from(result));
+        }
     }
 
-    pub fn pending_for(&self, agent_id: u64) -> Vec<&A2AMessage> {
-        self.messages.iter()
-            .filter(|m| m.to_agent == agent_id)
-            .collect()
+    pub fn agent_count(&self) -> usize {
+        self.agents.len()
     }
 
-    pub fn total_messages(&self) -> usize {
-        self.messages.len()
+    pub fn task_count(&self) -> usize {
+        self.tasks.len()
     }
 }

@@ -42,7 +42,7 @@ impl CertManager {
             serial: id,
             trusted: false,
             self_signed: subject == issuer,
-        });
+        };
         id
     }
 
@@ -75,4 +75,4 @@ impl CertManager {
     pub fn count(&self) -> usize {
         self.certificates.len()
     }
-}
+)}

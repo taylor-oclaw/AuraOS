@@ -52,7 +52,7 @@ impl DreamCycle {
                 frequency: 1,
                 insight: None,
                 consolidated: false
-            });
+            };
         }
     }
 
@@ -80,4 +80,4 @@ impl DreamCycle {
     pub fn total_patterns(&self) -> usize {
         self.entries.len()
     }
-}
+)}

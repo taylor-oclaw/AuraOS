@@ -53,7 +53,7 @@ impl AgentMigration {
             state_size_bytes: state_size,
             progress_pct: 0,
             started_at: 0,
-        });
+        };
         Some(id)
     }
 
@@ -81,4 +81,4 @@ impl AgentMigration {
     pub fn completed_count(&self) -> usize {
         self.jobs.iter().filter(|j| matches!(j.state, MigrationState::Complete)).count()
     }
-}
+)}

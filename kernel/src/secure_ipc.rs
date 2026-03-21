@@ -41,7 +41,7 @@ impl SecureIpc {
             subscribers: Vec::new(),
             messages: Vec::new(),
             max_messages: 1000
-        });
+        };
     }
 
     pub fn subscribe(&mut self, channel: &str, agent_id: u64) -> bool {
@@ -70,7 +70,7 @@ impl SecureIpc {
                     encrypted: true,
                     timestamp: 0,
                     acknowledged: false
-                });
+                };
             }
 
             if ch.messages.len() > ch.max_messages {
@@ -93,4 +93,4 @@ impl SecureIpc {
     pub fn channel_count(&self) -> usize {
         self.channels.len()
     }
-}
+))}

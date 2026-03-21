@@ -51,7 +51,7 @@ impl PerfProfiler {
             duration_us,
             timestamp: 0,
             agent_id: agent,
-        });
+        };
         if self.samples.len() > self.max_samples {
             self.samples.remove(0);
         }
@@ -76,7 +76,7 @@ impl PerfProfiler {
                     count: 1,
                     min_us: s.duration_us,
                     max_us: s.duration_us,
-                });
+                };
             }
         }
         stats.sort_by(|a, b| b.total_us.cmp(&a.total_us));
@@ -91,4 +91,4 @@ impl PerfProfiler {
     pub fn sample_count(&self) -> usize {
         self.samples.len()
     }
-}
+))}

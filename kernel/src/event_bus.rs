@@ -70,7 +70,7 @@ impl EventBus {
             source_agent: source,
             timestamp: 0,
             delivered_to: subscribers,
-        });
+        };
 
         self.total_published += 1;
         self.total_delivered += delivered;
@@ -89,4 +89,4 @@ impl EventBus {
     pub fn subscriber_count(&self, topic: &str) -> usize {
         self.subscriptions.iter().filter(|s| s.topic == topic).count()
     }
-}
+)}

@@ -45,7 +45,7 @@ impl CostAccounting {
                 spent_today: 0,
                 total_spent: 0,
                 warnings_sent: 0,
-            });
+            };
         }
     }
 
@@ -64,7 +64,7 @@ impl CostAccounting {
             amount,
             timestamp: 0,
             description: String::from(desc),
-        });
+        };
         true
     }
 
@@ -82,4 +82,4 @@ impl CostAccounting {
     pub fn over_budget(&self) -> Vec<u64> {
         self.budgets.iter().filter(|b| b.spent_today > b.daily_limit * 80 / 100).map(|b| b.agent_id).collect()
     }
-}
+))}

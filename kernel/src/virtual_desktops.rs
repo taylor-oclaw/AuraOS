@@ -37,7 +37,7 @@ impl DesktopManager {
             surfaces: Vec::new(),
             wallpaper: None,
             active: is_first,
-        });
+        };
         id
     }
 
@@ -83,4 +83,4 @@ impl DesktopManager {
     pub fn count(&self) -> usize {
         self.desktops.len()
     }
-}
+)}

@@ -47,7 +47,7 @@ impl LoginScreen {
             avatar_hash: None,
             last_login: 0,
             auto_login: false
-        });
+        };
         id
     }
 
@@ -76,4 +76,4 @@ impl LoginScreen {
             _ => None
         }
     }
-}
+)}

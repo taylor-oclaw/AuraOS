@@ -50,7 +50,7 @@ impl WorkflowEngine {
             steps: Vec::new(),
             created_by,
             next_step_id: 1,
-        });
+        };
         id
     }
 
@@ -66,7 +66,7 @@ impl WorkflowEngine {
                 depends_on: deps,
                 output: None,
                 timeout_secs: timeout,
-            });
+            };
             Some(sid)
         } else {
             None
@@ -101,4 +101,4 @@ impl WorkflowEngine {
             .map(|wf| wf.steps.iter().all(|s| matches!(s.status, StepStatus::Completed | StepStatus::Skipped)))
             .unwrap_or(false)
     }
-}
+))}

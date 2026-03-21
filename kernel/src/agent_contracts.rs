@@ -49,7 +49,7 @@ impl ContractManager {
             expires_at: expires,
             deliverables,
             completed_deliverables: Vec::new(),
-        });
+        };
         id
     }
 
@@ -87,4 +87,4 @@ impl ContractManager {
     pub fn total(&self) -> usize {
         self.contracts.len()
     }
-}
+)}

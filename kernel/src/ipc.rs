@@ -103,7 +103,7 @@ impl IpcManager {
                 msg_type,
                 payload,
                 timestamp,
-            });
+            };
         }
 
         false
@@ -156,4 +156,4 @@ impl Default for IpcManager {
     fn default() -> Self {
         Self::new()
     }
-}
+)}

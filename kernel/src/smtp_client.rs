@@ -16,7 +16,7 @@ impl SmtpClient {
             port,
             username: username.to_string(),
             password: password.to_string(),
-        })
+        }
     }
 
     pub fn connect(&self) -> Result<(), String> {
@@ -49,4 +49,4 @@ impl SmtpClient {
         // Simulate checking the status of an email
         Ok(String::from("Email sent successfully"))
     }
-}
+)}

@@ -44,7 +44,7 @@ mod mcp_discovery {
 
         pub fn get_last_scan_time(&self) -> u64 {
             self.last_scanned_time
-        })
+        }
     }
 }
 
@@ -68,4 +68,4 @@ mod tests {
         ];
         assert_eq!(discovery.get_last_scan_time(), 1672531200);
     }
-}
+)}

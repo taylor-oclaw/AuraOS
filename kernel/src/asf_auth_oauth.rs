@@ -26,7 +26,7 @@ impl OAuthToken {
             expires_in,
             refresh_token: None,
             scope: Vec::new(),
-        })
+        }
     }
 
     pub fn set_refresh_token(&mut self, refresh_token: &str) {
@@ -66,4 +66,4 @@ pub extern "C" fn asf_auth_oauth_free_token(token: *mut OAuthToken) {
     if !token.is_null() {
         unsafe { drop(Box::from_raw(token)) };
     }
-}
+)}

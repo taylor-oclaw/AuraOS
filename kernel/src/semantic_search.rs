@@ -35,7 +35,7 @@ impl SearchIndex {
             embedding, 
             score: 0.0, 
             agent_id 
-        });
+        };
         id
     }
 
@@ -87,4 +87,4 @@ impl SearchIndex {
     pub fn count(&self) -> usize {
         self.documents.len()
     }
-}
+)}

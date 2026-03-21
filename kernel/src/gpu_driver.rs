@@ -79,7 +79,7 @@ impl GpuDriver {
             height: h,
             format: 32,
             data_offset: 0,
-        });
+        };
         id
     }
 
@@ -90,4 +90,4 @@ impl GpuDriver {
     pub fn buffer_count(&self) -> usize {
         self.buffers.len()
     }
-}
+)}

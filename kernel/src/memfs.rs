@@ -138,8 +138,8 @@ fn parent_path(path: &str) -> Option<String> {
 /// Global filesystem instance
 static FS: spin::Lazy<spin::Mutex<FileSystem>> = spin::Lazy::new(|| {
     spin::Mutex::new(FileSystem::new())
-});
+};
 
 pub fn with_fs<F: FnOnce(&mut FileSystem) -> R, R>(f: F) -> R {
     f(&mut FS.lock())
-}
+)}

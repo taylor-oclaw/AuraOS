@@ -36,7 +36,7 @@ impl RateLimiter {
             last_refill: 0,
             total_requests: 0,
             rejected_requests: 0
-        });
+        };
     }
 
     pub fn try_acquire(&mut self, agent_id: u64, tokens: u32) -> bool {
@@ -78,4 +78,4 @@ impl RateLimiter {
             0.0
         }).unwrap_or(0.0)
     }
-}
+)}

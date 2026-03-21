@@ -123,7 +123,7 @@ pub fn scan() -> Vec<PciDevice> {
                     prog_if,
                     header_type: header_type & 0x7F,
                     class_name: PciDevice::classify(class_code, subclass),
-                });
+                };
             }
         }
     }
@@ -151,4 +151,4 @@ pub fn list_devices(devices: &[PciDevice]) {
 /// Read BAR0 from PCI config space
 pub fn read_bar0(bus: u8, device: u8, function: u8) -> u32 {
     pci_read(bus, device, function, 0x10)
-}
+)}
