@@ -225,6 +225,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1572,11 +1573,16 @@ mod paged_attention_v2;
 mod pam_module;
 mod panic_handler;
 mod parallel_decode;
+mod parental_activity_report;
 mod parental_age_rating;
+mod parental_app_restrict;
 mod parental_bedtime_mode;
 mod parental_content_filter;
 mod parental_homework_mode;
+mod parental_location_fence;
+mod parental_location_track;
 mod parental_safe_search;
+mod parental_school_app_only;
 mod parental_screen_time_limit;
 mod parental_screen_time_schedule;
 mod parental_website_allow;
