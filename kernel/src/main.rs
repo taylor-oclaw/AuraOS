@@ -517,6 +517,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1529,6 +1530,7 @@ mod document_summary_generate;
 mod document_template_smart;
 mod document_translate_inline;
 mod document_version_track;
+mod draft_smart_core;
 mod drag_drop;
 mod dream_cycle;
 mod e1000;
@@ -2443,11 +2445,15 @@ mod people_channel_preference;
 mod people_check_in_suggest;
 mod people_communication_style;
 mod people_congrats_suggest;
+mod people_context_aggregate_all;
 mod people_context_anniversary_near;
 mod people_context_before_call;
 mod people_context_before_text;
 mod people_context_birthday_near;
 mod people_context_last_interaction;
+mod people_context_not_stale;
+mod people_context_recent_life_event;
+mod people_context_shared_plan;
 mod people_context_surface_engine;
 mod people_context_time_of_year;
 mod people_context_topic_history;
