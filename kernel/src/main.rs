@@ -438,6 +438,9 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
+
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2980,6 +2983,7 @@ mod tls_handshake;
 mod token_healing;
 mod tokenizer;
 mod tone_abbreviation_style;
+mod tone_anger_detect;
 mod tone_capitalization_style;
 mod tone_context_personal;
 mod tone_context_switch;
@@ -2990,6 +2994,8 @@ mod tone_empathy_inject;
 mod tone_engine_core;
 mod tone_exclamation_match;
 mod tone_formality_scale;
+mod tone_frustration_defuse;
+mod tone_frustration_detect;
 mod tone_humor_avoid;
 mod tone_humor_match;
 mod tone_humor_safe_detect;
@@ -3004,6 +3010,7 @@ mod tone_same_person_one_on_one;
 mod tone_same_person_personal_mode;
 mod tone_sarcasm_safe_detect;
 mod tone_sign_off_match;
+mod tone_skepticism_detect;
 mod tone_slang_match;
 mod tone_urgency_match;
 mod tool_executor;
