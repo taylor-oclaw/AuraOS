@@ -367,6 +367,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1999,6 +2000,7 @@ mod miniapp_email_reply;
 mod miniapp_email_snooze;
 mod miniapp_expand_full;
 mod miniapp_file_preview;
+mod miniapp_file_quick_share;
 mod miniapp_float_mode;
 mod miniapp_gesture_handler;
 mod miniapp_layout_engine;
@@ -2011,12 +2013,14 @@ mod miniapp_position_manager;
 mod miniapp_reminder_done;
 mod miniapp_reminder_snooze;
 mod miniapp_renderer;
+mod miniapp_smart_home_control;
 mod miniapp_snap_corner;
 mod miniapp_snap_edge;
 mod miniapp_stack_manager;
 mod miniapp_task_complete;
 mod miniapp_task_delegate;
 mod miniapp_task_snooze;
+mod miniapp_timer_control;
 mod mixture_experts_v2;
 mod ml_accelerator;
 mod model_loader;
