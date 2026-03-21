@@ -405,6 +405,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2227,10 +2228,15 @@ mod pci;
 mod pci_bus;
 mod pcie_gen5;
 mod people_detail_capture;
+mod people_detail_dream_goal;
 mod people_detail_food_pref;
+mod people_detail_health;
 mod people_detail_hobby;
 mod people_detail_job_role;
 mod people_detail_kid_activity;
+mod people_detail_milestone;
+mod people_detail_pet;
+mod people_detail_struggle;
 mod people_detail_travel_plan;
 mod people_memory_context_trigger;
 mod people_memory_core;
