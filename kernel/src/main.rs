@@ -88,6 +88,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1099,9 +1100,12 @@ mod rtc_clock;
 mod runtime_dotnet;
 mod runtime_go;
 mod runtime_java;
+mod runtime_manager;
 mod runtime_node;
 mod runtime_python;
+mod runtime_resource_limit;
 mod runtime_ruby;
+mod runtime_version_mgr;
 mod saml_handler;
 mod sandbox_eval;
 mod sandbox_manager;
