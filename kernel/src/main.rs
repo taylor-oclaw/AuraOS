@@ -345,6 +345,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -638,6 +639,7 @@ mod ai_sec_agent_impersonate_detect;
 mod ai_sec_agent_privilege_escalate;
 mod ai_sec_agent_resource_abuse;
 mod ai_sec_alignment_monitor;
+mod ai_sec_alignment_score;
 mod ai_sec_alignment_test;
 mod ai_sec_api_key_detector;
 mod ai_sec_attribute_inference;
@@ -648,7 +650,9 @@ mod ai_sec_bias_mitigate;
 mod ai_sec_cache_attack_model;
 mod ai_sec_confidence_score;
 mod ai_sec_constitutional_enforce;
+mod ai_sec_copyright_detect;
 mod ai_sec_credit_card_detector;
+mod ai_sec_csam_detect;
 mod ai_sec_data_exfil_block;
 mod ai_sec_data_exfil_detect;
 mod ai_sec_data_integrity_check;
@@ -713,6 +717,7 @@ mod ai_sec_reconstruction_attack;
 mod ai_sec_rogue_agent_contain;
 mod ai_sec_rogue_agent_detect;
 mod ai_sec_rogue_agent_kill;
+mod ai_sec_self_harm_detect;
 mod ai_sec_sensitive_data_classify;
 mod ai_sec_sensitive_data_detect;
 mod ai_sec_sensitive_data_mask;
@@ -730,6 +735,7 @@ mod ai_sec_training_audit;
 mod ai_sec_trigger_phrase_detect;
 mod ai_sec_trojan_model_detect;
 mod ai_sec_uncertainty_flag;
+mod ai_sec_violence_detect;
 mod ai_structured_handler;
 mod ai_token_budget;
 mod ai_tokenizer_abstract;
