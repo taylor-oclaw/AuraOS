@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod lang_locale_address_format;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
