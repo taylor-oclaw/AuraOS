@@ -311,6 +311,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2108,6 +2109,7 @@ mod shader_compiler;
 mod shadow_mapper;
 mod shared_memory;
 mod shell;
+mod shopping_assistant;
 mod shutdown_mgr;
 mod signal_handler;
 mod signals;
@@ -2378,15 +2380,19 @@ mod trace_assurance;
 mod trackpad_driver;
 mod traffic_shaper;
 mod transformer;
+mod travel_activity_suggest;
 mod travel_assistant;
 mod travel_currency_convert;
 mod travel_document_check;
+mod travel_embassy_locate;
+mod travel_expense_track;
 mod travel_flight_track;
 mod travel_hotel_suggest;
 mod travel_itinerary_build;
 mod travel_language_prep;
 mod travel_offline_map;
 mod travel_packing_list;
+mod travel_restaurant_suggest;
 mod travel_timezone_adjust;
 mod travel_transit_navigate;
 mod travel_vaccine_check;
