@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod shopping_meal_plan_link;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
