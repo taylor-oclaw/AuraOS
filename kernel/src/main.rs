@@ -239,6 +239,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1040,17 +1041,21 @@ mod framebuffer;
 mod framebuffer_mgr;
 mod ftp_client;
 mod function_calling;
+mod game_mode_achievement;
 mod game_mode_activate;
 mod game_mode_anti_cheat;
+mod game_mode_cloud_save;
 mod game_mode_controller_generic;
 mod game_mode_controller_nintendo;
 mod game_mode_controller_ps;
 mod game_mode_controller_xbox;
 mod game_mode_core;
+mod game_mode_emulator_compat;
 mod game_mode_fps_counter;
 mod game_mode_haptic;
 mod game_mode_launcher;
 mod game_mode_library;
+mod game_mode_mod_support;
 mod game_mode_notify_silence;
 mod game_mode_overlay;
 mod game_mode_party_system;
@@ -1862,6 +1867,7 @@ mod skill_usage_tracker;
 mod skill_version_mgr;
 mod slab_allocator;
 mod sleep_manager;
+mod smart_home_hub_core;
 mod smtp_client;
 mod socket_api;
 mod socks_handler;
