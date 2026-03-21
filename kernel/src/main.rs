@@ -223,6 +223,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1065,6 +1066,8 @@ mod health_stress_detect_usage;
 mod health_stretch_remind;
 mod health_twenty_twenty_rule;
 mod health_vision_test;
+mod health_wellness_dashboard;
+mod health_wellness_report;
 mod hibernate_handler;
 mod homekit_bridge;
 mod hot_reload;
@@ -1570,6 +1573,9 @@ mod panic_handler;
 mod parallel_decode;
 mod parental_age_rating;
 mod parental_content_filter;
+mod parental_safe_search;
+mod parental_website_allow;
+mod parental_website_block;
 mod particle_renderer;
 mod password_hasher;
 mod pci;
