@@ -423,6 +423,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2428,6 +2429,8 @@ mod proc_sched;
 mod process_table;
 mod profile_feature_both;
 mod profile_feature_gate;
+mod profile_feature_hide;
+mod profile_feature_personal_only;
 mod profile_feature_professional_only;
 mod profile_feature_suggest;
 mod profile_mode_app_trigger;
@@ -2449,6 +2452,8 @@ mod profile_mode_student;
 mod profile_mode_switch;
 mod profile_mode_time_trigger;
 mod profile_mode_wifi_trigger;
+mod profile_ui_adapt;
+mod profile_ui_personal_layout;
 mod progress_bar;
 mod prompt_templates;
 mod proximity_sensor;
