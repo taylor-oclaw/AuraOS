@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod profile_account_calendar_merge_view;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
