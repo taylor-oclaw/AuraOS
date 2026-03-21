@@ -453,6 +453,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1167,6 +1168,11 @@ mod belief_revision;
 mod bidi_text;
 mod biz_crm_contact;
 mod biz_crm_core;
+mod biz_crm_deal_value;
+mod biz_crm_lead_capture;
+mod biz_crm_lead_nurture;
+mod biz_crm_lead_qualify;
+mod biz_crm_lead_score;
 mod bluetooth_mgr;
 mod bluetooth_stack;
 mod boot_sequence;
