@@ -240,6 +240,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1867,6 +1868,9 @@ mod skill_usage_tracker;
 mod skill_version_mgr;
 mod slab_allocator;
 mod sleep_manager;
+mod smart_home_automation_engine;
+mod smart_home_device_control;
+mod smart_home_device_discover;
 mod smart_home_hub_core;
 mod smtp_client;
 mod socket_api;
