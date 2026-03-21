@@ -236,6 +236,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1038,6 +1039,10 @@ mod framebuffer_mgr;
 mod ftp_client;
 mod function_calling;
 mod game_mode_activate;
+mod game_mode_controller_generic;
+mod game_mode_controller_nintendo;
+mod game_mode_controller_ps;
+mod game_mode_controller_xbox;
 mod game_mode_core;
 mod game_mode_notify_silence;
 mod game_mode_overlay;
