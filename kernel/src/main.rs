@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod access_color_blind_deuteranopia;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
