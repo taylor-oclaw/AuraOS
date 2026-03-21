@@ -175,6 +175,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1607,9 +1608,12 @@ mod speech_lambdacism;
 mod speech_lisp_frontal;
 mod speech_lisp_lateral;
 mod speech_lisp_palatal;
+mod speech_phoneme_custom_map;
+mod speech_phoneme_g_to_d;
 mod speech_phoneme_l_to_r;
 mod speech_phoneme_map_custom;
 mod speech_phoneme_r_to_l;
+mod speech_phoneme_r_to_w;
 mod speech_phoneme_s_to_th;
 mod speech_phoneme_substitution;
 mod speech_rhotacism;
