@@ -299,6 +299,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -869,8 +870,11 @@ mod bluetooth_mgr;
 mod bluetooth_stack;
 mod boot_sequence;
 mod buddy_allocator;
+mod calendar_buffer_time;
 mod calendar_conflict_detect;
+mod calendar_intelligence;
 mod calendar_optimal_time;
+mod calendar_reschedule_suggest;
 mod camera_driver;
 mod canvas_2d;
 mod capability_system;
