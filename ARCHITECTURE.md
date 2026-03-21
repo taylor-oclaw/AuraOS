@@ -50,6 +50,21 @@ OS already reads/writes DEFS particles. VyMatik adds: server API, query/intent e
 ### On Linux/Windows + ext4/NTFS (standalone)
 VyMatik installs everything: its own particle storage, gravity engine, density cache, quantum logging — stored in files on the host filesystem. Like SQL Server .mdf files.
 
+## VyMatik Concepts in AuraOS
+ALL VyMatik concepts are part of AuraOS/DEFS — not stripped down, not partial. The OS needs them:
+- Resonance: intelligent data encoding on disk
+- Singularity: natural data clustering (replaces folders)
+- Full Gravity: semantic relationships between all data
+- Density: intelligent caching based on access patterns
+- Entropy: version layers, data decay
+- Manifolds: per-user data worlds
+- Membranes: sharing contracts
+- NullSpace: unauthorized data is nonexistent
+- Quantum logging: every access is an audit entry
+
+VyMatik on AuraOS = just adds network server to serve data externally.
+VyMatik on Linux = full install of everything above + server.
+
 ## Design Principles
 - DEFS is a filesystem (like ext4/NTFS), not a database
 - AuraOS reads DEFS natively
