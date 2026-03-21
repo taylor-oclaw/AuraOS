@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod smart_home_camera_detect;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
