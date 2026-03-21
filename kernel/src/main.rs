@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod document_summary_generate;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
