@@ -397,6 +397,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2348,9 +2349,11 @@ mod raytracing_engine;
 mod rel_achievement_celebrate;
 mod rel_allergy_remember;
 mod rel_alumni_network;
+mod rel_anniversary_milestone;
 mod rel_apology_draft;
 mod rel_archive_manage;
 mod rel_baby_born_detect;
+mod rel_block_manage;
 mod rel_boundary_respect;
 mod rel_call_pref_detect;
 mod rel_client_vendor;
@@ -2384,6 +2387,7 @@ mod rel_favor_reciprocate;
 mod rel_favor_track;
 mod rel_friend_casual;
 mod rel_friend_close;
+mod rel_friendship_anniversary;
 mod rel_ghosting_detect;
 mod rel_gift_budget_track;
 mod rel_gift_history;
