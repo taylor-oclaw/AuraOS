@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod speech_stutter_wait_mode;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
