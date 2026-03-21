@@ -503,6 +503,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2612,6 +2613,8 @@ mod profile_commute_detect;
 mod profile_commute_email_triage;
 mod profile_commute_hands_free;
 mod profile_commute_podcast_resume;
+mod profile_cross_device_different_roles;
+mod profile_cross_device_identity;
 mod profile_data_crossover_allow;
 mod profile_data_crossover_block;
 mod profile_data_partition;
@@ -2621,6 +2624,7 @@ mod profile_device_guest_mode;
 mod profile_device_no_assume;
 mod profile_device_role_fluid;
 mod profile_device_role_learn;
+mod profile_device_shared_couple;
 mod profile_device_shared_family;
 mod profile_device_shared_roommate;
 mod profile_device_usage_pattern_learn;

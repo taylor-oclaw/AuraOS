@@ -69,7 +69,7 @@ if [ -f "$MODULES_QUEUE" ] && [ -s "$MODULES_QUEUE" ]; then
                 sed -i '' '1d' "$MODULES_QUEUE" 2>/dev/null || sed -i '1d' "$MODULES_QUEUE" 2>/dev/null
                 python3 -c "
 import json
-req = {'model': 'qwen2.5-coder:14b', 'prompt': 'Write ONLY Rust code for a kernel module, no markdown, no code fences. extern crate alloc; use alloc::string::String; use alloc::vec::Vec; Create a complete working module called ${module} for an AI-native operating system kernel. Include at least one public struct with an impl block, a new() constructor, and at least 5 useful public methods with real logic. Use only no_std compatible types. No format!, no println!, no std::, no HashMap, no no_mangle, no asm!, no rand.', 'stream': False, 'options': {'num_predict': 3000, 'temperature': 0.15}}
+req = {'model': 'llama3.1:70b', 'prompt': 'Write ONLY Rust code for a kernel module, no markdown, no code fences. extern crate alloc; use alloc::string::String; use alloc::vec::Vec; Create a complete working module called ${module} for an AI-native operating system kernel. Include at least one public struct with an impl block, a new() constructor, and at least 5 useful public methods with real logic. Use only no_std compatible types. No format!, no println!, no std::, no HashMap, no no_mangle, no asm!, no rand.', 'stream': False, 'options': {'num_predict': 3000, 'temperature': 0.15}}
 json.dump(req, open('/tmp/pipe_${module}.json', 'w'))
 "
                 if [ "$node" = "localhost" ]; then
