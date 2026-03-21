@@ -331,6 +331,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -608,6 +609,8 @@ mod ai_runtime_wasm;
 mod ai_safety_abstract;
 mod ai_safety_registry;
 mod ai_schema_enforcer;
+mod ai_sec_api_key_detector;
+mod ai_sec_credit_card_detector;
 mod ai_sec_data_integrity_check;
 mod ai_sec_data_poison_detect;
 mod ai_sec_data_poison_validate;
@@ -622,6 +625,7 @@ mod ai_sec_jailbreak_detect;
 mod ai_sec_jailbreak_evolve;
 mod ai_sec_jailbreak_pattern;
 mod ai_sec_jailbreak_response;
+mod ai_sec_medical_data_detector;
 mod ai_sec_model_access_control;
 mod ai_sec_model_encrypt;
 mod ai_sec_model_fingerprint;
@@ -638,6 +642,7 @@ mod ai_sec_output_sanitize;
 mod ai_sec_output_sql_detect;
 mod ai_sec_output_validate;
 mod ai_sec_output_xss_detect;
+mod ai_sec_password_detector;
 mod ai_sec_pii_detector;
 mod ai_sec_plugin_audit;
 mod ai_sec_plugin_file_restrict;
@@ -652,6 +657,7 @@ mod ai_sec_prompt_inject_detect;
 mod ai_sec_prompt_inject_monitor;
 mod ai_sec_prompt_inject_sanitize;
 mod ai_sec_sensitive_data_classify;
+mod ai_sec_sensitive_data_detect;
 mod ai_sec_sensitive_data_mask;
 mod ai_sec_supply_chain_pin;
 mod ai_sec_supply_chain_sbom;
