@@ -322,6 +322,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -604,10 +605,15 @@ mod ai_sec_indirect_inject_detect;
 mod ai_sec_jailbreak_detect;
 mod ai_sec_jailbreak_evolve;
 mod ai_sec_jailbreak_pattern;
+mod ai_sec_jailbreak_response;
 mod ai_sec_output_code_scan;
+mod ai_sec_output_command_detect;
 mod ai_sec_output_filter;
+mod ai_sec_output_pii_redact;
 mod ai_sec_output_sanitize;
+mod ai_sec_output_sql_detect;
 mod ai_sec_output_validate;
+mod ai_sec_output_xss_detect;
 mod ai_sec_prompt_inject_block;
 mod ai_sec_prompt_inject_boundary;
 mod ai_sec_prompt_inject_canary;
