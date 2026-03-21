@@ -496,6 +496,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1690,16 +1691,19 @@ mod gdt;
 mod gesture_engine;
 mod gguf;
 mod gift_anti_bribery_check;
+mod gift_charity_donation_gift;
 mod gift_client_apology;
 mod gift_client_deal_close;
 mod gift_client_gift;
 mod gift_client_milestone;
 mod gift_conference_swag;
 mod gift_corporate_budget;
+mod gift_eco_friendly_option;
 mod gift_employee_appreciation;
 mod gift_employee_farewell;
 mod gift_employee_promotion;
 mod gift_employee_welcome;
+mod gift_experience_gift;
 mod gift_professional_occasion;
 mod gift_tax_deductible_flag;
 mod gift_team_milestone;
