@@ -501,6 +501,8 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2615,10 +2617,15 @@ mod profile_data_crossover_block;
 mod profile_data_partition;
 mod profile_data_personal_vault;
 mod profile_data_work_vault;
+mod profile_device_guest_mode;
 mod profile_device_no_assume;
 mod profile_device_role_fluid;
 mod profile_device_role_learn;
+mod profile_device_shared_family;
+mod profile_device_shared_roommate;
 mod profile_device_usage_pattern_learn;
+mod profile_entrepreneur_biz_switch;
+mod profile_entrepreneur_multi_biz;
 mod profile_entrepreneur_personal_on_work;
 mod profile_entrepreneur_work_on_personal;
 mod profile_feature_both;
