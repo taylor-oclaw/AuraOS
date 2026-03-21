@@ -103,6 +103,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -367,6 +368,7 @@ mod app_ocr_engine_v2;
 mod app_process_monitor;
 mod app_result_extractor;
 mod app_screen_reader;
+mod app_screenshot_analyzer;
 mod app_state_tracker;
 mod app_switch_handler;
 mod app_ui_element_finder;
@@ -1362,8 +1364,11 @@ mod virtio_net;
 mod virtual_desktops;
 mod vlan_manager;
 mod vllm_compat;
+mod voice_always_listen;
+mod voice_command_loop;
 mod voice_engine;
 mod voice_pipeline;
+mod voice_wake_word;
 mod vpn_client;
 mod vpn_wireguard;
 mod vulkan_renderer;
