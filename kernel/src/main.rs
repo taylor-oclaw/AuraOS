@@ -533,6 +533,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1204,6 +1205,8 @@ mod aura_web_browser;
 mod aura_workspace_mgr;
 mod auto_learn_confidence_build;
 mod auto_learn_core;
+mod auto_learn_explain_why;
+mod auto_learn_graduate;
 mod auto_learn_observe;
 mod auto_learn_pattern_detect;
 mod auto_learn_suggest_phase;
@@ -1582,6 +1585,9 @@ mod eagle_decode;
 mod elf_loader;
 mod email_action_extract;
 mod email_attachment_preview;
+mod email_auto_delete_learn;
+mod email_auto_star_pattern;
+mod email_auto_star_urgency;
 mod email_category_auto;
 mod email_contact_enrich;
 mod email_deadline_extract;
