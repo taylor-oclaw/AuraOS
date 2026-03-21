@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod notification_auto_action_learn;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
