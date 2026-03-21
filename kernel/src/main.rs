@@ -535,6 +535,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1591,7 +1592,12 @@ mod email_auto_archive_pattern;
 mod email_auto_delete_learn;
 mod email_auto_delete_notification;
 mod email_auto_delete_promo;
+mod email_auto_flag_important;
+mod email_auto_folder_learn;
+mod email_auto_folder_route;
 mod email_auto_label_learn;
+mod email_auto_mark_read;
+mod email_auto_snooze_pattern;
 mod email_auto_star_pattern;
 mod email_auto_star_urgency;
 mod email_category_auto;
