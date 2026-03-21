@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod voice_permission_check;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
