@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod calendar_buffer_time;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
