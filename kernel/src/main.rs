@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod parental_school_app_only;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
