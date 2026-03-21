@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod photo_scene_classify;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
