@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod mesh_bandwidth_optimizer;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
