@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod expense_auto_categorize;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
