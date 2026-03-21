@@ -256,6 +256,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1715,9 +1716,13 @@ mod pop3_client;
 mod post_processing;
 mod power_mgmt;
 mod power_profiles;
+mod predict_app_chain_pattern;
+mod predict_app_context_pattern;
 mod predict_app_day_pattern;
+mod predict_app_preload_engine;
 mod predict_app_time_pattern;
 mod predict_app_usage;
+mod predict_app_wifi_pattern;
 mod print_manager;
 mod priority_auto_rebalance;
 mod priority_batch_optimizer;
