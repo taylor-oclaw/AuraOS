@@ -248,6 +248,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -743,12 +744,17 @@ mod encryption_rsa;
 mod encryption_xchacha20;
 mod enterprise_audit_log;
 mod enterprise_azure_ad;
+mod enterprise_compliance_hipaa;
+mod enterprise_compliance_soc2;
 mod enterprise_conditional_access;
 mod enterprise_console;
 mod enterprise_dashboard;
 mod enterprise_directory_sync;
+mod enterprise_dlp_engine;
+mod enterprise_dlp_rules;
 mod enterprise_google_workspace;
 mod enterprise_ldap_sync;
+mod enterprise_okta;
 mod enterprise_rbac;
 mod enterprise_reporting;
 mod enterprise_role_manager;
