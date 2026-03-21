@@ -306,6 +306,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1908,6 +1909,7 @@ mod perf_workload_predictor;
 mod permissions;
 mod photo_auto_organize;
 mod photo_background_remove;
+mod photo_backup_smart;
 mod photo_best_shot_select;
 mod photo_duplicate_detect;
 mod photo_enhance_auto;
@@ -1919,9 +1921,11 @@ mod photo_location_tag;
 mod photo_memory_create;
 mod photo_object_detect;
 mod photo_person_tag;
+mod photo_privacy_detect;
 mod photo_quality_score;
 mod photo_scene_classify;
 mod photo_slideshow_auto;
+mod photo_storage_optimize;
 mod physics_engine;
 mod pipe_system;
 mod pipes;
