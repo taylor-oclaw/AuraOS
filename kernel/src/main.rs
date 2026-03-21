@@ -374,6 +374,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2322,7 +2323,9 @@ mod raid_manager;
 mod random;
 mod rate_limiter;
 mod raytracing_engine;
+mod rel_alumni_network;
 mod rel_colleague_team;
+mod rel_community_group;
 mod rel_friend_close;
 mod rel_manager_report;
 mod rel_mentor_mentee;
