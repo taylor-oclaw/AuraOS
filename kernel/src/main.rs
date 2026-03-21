@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod rel_gift_budget_track;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
