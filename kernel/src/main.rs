@@ -6,6 +6,7 @@ extern crate alloc;
 
 
 mod biz_coworker_ask_expert;
+mod biz_coworker_introduce;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
