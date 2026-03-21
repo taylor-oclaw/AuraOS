@@ -230,6 +230,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1555,9 +1556,13 @@ mod ntp_sync;
 mod numa_topology;
 mod nvme_driver;
 mod oauth_client;
+mod offline_ai_local;
+mod offline_cache_manager;
 mod offline_conflict_resolve;
 mod offline_core;
 mod offline_data_sync;
+mod offline_queue_manager;
+mod offline_retry_engine;
 mod ollama_compat;
 mod onnxruntime_compat;
 mod oom_killer;
@@ -1592,6 +1597,7 @@ mod parental_daily_summary;
 mod parental_divorced_parent_sync;
 mod parental_emergency_alert;
 mod parental_family_discuss;
+mod parental_gradual_unlock;
 mod parental_homework_mode;
 mod parental_location_fence;
 mod parental_location_track;
