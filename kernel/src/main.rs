@@ -153,6 +153,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -960,6 +961,7 @@ mod lang_accent_arabic_gulf;
 mod lang_accent_bengali;
 mod lang_accent_chinese_cantonese;
 mod lang_accent_chinese_mandarin;
+mod lang_accent_custom;
 mod lang_accent_detector;
 mod lang_accent_english_au;
 mod lang_accent_english_in;
@@ -967,6 +969,7 @@ mod lang_accent_english_ng;
 mod lang_accent_english_sg;
 mod lang_accent_english_uk;
 mod lang_accent_english_us;
+mod lang_accent_filipino;
 mod lang_accent_french_af;
 mod lang_accent_french_ca;
 mod lang_accent_french_fr;
@@ -982,9 +985,11 @@ mod lang_accent_russian;
 mod lang_accent_spanish_ar;
 mod lang_accent_spanish_es;
 mod lang_accent_spanish_mx;
+mod lang_accent_swahili;
 mod lang_accent_tamil;
 mod lang_accent_telugu;
 mod lang_accent_thai;
+mod lang_accent_turkish;
 mod lang_accent_vietnamese;
 mod lang_code_switch_detect;
 mod lang_core;
@@ -994,6 +999,7 @@ mod lang_dominant_language;
 mod lang_history_tracker;
 mod lang_mixed_sentence_parse;
 mod lang_preference_mgr;
+mod lang_speech_model_router;
 mod lang_user_profile;
 mod ldap_client;
 mod linear_attention_v2;
