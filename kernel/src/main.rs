@@ -542,6 +542,8 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1337,6 +1339,10 @@ mod bluetooth_mgr;
 mod bluetooth_stack;
 mod boot_sequence;
 mod browser_auto_bookmark_learn;
+mod browser_auto_cookie_manage;
+mod browser_auto_form_fill;
+mod browser_auto_history_clean;
+mod browser_auto_save_article;
 mod browser_auto_tab_close;
 mod buddy_allocator;
 mod calendar_agenda_generate;
@@ -1576,6 +1582,8 @@ mod document_summary_generate;
 mod document_template_smart;
 mod document_translate_inline;
 mod document_version_track;
+mod download_auto_delete_installer;
+mod download_auto_open;
 mod draft_fill_confidence_score;
 mod draft_fill_from_crm;
 mod draft_fill_from_memory;
