@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod speech_stutter_word_predict;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
