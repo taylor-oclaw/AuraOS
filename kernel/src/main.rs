@@ -264,6 +264,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -941,6 +942,10 @@ mod device_tree;
 mod dhcp;
 mod dhcp_client;
 mod dialog_box;
+mod digital_twin_behavior_model;
+mod digital_twin_decision_model;
+mod digital_twin_preference;
+mod digital_twin_simulate;
 mod digital_twin_user;
 mod disk_partition;
 mod display_calibrate;
@@ -1740,6 +1745,7 @@ mod predict_app_wifi_pattern;
 mod predict_break_optimal;
 mod predict_calendar_context;
 mod predict_commute_detect;
+mod predict_energy_level;
 mod predict_file_access;
 mod predict_file_preload;
 mod predict_file_recent_smart;
