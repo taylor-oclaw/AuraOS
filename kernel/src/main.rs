@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod predict_app_time_pattern;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
