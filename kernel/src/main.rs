@@ -148,6 +148,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -950,6 +951,8 @@ mod keyboard;
 mod knowledge_graph;
 mod kv_cache_v2;
 mod lang_accent_adapt;
+mod lang_accent_arabic_eg;
+mod lang_accent_arabic_gulf;
 mod lang_accent_detector;
 mod lang_accent_english_au;
 mod lang_accent_english_in;
