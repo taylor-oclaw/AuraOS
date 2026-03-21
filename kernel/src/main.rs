@@ -238,6 +238,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1052,10 +1053,13 @@ mod game_mode_launcher;
 mod game_mode_library;
 mod game_mode_notify_silence;
 mod game_mode_overlay;
+mod game_mode_party_system;
 mod game_mode_perf_boost;
 mod game_mode_recording;
 mod game_mode_screenshot;
+mod game_mode_social;
 mod game_mode_streaming;
+mod game_mode_voice_chat;
 mod gdt;
 mod gesture_engine;
 mod gguf;
