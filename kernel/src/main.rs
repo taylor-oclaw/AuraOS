@@ -504,6 +504,8 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2606,6 +2608,7 @@ mod process_table;
 mod profile_account_browser_separate;
 mod profile_account_calendar_merge_view;
 mod profile_account_work_email;
+mod profile_ask_not_assume;
 mod profile_coffee_shop_detect;
 mod profile_coffee_shop_screen_guard;
 mod profile_coffee_shop_vpn;
@@ -2662,6 +2665,8 @@ mod profile_mode_time_trigger;
 mod profile_mode_wifi_trigger;
 mod profile_notification_personal_to_work;
 mod profile_notification_work_to_personal;
+mod profile_per_device_apps;
+mod profile_per_device_notification;
 mod profile_side_hustle_mode;
 mod profile_travel_airport_detect;
 mod profile_travel_conference_mode;
