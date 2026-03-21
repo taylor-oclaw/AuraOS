@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod mesh_key_rotation;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
