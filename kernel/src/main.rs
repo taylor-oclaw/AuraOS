@@ -536,6 +536,8 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1333,6 +1335,8 @@ mod boot_sequence;
 mod buddy_allocator;
 mod calendar_agenda_generate;
 mod calendar_attendee_suggest;
+mod calendar_auto_reschedule;
+mod calendar_auto_suggest_times;
 mod calendar_buffer_time;
 mod calendar_conflict_detect;
 mod calendar_external_sync;
@@ -1589,14 +1593,17 @@ mod email_action_extract;
 mod email_attachment_preview;
 mod email_auto_archive_learn;
 mod email_auto_archive_pattern;
+mod email_auto_delegate_pattern;
 mod email_auto_delete_learn;
 mod email_auto_delete_notification;
 mod email_auto_delete_promo;
 mod email_auto_flag_important;
 mod email_auto_folder_learn;
 mod email_auto_folder_route;
+mod email_auto_forward_pattern;
 mod email_auto_label_learn;
 mod email_auto_mark_read;
+mod email_auto_reply_pattern;
 mod email_auto_snooze_pattern;
 mod email_auto_star_pattern;
 mod email_auto_star_urgency;
