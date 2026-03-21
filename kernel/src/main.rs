@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod file_auto_delete_temp;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
