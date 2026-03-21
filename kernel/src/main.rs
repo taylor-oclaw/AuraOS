@@ -168,6 +168,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1005,6 +1006,7 @@ mod lang_accent_telugu;
 mod lang_accent_thai;
 mod lang_accent_turkish;
 mod lang_accent_vietnamese;
+mod lang_accessibility_screen_reader_lang;
 mod lang_autocomplete_multilingual;
 mod lang_autocorrect;
 mod lang_bilingual_assist;
@@ -1017,6 +1019,7 @@ mod lang_dictionary_mgr;
 mod lang_dictionary_offline;
 mod lang_dominant_language;
 mod lang_email_language_detect;
+mod lang_email_reply_match_lang;
 mod lang_font_fallback;
 mod lang_grammar_check;
 mod lang_history_tracker;
@@ -1581,6 +1584,8 @@ mod socket_api;
 mod socks_handler;
 mod sparse_attention_v2;
 mod speculative_decode_v2;
+mod speech_impediment_core;
+mod speech_impediment_detector;
 mod ssh_client;
 mod ssh_server;
 mod stack_unwinder;
