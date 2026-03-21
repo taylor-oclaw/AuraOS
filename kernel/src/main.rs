@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod access_cursor_highlight;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
