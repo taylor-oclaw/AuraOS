@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod relationship_communication_freq;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
