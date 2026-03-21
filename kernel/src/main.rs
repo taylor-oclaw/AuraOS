@@ -506,6 +506,8 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2489,6 +2491,9 @@ mod people_shared_memory;
 mod people_social_extract;
 mod people_story_recall;
 mod people_support_suggest;
+mod people_timeline_build;
+mod people_timeline_date_relevant;
+mod people_timeline_recurring_detect;
 mod people_timezone_remember;
 mod people_voice_remember;
 mod perf_app_preloader;
@@ -2663,10 +2668,12 @@ mod profile_mode_student;
 mod profile_mode_switch;
 mod profile_mode_time_trigger;
 mod profile_mode_wifi_trigger;
+mod profile_no_judgment;
 mod profile_notification_personal_to_work;
 mod profile_notification_work_to_personal;
 mod profile_per_device_apps;
 mod profile_per_device_notification;
+mod profile_per_device_preference;
 mod profile_side_hustle_mode;
 mod profile_travel_airport_detect;
 mod profile_travel_conference_mode;
