@@ -448,6 +448,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2994,10 +2995,12 @@ mod tone_anger_careful_reply;
 mod tone_anger_detect;
 mod tone_boss_mode;
 mod tone_capitalization_style;
+mod tone_child_mode;
 mod tone_client_mode;
 mod tone_close_friend_mode;
 mod tone_context_personal;
 mod tone_context_switch;
+mod tone_cultural_adapt;
 mod tone_directness_level;
 mod tone_draft_preview_perception;
 mod tone_draft_suggest_rewrite;
@@ -3014,6 +3017,7 @@ mod tone_family_mode;
 mod tone_formality_scale;
 mod tone_frustration_defuse;
 mod tone_frustration_detect;
+mod tone_generation_adapt;
 mod tone_group_chat_adapt;
 mod tone_humor_avoid;
 mod tone_humor_match;
@@ -3025,6 +3029,7 @@ mod tone_per_person_evolve;
 mod tone_per_person_learn;
 mod tone_per_person_profile;
 mod tone_profanity_level;
+mod tone_reply_chain_aware;
 mod tone_response_length_match;
 mod tone_sadness_detect;
 mod tone_sadness_gentle_reply;
