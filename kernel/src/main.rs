@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod marketplace_payment_paypal;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
