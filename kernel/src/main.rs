@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod speech_rate_too_fast;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
