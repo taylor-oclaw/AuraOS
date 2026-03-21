@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod rel_privacy_level_set;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
