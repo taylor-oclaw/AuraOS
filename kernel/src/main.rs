@@ -548,6 +548,8 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1224,6 +1226,7 @@ mod auto_learn_confidence_build;
 mod auto_learn_core;
 mod auto_learn_explain_why;
 mod auto_learn_graduate;
+mod auto_learn_never_auto;
 mod auto_learn_observe;
 mod auto_learn_pattern_detect;
 mod auto_learn_suggest_phase;
@@ -1619,6 +1622,9 @@ mod draft_template_smart;
 mod draft_undo_send;
 mod drag_drop;
 mod dream_cycle;
+mod driver_framework_core;
+mod driver_framework_registry;
+mod driver_framework_trait;
 mod e1000;
 mod eagle_decode;
 mod elf_loader;
