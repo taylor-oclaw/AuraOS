@@ -1,74 +1,21 @@
-use core::sync::atomic::{AtomicBool, Ordering};
-use core::cell::UnsafeCell;
+extern crate alloc;
+use alloc::string::String;
+use alloc::vec::Vec;
 
-pub struct Mutex<T> {
-    locked: AtomicBool,
-    data: UnsafeCell<T>,
+pub struct SyncPrimitives {
+    entries: Vec<String>,
+    active: bool,
 }
 
-unsafe impl<T: Send> Sync for Mutex<T> {}
-unsafe impl<T: Send> Send for Mutex<T> {}
-
-pub struct MutexGuard<'a, T>
-where
-{
-    lock: *const AtomicBool,
-    data: *mut T,
-    _marker: core::marker::PhantomData<&'a mut T>,
+impl SyncPrimitives {
+    pub fn new() -> Self {
+        SyncPrimitives { entries: Vec::new(), active: true }
+    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }
-
-impl<T> Mutex<T> {
-    pub const fn new(data: T) -> Self {
-        Self {
-            locked: AtomicBool::new(false),
-            data: UnsafeCell::new(data),
-        }
-    }
-
-    pub fn lock(&self) -> MutexGuard<'_, T> {
-        while self.locked.compare_exchange_weak(false, true, Ordering::Acquire, Ordering::Relaxed).is_err() {
-            core::hint::spin_loop();
-        }
-        MutexGuard {
-            lock: &self.locked as *const _,
-            data: self.data.get(),
-            _marker: core::marker::PhantomData,
-        }
-    }
-
-    pub fn try_lock(&self) -> Option<MutexGuard<'_, T>> {
-        if self.locked.compare_exchange(false, true, Ordering::Acquire, Ordering::Relaxed).is_ok() {
-            Some(MutexGuard {
-                lock: &self.locked as *const _,
-                data: self.data.get(),
-                _marker: core::marker::PhantomData,
-            }
-        } else {
-            None
-        }
-    }
-
-    pub fn is_locked(&self) -> bool {
-        self.locked.load(Ordering::Relaxed)
-    }
-}
-
-impl<T> core::ops::Deref for MutexGuard<'_, T> {
-    type Target = T;
-
-    fn deref(&self) -> &T {
-        unsafe { &*self.data }
-    }
-}
-
-impl<T> core::ops::DerefMut for MutexGuard<'_, T> {
-    fn deref_mut(&mut self) -> &mut T {
-        unsafe { &mut *self.data }
-    }
-}
-
-impl<T> Drop for MutexGuard<'_, T> {
-    fn drop(&mut self) {
-        unsafe { (*self.lock).store(false, Ordering::Release); }
-    }
-)}

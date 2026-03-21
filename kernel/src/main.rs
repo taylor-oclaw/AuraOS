@@ -260,6 +260,8 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -812,6 +814,7 @@ mod family_hub_inheritance;
 mod family_hub_invite;
 mod family_hub_key_mgr;
 mod family_hub_legacy_vault;
+mod family_hub_location_share;
 mod family_hub_member_mgr;
 mod family_hub_memory_capsule;
 mod family_hub_nas_bridge;
@@ -825,6 +828,7 @@ mod family_hub_role_mgr;
 mod family_hub_shared_storage;
 mod family_hub_skill_library;
 mod family_hub_skill_share;
+mod family_hub_subscription_mgr;
 mod family_hub_sync_engine;
 mod family_hub_vault;
 mod family_invite_handler;
@@ -1035,6 +1039,9 @@ mod memory_decay;
 mod memory_pool;
 mod menu_system;
 mod mesh;
+mod mesh_agent;
+mod mesh_core;
+mod mesh_orchestrator;
 mod metal_compat;
 mod mfa_handler;
 mod mixture_experts_v2;
