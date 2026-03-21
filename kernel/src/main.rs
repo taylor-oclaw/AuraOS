@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod app_accessibility_tree;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
