@@ -255,6 +255,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1714,6 +1715,9 @@ mod pop3_client;
 mod post_processing;
 mod power_mgmt;
 mod power_profiles;
+mod predict_app_day_pattern;
+mod predict_app_time_pattern;
+mod predict_app_usage;
 mod print_manager;
 mod priority_auto_rebalance;
 mod priority_batch_optimizer;
@@ -1920,6 +1924,8 @@ mod smart_home_oven_control;
 mod smart_home_pet_feeder;
 mod smart_home_plant_water;
 mod smart_home_pool_control;
+mod smart_home_ring_control;
+mod smart_home_routine_custom;
 mod smart_home_routine_morning;
 mod smart_home_routine_night;
 mod smart_home_scene_manager;
