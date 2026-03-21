@@ -143,6 +143,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -944,7 +945,11 @@ mod key_storage;
 mod keyboard;
 mod knowledge_graph;
 mod kv_cache_v2;
+mod lang_code_switch_detect;
 mod lang_core;
+mod lang_detector_realtime;
+mod lang_dominant_language;
+mod lang_mixed_sentence_parse;
 mod ldap_client;
 mod linear_attention_v2;
 mod llm_engine;
