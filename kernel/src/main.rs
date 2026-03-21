@@ -432,6 +432,8 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2976,8 +2978,12 @@ mod tokenizer;
 mod tone_context_personal;
 mod tone_context_switch;
 mod tone_engine_core;
+mod tone_formality_scale;
+mod tone_humor_match;
+mod tone_humor_safe_detect;
 mod tone_per_person_evolve;
 mod tone_per_person_profile;
+mod tone_same_person_one_on_one;
 mod tone_same_person_personal_mode;
 mod tool_executor;
 mod tool_use_engine;
