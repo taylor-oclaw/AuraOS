@@ -80,6 +80,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -880,6 +881,7 @@ mod mesh_consent_manager;
 mod mesh_core;
 mod mesh_cost_allocation;
 mod mesh_country_profile_au;
+mod mesh_country_profile_br;
 mod mesh_country_profile_ca;
 mod mesh_country_profile_cn;
 mod mesh_country_profile_eu;
@@ -953,6 +955,10 @@ mod mesh_sleep_resume;
 mod mesh_sox_boundary;
 mod mesh_spot_compute;
 mod mesh_standard_clauses;
+mod mesh_state_profile_il;
+mod mesh_state_profile_ny;
+mod mesh_state_profile_tx;
+mod mesh_state_profile_va;
 mod mesh_storage_share;
 mod mesh_tablet_bridge;
 mod mesh_task_checkpoint;
