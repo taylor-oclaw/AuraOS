@@ -82,6 +82,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -878,6 +879,7 @@ mod mesh_ccpa_boundary;
 mod mesh_chargeback;
 mod mesh_compliance_report;
 mod mesh_compute_credits;
+mod mesh_confidential_compute;
 mod mesh_consent_manager;
 mod mesh_core;
 mod mesh_cost_allocation;
@@ -908,6 +910,8 @@ mod mesh_department_pool;
 mod mesh_disaster_recovery;
 mod mesh_edge_cache;
 mod mesh_ediscovery;
+mod mesh_encryption_compute;
+mod mesh_encryption_transit;
 mod mesh_enterprise_dashboard;
 mod mesh_enterprise_mesh;
 mod mesh_enterprise_orchestrator;
@@ -925,6 +929,7 @@ mod mesh_industry_education;
 mod mesh_industry_finance;
 mod mesh_industry_government;
 mod mesh_industry_healthcare;
+mod mesh_industry_legal;
 mod mesh_itar_boundary;
 mod mesh_jurisdiction_engine;
 mod mesh_jurisdiction_rules;
@@ -960,6 +965,7 @@ mod mesh_sleep_resume;
 mod mesh_sox_boundary;
 mod mesh_spot_compute;
 mod mesh_standard_clauses;
+mod mesh_state_profile_ca;
 mod mesh_state_profile_il;
 mod mesh_state_profile_ny;
 mod mesh_state_profile_tx;
