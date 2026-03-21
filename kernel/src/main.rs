@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod tone_same_person_one_on_one;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
