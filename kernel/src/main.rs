@@ -307,6 +307,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1924,6 +1925,7 @@ mod photo_person_tag;
 mod photo_privacy_detect;
 mod photo_quality_score;
 mod photo_scene_classify;
+mod photo_share_suggest;
 mod photo_slideshow_auto;
 mod photo_storage_optimize;
 mod physics_engine;
@@ -2372,6 +2374,8 @@ mod trace_assurance;
 mod trackpad_driver;
 mod traffic_shaper;
 mod transformer;
+mod travel_hotel_suggest;
+mod travel_itinerary_build;
 mod tree_view;
 mod triton_compat;
 mod trust_attestation;
