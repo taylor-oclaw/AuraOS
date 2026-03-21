@@ -273,6 +273,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -905,6 +906,7 @@ mod coreml_compat;
 mod cost_accounting;
 mod cpu_hotplug;
 mod crash_reporter;
+mod cross_device_auto_connect;
 mod cross_device_browser_tab_sync;
 mod cross_device_call_transfer;
 mod cross_device_camera_relay;
@@ -919,7 +921,9 @@ mod cross_device_keyboard_share;
 mod cross_device_mouse_share;
 mod cross_device_music_sync;
 mod cross_device_notification_sync;
+mod cross_device_proximity_detect;
 mod cross_device_screen_mirror;
+mod cross_device_trust_pair;
 mod crucible_parser;
 mod crypto;
 mod crypto_engine;
