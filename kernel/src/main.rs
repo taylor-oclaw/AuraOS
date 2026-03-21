@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod speech_aac_bridge;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
