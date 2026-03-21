@@ -74,6 +74,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -200,6 +201,12 @@ mod agent_self_reflection;
 mod agent_service_mesh;
 mod agent_skill_library;
 mod agent_snapshot;
+mod agent_snapshot
+buddy_allocator
+deadlock_detector
+nlp_tokenizer
+progress_bar
+tool_executor;
 mod agent_source_validator;
 mod agent_stream_processor;
 mod agent_streaming_output;
@@ -856,7 +863,9 @@ mod mesh_bandwidth_share;
 mod mesh_batch_priority;
 mod mesh_batch_queue;
 mod mesh_batch_schedule_window;
+mod mesh_burst_compute;
 mod mesh_capacity_reporter;
+mod mesh_compute_credits;
 mod mesh_core;
 mod mesh_cpu_share;
 mod mesh_department_pool;
@@ -880,9 +889,11 @@ mod mesh_personal_sync;
 mod mesh_phone_bridge;
 mod mesh_priority_engine;
 mod mesh_qos_guarantees;
+mod mesh_reserved_compute;
 mod mesh_resource_monitor;
 mod mesh_sla_enforcer;
 mod mesh_sleep_resume;
+mod mesh_spot_compute;
 mod mesh_storage_share;
 mod mesh_tablet_bridge;
 mod mesh_task_checkpoint;
