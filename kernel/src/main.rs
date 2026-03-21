@@ -254,6 +254,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1887,6 +1888,7 @@ mod smart_home_audio_announce;
 mod smart_home_audio_multiroom;
 mod smart_home_automation_engine;
 mod smart_home_automation_rule;
+mod smart_home_away_mode;
 mod smart_home_blind_control;
 mod smart_home_camera_alert;
 mod smart_home_camera_detect;
@@ -1906,6 +1908,7 @@ mod smart_home_ev_charger;
 mod smart_home_floorplan;
 mod smart_home_fridge_monitor;
 mod smart_home_garage_control;
+mod smart_home_gesture_control;
 mod smart_home_guest_mode;
 mod smart_home_hub_core;
 mod smart_home_hvac_control;
@@ -1940,7 +1943,9 @@ mod smart_home_trigger_time;
 mod smart_home_trigger_voice;
 mod smart_home_vacation_mode;
 mod smart_home_vacuum_robot;
+mod smart_home_voice_control;
 mod smart_home_washer_dryer;
+mod smart_home_watch_control;
 mod smart_home_water_leak;
 mod smtp_client;
 mod socket_api;
