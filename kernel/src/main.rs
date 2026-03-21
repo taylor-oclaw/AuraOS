@@ -482,6 +482,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2593,12 +2594,16 @@ mod profile_mode_time_trigger;
 mod profile_mode_wifi_trigger;
 mod profile_notification_personal_to_work;
 mod profile_notification_work_to_personal;
+mod profile_travel_airport_detect;
+mod profile_travel_conference_mode;
+mod profile_travel_hotel_detect;
 mod profile_ui_adapt;
 mod profile_ui_dock_adjust;
 mod profile_ui_personal_layout;
 mod profile_ui_professional_layout;
 mod profile_ui_theme_switch;
 mod profile_ui_widgets_adjust;
+mod profile_wfh_app_based_switch;
 mod profile_wfh_break_personal;
 mod profile_wfh_detect;
 mod profile_wfh_hybrid_schedule;

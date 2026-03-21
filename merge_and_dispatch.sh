@@ -55,10 +55,14 @@ fi
 
 # Check idle nodes and dispatch from queue
 if [ -f "$MODULES_QUEUE" ] && [ -s "$MODULES_QUEUE" ]; then
-    for node_info in "sophie@192.168.5.103:sophie" "marcus@192.168.5.102:marcus" "james@192.168.5.108:james" "priya@192.168.5.106:priya" "ace@192.168.5.104:ace"; do
+    for node_info in "localhost:taylor" "sophie@192.168.5.103:sophie" "marcus@192.168.5.102:marcus" "james@192.168.5.108:james" "priya@192.168.5.106:priya" "ace@192.168.5.104:ace"; do
         node=$(echo $node_info | cut -d: -f1)
         user=$(echo $node_info | cut -d: -f2)
-        running=$(ssh $node "ps aux | grep aura_build | grep -v grep" 2>/dev/null)
+        if [ "$node" = "localhost" ]; then
+            running=$(ps aux | grep aura_build | grep -v grep | grep -v ssh 2>/dev/null)
+        else
+            running=$(ssh $node "ps aux | grep aura_build | grep -v grep" 2>/dev/null)
+        fi
         if [ -z "$running" ]; then
             module=$(head -1 "$MODULES_QUEUE")
             if [ -n "$module" ]; then
@@ -68,10 +72,14 @@ import json
 req = {'model': 'qwen2.5-coder:14b', 'prompt': 'Write ONLY Rust code for a kernel module, no markdown, no code fences. extern crate alloc; use alloc::string::String; use alloc::vec::Vec; Create a complete working module called ${module} for an AI-native operating system kernel. Include at least one public struct with an impl block, a new() constructor, and at least 5 useful public methods with real logic. Use only no_std compatible types. No format!, no println!, no std::, no HashMap, no no_mangle, no asm!, no rand.', 'stream': False, 'options': {'num_predict': 3000, 'temperature': 0.15}}
 json.dump(req, open('/tmp/pipe_${module}.json', 'w'))
 "
-                scp /tmp/pipe_${module}.json ${node}:/tmp/prompt.json 2>/dev/null
-                if [ "$user" = "ace" ]; then
+                if [ "$node" = "localhost" ]; then
+                    cp /tmp/pipe_${module}.json /tmp/prompt.json
+                    (cd ~/AuraOS && git checkout main && git fetch origin && git reset --hard origin/main && bash ~/aura_build.sh ${module} /tmp/prompt.json) </dev/null >/dev/null 2>&1 &
+                elif [ "$user" = "ace" ]; then
+                    scp /tmp/pipe_${module}.json ${node}:/tmp/prompt.json 2>/dev/null
                     ssh $node "export PATH=\"/usr/local/bin:\$HOME/.cargo/bin:\$PATH\"; cd ~/AuraOS && git checkout main && git fetch origin && git reset --hard origin/main && bash ~/aura_build.sh ${module} /tmp/prompt.json" </dev/null >/dev/null 2>&1 &
                 else
+                    scp /tmp/pipe_${module}.json ${node}:/tmp/prompt.json 2>/dev/null
                     ssh $node "cd ~/AuraOS && git checkout main && git fetch origin && git reset --hard origin/main && bash ~/aura_build.sh ${module} /tmp/prompt.json" </dev/null >/dev/null 2>&1 &
                 fi
                 echo "$(date +%H:%M) DISPATCH $user → $module" >> /tmp/aura_dispatch.log
