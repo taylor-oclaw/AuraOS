@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod voice_app_specific_vocab;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
