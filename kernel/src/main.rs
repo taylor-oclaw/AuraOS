@@ -491,6 +491,9 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
+
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1686,8 +1689,13 @@ mod gesture_engine;
 mod gguf;
 mod gift_client_apology;
 mod gift_client_deal_close;
+mod gift_client_gift;
 mod gift_client_milestone;
 mod gift_employee_appreciation;
+mod gift_employee_farewell;
+mod gift_employee_promotion;
+mod gift_professional_occasion;
+mod gift_team_milestone;
 mod global_illumination;
 mod goal_decompose;
 mod google_home_bridge;
