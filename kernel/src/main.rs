@@ -241,6 +241,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -908,10 +909,12 @@ mod mdm_certificate_deploy;
 mod mdm_container_isolation;
 mod mdm_data_boundary;
 mod mdm_device_compliance;
+mod mdm_device_group;
 mod mdm_device_inventory;
 mod mdm_device_registry;
 mod mdm_encryption_policy;
 mod mdm_enrollment;
+mod mdm_geofence;
 mod mdm_network_policy;
 mod mdm_os_update_push;
 mod mdm_password_policy;
@@ -920,6 +923,7 @@ mod mdm_pin_policy;
 mod mdm_policy_enforcer;
 mod mdm_policy_engine;
 mod mdm_profile_manager;
+mod mdm_qr_enroll;
 mod mdm_remote_locate;
 mod mdm_remote_lock;
 mod mdm_remote_wipe;
