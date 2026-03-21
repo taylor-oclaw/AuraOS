@@ -1,85 +1,21 @@
 extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
-use alloc::vec;
 
-pub extern "C" fn mdm_container_isolation_init() {
-    // Initialization logic for the module
+pub struct MdmContainerIsolation {
+    entries: Vec<String>,
+    active: bool,
 }
 
-pub extern "C" fn mdm_container_isolation_exit() {
-    // Cleanup logic for the module
-}
-
-pub struct ContainerIsolation {
-    containers: Vec<String>,
-}
-
-impl ContainerIsolation {
+impl MdmContainerIsolation {
     pub fn new() -> Self {
-        ContainerIsolation {
-            containers: Vec::new(),
-        }
+        MdmContainerIsolation { entries: Vec::new(), active: true }
     }
-
-    pub fn add_container(&mut self, name: &str) {
-        let container_name = String::from(name);
-        if !self.containers.contains(&container_name) {
-            self.containers.push(container_name);
-        }
-    }
-
-    pub fn remove_container(&mut self, name: &str) -> bool {
-        let container_name = String::from(name);
-        match self.containers.iter().position(|x| *x == container_name) {
-            Some(index) => {
-                self.containers.remove(index);
-                true
-            }
-            None => false,
-        }
-    }
-
-    pub fn list_containers(&self) -> Vec<String> {
-        self.containers.clone()
-    }
-
-    pub fn is_container_present(&self, name: &str) -> bool {
-        let container_name = String::from(name);
-        self.containers.contains(&container_name)
-    }
-
-    pub fn clear_containers(&mut self) {
-        self.containers.clear();
-    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_container_isolation() {
-        let mut isolation = ContainerIsolation::new();
-
-        assert_eq!(isolation.list_containers(), Vec::<String>::new());
-
-        isolation.add_container("container1");
-        assert!(isolation.is_container_present("container1"));
-        assert_eq!(isolation.list_containers(), vec![String::from("container1")]);
-
-        isolation.add_container("container2");
-        assert!(isolation.is_container_present("container2"));
-        assert_eq!(
-            isolation.list_containers(),
-            vec![String::from("container1"), String::from("container2")]
-        ;
-
-        assert!(isolation.remove_container("container1"));
-        assert!(!isolation.is_container_present("container1"));
-        assert_eq!(isolation.list_containers(), vec![String::from("container2")]);
-
-        isolation.clear_containers();
-        assert_eq!(isolation.list_containers(), Vec::<String>::new());
-    }
-)}

@@ -2,66 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn rust_start() {
-    // Module initialization code here
+pub struct EnterpriseSsoSaml {
+    entries: Vec<String>,
+    active: bool,
 }
 
-struct SAMLToken {
-    issuer: String,
-    subject: String,
-    audience: String,
-    not_before: u64,
-    not_on_or_after: u64,
-    attributes: Vec<(String, String)>,
+impl EnterpriseSsoSaml {
+    pub fn new() -> Self {
+        EnterpriseSsoSaml { entries: Vec::new(), active: true }
+    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }
-
-impl SAMLToken {
-    pub fn new(issuer: &str, subject: &str, audience: &str, not_before: u64, not_on_or_after: u64) -> Self {
-        SAMLToken {
-            issuer: String::from(issuer),
-            subject: String::from(subject),
-            audience: String::from(audience),
-            not_before,
-            not_on_or_after,
-            attributes: Vec::new(),
-        }
-    }
-
-    pub fn add_attribute(&mut self, name: &str, value: &str) {
-        self.attributes.push((String::from(name), String::from(value)));
-    }
-
-    pub fn get_issuer(&self) -> &str {
-        &self.issuer
-    }
-
-    pub fn get_subject(&self) -> &str {
-        &self.subject
-    }
-
-    pub fn is_valid_at_time(&self, current_time: u64) -> bool {
-        current_time >= self.not_before && current_time <= self.not_on_or_after
-    }
-
-    pub fn has_attribute(&self, name: &str) -> bool {
-        self.attributes.iter().any(|(attr_name, _)| attr_name == name)
-    }
-
-    pub fn get_attribute_value(&self, name: &str) -> Option<&str> {
-        self.attributes.iter().find_map(|(attr_name, value)| {
-            if attr_name == name {
-                Some(value.as_str())
-            } else {
-                None
-            }
-        }
-    }
-}
-
-pub extern "C" fn enterprise_sso_saml_init() {
-    // Initialization code for the module
-}
-
-pub extern "C" fn enterprise_sso_saml_exit() {
-    // Cleanup code for the module
-)}

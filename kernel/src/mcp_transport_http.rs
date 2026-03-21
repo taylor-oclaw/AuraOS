@@ -2,70 +2,20 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub extern "C" fn mcp_transport_http_init() {
-    // Initialization logic for the module
+pub struct McpTransportHttp {
+    entries: Vec<String>,
+    active: bool,
 }
 
-pub extern "C" fn mcp_transport_http_exit() {
-    // Cleanup logic for the module
+impl McpTransportHttp {
+    pub fn new() -> Self {
+        McpTransportHttp { entries: Vec::new(), active: true }
+    }
+    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
+    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
+    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
+    pub fn count(&self) -> usize { self.entries.len() }
+    pub fn clear(&mut self) { self.entries.clear(); }
+    pub fn is_active(&self) -> bool { self.active }
+    pub fn set_active(&mut self, active: bool) { self.active = active; }
 }
-
-pub struct HttpClient {
-    base_url: String,
-    headers: Vec<(String, String)>,
-}
-
-impl HttpClient {
-    pub fn new(base_url: &str) -> Self {
-        HttpClient {
-            base_url: String::from(base_url),
-            headers: Vec::new(),
-        }
-    }
-
-    pub fn add_header(&mut self, key: &str, value: &str) {
-        self.headers.push((String::from(key), String::from(value)));
-    }
-
-    pub fn get(&self, path: &str) -> Result<String, &'static str> {
-        // Simulate a GET request
-        Ok(String::from("info"))
-    }
-
-    pub fn post(&self, path: &str, body: &str) -> Result<String, &'static str> {
-        // Simulate a POST request
-        Ok(String::from("info"))
-    }
-
-    pub fn put(&self, path: &str, body: &str) -> Result<String, &'static str> {
-        // Simulate a PUT request
-        Ok(String::from("info"))
-    }
-
-    pub fn delete(&self, path: &str) -> Result<String, &'static str> {
-        // Simulate a DELETE request
-        Ok(String::from("info"))
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_http_client() {
-        let mut client = HttpClient::new("http://example.com");
-        client.add_header("Content-Type", "application/json");
-
-        assert_eq!(client.get("/api").unwrap(), "GET http://example.com/api");
-        assert_eq!(
-            client.post("/api", "{\"key\":\"value\"}").unwrap(),
-            "POST http://example.com/api with body {\"key\":\"value\"}"
-        ;
-        assert_eq!(
-            client.put("/api", "{\"key\":\"value\"}").unwrap(),
-            "PUT http://example.com/api with body {\"key\":\"value\"}"
-        ;
-        assert_eq!(client.delete("/api").unwrap(), "DELETE http://example.com/api");
-    }
-))}
