@@ -302,6 +302,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -873,8 +874,10 @@ mod bluetooth_stack;
 mod boot_sequence;
 mod buddy_allocator;
 mod calendar_agenda_generate;
+mod calendar_attendee_suggest;
 mod calendar_buffer_time;
 mod calendar_conflict_detect;
+mod calendar_external_sync;
 mod calendar_focus_block_auto;
 mod calendar_follow_up_auto;
 mod calendar_intelligence;
@@ -1900,6 +1903,9 @@ mod perf_thermal_schedule;
 mod perf_usage_pattern_learn;
 mod perf_workload_predictor;
 mod permissions;
+mod photo_auto_organize;
+mod photo_face_detect;
+mod photo_intelligence;
 mod physics_engine;
 mod pipe_system;
 mod pipes;
