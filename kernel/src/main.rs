@@ -350,6 +350,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -656,6 +657,7 @@ mod ai_sec_backdoor_detect;
 mod ai_sec_behavior_shift_detect;
 mod ai_sec_bias_detect;
 mod ai_sec_bias_mitigate;
+mod ai_sec_blue_team_defend;
 mod ai_sec_cache_attack_model;
 mod ai_sec_confidence_score;
 mod ai_sec_constitutional_enforce;
@@ -718,6 +720,7 @@ mod ai_sec_output_validate;
 mod ai_sec_output_xss_detect;
 mod ai_sec_overreliance_warn;
 mod ai_sec_password_detector;
+mod ai_sec_penetration_test;
 mod ai_sec_pii_detector;
 mod ai_sec_plugin_audit;
 mod ai_sec_plugin_file_restrict;
@@ -732,7 +735,9 @@ mod ai_sec_prompt_inject_canary;
 mod ai_sec_prompt_inject_detect;
 mod ai_sec_prompt_inject_monitor;
 mod ai_sec_prompt_inject_sanitize;
+mod ai_sec_purple_team_exercise;
 mod ai_sec_reconstruction_attack;
+mod ai_sec_red_team_auto;
 mod ai_sec_rogue_agent_contain;
 mod ai_sec_rogue_agent_detect;
 mod ai_sec_rogue_agent_kill;
