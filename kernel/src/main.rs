@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod security_behavioral_biometric;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
