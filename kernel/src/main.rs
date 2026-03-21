@@ -14,19 +14,10 @@ pub static BOOTLOADER_CONFIG: BootloaderConfig = {
     let mut config = BootloaderConfig::new_default();
     config.mappings.physical_memory = Some(bootloader_api::config::Mapping::Dynamic);
     config.kernel_stack_size = 256 * 1024; // 256 KB stack (default is very small)
-    config
 };
 
 // Remove the duplicate BOOTLOADER_CONFIG above  
 entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
-
-
-
-
-
-
-
-
 
 
 
