@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod people_context_recent_life_event;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
