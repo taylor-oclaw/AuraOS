@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod smart_home_smoke_detect;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
