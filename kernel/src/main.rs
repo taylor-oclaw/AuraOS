@@ -473,6 +473,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1238,6 +1239,9 @@ mod biz_crm_report_revenue;
 mod biz_crm_salesforce_sync;
 mod biz_crm_task_create;
 mod biz_crm_touchpoint_track;
+mod biz_vendor_invoice_track;
+mod biz_vendor_profile;
+mod biz_vendor_sla_track;
 mod bluetooth_mgr;
 mod bluetooth_stack;
 mod boot_sequence;
