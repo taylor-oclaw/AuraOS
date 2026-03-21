@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod mesh_graceful_preempt;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
