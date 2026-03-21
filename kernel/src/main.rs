@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod travel_currency_convert;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
