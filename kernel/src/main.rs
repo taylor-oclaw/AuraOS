@@ -421,6 +421,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2424,11 +2425,15 @@ mod privacy_engine;
 mod proc_mgr;
 mod proc_sched;
 mod process_table;
+mod profile_feature_gate;
+mod profile_mode_app_trigger;
+mod profile_mode_calendar_trigger;
 mod profile_mode_child;
 mod profile_mode_core;
 mod profile_mode_creator;
 mod profile_mode_detect;
 mod profile_mode_developer;
+mod profile_mode_enterprise;
 mod profile_mode_family;
 mod profile_mode_hybrid;
 mod profile_mode_location_trigger;
