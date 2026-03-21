@@ -90,6 +90,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -505,7 +506,12 @@ mod compat_fat32;
 mod compat_hfs;
 mod compat_iso9660;
 mod compat_linux_abi;
+mod compat_linux_devfs;
+mod compat_linux_procfs;
+mod compat_linux_signals;
 mod compat_linux_syscall;
+mod compat_linux_sysfs;
+mod compat_linux_threads;
 mod compat_ntfs;
 mod compositor;
 mod compute_shader;
