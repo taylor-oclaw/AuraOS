@@ -544,6 +544,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1002,6 +1003,8 @@ mod anthropic_compat;
 mod anti_aliasing;
 mod app_accessibility_api;
 mod app_accessibility_tree;
+mod app_auto_preference_sync;
+mod app_auto_update_schedule;
 mod app_automation_assert;
 mod app_automation_chain;
 mod app_automation_click;
@@ -2406,6 +2409,8 @@ mod nlp;
 mod nlp_bridge;
 mod nlp_tokenizer;
 mod notif_sounds;
+mod notification_auto_action_learn;
+mod notification_auto_mute_learn;
 mod notification_bundle_smart;
 mod notification_center;
 mod notification_channel_route;
@@ -3334,6 +3339,7 @@ mod system_config;
 mod system_tray;
 mod tab_control;
 mod tar_handler;
+mod task_auto_delegate_learn;
 mod task_queue;
 mod taskbar;
 mod tcpip;
