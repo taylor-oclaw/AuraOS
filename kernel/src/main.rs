@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod ai_sec_password_detector;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
