@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod rel_contract_expire_warn;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
