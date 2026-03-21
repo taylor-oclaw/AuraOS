@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod perf_process_priority_auto;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
