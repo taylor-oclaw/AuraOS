@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod lang_input_ime_chinese;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
