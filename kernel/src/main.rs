@@ -310,6 +310,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2384,8 +2385,10 @@ mod travel_flight_track;
 mod travel_hotel_suggest;
 mod travel_itinerary_build;
 mod travel_language_prep;
+mod travel_offline_map;
 mod travel_packing_list;
 mod travel_timezone_adjust;
+mod travel_transit_navigate;
 mod travel_vaccine_check;
 mod travel_visa_check;
 mod tree_view;
