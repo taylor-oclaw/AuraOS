@@ -415,6 +415,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2261,10 +2262,13 @@ mod people_detail_recommendation;
 mod people_detail_struggle;
 mod people_detail_travel_plan;
 mod people_email_extract;
+mod people_emoji_style;
 mod people_event_recall;
 mod people_face_remember;
 mod people_follow_up_natural;
 mod people_forget_request;
+mod people_formality_level;
+mod people_greeting_style;
 mod people_grief_aware;
 mod people_handwriting_recognize;
 mod people_inside_joke;
