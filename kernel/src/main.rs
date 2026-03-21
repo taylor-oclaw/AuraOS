@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod lang_code_switch_detect;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
