@@ -231,6 +231,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1561,8 +1562,12 @@ mod offline_cache_manager;
 mod offline_conflict_resolve;
 mod offline_core;
 mod offline_data_sync;
+mod offline_doc_cache;
+mod offline_map_cache;
+mod offline_music_cache;
 mod offline_queue_manager;
 mod offline_retry_engine;
+mod offline_skill_cache;
 mod ollama_compat;
 mod onnxruntime_compat;
 mod oom_killer;
