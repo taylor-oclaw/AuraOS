@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod tone_context_personal;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
