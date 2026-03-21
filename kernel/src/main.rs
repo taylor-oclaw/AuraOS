@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod compat_linux_syscall;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
