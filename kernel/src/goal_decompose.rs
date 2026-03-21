@@ -2,20 +2,112 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub struct GoalDecompose {
-    entries: Vec<String>,
-    active: bool,
+pub enum GoalStatus {
+    Pending,
+    Decomposed,
+    InProgress,
+    Completed,
+    Failed,
 }
 
-impl GoalDecompose {
+pub struct SubGoal {
+    pub id: u64,
+    pub description: String,
+    pub assigned_to: Option<u64>,
+    pub status: GoalStatus,
+    pub llm_tier_needed: u8,
+    pub estimated_cost: u64,
+    pub dependencies: Vec<u64>,
+}
+
+pub struct Goal {
+    pub id: u64,
+    pub intent: String,
+    pub sub_goals: Vec<SubGoal>,
+    pub status: GoalStatus,
+    pub total_cost: u64,
+    pub requester_agent: u64,
+}
+
+pub struct GoalDecomposer {
+    pub goals: Vec<Goal>,
+    pub next_id: u64,
+    pub next_sub_id: u64,
+}
+
+impl GoalDecomposer {
     pub fn new() -> Self {
-        GoalDecompose { entries: Vec::new(), active: true }
+        Self {
+            goals: Vec::new(),
+            next_id: 1,
+            next_sub_id: 1,
+        }
     }
-    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
-    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
-    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
-    pub fn count(&self) -> usize { self.entries.len() }
-    pub fn clear(&mut self) { self.entries.clear(); }
-    pub fn is_active(&self) -> bool { self.active }
-    pub fn set_active(&mut self, active: bool) { self.active = active; }
+
+    pub fn create_goal(&mut self, intent: &str, requester: u64) -> u64 {
+        let id = self.next_id;
+        self.next_id += 1;
+        self.goals.push(Goal {
+            id,
+            intent: String::from(intent),
+            sub_goals: Vec::new(),
+            status: GoalStatus::Pending,
+            total_cost: 0,
+            requester_agent: requester,
+        });
+        id
+    }
+
+    pub fn add_sub_goal(
+        &mut self,
+        goal_id: u64,
+        desc: &str,
+        tier: u8,
+        cost: u64,
+        deps: Vec<u64>,
+    ) -> u64 {
+        let sub_id = self.next_sub_id;
+        self.next_sub_id += 1;
+        if let Some(g) = self.goals.iter_mut().find(|g| g.id == goal_id) {
+            g.sub_goals.push(SubGoal {
+                id: sub_id,
+                description: String::from(desc),
+                assigned_to: None,
+                status: GoalStatus::Pending,
+                llm_tier_needed: tier,
+                estimated_cost: cost,
+                dependencies: deps,
+            });
+            g.status = GoalStatus::Decomposed;
+        }
+        sub_id
+    }
+
+    pub fn assign_sub_goal(&mut self, goal_id: u64, sub_id: u64, agent_id: u64) {
+        if let Some(g) = self.goals.iter_mut().find(|g| g.id == goal_id) {
+            if let Some(sg) = g.sub_goals.iter_mut().find(|s| s.id == sub_id) {
+                sg.assigned_to = Some(agent_id);
+                sg.status = GoalStatus::InProgress;
+            }
+        }
+    }
+
+    pub fn complete_sub_goal(&mut self, goal_id: u64, sub_id: u64, cost: u64) {
+        if let Some(g) = self.goals.iter_mut().find(|g| g.id == goal_id) {
+            if let Some(sg) = g.sub_goals.iter_mut().find(|s| s.id == sub_id) {
+                sg.status = GoalStatus::Completed;
+            }
+            g.total_cost += cost;
+            if g.sub_goals.iter().all(|s| matches!(s.status, GoalStatus::Completed)) {
+                g.status = GoalStatus::Completed;
+            }
+        }
+    }
+
+    pub fn pending_goals(&self) -> Vec<&Goal> {
+        self.goals
+            .iter()
+            .filter(|g| !matches!(g.status, GoalStatus::Completed))
+            .collect()
+    }
 }

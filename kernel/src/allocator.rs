@@ -1,21 +1,45 @@
-extern crate alloc;
-use alloc::string::String;
-use alloc::vec::Vec;
+//! Kernel heap allocator
+//! 
+//! Uses a linked-list allocator for dynamic memory.
+//! Heap starts at a fixed virtual address and grows as needed.
 
-pub struct Allocator {
-    entries: Vec<String>,
-    active: bool,
-}
+use linked_list_allocator::LockedHeap;
+use x86_64::structures::paging::{
+    mapper::MapToError, FrameAllocator, Mapper, Page, PageTableFlags, Size4KiB,
+};
+use x86_64::VirtAddr;
 
-impl Allocator {
-    pub fn new() -> Self {
-        Allocator { entries: Vec::new(), active: true }
+pub const HEAP_START: usize = 0x_4444_4444_0000;
+pub const HEAP_SIZE: usize = 1024 * 1024; // 1 MB initial heap
+
+#[global_allocator]
+static ALLOCATOR: LockedHeap = LockedHeap::empty();
+
+pub fn init_heap(
+    mapper: &mut impl Mapper<Size4KiB>,
+    frame_allocator: &mut impl FrameAllocator<Size4KiB>,
+) -> Result<(), MapToError<Size4KiB>> {
+    let page_range = {
+        let heap_start = VirtAddr::new(HEAP_START as u64);
+        let heap_end = heap_start + HEAP_SIZE as u64 - 1u64;
+        let heap_start_page = Page::containing_address(heap_start);
+        let heap_end_page = Page::containing_address(heap_end);
+        Page::range_inclusive(heap_start_page, heap_end_page)
+    };
+
+    for page in page_range {
+        let frame = frame_allocator
+            .allocate_frame()
+            .ok_or(MapToError::FrameAllocationFailed)?;
+        let flags = PageTableFlags::PRESENT | PageTableFlags::WRITABLE;
+        unsafe {
+            mapper.map_to(page, frame, flags, frame_allocator)?.flush();
+        }
     }
-    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
-    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
-    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
-    pub fn count(&self) -> usize { self.entries.len() }
-    pub fn clear(&mut self) { self.entries.clear(); }
-    pub fn is_active(&self) -> bool { self.active }
-    pub fn set_active(&mut self, active: bool) { self.active = active; }
+
+    unsafe {
+        ALLOCATOR.lock().init(HEAP_START as *mut u8, HEAP_SIZE);
+    }
+
+    Ok(())
 }

@@ -1,21 +1,68 @@
 extern crate alloc;
-use alloc::string::String;
-use alloc::vec::Vec;
 
-pub struct Notifications {
-    entries: Vec<String>,
-    active: bool,
+use alloc::vec::Vec;
+use alloc::string::String;
+
+#[derive(Clone, Copy, PartialEq)]
+pub enum NotifLevel { Info, Warning, Error, Success }
+
+pub struct Notification {
+    pub id: u64,
+    pub title: String,
+    pub body: String,
+    pub level: NotifLevel,
+    pub timestamp: u64,
+    pub read: bool,
+    pub source: String,
 }
 
-impl Notifications {
+pub struct NotificationManager {
+    notifications: Vec<Notification>,
+    next_id: u64,
+    max_count: usize,
+}
+
+impl NotificationManager {
     pub fn new() -> Self {
-        Notifications { entries: Vec::new(), active: true }
+        Self { notifications: Vec::new(), next_id: 1, max_count: 100 }
     }
-    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
-    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
-    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
-    pub fn count(&self) -> usize { self.entries.len() }
-    pub fn clear(&mut self) { self.entries.clear(); }
-    pub fn is_active(&self) -> bool { self.active }
-    pub fn set_active(&mut self, active: bool) { self.active = active; }
+
+    pub fn notify(&mut self, title: &str, body: &str, level: NotifLevel, source: &str, timestamp: u64) -> u64 {
+        let id = self.next_id;
+        self.next_id += 1;
+        if self.notifications.len() >= self.max_count {
+            self.notifications.remove(0);
+        }
+        self.notifications.push(Notification {
+            id,
+            title: String::from(title),
+            body: String::from(body),
+            level,
+            timestamp,
+            read: false,
+            source: String::from(source),
+        });
+        id
+    }
+
+    pub fn dismiss(&mut self, id: u64) {
+        if let Some(n) = self.notifications.iter_mut().find(|n| n.id == id) {
+            n.read = true;
+        }
+    }
+
+    pub fn dismiss_all(&mut self) {
+        for n in self.notifications.iter_mut() {
+            n.read = true;
+        }
+    }
+
+    pub fn unread_count(&self) -> usize {
+        self.notifications.iter().filter(|n| !n.read).count()
+    }
+
+    pub fn recent(&self, count: usize) -> &[Notification] {
+        let start = self.notifications.len().saturating_sub(count);
+        &self.notifications[start..]
+    }
 }

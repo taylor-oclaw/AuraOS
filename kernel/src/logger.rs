@@ -1,21 +1,58 @@
 extern crate alloc;
+
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub struct Logger {
-    entries: Vec<String>,
-    active: bool,
+#[derive(Clone, Copy, PartialEq)]
+pub enum LogLevel { Trace, Debug, Info, Warn, Error, Fatal }
+
+pub struct LogEntry {
+    pub level: LogLevel,
+    pub message: String,
+    pub timestamp: u64,
+    pub source: String,
 }
 
-impl Logger {
+pub struct SystemLogger {
+    entries: Vec<LogEntry>,
+    max_entries: usize,
+}
+
+impl SystemLogger {
     pub fn new() -> Self {
-        Logger { entries: Vec::new(), active: true }
+        Self { entries: Vec::new(), max_entries: 1000 }
     }
-    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
-    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
-    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
-    pub fn count(&self) -> usize { self.entries.len() }
-    pub fn clear(&mut self) { self.entries.clear(); }
-    pub fn is_active(&self) -> bool { self.active }
-    pub fn set_active(&mut self, active: bool) { self.active = active; }
+
+    pub fn log(&mut self, level: LogLevel, message: &str, source: &str, timestamp: u64) {
+        if self.entries.len() >= self.max_entries {
+            self.entries.remove(0);
+        }
+        self.entries.push(LogEntry {
+            level,
+            message: String::from(message),
+            timestamp,
+            source: String::from(source),
+        });
+    }
+
+    pub fn last_n(&self, n: usize) -> &[LogEntry] {
+        let start = self.entries.len().saturating_sub(n);
+        &self.entries[start..]
+    }
+
+    pub fn clear(&mut self) {
+        self.entries.clear();
+    }
+
+    pub fn count(&self) -> usize {
+        self.entries.len()
+    }
+
+    pub fn filter_by_level(&self, level: LogLevel) -> Vec<&LogEntry> {
+        self.entries.iter().filter(|e| e.level == level).collect()
+    }
+
+    pub fn entries_since(&self, timestamp: u64) -> Vec<&LogEntry> {
+        self.entries.iter().filter(|e| e.timestamp >= timestamp).collect()
+    }
 }

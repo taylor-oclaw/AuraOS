@@ -1,21 +1,44 @@
 extern crate alloc;
 use alloc::string::String;
-use alloc::vec::Vec;
+use alloc::format;
 
-pub struct Uptime {
-    entries: Vec<String>,
-    active: bool,
+pub struct UptimeTracker {
+    ticks: u64,
+    ms_per_tick: u64,
 }
 
-impl Uptime {
-    pub fn new() -> Self {
-        Uptime { entries: Vec::new(), active: true }
+impl UptimeTracker {
+    pub fn new(ms_per_tick: u64) -> Self {
+        Self { ticks: 0, ms_per_tick }
     }
-    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
-    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
-    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
-    pub fn count(&self) -> usize { self.entries.len() }
-    pub fn clear(&mut self) { self.entries.clear(); }
-    pub fn is_active(&self) -> bool { self.active }
-    pub fn set_active(&mut self, active: bool) { self.active = active; }
+
+    pub fn tick(&mut self) {
+        self.ticks += 1;
+    }
+
+    pub fn uptime_ms(&self) -> u64 {
+        self.ticks * self.ms_per_tick
+    }
+
+    pub fn uptime_seconds(&self) -> u64 {
+        self.uptime_ms() / 1000
+    }
+
+    pub fn format_uptime(&self) -> String {
+        let total = self.uptime_seconds();
+        let days = total / 86400;
+        let hours = (total % 86400) / 3600;
+        let mins = (total % 3600) / 60;
+        let secs = total % 60;
+
+        if days > 0 {
+            String::from("info")
+        } else if hours > 0 {
+            String::from("info")
+        } else if mins > 0 {
+            String::from("info")
+        } else {
+            String::from("info")
+        }
+    }
 }

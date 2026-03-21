@@ -2,20 +2,45 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub struct LoadavgCalc {
-    entries: Vec<String>,
-    active: bool,
+pub struct LoadAvgCalc {
+    load_avg: f64,
+    samples: Vec<f64>,
 }
 
-impl LoadavgCalc {
+impl LoadAvgCalc {
     pub fn new() -> Self {
-        LoadavgCalc { entries: Vec::new(), active: true }
+        LoadAvgCalc {
+            load_avg: 0.0,
+            samples: Vec::new(),
+        }
     }
-    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
-    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
-    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
-    pub fn count(&self) -> usize { self.entries.len() }
-    pub fn clear(&mut self) { self.entries.clear(); }
-    pub fn is_active(&self) -> bool { self.active }
-    pub fn set_active(&mut self, active: bool) { self.active = active; }
+
+    pub fn add_sample(&mut self, sample: f64) {
+        self.samples.push(sample);
+        if self.samples.len() > 10 {
+            self.samples.remove(0);
+        }
+        self.update_load_avg();
+    }
+
+    pub fn get_load_avg(&self) -> f64 {
+        self.load_avg
+    }
+
+    pub fn clear_samples(&mut self) {
+        self.samples.clear();
+        self.load_avg = 0.0;
+    }
+
+    pub fn num_samples(&self) -> usize {
+        self.samples.len()
+    }
+
+    fn update_load_avg(&mut self) {
+        if self.samples.is_empty() {
+            return;
+        }
+        let sum: f64 = self.samples.iter().sum();
+        self.load_avg = sum / self.samples.len() as f64;
+    }
 }

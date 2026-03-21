@@ -1,21 +1,29 @@
-extern crate alloc;
-use alloc::string::String;
-use alloc::vec::Vec;
+use spin::Mutex;
+use uart_16550::SerialPort;
 
-pub struct Serial {
-    entries: Vec<String>,
-    active: bool,
+pub static SERIAL1: Mutex<SerialPort> = Mutex::new(unsafe { SerialPort::new(0x3F8) });
+
+pub fn init() {
+    SERIAL1.lock().init();
 }
 
-impl Serial {
-    pub fn new() -> Self {
-        Serial { entries: Vec::new(), active: true }
-    }
-    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
-    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
-    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
-    pub fn count(&self) -> usize { self.entries.len() }
-    pub fn clear(&mut self) { self.entries.clear(); }
-    pub fn is_active(&self) -> bool { self.active }
-    pub fn set_active(&mut self, active: bool) { self.active = active; }
+#[doc(hidden)]
+pub fn _serial_print(args: core::fmt::Arguments) {
+    use core::fmt::Write;
+    use x86_64::instructions::interrupts;
+
+    interrupts::without_interrupts(|| {
+        SERIAL1.lock().write_fmt(args).expect("serial print failed");
+    });
+}
+
+#[macro_export]
+macro_rules! serial_print {
+    ($($arg:tt)*) => { $crate::serial::_serial_print(format_args!($($arg)*)) };
+}
+
+#[macro_export]
+macro_rules! serial_println {
+    () => ($crate::serial_print!("\n"));
+    ($($arg:tt)*) => ($crate::serial_print!("{}\n", format_args!($($arg)*)));
 }

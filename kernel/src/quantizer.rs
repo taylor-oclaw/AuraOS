@@ -1,21 +1,40 @@
 extern crate alloc;
+
 use alloc::string::String;
 use alloc::vec::Vec;
 
 pub struct Quantizer {
-    entries: Vec<String>,
-    active: bool,
+    scale: u32,
+    offset: i32,
+    data: Vec<i32>,
 }
 
 impl Quantizer {
-    pub fn new() -> Self {
-        Quantizer { entries: Vec::new(), active: true }
+    pub fn new(scale: u32, offset: i32) -> Self {
+        Quantizer {
+            scale,
+            offset,
+            data: Vec::new(),
+        }
     }
-    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
-    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
-    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
-    pub fn count(&self) -> usize { self.entries.len() }
-    pub fn clear(&mut self) { self.entries.clear(); }
-    pub fn is_active(&self) -> bool { self.active }
-    pub fn set_active(&mut self, active: bool) { self.active = active; }
+
+    pub fn add_data(&mut self, value: i32) {
+        self.data.push(value);
+    }
+
+    pub fn quantize(&self) -> Vec<i32> {
+        self.data.iter().map(|&x| (x + self.offset) / self.scale as i32).collect()
+    }
+
+    pub fn dequantize(&self, quantized: &[i32]) -> Vec<i32> {
+        quantized.iter().map(|&x| x * self.scale as i32 - self.offset).collect()
+    }
+
+    pub fn clear_data(&mut self) {
+        self.data.clear();
+    }
+
+    pub fn get_scale(&self) -> u32 {
+        self.scale
+    }
 }

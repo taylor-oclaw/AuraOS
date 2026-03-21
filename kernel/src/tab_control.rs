@@ -2,20 +2,54 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
+#[repr(C)]
 pub struct TabControl {
-    entries: Vec<String>,
-    active: bool,
+    tabs: Vec<String>,
+    active_index: usize,
 }
 
 impl TabControl {
     pub fn new() -> Self {
-        TabControl { entries: Vec::new(), active: true }
+        TabControl {
+            tabs: Vec::new(),
+            active_index: 0,
+        }
     }
-    pub fn add(&mut self, entry: &str) { self.entries.push(String::from(entry)); }
-    pub fn remove(&mut self, entry: &str) { self.entries.retain(|e| e != entry); }
-    pub fn contains(&self, entry: &str) -> bool { self.entries.iter().any(|e| e == entry) }
-    pub fn count(&self) -> usize { self.entries.len() }
-    pub fn clear(&mut self) { self.entries.clear(); }
-    pub fn is_active(&self) -> bool { self.active }
-    pub fn set_active(&mut self, active: bool) { self.active = active; }
+
+    pub fn add_tab(&mut self, title: &str) {
+        let tab_title = String::from(title);
+        self.tabs.push(tab_title);
+        if self.active_index >= self.tabs.len() {
+            self.active_index = self.tabs.len() - 1;
+        }
+    }
+
+    pub fn remove_tab(&mut self, index: usize) -> Option<String> {
+        if index < self.tabs.len() {
+            let removed_tab = self.tabs.remove(index);
+            if self.active_index >= self.tabs.len() {
+                self.active_index = self.tabs.len().saturating_sub(1);
+            }
+            Some(removed_tab)
+        } else {
+            None
+        }
+    }
+
+    pub fn activate_tab(&mut self, index: usize) -> bool {
+        if index < self.tabs.len() {
+            self.active_index = index;
+            true
+        } else {
+            false
+        }
+    }
+
+    pub fn get_active_tab_title(&self) -> Option<&str> {
+        self.tabs.get(self.active_index).map(|s| s.as_str())
+    }
+
+    pub fn list_tabs(&self) -> Vec<&str> {
+        self.tabs.iter().map(|s| s.as_str()).collect()
+    }
 }
