@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod mam_version_pin;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
