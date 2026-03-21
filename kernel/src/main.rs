@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod browser_auto_cookie_manage;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
