@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod lang_speech_model_router;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
