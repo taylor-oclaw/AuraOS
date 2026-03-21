@@ -254,6 +254,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -789,10 +790,14 @@ mod events;
 mod expert_router_v2;
 mod face_recognition;
 mod family_activity_log;
+mod family_hub_activity_feed;
+mod family_hub_age_gate;
 mod family_hub_core;
 mod family_hub_encryption;
 mod family_hub_invite;
+mod family_hub_key_mgr;
 mod family_hub_member_mgr;
+mod family_hub_notification;
 mod family_hub_role_mgr;
 mod family_hub_vault;
 mod family_invite_handler;
