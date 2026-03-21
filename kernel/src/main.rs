@@ -231,6 +231,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -843,9 +844,13 @@ mod marketplace_catalog;
 mod marketplace_categories;
 mod marketplace_certification;
 mod marketplace_core;
+mod marketplace_family_share;
 mod marketplace_featured;
+mod marketplace_free_tier;
 mod marketplace_moderation;
 mod marketplace_one_time_purchase;
+mod marketplace_org_volume_license;
+mod marketplace_pricing_engine;
 mod marketplace_publisher_analytics;
 mod marketplace_publisher_payout;
 mod marketplace_publisher_portal;
@@ -857,6 +862,7 @@ mod marketplace_subscription;
 mod marketplace_trending;
 mod marketplace_trial_period;
 mod marketplace_verified_badge;
+mod marketplace_wallet;
 mod math;
 mod matter_protocol;
 mod mcp_auth_handler;
