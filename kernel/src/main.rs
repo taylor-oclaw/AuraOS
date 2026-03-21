@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod context_traveling_detect;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
