@@ -192,6 +192,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -200,13 +201,17 @@ mod a2a_push_notify;
 mod a2a_server;
 mod a2a_task_handler;
 mod accelerometer_driver;
+mod access_bounce_keys;
 mod access_color_blind_deuteranopia;
 mod access_color_blind_protanopia;
 mod access_color_blind_tritanopia;
 mod access_color_invert;
+mod access_filter_keys;
 mod access_high_contrast;
 mod access_large_cursor;
 mod access_screen_magnifier;
+mod access_slow_keys;
+mod access_sticky_keys;
 mod accessibility;
 mod account_lockout;
 mod acpi;
