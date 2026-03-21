@@ -451,6 +451,8 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1163,6 +1165,8 @@ mod battery_manager;
 mod behavior;
 mod belief_revision;
 mod bidi_text;
+mod biz_crm_contact;
+mod biz_crm_core;
 mod bluetooth_mgr;
 mod bluetooth_stack;
 mod boot_sequence;
@@ -3015,6 +3019,7 @@ mod tone_engine_core;
 mod tone_enthusiasm_match;
 mod tone_excitement_match;
 mod tone_exclamation_match;
+mod tone_explain_simple_detect;
 mod tone_family_mode;
 mod tone_formality_scale;
 mod tone_frustration_defuse;
@@ -3044,6 +3049,7 @@ mod tone_skepticism_detect;
 mod tone_slang_match;
 mod tone_stranger_mode;
 mod tone_subordinate_mode;
+mod tone_technical_level_match;
 mod tone_thread_context;
 mod tone_under_explain_avoid;
 mod tone_urgency_match;
