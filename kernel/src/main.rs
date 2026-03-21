@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod biz_coworker_directory;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
