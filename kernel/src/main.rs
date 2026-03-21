@@ -313,6 +313,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2112,8 +2113,13 @@ mod shared_memory;
 mod shell;
 mod shopping_assistant;
 mod shopping_deal_alert;
+mod shopping_list_smart;
 mod shopping_price_compare;
 mod shopping_price_history;
+mod shopping_receipt_organize;
+mod shopping_return_track;
+mod shopping_review_summarize;
+mod shopping_warranty_track;
 mod shutdown_mgr;
 mod signal_handler;
 mod signals;
