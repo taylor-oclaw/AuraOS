@@ -81,6 +81,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -920,6 +921,10 @@ mod mesh_graceful_preempt;
 mod mesh_hipaa_boundary;
 mod mesh_home_devices;
 mod mesh_idle_detector;
+mod mesh_industry_education;
+mod mesh_industry_finance;
+mod mesh_industry_government;
+mod mesh_industry_healthcare;
 mod mesh_itar_boundary;
 mod mesh_jurisdiction_engine;
 mod mesh_jurisdiction_rules;
