@@ -276,6 +276,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -901,13 +902,17 @@ mod constitution;
 mod container_mkv;
 mod container_mp4;
 mod container_webm;
+mod context_activity_detect;
+mod context_driving_detect;
 mod context_engine_core;
 mod context_inherit;
 mod context_light_aware;
 mod context_location_aware;
+mod context_motion_aware;
 mod context_noise_aware;
 mod context_time_aware;
 mod context_traffic_aware;
+mod context_walking_detect;
 mod context_weather_aware;
 mod continuous_batching;
 mod core_dump;
