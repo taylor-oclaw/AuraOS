@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod finance_net_worth;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
