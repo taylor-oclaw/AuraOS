@@ -120,6 +120,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -981,6 +982,9 @@ mod medusa_v2;
 mod meeting_action_extractor;
 mod meeting_audio_capture;
 mod meeting_decision_extractor;
+mod meeting_engagement_score;
+mod meeting_entity_extract;
+mod meeting_keyword_extract;
 mod meeting_language_detect;
 mod meeting_note_generator;
 mod meeting_participant_detect;
@@ -988,6 +992,8 @@ mod meeting_question_tracker;
 mod meeting_screen_capture;
 mod meeting_sentiment_tracker;
 mod meeting_speaker_diarize;
+mod meeting_summary_generator;
+mod meeting_topic_segmenter;
 mod meeting_transcribe_offline;
 mod meeting_transcribe_realtime;
 mod meeting_translate_live;
