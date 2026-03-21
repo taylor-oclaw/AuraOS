@@ -128,6 +128,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -139,6 +140,9 @@ mod accelerometer_driver;
 mod accessibility;
 mod account_lockout;
 mod acpi;
+mod action_item_classifier;
+mod action_item_parser;
+mod action_item_priority;
 mod agent_access_control;
 mod agent_adversarial_test;
 mod agent_alignment_checker;
@@ -1014,6 +1018,7 @@ mod meeting_phone_bridge;
 mod meeting_post_debrief;
 mod meeting_pre_brief;
 mod meeting_priority_infer;
+mod meeting_privacy_redact;
 mod meeting_question_tracker;
 mod meeting_recording_index;
 mod meeting_recording_search;
