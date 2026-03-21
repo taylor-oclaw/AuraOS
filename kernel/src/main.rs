@@ -530,6 +530,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2627,17 +2628,22 @@ mod policy_byod_device;
 mod policy_byod_personal_free;
 mod policy_byod_work_container;
 mod policy_company_admin_restrict;
+mod policy_company_after_hours_allow;
 mod policy_company_camera_policy;
 mod policy_company_category_block;
 mod policy_company_device;
 mod policy_company_encrypt_require;
+mod policy_company_hours_restrict;
 mod policy_company_mfa_require;
 mod policy_company_mic_policy;
 mod policy_company_password_require;
 mod policy_company_time_restrict;
+mod policy_company_transparency;
 mod policy_company_usage_report;
 mod policy_company_usb_block;
+mod policy_company_user_notify;
 mod policy_company_website_block;
+mod policy_employee_privacy_minimum;
 mod policy_personal_device;
 mod pop3_client;
 mod post_processing;
