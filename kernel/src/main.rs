@@ -399,6 +399,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2395,6 +2396,7 @@ mod rel_gift_history;
 mod rel_gift_idea_generate;
 mod rel_gift_wishlist_track;
 mod rel_graduation_detect;
+mod rel_gratitude_journal;
 mod rel_group_smart_create;
 mod rel_group_suggest;
 mod rel_holiday_greet;
@@ -2430,6 +2432,8 @@ mod rel_promotion_detect;
 mod rel_public_info_enrich;
 mod rel_recommendation_draft;
 mod rel_referral_track;
+mod rel_relationship_invest_suggest;
+mod rel_relationship_neglect_warn;
 mod rel_religious_aware;
 mod rel_response_time_expect;
 mod rel_response_time_track;
@@ -2445,6 +2449,7 @@ mod rel_spouse_name_remember;
 mod rel_strengthening_detect;
 mod rel_text_pref_detect;
 mod rel_thank_you_remind;
+mod rel_throwback_generate;
 mod rel_topic_suggest;
 mod rel_tradition_remind;
 mod rel_twitter_enrich;
