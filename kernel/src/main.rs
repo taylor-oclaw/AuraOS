@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod access_ai_scene_describe;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
