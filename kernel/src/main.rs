@@ -477,6 +477,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1243,6 +1244,11 @@ mod biz_crm_report_revenue;
 mod biz_crm_salesforce_sync;
 mod biz_crm_task_create;
 mod biz_crm_touchpoint_track;
+mod biz_handoff_knowledge;
+mod biz_handoff_relationship;
+mod biz_meeting_client_brief;
+mod biz_meeting_stakeholder_brief;
+mod biz_org_chart_change_detect;
 mod biz_org_chart_visual;
 mod biz_project_people_map;
 mod biz_stakeholder_map;
