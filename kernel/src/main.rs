@@ -257,6 +257,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -799,13 +800,17 @@ mod family_hub_conflict_resolver;
 mod family_hub_core;
 mod family_hub_encryption;
 mod family_hub_home_server;
+mod family_hub_inheritance;
 mod family_hub_invite;
 mod family_hub_key_mgr;
+mod family_hub_legacy_vault;
 mod family_hub_member_mgr;
+mod family_hub_memory_capsule;
 mod family_hub_nas_bridge;
 mod family_hub_notification;
 mod family_hub_offline_mode;
 mod family_hub_parental_ctrl;
+mod family_hub_purchase_share;
 mod family_hub_role_mgr;
 mod family_hub_shared_storage;
 mod family_hub_skill_library;
