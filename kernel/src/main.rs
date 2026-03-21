@@ -428,6 +428,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2431,7 +2432,10 @@ mod privacy_engine;
 mod proc_mgr;
 mod proc_sched;
 mod process_table;
+mod profile_account_browser_separate;
+mod profile_account_calendar_merge_view;
 mod profile_account_work_email;
+mod profile_data_crossover_allow;
 mod profile_data_crossover_block;
 mod profile_data_partition;
 mod profile_data_personal_vault;
@@ -2966,6 +2970,8 @@ mod tls_engine;
 mod tls_handshake;
 mod token_healing;
 mod tokenizer;
+mod tone_engine_core;
+mod tone_per_person_profile;
 mod tool_executor;
 mod tool_use_engine;
 mod tooltip_system;
