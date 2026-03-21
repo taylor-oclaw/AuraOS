@@ -541,6 +541,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1335,6 +1336,8 @@ mod biz_vendor_sla_track;
 mod bluetooth_mgr;
 mod bluetooth_stack;
 mod boot_sequence;
+mod browser_auto_bookmark_learn;
+mod browser_auto_tab_close;
 mod buddy_allocator;
 mod calendar_agenda_generate;
 mod calendar_attendee_suggest;
@@ -1728,6 +1731,10 @@ mod fan_controller;
 mod fat32;
 mod fb_console;
 mod federated_learn;
+mod file_auto_archive_old;
+mod file_auto_delete_temp;
+mod file_auto_organize_learn;
+mod file_auto_share_pattern;
 mod file_compression;
 mod file_dialog;
 mod file_mgr;
