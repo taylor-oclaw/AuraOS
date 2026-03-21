@@ -147,6 +147,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -956,6 +957,11 @@ mod lang_accent_english_ng;
 mod lang_accent_english_sg;
 mod lang_accent_english_uk;
 mod lang_accent_english_us;
+mod lang_accent_french_ca;
+mod lang_accent_french_fr;
+mod lang_accent_profile;
+mod lang_accent_spanish_ar;
+mod lang_accent_spanish_es;
 mod lang_accent_spanish_mx;
 mod lang_code_switch_detect;
 mod lang_core;
