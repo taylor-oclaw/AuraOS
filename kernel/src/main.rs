@@ -315,6 +315,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -905,6 +906,9 @@ mod camera_driver;
 mod canvas_2d;
 mod capability_system;
 mod car_connect;
+mod car_fuel_track;
+mod car_maintenance_remind;
+mod car_mileage_track;
 mod car_obd2_reader;
 mod cellular_modem;
 mod cert_manager;
@@ -2116,11 +2120,13 @@ mod shared_memory;
 mod shell;
 mod shopping_assistant;
 mod shopping_deal_alert;
+mod shopping_grocery_smart;
 mod shopping_list_smart;
 mod shopping_meal_plan_link;
 mod shopping_price_compare;
 mod shopping_price_history;
 mod shopping_receipt_organize;
+mod shopping_reorder_suggest;
 mod shopping_return_track;
 mod shopping_review_summarize;
 mod shopping_warranty_track;
