@@ -91,6 +91,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -497,6 +498,8 @@ mod company_support_portal;
 mod company_tenant_manager;
 mod company_usage_meter;
 mod compass_driver;
+mod compat_android_apk;
+mod compat_android_intent;
 mod compat_apfs_read;
 mod compat_bridge;
 mod compat_btrfs;
@@ -513,6 +516,8 @@ mod compat_linux_syscall;
 mod compat_linux_sysfs;
 mod compat_linux_threads;
 mod compat_ntfs;
+mod compat_wine_core;
+mod compat_wine_registry;
 mod compositor;
 mod compute_shader;
 mod connection_tracker;
