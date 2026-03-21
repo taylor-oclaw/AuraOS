@@ -411,6 +411,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2256,6 +2257,7 @@ mod people_detail_travel_plan;
 mod people_email_extract;
 mod people_event_recall;
 mod people_follow_up_natural;
+mod people_forget_request;
 mod people_inside_joke;
 mod people_meeting_extract;
 mod people_memory_context_trigger;
@@ -2267,9 +2269,12 @@ mod people_memory_store;
 mod people_mention_detect;
 mod people_message_extract;
 mod people_preference_evolve;
+mod people_privacy_consent;
+mod people_privacy_level;
 mod people_remember_prompt;
 mod people_shared_memory;
 mod people_social_extract;
+mod people_story_recall;
 mod people_support_suggest;
 mod perf_app_preloader;
 mod perf_background_throttle;
