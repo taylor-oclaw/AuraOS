@@ -336,6 +336,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -618,6 +619,9 @@ mod ai_sec_agency_audit_trail;
 mod ai_sec_agency_kill_switch;
 mod ai_sec_agency_rollback;
 mod ai_sec_agency_scope_limit;
+mod ai_sec_agent_escape_detect;
+mod ai_sec_agent_goal_drift;
+mod ai_sec_agent_resource_abuse;
 mod ai_sec_api_key_detector;
 mod ai_sec_confidence_score;
 mod ai_sec_credit_card_detector;
@@ -633,6 +637,7 @@ mod ai_sec_dos_resource_cap;
 mod ai_sec_dos_timeout_enforce;
 mod ai_sec_excessive_agency_detect;
 mod ai_sec_fact_verify_chain;
+mod ai_sec_hallucination_score;
 mod ai_sec_indirect_inject_block;
 mod ai_sec_indirect_inject_detect;
 mod ai_sec_jailbreak_detect;
