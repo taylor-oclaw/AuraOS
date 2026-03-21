@@ -333,6 +333,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -610,6 +611,10 @@ mod ai_runtime_wasm;
 mod ai_safety_abstract;
 mod ai_safety_registry;
 mod ai_schema_enforcer;
+mod ai_sec_agency_action_approval;
+mod ai_sec_agency_audit_trail;
+mod ai_sec_agency_kill_switch;
+mod ai_sec_agency_rollback;
 mod ai_sec_agency_scope_limit;
 mod ai_sec_api_key_detector;
 mod ai_sec_credit_card_detector;
@@ -664,6 +669,7 @@ mod ai_sec_prompt_inject_sanitize;
 mod ai_sec_sensitive_data_classify;
 mod ai_sec_sensitive_data_detect;
 mod ai_sec_sensitive_data_mask;
+mod ai_sec_ssn_detector;
 mod ai_sec_supply_chain_pin;
 mod ai_sec_supply_chain_sbom;
 mod ai_sec_supply_chain_scan;
