@@ -413,6 +413,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2243,6 +2244,7 @@ mod people_conversation_extract;
 mod people_conversation_link_person;
 mod people_conversation_listen;
 mod people_correction_learn;
+mod people_cultural_context;
 mod people_detail_capture;
 mod people_detail_custom;
 mod people_detail_dream_goal;
@@ -2272,11 +2274,15 @@ mod people_memory_recall;
 mod people_memory_store;
 mod people_mention_detect;
 mod people_message_extract;
+mod people_name_pronounce;
+mod people_name_spelling;
 mod people_never_mention;
 mod people_preference_evolve;
 mod people_privacy_consent;
 mod people_privacy_level;
+mod people_pronoun_remember;
 mod people_remember_prompt;
+mod people_sensitive_topic;
 mod people_shared_memory;
 mod people_social_extract;
 mod people_story_recall;
