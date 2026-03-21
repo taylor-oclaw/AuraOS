@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod speech_sign_language_bsl;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
