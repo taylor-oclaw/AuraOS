@@ -203,6 +203,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1518,10 +1519,15 @@ mod pcie_gen5;
 mod perf_app_preloader;
 mod perf_background_throttle;
 mod perf_battery_predict;
+mod perf_battery_report;
+mod perf_battery_saver_smart;
 mod perf_disk_optimizer;
+mod perf_memory_optimizer;
 mod perf_profiler;
 mod perf_resource_forecast;
 mod perf_startup_optimizer;
+mod perf_thermal_predict;
+mod perf_thermal_schedule;
 mod perf_usage_pattern_learn;
 mod perf_workload_predictor;
 mod permissions;
