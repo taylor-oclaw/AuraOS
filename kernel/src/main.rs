@@ -340,6 +340,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -646,6 +647,7 @@ mod ai_sec_dos_query_complex_limit;
 mod ai_sec_dos_rate_limit;
 mod ai_sec_dos_resource_cap;
 mod ai_sec_dos_timeout_enforce;
+mod ai_sec_evasion_detect;
 mod ai_sec_excessive_agency_detect;
 mod ai_sec_fact_verify_chain;
 mod ai_sec_hallucination_score;
@@ -683,24 +685,28 @@ mod ai_sec_plugin_memory_restrict;
 mod ai_sec_plugin_network_restrict;
 mod ai_sec_plugin_permission;
 mod ai_sec_plugin_sandbox_v2;
+mod ai_sec_power_analysis_model;
 mod ai_sec_prompt_inject_block;
 mod ai_sec_prompt_inject_boundary;
 mod ai_sec_prompt_inject_canary;
 mod ai_sec_prompt_inject_detect;
 mod ai_sec_prompt_inject_monitor;
 mod ai_sec_prompt_inject_sanitize;
+mod ai_sec_reconstruction_attack;
 mod ai_sec_rogue_agent_contain;
 mod ai_sec_rogue_agent_detect;
 mod ai_sec_rogue_agent_kill;
 mod ai_sec_sensitive_data_classify;
 mod ai_sec_sensitive_data_detect;
 mod ai_sec_sensitive_data_mask;
+mod ai_sec_side_channel_model;
 mod ai_sec_source_require;
 mod ai_sec_ssn_detector;
 mod ai_sec_supply_chain_pin;
 mod ai_sec_supply_chain_sbom;
 mod ai_sec_supply_chain_scan;
 mod ai_sec_supply_chain_verify;
+mod ai_sec_timing_attack_model;
 mod ai_sec_training_audit;
 mod ai_sec_uncertainty_flag;
 mod ai_structured_handler;
