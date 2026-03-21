@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod gift_group_gift_collect;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
