@@ -136,6 +136,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -595,7 +596,11 @@ mod aura_weather;
 mod aura_web_browser;
 mod aura_workspace_mgr;
 mod auto_task_decomposer;
+mod auto_task_email_draft;
+mod auto_task_email_send;
 mod auto_task_executor;
+mod auto_task_planner;
+mod auto_task_progress_report;
 mod auto_task_sandbox;
 mod auto_task_validator;
 mod backup_manager;
