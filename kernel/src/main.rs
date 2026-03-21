@@ -269,6 +269,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -901,6 +902,8 @@ mod coreml_compat;
 mod cost_accounting;
 mod cpu_hotplug;
 mod crash_reporter;
+mod cross_device_core;
+mod cross_device_handoff;
 mod crucible_parser;
 mod crypto;
 mod crypto_engine;
@@ -1623,9 +1626,11 @@ mod notification_center;
 mod notification_channel_route;
 mod notification_do_not_disturb_smart;
 mod notification_driving_aware;
+mod notification_evening_digest;
 mod notification_focus_aware;
 mod notification_intelligence;
 mod notification_meeting_aware;
+mod notification_morning_digest;
 mod notification_priority_rank;
 mod notification_sleeping_aware;
 mod notification_snooze_smart;
@@ -1633,6 +1638,7 @@ mod notification_spam_filter;
 mod notification_summary_digest;
 mod notification_timing_optimal;
 mod notification_urgent_detect;
+mod notification_weekly_digest;
 mod notifications;
 mod npu_driver;
 mod npu_scheduler;
