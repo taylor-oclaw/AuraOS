@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod profile_coffee_shop_screen_guard;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
