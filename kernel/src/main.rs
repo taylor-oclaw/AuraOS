@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod photo_auto_share_pattern;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
