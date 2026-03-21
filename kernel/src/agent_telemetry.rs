@@ -2,100 +2,45 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub struct TelemetryEvent {
-    pub agent_id: u64,
-    pub event_type: String,
-    pub metric: String,
-    pub value: f64,
-    pub timestamp: u64,
-    pub tags: Vec<(String, String)>,
+pub struct agenttelemetry {
+    entries: Vec<String>,
+    active: bool,
 }
 
-pub struct AgentSpan {
-    pub agent_id: u64,
-    pub operation: String,
-    pub start_ts: u64,
-    pub end_ts: Option<u64>,
-    pub parent_span: Option<u64>,
-    pub status: SpanStatus,
-}
-
-pub enum SpanStatus {
-    Running,
-    Success,
-    Error(String),
-}
-
-pub struct AgentTelemetry {
-    pub events: Vec<TelemetryEvent>,
-    pub spans: Vec<AgentSpan>,
-    pub next_span_id: u64,
-    pub enabled: bool,
-    pub max_events: usize,
-}
-
-impl AgentTelemetry {
+impl agenttelemetry {
     pub fn new() -> Self {
-        Self {
-            events: Vec::new(),
-            spans: Vec::new(),
-            next_span_id: 1,
-            enabled: true,
-            max_events: 100000,
-        }
+        agenttelemetry { entries: Vec::new(), active: true }
     }
-
-    pub fn record(&mut self, agent_id: u64, event_type: &str, metric: &str, value: f64) {
-        if !self.enabled {
-            return;
-        }
-        self.events.push(TelemetryEvent {
-            agent_id,
-            event_type: String::from(event_type),
-            metric: String::from(metric),
-            value,
-            timestamp: 0,
-            tags: Vec::new(),
-        };
-        if self.events.len() > self.max_events {
-            self.events.remove(0);
-        }
+    
+    pub fn add(&mut self, entry: &str) {
+        self.entries.push(String::from(entry));
     }
-
-    pub fn start_span(&mut self, agent_id: u64, operation: &str, parent: Option<u64>) -> u64 {
-        let id = self.next_span_id;
-        self.next_span_id += 1;
-        self.spans.push(AgentSpan {
-            agent_id,
-            operation: String::from(operation),
-            start_ts: 0,
-            end_ts: None,
-            parent_span: parent,
-            status: SpanStatus::Running,
-        };
-        id
+    
+    pub fn remove(&mut self, entry: &str) {
+        self.entries.retain(|e| e != entry);
     }
-
-    pub fn end_span(&mut self, span_id: u64, success: bool) {
-        if let Some(span) = self.spans.iter_mut().find(|s| s.agent_id == span_id) {
-            span.end_ts = Some(0);
-            span.status = if success {
-                SpanStatus::Success
-            } else {
-                SpanStatus::Error(String::from("failed"))
-            };
-        }
+    
+    pub fn contains(&self, entry: &str) -> bool {
+        self.entries.iter().any(|e| e == entry)
     }
-
-    pub fn events_for_agent(&self, agent_id: u64) -> Vec<&TelemetryEvent> {
-        self.events.iter().filter(|e| e.agent_id == agent_id).collect()
+    
+    pub fn count(&self) -> usize {
+        self.entries.len()
     }
-
-    pub fn active_spans(&self) -> Vec<&AgentSpan> {
-        self.spans.iter().filter(|s| s.end_ts.is_none()).collect()
+    
+    pub fn clear(&mut self) {
+        self.entries.clear();
     }
-
-    pub fn event_count(&self) -> usize {
-        self.events.len()
+    
+    pub fn is_active(&self) -> bool {
+        self.active
     }
-))}
+    
+    pub fn set_active(&mut self, active: bool) {
+        self.active = active;
+    }
+    
+    pub fn list(&self) -> &Vec<String> {
+        &self.entries
+    }
+}

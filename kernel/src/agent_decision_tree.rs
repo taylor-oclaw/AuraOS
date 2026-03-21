@@ -1,108 +1,82 @@
 extern crate alloc;
-
 use alloc::string::String;
 use alloc::vec::Vec;
 
+pub struct DecisionNode {
+    label: String,
+    children: Vec<DecisionNode>,
+    value: Option<String>,
+}
+
 pub struct AgentDecisionTree {
-    root: Node,
+    root: Option<DecisionNode>,
 }
 
 impl AgentDecisionTree {
     pub fn new() -> Self {
-        AgentDecisionTree {
-            root: Node::new("root"),
-        }
+        AgentDecisionTree { root: None }
     }
 
-    pub fn add_decision(&mut self, parent_label: &str, decision: Decision) {
-        if let Some(parent_node) = self.find_node_by_label(&self.root, parent_label) {
-            parent_node.add_child(decision.into());
-        }
-    }
-
-    pub fn make_decision(&self, label: &str) -> Option<&Decision> {
-        self.find_node_by_label(&self.root, label)
-            .and_then(|node| node.decision.as_ref())
-    }
-
-    pub fn get_all_decisions(&self) -> Vec<&Decision> {
-        let mut decisions = Vec::new();
-        self.collect_decisions(&self.root, &mut decisions);
-        decisions
-    }
-
-    pub fn remove_decision(&mut self, label: &str) {
-        self.remove_node_by_label(&mut self.root, label);
-    }
-}
-
-struct Node {
-    label: String,
-    decision: Option<Decision>,
-    children: Vec<Node>,
-}
-
-impl Node {
-    fn new(label: &str) -> Self {
-        Node {
+    pub fn set_root(&mut self, label: &str) {
+        self.root = Some(DecisionNode {
             label: String::from(label),
-            decision: None,
             children: Vec::new(),
+            value: None,
+        });
+    }
+
+    pub fn add_child(&mut self, parent_label: &str, child_label: &str) {
+        if let Some(ref mut root) = self.root {
+            Self::add_child_recursive(root, parent_label, child_label);
         }
     }
 
-    fn add_child(&mut self, child: Node) {
-        self.children.push(child);
+    fn add_child_recursive(node: &mut DecisionNode, parent: &str, child: &str) {
+        if node.label == parent {
+            node.children.push(DecisionNode {
+                label: String::from(child),
+                children: Vec::new(),
+                value: None,
+            });
+            return;
+        }
+        for c in node.children.iter_mut() {
+            Self::add_child_recursive(c, parent, child);
+        }
     }
 
-    fn get_child_by_label(&self, label: &str) -> Option<&Node> {
-        self.children.iter().find(|child| child.label == label)
+    pub fn set_value(&mut self, label: &str, value: &str) {
+        if let Some(ref mut root) = self.root {
+            Self::set_value_recursive(root, label, value);
+        }
     }
-}
 
-struct Decision {
-    action: String,
-    outcome: String,
-}
-
-impl From<Decision> for Node {
-    fn from(decision: Decision) -> Self {
-        let mut node = Node::new(&decision.action);
-        node.decision = Some(decision);
-        node
-    }
-}
-
-impl AgentDecisionTree {
-    fn find_node_by_label(&self, node: &Node, label: &str) -> Option<&Node> {
+    fn set_value_recursive(node: &mut DecisionNode, label: &str, value: &str) {
         if node.label == label {
-            return Some(node);
+            node.value = Some(String::from(value));
+            return;
         }
-        for child in &node.children {
-            if let Some(found_node) = self.find_node_by_label(child, label) {
-                return Some(found_node);
-            }
-        }
-        None
-    }
-
-    fn collect_decisions(&self, node: &Node, decisions: &mut Vec<&Decision>) {
-        if let Some(decision) = &node.decision {
-            decisions.push(decision);
-        }
-        for child in &node.children {
-            self.collect_decisions(child, decisions);
+        for c in node.children.iter_mut() {
+            Self::set_value_recursive(c, label, value);
         }
     }
 
-    fn remove_node_by_label(&mut self, node: &mut Node, label: &str) {
-        node.children.retain(|child| {
-            if child.label == label {
-                false
-            } else {
-                self.remove_node_by_label(child, label);
-                true
-            }
-        };
+    pub fn depth(&self) -> usize {
+        match &self.root {
+            Some(root) => Self::calc_depth(root),
+            None => 0,
+        }
     }
-)}
+
+    fn calc_depth(node: &DecisionNode) -> usize {
+        if node.children.is_empty() {
+            return 1;
+        }
+        let mut max_d = 0;
+        for c in &node.children {
+            let d = Self::calc_depth(c);
+            if d > max_d { max_d = d; }
+        }
+        max_d + 1
+    }
+}
