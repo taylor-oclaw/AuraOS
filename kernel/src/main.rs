@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod profile_travel_per_diem_track;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
