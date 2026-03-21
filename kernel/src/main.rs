@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod draft_pre_send_confidential_scan;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
