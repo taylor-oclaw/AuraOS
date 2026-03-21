@@ -511,6 +511,9 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
+
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2492,14 +2495,19 @@ mod people_seasonal_context;
 mod people_sensitive_topic;
 mod people_shared_memory;
 mod people_social_extract;
+mod people_source_calendar_note;
 mod people_source_discord;
 mod people_source_email_cc;
 mod people_source_email_sent;
 mod people_source_imessage;
 mod people_source_instagram_dm;
 mod people_source_linkedin_msg;
+mod people_source_meeting_chat;
+mod people_source_meeting_transcript;
 mod people_source_phone_call;
+mod people_source_shared_comment;
 mod people_source_signal;
+mod people_source_social_post;
 mod people_source_twitter_dm;
 mod people_source_whatsapp;
 mod people_story_recall;
