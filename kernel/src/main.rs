@@ -108,6 +108,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1370,11 +1371,14 @@ mod virtual_desktops;
 mod vlan_manager;
 mod vllm_compat;
 mod voice_always_listen;
+mod voice_app_specific_vocab;
 mod voice_command_loop;
+mod voice_command_mode;
 mod voice_context_aware;
 mod voice_context_stack;
 mod voice_continuous_convo;
 mod voice_correction;
+mod voice_dictation_mode;
 mod voice_disambiguation;
 mod voice_emotion_detect;
 mod voice_engine;
@@ -1382,6 +1386,7 @@ mod voice_follow_up;
 mod voice_intent_confirm;
 mod voice_language_detect;
 mod voice_multi_turn;
+mod voice_natural_mode;
 mod voice_noise_cancel;
 mod voice_pipeline;
 mod voice_response_select;
