@@ -130,6 +130,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -142,13 +143,18 @@ mod accessibility;
 mod account_lockout;
 mod acpi;
 mod action_item_assignee;
+mod action_item_auto_execute;
 mod action_item_classifier;
 mod action_item_deadline;
+mod action_item_delegate;
 mod action_item_dependency;
 mod action_item_engine;
+mod action_item_escalate;
 mod action_item_parser;
 mod action_item_priority;
+mod action_item_reminder;
 mod action_item_tracker;
+mod action_item_verify;
 mod agent_access_control;
 mod agent_adversarial_test;
 mod agent_alignment_checker;
