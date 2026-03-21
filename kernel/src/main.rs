@@ -487,6 +487,8 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -2565,7 +2567,11 @@ mod process_table;
 mod profile_account_browser_separate;
 mod profile_account_calendar_merge_view;
 mod profile_account_work_email;
+mod profile_coffee_shop_detect;
+mod profile_coffee_shop_screen_guard;
+mod profile_coffee_shop_vpn;
 mod profile_commute_detect;
+mod profile_commute_hands_free;
 mod profile_commute_podcast_resume;
 mod profile_data_crossover_allow;
 mod profile_data_crossover_block;
