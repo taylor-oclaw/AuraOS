@@ -546,6 +546,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1696,6 +1697,8 @@ mod ethernet;
 mod event_bus;
 mod event_loop;
 mod events;
+mod expense_auto_categorize;
+mod expense_auto_receipt_match;
 mod expert_router_v2;
 mod face_recognition;
 mod family_activity_log;
@@ -2666,7 +2669,10 @@ mod perf_thermal_schedule;
 mod perf_usage_pattern_learn;
 mod perf_workload_predictor;
 mod permissions;
+mod photo_auto_album_sort;
+mod photo_auto_favorite_learn;
 mod photo_auto_organize;
+mod photo_auto_share_pattern;
 mod photo_background_remove;
 mod photo_backup_smart;
 mod photo_best_shot_select;
