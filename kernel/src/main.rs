@@ -238,6 +238,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -906,11 +907,14 @@ mod mdm_device_inventory;
 mod mdm_device_registry;
 mod mdm_encryption_policy;
 mod mdm_enrollment;
+mod mdm_network_policy;
 mod mdm_os_update_push;
 mod mdm_policy_enforcer;
 mod mdm_policy_engine;
+mod mdm_remote_locate;
 mod mdm_remote_lock;
 mod mdm_remote_wipe;
+mod mdm_vpn_policy;
 mod media_controls;
 mod medusa_v2;
 mod mem_pool;
