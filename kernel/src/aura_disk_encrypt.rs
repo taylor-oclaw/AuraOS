@@ -12,27 +12,35 @@ impl AuraDiskEncrypt {
     }
 
     pub fn encrypt(&self, data: &[u8]) -> Vec<u8> {
-        let mut encrypted_data = Vec::new();
+        let mut encrypted_data = Vec::with_capacity(data.len());
         for (i, &byte) in data.iter().enumerate() {
-            let key_byte = self.key[i % self.key.len()];
-            encrypted_data.push(byte ^ key_byte);
+            encrypted_data.push(byte ^ self.key[i % self.key.len()]);
         }
         encrypted_data
     }
 
     pub fn decrypt(&self, encrypted_data: &[u8]) -> Vec<u8> {
-        self.encrypt(encrypted_data)
+        let mut decrypted_data = Vec::with_capacity(encrypted_data.len());
+        for (i, &byte) in encrypted_data.iter().enumerate() {
+            decrypted_data.push(byte ^ self.key[i % self.key.len()]);
+        }
+        decrypted_data
     }
 
-    pub fn set_key(&mut self, new_key: Vec<u8>) {
+    pub fn change_key(&mut self, new_key: Vec<u8>) {
         self.key = new_key;
     }
 
-    pub fn get_key_size(&self) -> usize {
+    pub fn key_size(&self) -> usize {
         self.key.len()
     }
 
-    pub fn is_key_empty(&self) -> bool {
-        self.key.is_empty()
+    pub fn is_valid_key(&self, data: &[u8]) -> bool {
+        if data.len() < self.key.len() {
+            return false;
+        }
+        let encrypted_data = self.encrypt(data);
+        let decrypted_data = self.decrypt(&encrypted_data);
+        data == &decrypted_data
     }
 }
