@@ -14,40 +14,36 @@ pub extern "C" fn rust_ffi_exit() {
 
 pub struct AuraTelemetryControl {
     data: Vec<String>,
-    enabled: bool,
+    threshold: u32,
 }
 
 impl AuraTelemetryControl {
-    pub fn new() -> Self {
+    pub fn new(threshold: u32) -> Self {
         AuraTelemetryControl {
             data: Vec::new(),
-            enabled: true,
+            threshold,
         }
     }
 
-    pub fn enable(&mut self) {
-        self.enabled = true;
-    }
-
-    pub fn disable(&mut self) {
-        self.enabled = false;
-    }
-
-    pub fn is_enabled(&self) -> bool {
-        self.enabled
-    }
-
-    pub fn add_data(&mut self, entry: String) {
-        if self.enabled {
-            self.data.push(entry);
+    pub fn add_data(&mut self, value: &str) {
+        if value.parse::<u32>().unwrap_or(0) > self.threshold {
+            self.data.push(value.to_string());
         }
     }
 
-    pub fn get_data(&self) -> &Vec<String> {
+    pub fn get_data(&self) -> &[String] {
         &self.data
     }
 
     pub fn clear_data(&mut self) {
         self.data.clear();
+    }
+
+    pub fn set_threshold(&mut self, threshold: u32) {
+        self.threshold = threshold;
+    }
+
+    pub fn above_threshold_count(&self) -> usize {
+        self.data.len()
     }
 }
