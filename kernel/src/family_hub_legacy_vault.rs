@@ -2,41 +2,45 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-#[no_mangle]
-pub extern "C" fn rust_start() {
-    // Entry point for the kernel module
-}
-
 pub struct FamilyHubLegacyVault {
-    data: Vec<u8>,
-    name: String,
+    key: String,
 }
 
 impl FamilyHubLegacyVault {
-    pub fn new(name: &str) -> Self {
-        FamilyHubLegacyVault {
-            data: Vec::new(),
-            name: String::from(name),
+    pub fn new(key: String) -> Self {
+        FamilyHubLegacyVault { key }
+    }
+
+    pub fn get_key(&self) -> &str {
+        self.key.as_str()
+    }
+
+    pub fn set_key(&mut self, key: String) {
+        self.key = key;
+    }
+
+    pub fn encrypt_data(&self, data: Vec<u8>) -> Vec<u8> {
+        // Simple XOR encryption for demonstration purposes
+        let mut encrypted_data = Vec::new();
+        for byte in data.iter() {
+            encrypted_data.push(byte ^ self.key.as_bytes()[0]);
         }
+        encrypted_data
     }
 
-    pub fn add_data(&mut self, data: &[u8]) {
-        self.data.extend_from_slice(data);
+    pub fn decrypt_data(&self, data: Vec<u8>) -> Vec<u8> {
+        // Simple XOR decryption for demonstration purposes
+        let mut decrypted_data = Vec::new();
+        for byte in data.iter() {
+            decrypted_data.push(byte ^ self.key.as_bytes()[0]);
+        }
+        decrypted_data
     }
 
-    pub fn get_data(&self) -> &[u8] {
-        &self.data
-    }
-
-    pub fn clear_data(&mut self) {
-        self.data.clear();
-    }
-
-    pub fn get_name(&self) -> &str {
-        &self.name
-    }
-
-    pub fn set_name(&mut self, new_name: &str) {
-        self.name = String::from(new_name);
+    pub fn generate_key(&self) -> String {
+        // Generate a new key based on the current system time
+        use std::time::{SystemTime, UNIX_EPOCH};
+        let now = SystemTime::now().duration_since(UNIX_EPOCH).unwrap();
+        format!("{:x}", now.as_millis())
     }
 }
