@@ -12,7 +12,7 @@ pub extern "C" fn rust_ffi_exit() {
     // Cleanup the module
 }
 
-pub struct AuraVideoPlayer {
+struct AuraVideoPlayer {
     video_files: Vec<String>,
     current_index: usize,
     is_playing: bool,
@@ -27,16 +27,8 @@ impl AuraVideoPlayer {
         }
     }
 
-    pub fn add_video(&mut self, file_path: &str) {
-        self.video_files.push(String::from(file_path));
-    }
-
-    pub fn remove_video(&mut self, index: usize) -> Option<String> {
-        if index < self.video_files.len() {
-            Some(self.video_files.remove(index))
-        } else {
-            None
-        }
+    pub fn add_video(&mut self, file_name: String) {
+        self.video_files.push(file_name);
     }
 
     pub fn play(&mut self) {
@@ -76,11 +68,9 @@ impl AuraVideoPlayer {
         }
     }
 
-    pub fn get_current_video(&self) -> Option<&String> {
-        if !self.video_files.is_empty() && self.current_index < self.video_files.len() {
-            Some(&self.video_files[self.current_index])
-        } else {
-            None
-        }
+    pub fn stop(&mut self) {
+        self.is_playing = false;
+        self.current_index = 0;
+        println!("Stopped");
     }
 }
