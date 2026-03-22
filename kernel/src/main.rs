@@ -2,6 +2,7 @@
 disambiguation;
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1093,6 +1094,11 @@ mod driver_port_lint;
 mod driver_port_test_generate;
 mod driver_printer_cups_compat;
 mod driver_printer_generic;
+mod driver_usb_cdc;
+mod driver_usb_hid_v2;
+mod driver_usb_hub_v2;
+mod driver_usb_mass_storage_v2;
+mod driver_usb_serial;
 mod driver_usb_xhci;
 mod driver_webcam_generic;
 mod e1000;
