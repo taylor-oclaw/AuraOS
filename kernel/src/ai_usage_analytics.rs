@@ -1,62 +1,63 @@
 extern crate alloc;
+
 use alloc::string::String;
 use alloc::vec::Vec;
 
-#[no_mangle]
-pub extern "C" fn rust_start() -> ! {
-    // Entry point for the kernel module
-    let mut analytics = AIUsageAnalytics::new();
-    
-    // Example usage of the methods
-    analytics.log_event("login", "user123");
-    analytics.log_event("logout", "user123");
-    analytics.increment_session_count();
-    analytics.set_user_active(true);
-    let active_users = analytics.get_active_users();
-    
-    loop {}
-}
-
 pub struct AIUsageAnalytics {
-    events: Vec<String>,
-    session_count: u32,
-    user_active: bool,
-    active_users: Vec<String>,
+    user_sessions: Vec<String>,
+    total_queries: u32,
+    successful_queries: u32,
+    failed_queries: u32,
+    average_query_time: f64,
 }
 
 impl AIUsageAnalytics {
     pub fn new() -> Self {
         AIUsageAnalytics {
-            events: Vec::new(),
-            session_count: 0,
-            user_active: false,
-            active_users: Vec::new(),
+            user_sessions: Vec::new(),
+            total_queries: 0,
+            successful_queries: 0,
+            failed_queries: 0,
+            average_query_time: 0.0,
         }
     }
 
-    pub fn log_event(&mut self, event_type: &str, user_id: &str) {
-        let event = format!("{} - {}", event_type, user_id);
-        self.events.push(event);
+    pub fn record_session(&mut self, session_id: &str) {
+        self.user_sessions.push(session_id.to_string());
     }
 
-    pub fn increment_session_count(&mut self) {
-        self.session_count += 1;
-    }
-
-    pub fn set_user_active(&mut self, active: bool) {
-        if active && !self.user_active {
-            self.active_users.push(String::from("user123")); // Assuming a fixed user for simplicity
-        } else if !active {
-            self.active_users.retain(|&x| x != "user123");
+    pub fn log_query_result(&mut self, success: bool, query_time: f64) {
+        self.total_queries += 1;
+        if success {
+            self.successful_queries += 1;
+        } else {
+            self.failed_queries += 1;
         }
-        self.user_active = active;
+        self.update_average_query_time(query_time);
     }
 
-    pub fn get_active_users(&self) -> Vec<String> {
-        self.active_users.clone()
+    fn update_average_query_time(&mut self, query_time: f64) {
+        let total_time = (self.average_query_time * self.total_queries as f64) + query_time;
+        self.average_query_time = total_time / self.total_queries as f64;
     }
 
-    pub fn get_session_count(&self) -> u32 {
-        self.session_count
+    pub fn get_session_count(&self) -> usize {
+        self.user_sessions.len()
+    }
+
+    pub fn get_success_rate(&self) -> f64 {
+        if self.total_queries == 0 {
+            0.0
+        } else {
+            (self.successful_queries as f64 / self.total_queries as f64) * 100.0
+        }
+    }
+
+    pub fn get_failure_rate(&self) -> f64 {
+        if self.total_queries == 0 {
+            0.0
+        } else {
+            (self.failed_queries as f64 / self.total_queries as f64) * 100.0
+        }
     }
 }
