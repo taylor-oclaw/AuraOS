@@ -14,6 +14,7 @@ disambiguation;
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -729,6 +730,10 @@ mod auto_task_ticket_create;
 mod auto_task_travel_book;
 mod auto_task_validator;
 mod auto_task_web_search;
+mod backup_archive_compress;
+mod backup_archive_manifest;
+mod backup_archive_verify;
+mod backup_archive_vym;
 mod backup_cloud_bandwidth_throttle;
 mod backup_cloud_company;
 mod backup_cloud_encrypt;
@@ -747,6 +752,7 @@ mod backup_nas_defs_native;
 mod backup_nas_non_defs;
 mod backup_nas_realtime;
 mod backup_nas_schedule;
+mod backup_non_defs_export;
 mod backup_particle_stream;
 mod backup_point_in_time;
 mod backup_self_heal;
