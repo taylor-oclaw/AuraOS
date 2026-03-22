@@ -17,13 +17,16 @@ impl FamilyHubSyncEngine {
     }
 
     pub fn add_device(&mut self, device_name: &str) {
-        if !self.devices.contains(&device_name.to_string()) {
-            self.devices.push(device_name.to_string());
-        }
+        self.devices.push(String::from(device_name));
     }
 
-    pub fn remove_device(&mut self, device_name: &str) {
-        self.devices.retain(|d| d != device_name);
+    pub fn remove_device(&mut self, device_name: &str) -> bool {
+        if let Some(index) = self.devices.iter().position(|d| d == device_name) {
+            self.devices.remove(index);
+            true
+        } else {
+            false
+        }
     }
 
     pub fn list_devices(&self) -> Vec<String> {
@@ -31,18 +34,19 @@ impl FamilyHubSyncEngine {
     }
 
     pub fn start_sync(&mut self) {
-        if !self.sync_status {
-            // Simulate sync process
-            self.sync_status = true;
-            // Additional logic for starting sync can be added here
+        self.sync_status = true;
+        // Simulate sync process
+        for device in &self.devices {
+            // Placeholder logic for syncing with each device
+            println!("Syncing with {}", device);
         }
     }
 
     pub fn stop_sync(&mut self) {
-        if self.sync_status {
-            // Simulate stopping sync process
-            self.sync_status = false;
-            // Additional logic for stopping sync can be added here
-        }
+        self.sync_status = false;
+    }
+
+    pub fn is_syncing(&self) -> bool {
+        self.sync_status
     }
 }
