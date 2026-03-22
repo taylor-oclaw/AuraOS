@@ -12,6 +12,7 @@ ler;
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1976,6 +1977,7 @@ mod native_gguf_loader;
 mod native_gpu_metal_backend;
 mod native_huggingface_download;
 mod native_inference_engine;
+mod native_inference_sandbox;
 mod native_json_mode_enforce;
 mod native_latency_monitor;
 mod native_matmul_kernel;
@@ -1996,6 +1998,7 @@ mod native_rope_scaling;
 mod native_rotary_embedding;
 mod native_safetensors_loader;
 mod native_sampling_engine;
+mod native_secure_inference_enclave;
 mod native_skill_ffi;
 mod native_skill_loader;
 mod native_sliding_window_attention;
@@ -2008,6 +2011,7 @@ mod native_throughput_optimizer;
 mod native_tool_call_parser;
 mod native_top_k_sampling;
 mod native_vision_encoder;
+mod native_weight_checksum;
 mod native_weight_particle_store;
 mod net_stack;
 mod network_bridge;
