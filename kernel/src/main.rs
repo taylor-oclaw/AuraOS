@@ -6,6 +6,7 @@ disambiguation;
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -721,7 +722,10 @@ mod auto_task_ticket_create;
 mod auto_task_travel_book;
 mod auto_task_validator;
 mod auto_task_web_search;
+mod backup_core;
+mod backup_entropy_rewind;
 mod backup_manager;
+mod backup_point_in_time;
 mod bandwidth_monitor;
 mod barometer_driver;
 mod batch_inference_v2;
@@ -1084,6 +1088,8 @@ mod driver_bt_mesh;
 mod driver_bt_rfcomm;
 mod driver_displayport_v2;
 mod driver_dp_alt_mode;
+mod driver_ethernet_generic;
+mod driver_ethernet_realtek;
 mod driver_framework_core;
 mod driver_framework_download;
 mod driver_framework_error_handle;
