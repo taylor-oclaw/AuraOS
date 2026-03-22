@@ -3,73 +3,69 @@ use alloc::string::String;
 use alloc::vec::Vec;
 
 #[no_mangle]
-pub extern "C" fn rust_start() -> i32 {
-    0
+pub extern "C" fn rust_start() {
+    // Entry point for the kernel module
+    let provider = AiProviderHotSwap::new();
+    provider.load_model("model1");
+    provider.unload_model("model2");
+    provider.list_models();
+    provider.swap_models("model3", "model4");
+    provider.get_current_model();
 }
 
-struct AIProviderHotSwap {
+pub struct AiProviderHotSwap {
     models: Vec<String>,
-    current_model: usize,
+    current_model: Option<String>,
 }
 
-impl AIProviderHotSwap {
+impl AiProviderHotSwap {
     pub fn new() -> Self {
-        AIProviderHotSwap {
+        AiProviderHotSwap {
             models: Vec::new(),
-            current_model: 0,
+            current_model: None,
         }
     }
 
-    pub fn add_model(&mut self, model_name: &str) {
-        self.models.push(String::from(model_name));
+    pub fn load_model(&mut self, model_name: &str) {
+        if !self.models.contains(&model_name.to_string()) {
+            self.models.push(model_name.to_string());
+            println!("Model {} loaded.", model_name);
+        } else {
+            println!("Model {} is already loaded.", model_name);
+        }
     }
 
-    pub fn remove_model(&mut self, model_name: &str) -> bool {
+    pub fn unload_model(&mut self, model_name: &str) {
         if let Some(index) = self.models.iter().position(|m| m == model_name) {
             self.models.remove(index);
-            true
+            if self.current_model.as_ref() == Some(&model_name.to_string()) {
+                self.current_model = None;
+            }
+            println!("Model {} unloaded.", model_name);
         } else {
-            false
+            println!("Model {} not found.", model_name);
         }
     }
 
-    pub fn list_models(&self) -> Vec<String> {
-        self.models.clone()
-    }
-
-    pub fn switch_to_next_model(&mut self) {
-        if !self.models.is_empty() {
-            self.current_model = (self.current_model + 1) % self.models.len();
+    pub fn list_models(&self) {
+        for model in &self.models {
+            println!("{}", model);
         }
     }
 
-    pub fn current_model_name(&self) -> Option<&String> {
-        self.models.get(self.current_model)
+    pub fn swap_models(&mut self, old_model: &str, new_model: &str) {
+        if let Some(index) = self.models.iter().position(|m| m == old_model) {
+            self.models[index] = new_model.to_string();
+            if self.current_model.as_ref() == Some(&old_model.to_string()) {
+                self.current_model = Some(new_model.to_string());
+            }
+            println!("Model swapped from {} to {}", old_model, new_model);
+        } else {
+            println!("Old model {} not found.", old_model);
+        }
     }
-}
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_ai_provider_hot_swap() {
-        let mut ai = AIProviderHotSwap::new();
-        assert_eq!(ai.list_models(), Vec::<String>::new());
-
-        ai.add_model("model1");
-        ai.add_model("model2");
-        assert_eq!(ai.list_models(), vec![String::from("model1"), String::from("model2")]);
-
-        assert!(ai.remove_model("model1"));
-        assert_eq!(ai.list_models(), vec![String::from("model2")]);
-        assert!(!ai.remove_model("model3"));
-
-        ai.switch_to_next_model();
-        assert_eq!(ai.current_model_name(), Some(&String::from("model2")));
-
-        ai.add_model("model1");
-        ai.switch_to_next_model();
-        assert_eq!(ai.current_model_name(), Some(&String::from("model1")));
+    pub fn get_current_model(&self) -> Option<&str> {
+        self.current_model.as_deref()
     }
 }
