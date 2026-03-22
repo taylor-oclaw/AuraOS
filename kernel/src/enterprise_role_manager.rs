@@ -2,7 +2,6 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-#[repr(C)]
 pub struct EnterpriseRoleManager {
     roles: Vec<String>,
 }
