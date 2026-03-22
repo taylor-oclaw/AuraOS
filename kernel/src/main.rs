@@ -550,6 +550,7 @@ entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1623,7 +1624,12 @@ mod draft_undo_send;
 mod drag_drop;
 mod dream_cycle;
 mod driver_framework_core;
+mod driver_framework_download;
+mod driver_framework_error_handle;
+mod driver_framework_fallback;
+mod driver_framework_hot_unplug;
 mod driver_framework_registry;
+mod driver_framework_test;
 mod driver_framework_trait;
 mod e1000;
 mod eagle_decode;
