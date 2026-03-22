@@ -2,62 +2,50 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-#[no_mangle]
-pub extern "C" fn rust_image_codec_avif_init() {
-    // Initialization logic for the module
-}
+#[no_std]
+mod image_codec_avif {
+    use core::convert::TryInto;
+    use alloc::boxed::Box;
 
-#[no_mangle]
-pub extern "C" fn rust_image_codec_avif_exit() {
-    // Cleanup logic for the module
-}
+    pub struct AvifDecoder {
+        // Placeholder for actual decoder state
+        data: Vec<u8>,
+    }
 
-pub struct ImageCodecAvif {
-    data: Vec<u8>,
-    width: u32,
-    height: u32,
-    format: String,
-}
-
-impl ImageCodecAvif {
-    pub fn new(data: Vec<u8>, width: u32, height: u32, format: &str) -> Self {
-        ImageCodecAvif {
-            data,
-            width,
-            height,
-            format: String::from(format),
+    impl AvifDecoder {
+        pub fn new(data: Vec<u8>) -> Self {
+            AvifDecoder { data }
         }
-    }
 
-    pub fn get_data(&self) -> &[u8] {
-        &self.data
-    }
+        pub fn decode(&self) -> Result<Vec<u8>, String> {
+            // Simulate decoding logic
+            if self.data.is_empty() {
+                return Err(String::from("No data to decode"));
+            }
+            Ok(self.data.clone())
+        }
 
-    pub fn set_data(&mut self, data: Vec<u8>) {
-        self.data = data;
-    }
+        pub fn get_width(&self) -> Result<u32, String> {
+            // Simulate getting width from metadata
+            Ok(1920)
+        }
 
-    pub fn get_width(&self) -> u32 {
-        self.width
-    }
+        pub fn get_height(&self) -> Result<u32, String> {
+            // Simulate getting height from metadata
+            Ok(1080)
+        }
 
-    pub fn set_width(&mut self, width: u32) {
-        self.width = width;
-    }
+        pub fn is_valid(&self) -> bool {
+            // Simulate validation logic
+            !self.data.is_empty()
+        }
 
-    pub fn get_height(&self) -> u32 {
-        self.height
-    }
-
-    pub fn set_height(&mut self, height: u32) {
-        self.height = height;
-    }
-
-    pub fn get_format(&self) -> &str {
-        &self.format
-    }
-
-    pub fn set_format(&mut self, format: &str) {
-        self.format = String::from(format);
+        pub fn compress(&mut self, quality: u8) -> Result<(), String> {
+            if quality > 100 {
+                return Err(String::from("Quality must be between 0 and 100"));
+            }
+            // Simulate compression logic
+            Ok(())
+        }
     }
 }
