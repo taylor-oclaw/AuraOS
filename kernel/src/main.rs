@@ -5,6 +5,7 @@
 extern crate alloc;
 
 
+mod driver_port_api_translate;
 use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
 use core::panic::PanicInfo;
 
