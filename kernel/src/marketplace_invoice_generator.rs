@@ -15,15 +15,15 @@ impl MarketplaceInvoiceGenerator {
         }
     }
 
-    pub fn add_item(&mut self, item_name: String, price: u32) {
-        let item = Item { name: item_name, price };
+    pub fn add_item(&mut self, name: String, price: u32) {
+        let item = Item { name, price };
         self.items.push(item);
         self.total_amount += price;
     }
 
-    pub fn remove_item(&mut self, item_index: usize) -> Option<Item> {
-        if item_index < self.items.len() {
-            let removed_item = self.items.remove(item_index);
+    pub fn remove_item(&mut self, index: usize) -> Option<Item> {
+        if index < self.items.len() {
+            let removed_item = self.items.remove(index);
             self.total_amount -= removed_item.price;
             Some(removed_item)
         } else {
@@ -35,8 +35,8 @@ impl MarketplaceInvoiceGenerator {
         self.total_amount
     }
 
-    pub fn list_items(&self) -> Vec<String> {
-        self.items.iter().map(|item| item.name.clone()).collect()
+    pub fn list_items(&self) -> Vec<&Item> {
+        self.items.iter().collect()
     }
 
     pub fn clear_invoice(&mut self) {
