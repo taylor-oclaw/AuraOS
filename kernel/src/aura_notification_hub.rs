@@ -1,41 +1,26 @@
+#![no_std]
+#![feature(allocator_api)]
+#![feature(const_mut_refs)]
+
 extern crate alloc;
+
 use alloc::string::String;
 use alloc::vec::Vec;
 
-#[no_mangle]
-pub extern "C" fn rust_ffi_init() {
-    // Initialize the module
-}
-
-#[no_mangle]
-pub extern "C" fn rust_ffi_exit() {
-    // Cleanup the module
-}
-
-pub struct AuraNotificationHub {
+struct AuraNotificationHub {
     notifications: Vec<String>,
 }
 
 impl AuraNotificationHub {
     pub fn new() -> Self {
-        AuraNotificationHub {
-            notifications: Vec::new(),
-        }
+        AuraNotificationHub { notifications: Vec::new() }
     }
 
-    pub fn add_notification(&mut self, notification: String) {
-        self.notifications.push(notification);
+    pub fn add_notification(&mut self, message: String) {
+        self.notifications.push(message);
     }
 
-    pub fn remove_notification(&mut self, index: usize) -> Option<String> {
-        if index < self.notifications.len() {
-            Some(self.notifications.remove(index))
-        } else {
-            None
-        }
-    }
-
-    pub fn get_notifications(&self) -> &[String] {
+    pub fn get_notifications(&self) -> &Vec<String> {
         &self.notifications
     }
 
@@ -43,7 +28,35 @@ impl AuraNotificationHub {
         self.notifications.clear();
     }
 
-    pub fn notification_count(&self) -> usize {
-        self.notifications.len()
+    pub fn has_notifications(&self) -> bool {
+        !self.notifications.is_empty()
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_add_notification() {
+        let mut hub = AuraNotificationHub::new();
+        hub.add_notification(String::from("Hello, world!"));
+        assert_eq!(hub.get_notifications(), &vec![String::from("Hello, world!")]);
+    }
+
+    #[test]
+    fn test_clear_notifications() {
+        let mut hub = AuraNotificationHub::new();
+        hub.add_notification(String::from("Hello, world!"));
+        hub.clear_notifications();
+        assert!(hub.get_notifications().is_empty());
+    }
+
+    #[test]
+    fn test_has_notifications() {
+        let mut hub = AuraNotificationHub::new();
+        assert!(!hub.has_notifications());
+        hub.add_notification(String::from("Hello, world!"));
+        assert!(hub.has_notifications());
     }
 }
