@@ -2,71 +2,57 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-mod x25519_dalek {
-    // Placeholder for actual X25519 implementation details
-    pub struct PublicKey([u8; 32]);
-    pub struct SecretKey([u8; 32]);
-    pub struct SharedSecret([u8; 32]);
-
-    impl PublicKey {
-        pub fn from_bytes(bytes: [u8; 32]) -> Self {
-            PublicKey(bytes)
-        }
-    }
-
-    impl SecretKey {
-        pub fn from_bytes(bytes: [u8; 32]) -> Self {
-            SecretKey(bytes)
-        }
-    }
-
-    impl SharedSecret {
-        pub fn as_bytes(&self) -> &[u8; 32] {
-            &self.0
-        }
-    }
-
-    pub fn exchange(secret_key: &SecretKey, public_key: &PublicKey) -> SharedSecret {
-        // Placeholder for actual exchange logic
-        SharedSecret([0u8; 32])
-    }
-}
-
 pub struct KeyExchangeX25519 {
-    secret_key: x25519_dalek::SecretKey,
-    public_key: x25519_dalek::PublicKey,
+    private_key: [u8; 32],
+    public_key: [u8; 32],
 }
 
 impl KeyExchangeX25519 {
-    pub fn new(secret_key_bytes: [u8; 32]) -> Self {
-        let secret_key = x25519_dalek::SecretKey::from_bytes(secret_key_bytes);
-        let public_key = x25519_dalek::PublicKey::from_bytes([
-            // Placeholder for actual public key calculation
-            0u8; 32
-        ]);
-        KeyExchangeX25519 {
-            secret_key,
-            public_key,
+    pub fn new() -> Self {
+        let mut private_key = [0u8; 32];
+        let mut public_key = [0u8; 32];
+
+        // Generate a random private key
+        // (in a real kernel, this would be replaced with a secure random number generator)
+        for i in &mut private_key {
+            *i = 42;
         }
+
+        KeyExchangeX25519 { private_key, public_key }
+    }
+
+    pub fn generate_public_key(&self) -> [u8; 32] {
+        // In a real kernel, this would be replaced with a secure implementation of the X25519 key exchange
+        let mut public_key = self.public_key;
+        for i in &mut public_key {
+            *i += 1;
+        }
+        public_key
+    }
+
+    pub fn encrypt(&self, message: &[u8]) -> Vec<u8> {
+        // In a real kernel, this would be replaced with a secure implementation of the X25519 key exchange
+        let mut encrypted_message = Vec::new();
+        for i in message {
+            encrypted_message.push(*i + 1);
+        }
+        encrypted_message
+    }
+
+    pub fn decrypt(&self, encrypted_message: &[u8]) -> Vec<u8> {
+        // In a real kernel, this would be replaced with a secure implementation of the X25519 key exchange
+        let mut decrypted_message = Vec::new();
+        for i in encrypted_message {
+            decrypted_message.push(*i - 1);
+        }
+        decrypted_message
+    }
+
+    pub fn get_private_key(&self) -> [u8; 32] {
+        self.private_key
     }
 
     pub fn get_public_key(&self) -> [u8; 32] {
-        self.public_key.0
-    }
-
-    pub fn set_secret_key(&mut self, secret_key_bytes: [u8; 32]) {
-        self.secret_key = x25519_dalek::SecretKey::from_bytes(secret_key_bytes);
-        // Placeholder for updating public key calculation
-    }
-
-    pub fn compute_shared_secret(&self, peer_public_key_bytes: [u8; 32]) -> [u8; 32] {
-        let peer_public_key = x25519_dalek::PublicKey::from_bytes(peer_public_key_bytes);
-        let shared_secret = x25519_dalek::exchange(&self.secret_key, &peer_public_key);
-        *shared_secret.as_bytes()
-    }
-
-    pub fn verify_peer_public_key(&self, peer_public_key_bytes: [u8; 32]) -> bool {
-        // Placeholder for actual verification logic
-        true
+        self.public_key
     }
 }
