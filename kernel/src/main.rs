@@ -4,6 +4,7 @@ ler;
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1964,12 +1965,16 @@ mod native_matmul_kernel;
 mod native_model_cache_manager;
 mod native_model_loader;
 mod native_model_shard_manager;
+mod native_openai_compat_api;
 mod native_peer_heartbeat;
 mod native_prompt_builder;
+mod native_repetition_penalty;
 mod native_rotary_embedding;
 mod native_sampling_engine;
 mod native_skill_ffi;
 mod native_skill_loader;
+mod native_stop_sequence_detect;
+mod native_streaming_output;
 mod native_tensor_parallel_split;
 mod native_top_k_sampling;
 mod native_weight_particle_store;
