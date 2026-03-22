@@ -2,62 +2,55 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-#[no_mangle]
-pub extern "C" fn rust_start() {
-    // Entry point for the kernel module
-    let mut moderation = MarketplaceModeration::new();
-    moderation.add_product(String::from("AI Camera"), 299);
-    moderation.add_product(String::from("Smartphone"), 799);
-    moderation.remove_product(String::from("AI Camera"));
-    moderation.update_price(String::from("Smartphone"), 699);
-    let products = moderation.list_products();
-    for product in products {
-        println!("Product: {}, Price: {}", product.name, product.price);
-    }
-}
-
-pub struct Product {
-    name: String,
-    price: u32,
-}
-
-impl Product {
-    pub fn new(name: String, price: u32) -> Self {
-        Product { name, price }
-    }
-}
-
 pub struct MarketplaceModeration {
-    products: Vec<Product>,
+    banned_users: Vec<String>,
+    banned_keywords: Vec<String>,
 }
 
 impl MarketplaceModeration {
     pub fn new() -> Self {
         MarketplaceModeration {
-            products: Vec::new(),
+            banned_users: Vec::new(),
+            banned_keywords: Vec::new(),
         }
     }
 
-    pub fn add_product(&mut self, name: String, price: u32) {
-        let product = Product::new(name, price);
-        self.products.push(product);
+    pub fn add_banned_user(&mut self, user_id: String) {
+        self.banned_users.push(user_id);
     }
 
-    pub fn remove_product(&mut self, name: String) {
-        self.products.retain(|p| p.name != name);
-    }
-
-    pub fn update_price(&mut self, name: String, new_price: u32) {
-        if let Some(product) = self.products.iter_mut().find(|p| p.name == name) {
-            product.price = new_price;
+    pub fn remove_banned_user(&mut self, user_id: &String) -> bool {
+        if let Some(pos) = self.banned_users.iter().position(|x| x == user_id) {
+            self.banned_users.remove(pos);
+            true
+        } else {
+            false
         }
     }
 
-    pub fn list_products(&self) -> Vec<Product> {
-        self.products.clone()
+    pub fn add_banned_keyword(&mut self, keyword: String) {
+        self.banned_keywords.push(keyword);
     }
 
-    pub fn get_product_price(&self, name: String) -> Option<u32> {
-        self.products.iter().find(|p| p.name == name).map(|p| p.price)
+    pub fn remove_banned_keyword(&mut self, keyword: &String) -> bool {
+        if let Some(pos) = self.banned_keywords.iter().position(|x| x == keyword) {
+            self.banned_keywords.remove(pos);
+            true
+        } else {
+            false
+        }
+    }
+
+    pub fn check_user(&self, user_id: &String) -> bool {
+        self.banned_users.contains(user_id)
+    }
+
+    pub fn check_keyword(&self, message: &String) -> bool {
+        for keyword in &self.banned_keywords {
+            if message.contains(keyword) {
+                return true;
+            }
+        }
+        false
     }
 }
