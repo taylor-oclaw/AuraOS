@@ -1,44 +1,72 @@
+#![no_std]
+#![feature(allocator_api)]
+
 extern crate alloc;
+
 use alloc::string::String;
 use alloc::vec::Vec;
+use core::alloc::{AllocError, Allocator, Global};
+use core::ptr::NonNull;
 
-#[no_mangle]
-pub extern "C" fn mdm_profile_manager_init() {
-    // Initialization logic for the module
+struct MdmProfile {
+    name: String,
+    settings: Vec<String>,
 }
 
-#[no_mangle]
-pub extern "C" fn mdm_profile_manager_exit() {
-    // Cleanup logic for the module
+impl MdmProfile {
+    pub fn new(name: String) -> Self {
+        MdmProfile {
+            name,
+            settings: Vec::new(),
+        }
+    }
+
+    pub fn add_setting(&mut self, setting: String) {
+        self.settings.push(setting);
+    }
+
+    pub fn get_settings(&self) -> &Vec<String> {
+        &self.settings
+    }
+
+    pub fn remove_setting(&mut self, index: usize) -> Option<String> {
+        if index < self.settings.len() {
+            Some(self.settings.remove(index))
+        } else {
+            None
+        }
+    }
+
+    pub fn clear_settings(&mut self) {
+        self.settings.clear();
+    }
 }
 
-pub struct ProfileManager {
-    profiles: Vec<String>,
+struct MdmProfileManager {
+    profiles: Vec<MdmProfile>,
 }
 
-impl ProfileManager {
+impl MdmProfileManager {
     pub fn new() -> Self {
-        ProfileManager {
+        MdmProfileManager {
             profiles: Vec::new(),
         }
     }
 
-    pub fn add_profile(&mut self, profile_name: &str) {
-        if !self.profiles.contains(&String::from(profile_name)) {
-            self.profiles.push(String::from(profile_name));
+    pub fn add_profile(&mut self, profile: MdmProfile) {
+        self.profiles.push(profile);
+    }
+
+    pub fn get_profiles(&self) -> &Vec<MdmProfile> {
+        &self.profiles
+    }
+
+    pub fn remove_profile(&mut self, index: usize) -> Option<MdmProfile> {
+        if index < self.profiles.len() {
+            Some(self.profiles.remove(index))
+        } else {
+            None
         }
-    }
-
-    pub fn remove_profile(&mut self, profile_name: &str) {
-        self.profiles.retain(|p| p != profile_name);
-    }
-
-    pub fn list_profiles(&self) -> Vec<String> {
-        self.profiles.clone()
-    }
-
-    pub fn has_profile(&self, profile_name: &str) -> bool {
-        self.profiles.contains(&String::from(profile_name))
     }
 
     pub fn clear_profiles(&mut self) {
@@ -46,51 +74,19 @@ impl ProfileManager {
     }
 }
 
-#[no_mangle]
-pub extern "C" fn mdm_profile_manager_add_profile(profile_name: *const u8, length: usize) -> i32 {
-    let profile_str = unsafe { core::str::from_utf8_unchecked(core::slice::from_raw_parts(profile_name, length)) };
-    let mut manager = ProfileManager::new();
-    manager.add_profile(profile_str);
-    0 // Return success
-}
+struct MdmProfileManagerAllocator;
 
-#[no_mangle]
-pub extern "C" fn mdm_profile_manager_remove_profile(profile_name: *const u8, length: usize) -> i32 {
-    let profile_str = unsafe { core::str::from_utf8_unchecked(core::slice::from_raw_parts(profile_name, length)) };
-    let mut manager = ProfileManager::new();
-    manager.remove_profile(profile_str);
-    0 // Return success
-}
-
-#[no_mangle]
-pub extern "C" fn mdm_profile_manager_list_profiles() -> *const u8 {
-    let manager = ProfileManager::new();
-    let profiles = manager.list_profiles();
-    let mut result = String::new();
-    for profile in profiles {
-        result.push_str(&profile);
-        result.push(',');
+unsafe impl Allocator for MdmProfileManagerAllocator {
+    fn allocate(&self, layout: core::alloc::Layout) -> Result<NonNull<u8>, AllocError> {
+        Global.allocate(layout)
     }
-    if !result.is_empty() {
-        result.pop(); // Remove the trailing comma
-    }
-    Box::leak(result.into_boxed_str()).as_ptr()
-}
 
-#[no_mangle]
-pub extern "C" fn mdm_profile_manager_has_profile(profile_name: *const u8, length: usize) -> i32 {
-    let profile_str = unsafe { core::str::from_utf8_unchecked(core::slice::from_raw_parts(profile_name, length)) };
-    let manager = ProfileManager::new();
-    if manager.has_profile(profile_str) {
-        1 // True
-    } else {
-        0 // False
+    unsafe fn deallocate(&self, ptr: NonNull<u8>, layout: core::alloc::Layout) {
+        Global.deallocate(ptr, layout);
     }
 }
 
-#[no_mangle]
-pub extern "C" fn mdm_profile_manager_clear_profiles() -> i32 {
-    let mut manager = ProfileManager::new();
-    manager.clear_profiles();
-    0 // Return success
-}
+static ALLOCATOR: MdmProfileManagerAllocator = MdmProfileManagerAllocator;
+
+#[global_allocator]
+static GLOBAL_ALLOC: &'static dyn Allocator = &ALLOCATOR;
