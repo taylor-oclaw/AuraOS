@@ -1,44 +1,22 @@
+#![no_std]
+#![feature(allocator_api)]
+
 extern crate alloc;
+
 use alloc::string::String;
 use alloc::vec::Vec;
 
-#[no_mangle]
-pub extern "C" fn mam_skill_approve_init() {
-    println!("mam_skill_approve module initialized");
-}
-
-#[no_mangle]
-pub extern "C" fn mam_skill_approve_exit() {
-    println!("mam_skill_approve module exited");
-}
-
-pub struct MamSkillApprove {
+struct MamSkillApprove {
     skills: Vec<String>,
-    approved_skills: Vec<String>,
 }
 
 impl MamSkillApprove {
     pub fn new() -> Self {
-        MamSkillApprove {
-            skills: Vec::new(),
-            approved_skills: Vec::new(),
-        }
+        MamSkillApprove { skills: Vec::new() }
     }
 
     pub fn add_skill(&mut self, skill: String) {
-        if !self.skills.contains(&skill) {
-            self.skills.push(skill);
-        }
-    }
-
-    pub fn approve_skill(&mut self, skill: &str) -> bool {
-        if let Some(index) = self.skills.iter().position(|s| s == skill) {
-            let approved_skill = self.skills.remove(index);
-            self.approved_skills.push(approved_skill);
-            true
-        } else {
-            false
-        }
+        self.skills.push(skill);
     }
 
     pub fn remove_skill(&mut self, skill: &str) -> bool {
@@ -50,29 +28,40 @@ impl MamSkillApprove {
         }
     }
 
-    pub fn list_skills(&self) -> Vec<String> {
-        self.skills.clone()
+    pub fn has_skill(&self, skill: &str) -> bool {
+        self.skills.contains(skill)
     }
 
-    pub fn list_approved_skills(&self) -> Vec<String> {
-        self.approved_skills.clone()
+    pub fn list_skills(&self) -> Vec<&String> {
+        self.skills.iter().collect()
     }
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+#[no_mangle]
+pub extern "C" fn mam_skill_approve_init() -> *mut MamSkillApprove {
+    Box::into_raw(Box::new(MamSkillApprove::new()))
+}
 
-    #[test]
-    fn test_mam_skill_approve() {
-        let mut mam = MamSkillApprove::new();
-        mam.add_skill(String::from("Rust"));
-        mam.add_skill(String::from("AI"));
+#[no_mangle]
+pub extern "C" fn mam_skill_approve_add_skill(ptr: *mut MamSkillApprove, skill: *const u8) {
+    let skill_str = unsafe { core::str::from_utf8_unchecked(core::slice::from_raw_parts(skill, 1)) };
+    unsafe { &mut *ptr }.add_skill(String::from(skill_str));
+}
 
-        assert_eq!(mam.list_skills(), vec![String::from("Rust"), String::from("AI")]);
-        assert_eq!(mam.approve_skill("Rust"), true);
-        assert_eq!(mam.list_approved_skills(), vec![String::from("Rust")]);
-        assert_eq!(mam.remove_skill("AI"), true);
-        assert_eq!(mam.list_skills(), Vec::<String>::new());
-    }
+#[no_mangle]
+pub extern "C" fn mam_skill_approve_remove_skill(ptr: *mut MamSkillApprove, skill: *const u8) -> bool {
+    let skill_str = unsafe { core::str::from_utf8_unchecked(core::slice::from_raw_parts(skill, 1)) };
+    unsafe { &mut *ptr }.remove_skill(skill_str)
+}
+
+#[no_mangle]
+pub extern "C" fn mam_skill_approve_has_skill(ptr: *const MamSkillApprove, skill: *const u8) -> bool {
+    let skill_str = unsafe { core::str::from_utf8_unchecked(core::slice::from_raw_parts(skill, 1)) };
+    unsafe { &*ptr }.has_skill(skill_str)
+}
+
+#[no_mangle]
+pub extern "C" fn mam_skill_approve_list_skills(ptr: *const MamSkillApprove) -> *mut Vec<&'static str> {
+    let skills = unsafe { &*ptr }.list_skills();
+    Box::into_raw(Box::new(skills.iter().map(|s| s.as_str()).collect()))
 }
