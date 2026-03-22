@@ -12,36 +12,36 @@ pub extern "C" fn ai_structured_handler_exit() {
     // Cleanup logic for the module
 }
 
-pub struct AIStructuredHandler {
-    data: Vec<String>,
+pub struct AIHandler {
+    data: Vec<u8>,
+    metadata: String,
 }
 
-impl AIStructuredHandler {
-    pub fn new() -> Self {
-        AIStructuredHandler { data: Vec::new() }
-    }
-
-    pub fn add_data(&mut self, item: String) {
-        self.data.push(item);
-    }
-
-    pub fn get_data(&self) -> &Vec<String> {
-        &self.data
-    }
-
-    pub fn remove_data(&mut self, index: usize) -> Option<String> {
-        if index < self.data.len() {
-            Some(self.data.remove(index))
-        } else {
-            None
+impl AIHandler {
+    pub fn new(data: Vec<u8>, metadata: &str) -> Self {
+        AIHandler {
+            data,
+            metadata: String::from(metadata),
         }
     }
 
-    pub fn clear_data(&mut self) {
-        self.data.clear();
+    pub fn get_data(&self) -> &[u8] {
+        &self.data
     }
 
-    pub fn find_data(&self, query: &str) -> Vec<&String> {
-        self.data.iter().filter(|&&item| item.contains(query)).collect()
+    pub fn set_data(&mut self, data: Vec<u8>) {
+        self.data = data;
+    }
+
+    pub fn get_metadata(&self) -> &str {
+        &self.metadata
+    }
+
+    pub fn update_metadata(&mut self, new_metadata: &str) {
+        self.metadata = String::from(new_metadata);
+    }
+
+    pub fn append_data(&mut self, additional_data: &[u8]) {
+        self.data.extend_from_slice(additional_data);
     }
 }
