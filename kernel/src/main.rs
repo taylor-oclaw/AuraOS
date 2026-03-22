@@ -9,6 +9,7 @@ ler;
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1962,6 +1963,7 @@ mod native_batch_inference;
 mod native_bf16_inference;
 mod native_chat_template_engine;
 mod native_compute_pool_manager;
+mod native_context_window_manage;
 mod native_continuous_batching;
 mod native_cpu_simd_backend;
 mod native_device_capability_detect;
@@ -1986,17 +1988,20 @@ mod native_power_aware_inference;
 mod native_prompt_builder;
 mod native_repetition_penalty;
 mod native_request_router;
+mod native_rope_scaling;
 mod native_rotary_embedding;
 mod native_safetensors_loader;
 mod native_sampling_engine;
 mod native_skill_ffi;
 mod native_skill_loader;
+mod native_sliding_window_attention;
 mod native_stop_sequence_detect;
 mod native_streaming_output;
 mod native_tensor_parallel_split;
 mod native_thermal_throttle_inference;
 mod native_throughput_optimizer;
 mod native_top_k_sampling;
+mod native_vision_encoder;
 mod native_weight_particle_store;
 mod net_stack;
 mod network_bridge;
