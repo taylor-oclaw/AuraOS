@@ -1,9 +1,13 @@
 extern crate alloc;
-
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub struct AiQuotaManager {
+#[no_mangle]
+pub extern "C" fn rust_start() {
+    // Entry point for the kernel module
+}
+
+struct AiQuotaManager {
     user_quotas: Vec<(String, u32)>,
 }
 
@@ -38,7 +42,7 @@ impl AiQuotaManager {
     }
 
     pub fn remove_user(&mut self, username: &str) -> bool {
-        let pos = self.user_quotas.iter().position(|&(ref user, _)| user == username);
+        let pos = self.user_quotas.iter().position(|(user, _)| user == username);
         if let Some(index) = pos {
             self.user_quotas.remove(index);
             true
