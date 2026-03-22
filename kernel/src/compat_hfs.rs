@@ -2,67 +2,56 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-#[no_mangle]
-pub extern "C" fn rust_start() -> i32 {
-    0
-}
-
-struct HfsVolume {
+pub struct HfsNode {
     name: String,
-    files: Vec<String>,
+    parent: Option<Box<HfsNode>>,
 }
 
-impl HfsVolume {
+impl HfsNode {
     pub fn new(name: &str) -> Self {
-        HfsVolume {
+        HfsNode {
             name: String::from(name),
-            files: Vec::new(),
+            parent: None,
         }
     }
 
-    pub fn add_file(&mut self, file_name: &str) {
-        self.files.push(String::from(file_name));
+    pub fn get_name(&self) -> &str {
+        self.name.as_str()
     }
 
-    pub fn remove_file(&mut self, file_name: &str) -> bool {
-        if let Some(index) = self.files.iter().position(|f| f == file_name) {
-            self.files.remove(index);
-            true
-        } else {
-            false
+    pub fn set_parent(&mut self, node: Box<HfsNode>) {
+        self.parent = Some(node);
+    }
+
+    pub fn get_parent(&self) -> Option<&HfsNode> {
+        self.parent.as_ref().map(|node| node.as_ref())
+    }
+
+    pub fn add_child(&mut self, child: Box<HfsNode>) {
+        if let Some(parent) = self.get_parent() {
+            parent.set_parent(child);
         }
     }
 
-    pub fn list_files(&self) -> Vec<String> {
-        self.files.clone()
-    }
-
-    pub fn has_file(&self, file_name: &str) -> bool {
-        self.files.contains(&String::from(file_name))
-    }
-
-    pub fn get_volume_name(&self) -> String {
-        self.name.clone()
+    pub fn get_children(&self) -> Vec<&HfsNode> {
+        match self.parent {
+            Some(node) => node.get_children(),
+            None => vec![],
+        }
     }
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+pub struct HfsFilesystem {
+    root: Box<HfsNode>,
+}
 
-    #[test]
-    fn test_hfs_volume() {
-        let mut volume = HfsVolume::new("Test Volume");
-        assert_eq!(volume.get_volume_name(), "Test Volume");
+impl HfsFilesystem {
+    pub fn new() -> Self {
+        let root = Box::new(HfsNode::new("root"));
+        HfsFilesystem { root }
+    }
 
-        volume.add_file("file1.txt");
-        volume.add_file("file2.txt");
-        assert_eq!(volume.list_files(), vec![String::from("file1.txt"), String::from("file2.txt")]);
-        assert!(volume.has_file("file1.txt"));
-        assert!(!volume.has_file("file3.txt"));
-
-        assert!(volume.remove_file("file1.txt"));
-        assert!(!volume.has_file("file1.txt"));
-        assert_eq!(volume.list_files(), vec![String::from("file2.txt")]);
+    pub fn get_root(&self) -> &HfsNode {
+        self.root.as_ref()
     }
 }
