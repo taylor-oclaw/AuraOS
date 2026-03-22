@@ -12,6 +12,7 @@ disambiguation;
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -727,6 +728,11 @@ mod auto_task_ticket_create;
 mod auto_task_travel_book;
 mod auto_task_validator;
 mod auto_task_web_search;
+mod backup_cloud_bandwidth_throttle;
+mod backup_cloud_company;
+mod backup_cloud_encrypt;
+mod backup_cloud_membrane_route;
+mod backup_cloud_resume;
 mod backup_core;
 mod backup_entropy_rewind;
 mod backup_gravity_consistent;
