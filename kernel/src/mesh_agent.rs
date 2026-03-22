@@ -1,66 +1,92 @@
 extern crate alloc;
-
 use alloc::string::String;
 use alloc::vec::Vec;
 
-#[no_mangle]
-pub extern "C" fn mesh_agent_init() {
-    // Initialization logic for the mesh agent module
-}
-
-#[no_mangle]
-pub extern "C" fn mesh_agent_exit() {
-    // Cleanup logic for the mesh agent module
-}
-
 pub struct MeshAgent {
-    nodes: Vec<String>,
-    connections: Vec<(String, String)>,
+    name: String,
+    mesh_id: u32,
 }
 
 impl MeshAgent {
-    pub fn new() -> Self {
+    pub fn new(name: &str) -> Self {
         MeshAgent {
-            nodes: Vec::new(),
-            connections: Vec::new(),
+            name: String::from(name),
+            mesh_id: 0,
         }
     }
 
-    pub fn add_node(&mut self, node_id: &str) {
-        if !self.nodes.contains(&node_id.to_string()) {
-            self.nodes.push(node_id.to_string());
-        }
+    pub fn get_name(&self) -> &str {
+        self.name.as_str()
     }
 
-    pub fn remove_node(&mut self, node_id: &str) {
-        self.nodes.retain(|n| n != node_id);
-        self.connections.retain(|&(ref a, ref b)| a != node_id && b != node_id);
+    pub fn set_mesh_id(&mut self, id: u32) {
+        self.mesh_id = id;
     }
 
-    pub fn connect_nodes(&mut self, node_a: &str, node_b: &str) -> bool {
-        if self.nodes.contains(&node_a.to_string()) && self.nodes.contains(&node_b.to_string()) {
-            self.connections.push((node_a.to_string(), node_b.to_string()));
-            true
+    pub fn get_mesh_id(&self) -> u32 {
+        self.mesh_id
+    }
+
+    pub fn add_node(&mut self, node_name: &str) {
+        let mut nodes = Vec::new();
+        if let Some(nodes) = self.get_nodes() {
+            nodes.push(node_name);
         } else {
-            false
+            nodes.push(node_name);
+        }
+        self.set_nodes(nodes);
+    }
+
+    pub fn remove_node(&mut self, node_name: &str) {
+        let mut nodes = Vec::new();
+        if let Some(mut nodes) = self.get_nodes() {
+            for node in nodes.iter() {
+                if node != node_name {
+                    nodes.push(node.clone());
+                }
+            }
+            self.set_nodes(nodes);
         }
     }
 
-    pub fn disconnect_nodes(&mut self, node_a: &str, node_b: &str) -> bool {
-        let index = self.connections.iter().position(|&(ref a, ref b)| a == node_a && b == node_b);
-        if let Some(idx) = index {
-            self.connections.remove(idx);
-            true
-        } else {
-            false
+    pub fn get_nodes(&self) -> Option<Vec<&str>> {
+        // This is a placeholder, you would need to implement the actual logic
+        // to retrieve the list of nodes from the mesh.
+        None
+    }
+
+    pub fn set_nodes(&mut self, nodes: Vec<String>) {
+        let mut node_names = Vec::new();
+        for node in nodes.iter() {
+            node_names.push(node.as_str());
         }
+        self.nodes = Some(node_names);
     }
 
-    pub fn list_nodes(&self) -> Vec<String> {
-        self.nodes.clone()
+    pub fn get_mesh_info(&self) -> String {
+        format!("Mesh ID: {}, Nodes: {:?}", self.mesh_id, self.get_nodes().unwrap())
     }
 
-    pub fn list_connections(&self) -> Vec<(String, String)> {
-        self.connections.clone()
+    pub fn set_mesh_info(&mut self, mesh_info: &str) {
+        // This is a placeholder, you would need to implement the actual logic
+        // to update the mesh info.
+    }
+}
+
+pub struct MeshAgentList {
+    agents: Vec<MeshAgent>,
+}
+
+impl MeshAgentList {
+    pub fn new() -> Self {
+        MeshAgentList { agents: Vec::new() }
+    }
+
+    pub fn add_agent(&mut self, agent: MeshAgent) {
+        self.agents.push(agent);
+    }
+
+    pub fn get_agents(&self) -> &Vec<MeshAgent> {
+        &self.agents
     }
 }
