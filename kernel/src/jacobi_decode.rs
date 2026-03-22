@@ -1,49 +1,38 @@
+#![no_std]
+#![feature(allocator_api)]
+
 extern crate alloc;
+
 use alloc::string::String;
 use alloc::vec::Vec;
 
-#[no_mangle]
-pub extern "C" fn jacobi_decode_init() {
-    // Initialization logic for the module
-}
-
-#[no_mangle]
-pub extern "C" fn jacobi_decode_exit() {
-    // Cleanup logic for the module
-}
-
-pub struct JacobiDecoder {
+pub struct JacobiDecode {
     data: Vec<u8>,
-    decoded_data: Vec<u8>,
 }
 
-impl JacobiDecoder {
+impl JacobiDecode {
     pub fn new(data: Vec<u8>) -> Self {
-        JacobiDecoder {
-            data,
-            decoded_data: Vec::new(),
+        JacobiDecode { data }
+    }
+
+    pub fn decode(&self) -> String {
+        let mut decoded = String::new();
+        for byte in &self.data {
+            decoded.push(*byte as char);
         }
+        decoded
     }
 
-    pub fn decode(&mut self) {
-        // Placeholder for decoding logic
-        self.decoded_data = self.data.clone(); // Assuming no actual decoding for simplicity
+    pub fn encode(&self, input: &str) -> Vec<u8> {
+        input.chars().map(|c| c as u8).collect()
     }
 
-    pub fn get_decoded_data(&self) -> &[u8] {
-        &self.decoded_data
+    pub fn reverse(&self) -> Vec<u8> {
+        self.data.iter().rev().cloned().collect()
     }
 
-    pub fn clear_decoded_data(&mut self) {
-        self.decoded_data.clear();
-    }
-
-    pub fn set_data(&mut self, data: Vec<u8>) {
-        self.data = data;
-    }
-
-    pub fn get_data(&self) -> &[u8] {
-        &self.data
+    pub fn length(&self) -> usize {
+        self.data.len()
     }
 }
 
@@ -52,21 +41,36 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_jacobi_decoder() {
-        let input_data = vec![1, 2, 3, 4];
-        let mut decoder = JacobiDecoder::new(input_data);
+    fn test_new() {
+        let data = vec![74, 97, 99, 105, 111, 110];
+        let jacobi = JacobiDecode::new(data);
+        assert_eq!(jacobi.data, vec![74, 97, 99, 105, 111, 110]);
+    }
 
-        assert_eq!(decoder.get_data(), &[1, 2, 3, 4]);
-        assert!(decoder.get_decoded_data().is_empty());
+    #[test]
+    fn test_decode() {
+        let data = vec![74, 97, 99, 105, 111, 110];
+        let jacobi = JacobiDecode::new(data);
+        assert_eq!(jacobi.decode(), "Jacino");
+    }
 
-        decoder.decode();
-        assert_eq!(decoder.get_decoded_data(), &[1, 2, 3, 4]);
+    #[test]
+    fn test_encode() {
+        let jacobi = JacobiDecode::new(vec![]);
+        assert_eq!(jacobi.encode("Jacino"), vec![74, 97, 99, 105, 111, 110]);
+    }
 
-        decoder.clear_decoded_data();
-        assert!(decoder.get_decoded_data().is_empty());
+    #[test]
+    fn test_reverse() {
+        let data = vec![74, 97, 99, 105, 111, 110];
+        let jacobi = JacobiDecode::new(data);
+        assert_eq!(jacobi.reverse(), vec![110, 111, 111, 105, 97, 74]);
+    }
 
-        let new_data = vec![5, 6, 7];
-        decoder.set_data(new_data);
-        assert_eq!(decoder.get_data(), &[5, 6, 7]);
+    #[test]
+    fn test_length() {
+        let data = vec![74, 97, 99, 105, 111, 110];
+        let jacobi = JacobiDecode::new(data);
+        assert_eq!(jacobi.length(), 6);
     }
 }
