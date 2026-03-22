@@ -2,58 +2,51 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-#[no_mangle]
-pub extern "C" fn rust_start() -> ! {
-    // Entry point for the kernel module
-    let mut stream = AIInferenceStream::new();
-    stream.add_model("model1");
-    stream.add_data(String::from("data1"));
-    stream.process_data();
-    let result = stream.get_result();
-    println!("Result: {}", result);
-    loop {}
+pub struct AiInferenceStream {
+    input_buffer: Vec<u8>,
+    output_buffer: Vec<u8>,
 }
 
-pub struct AIInferenceStream {
-    models: Vec<String>,
-    data: Vec<String>,
-    results: Vec<String>,
-}
+impl AiInferenceStream {
+    pub fn new(input_size: usize, output_size: usize) -> Self {
+        let mut stream = AiInferenceStream {
+            input_buffer: vec![0; input_size],
+            output_buffer: vec![0; output_size],
+        };
+        stream
+    }
 
-impl AIInferenceStream {
-    pub fn new() -> Self {
-        AIInferenceStream {
-            models: Vec::new(),
-            data: Vec::new(),
-            results: Vec::new(),
+    pub fn enqueue_input(&mut self, data: &[u8]) {
+        if data.len() > self.input_buffer.len() {
+            panic!("Input buffer overflow");
+        }
+        for (i, &byte) in data.iter().enumerate() {
+            self.input_buffer[i] = byte;
         }
     }
 
-    pub fn add_model(&mut self, model_name: &str) {
-        self.models.push(model_name.to_string());
-    }
-
-    pub fn add_data(&mut self, data: String) {
-        self.data.push(data);
-    }
-
-    pub fn process_data(&mut self) {
-        for d in &self.data {
-            // Simulate processing data with a model
-            let result = format!("Processed {}", d);
-            self.results.push(result);
+    pub fn dequeue_output(&mut self) -> Vec<u8> {
+        let mut output = vec![0; self.output_buffer.len()];
+        for (i, &byte) in self.output_buffer.iter().enumerate() {
+            output[i] = byte;
         }
+        self.output_buffer.clear();
+        output
     }
 
-    pub fn get_result(&self) -> String {
-        if let Some(last_result) = self.results.last() {
-            last_result.clone()
-        } else {
-            String::from("No results")
+    pub fn process(&mut self) -> Vec<u8> {
+        // Simulate AI inference processing
+        let mut processed_output = vec![0; self.output_buffer.len()];
+        for (i, &byte) in self.input_buffer.iter().enumerate() {
+            processed_output[i] = byte + 1;
         }
+        self.output_buffer.extend_from_slice(&processed_output);
+        self.dequeue_output()
     }
 
-    pub fn clear_data(&mut self) {
-        self.data.clear();
+    pub fn flush(&mut self) {
+        // Clear input and output buffers
+        self.input_buffer.clear();
+        self.output_buffer.clear();
     }
 }
