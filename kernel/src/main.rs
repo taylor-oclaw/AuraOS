@@ -2,6 +2,7 @@
 ler;
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1950,15 +1951,19 @@ mod music_auto_volume_context;
 mod namespace_isolate;
 mod nat_gateway;
 mod native_activation_transfer;
+mod native_attention_kernel;
+mod native_bf16_inference;
 mod native_compute_pool_manager;
 mod native_cpu_simd_backend;
 mod native_device_capability_detect;
 mod native_gpu_metal_backend;
 mod native_inference_engine;
+mod native_matmul_kernel;
 mod native_model_cache_manager;
 mod native_model_loader;
 mod native_model_shard_manager;
 mod native_peer_heartbeat;
+mod native_rotary_embedding;
 mod native_skill_ffi;
 mod native_skill_loader;
 mod native_tensor_parallel_split;
