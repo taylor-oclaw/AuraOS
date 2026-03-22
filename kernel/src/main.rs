@@ -19,6 +19,8 @@ disambiguation;
 
 
 
+
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1030,6 +1032,11 @@ mod deadlock_detector;
 mod debug_console;
 mod defs_acl;
 mod defs_alloc;
+mod defs_backup_core;
+mod defs_backup_entropy_export;
+mod defs_backup_gravity_export;
+mod defs_backup_membrane_export;
+mod defs_backup_quantum_log_export;
 mod defs_btree;
 mod defs_cloud_sync;
 mod defs_compression;
