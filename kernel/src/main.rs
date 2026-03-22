@@ -8,6 +8,7 @@ ler;
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1965,6 +1966,7 @@ mod native_continuous_batching;
 mod native_cpu_simd_backend;
 mod native_device_capability_detect;
 mod native_draft_model_manager;
+mod native_embedding_engine;
 mod native_gguf_loader;
 mod native_gpu_metal_backend;
 mod native_huggingface_download;
@@ -1972,9 +1974,12 @@ mod native_inference_engine;
 mod native_latency_monitor;
 mod native_matmul_kernel;
 mod native_model_cache_manager;
+mod native_model_eviction_policy;
 mod native_model_format_detect;
+mod native_model_hot_swap;
 mod native_model_loader;
 mod native_model_shard_manager;
+mod native_multi_model_serve;
 mod native_openai_compat_api;
 mod native_peer_heartbeat;
 mod native_power_aware_inference;
