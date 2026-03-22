@@ -3,6 +3,7 @@ ler;
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1953,6 +1954,7 @@ mod nat_gateway;
 mod native_activation_transfer;
 mod native_attention_kernel;
 mod native_bf16_inference;
+mod native_chat_template_engine;
 mod native_compute_pool_manager;
 mod native_cpu_simd_backend;
 mod native_device_capability_detect;
@@ -1963,10 +1965,13 @@ mod native_model_cache_manager;
 mod native_model_loader;
 mod native_model_shard_manager;
 mod native_peer_heartbeat;
+mod native_prompt_builder;
 mod native_rotary_embedding;
+mod native_sampling_engine;
 mod native_skill_ffi;
 mod native_skill_loader;
 mod native_tensor_parallel_split;
+mod native_top_k_sampling;
 mod native_weight_particle_store;
 mod net_stack;
 mod network_bridge;
