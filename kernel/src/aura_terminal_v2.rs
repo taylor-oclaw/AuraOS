@@ -9,14 +9,14 @@ pub extern "C" fn rust_ffi_init() {
 
 #[no_mangle]
 pub extern "C" fn rust_ffi_exit() {
-    // Cleanup the module
+    // Clean up the module
 }
 
 pub struct AuraTerminalV2 {
     buffer: Vec<u8>,
     cursor_position: usize,
     history: Vec<String>,
-    current_input: String,
+    current_command: String,
 }
 
 impl AuraTerminalV2 {
@@ -25,37 +25,48 @@ impl AuraTerminalV2 {
             buffer: Vec::new(),
             cursor_position: 0,
             history: Vec::new(),
-            current_input: String::new(),
+            current_command: String::new(),
         }
     }
 
-    pub fn write(&mut self, data: &[u8]) {
-        self.buffer.extend_from_slice(data);
-        self.cursor_position += data.len();
-    }
-
-    pub fn read_line(&self) -> &str {
-        core::str::from_utf8(&self.buffer).unwrap_or("")
-    }
-
-    pub fn add_to_history(&mut self) {
-        if !self.current_input.is_empty() {
-            self.history.push(self.current_input.clone());
-            self.current_input.clear();
-        }
-    }
-
-    pub fn get_previous_command(&mut self) -> Option<&str> {
-        if let Some(command) = self.history.pop() {
-            self.current_input = command;
-            Some(&self.current_input)
+    pub fn add_char(&mut self, c: char) {
+        if self.cursor_position < self.current_command.len() {
+            self.current_command.insert(self.cursor_position, c);
+            self.buffer.push(c as u8);
+            self.move_cursor_right();
         } else {
-            None
+            self.current_command.push(c);
+            self.buffer.push(c as u8);
         }
     }
 
-    pub fn clear_buffer(&mut self) {
+    pub fn backspace(&mut self) {
+        if !self.current_command.is_empty() && self.cursor_position > 0 {
+            self.cursor_position -= 1;
+            self.current_command.remove(self.cursor_position);
+            self.buffer.pop();
+        }
+    }
+
+    pub fn move_cursor_left(&mut self) {
+        if self.cursor_position > 0 {
+            self.cursor_position -= 1;
+        }
+    }
+
+    pub fn move_cursor_right(&mut self) {
+        if self.cursor_position < self.current_command.len() {
+            self.cursor_position += 1;
+        }
+    }
+
+    pub fn execute_command(&mut self) -> String {
+        let command = self.current_command.clone();
+        self.history.push(command.clone());
+        self.current_command.clear();
         self.buffer.clear();
         self.cursor_position = 0;
+        // Simulate command execution
+        format!("Executed: {}", command)
     }
 }
