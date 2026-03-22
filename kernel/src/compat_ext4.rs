@@ -5,7 +5,7 @@ use alloc::vec::Vec;
 #[no_mangle]
 pub extern "C" fn rust_start() {
     // Entry point for the kernel module
-    let ext4 = CompatExt4::new();
+    let mut ext4 = Ext4FileSystem::new();
     ext4.mount("/dev/sda1");
     ext4.create_file("example.txt", b"Hello, AI-native OS!");
     let content = ext4.read_file("example.txt").unwrap();
@@ -14,14 +14,14 @@ pub extern "C" fn rust_start() {
     ext4.unmount();
 }
 
-pub struct CompatExt4 {
+pub struct Ext4FileSystem {
     mounted: bool,
     files: Vec<(String, Vec<u8>)>,
 }
 
-impl CompatExt4 {
+impl Ext4FileSystem {
     pub fn new() -> Self {
-        CompatExt4 {
+        Ext4FileSystem {
             mounted: false,
             files: Vec::new(),
         }
@@ -29,21 +29,21 @@ impl CompatExt4 {
 
     pub fn mount(&mut self, device: &str) {
         if !self.mounted {
-            // Simulate mounting the ext4 filesystem
+            // Simulate mounting the filesystem
             println!("Mounting {}...", device);
             self.mounted = true;
         } else {
-            println!("Already mounted.");
+            println!("Filesystem already mounted.");
         }
     }
 
     pub fn unmount(&mut self) {
         if self.mounted {
-            // Simulate unmounting the ext4 filesystem
+            // Simulate unmounting the filesystem
             println!("Unmounting...");
             self.mounted = false;
         } else {
-            println!("Not mounted.");
+            println!("Filesystem not mounted.");
         }
     }
 
@@ -51,25 +51,24 @@ impl CompatExt4 {
         if self.mounted {
             // Simulate creating a file with content
             let name = String::from(filename);
-            let data = Vec::from(content);
-            self.files.push((name, data));
-            println!("Created file {}.", filename);
+            self.files.push((name, Vec::from(content)));
+            println!("File {} created.", filename);
         } else {
-            println!("Filesystem not mounted.");
+            println!("Filesystem not mounted. Cannot create file.");
         }
     }
 
     pub fn read_file(&self, filename: &str) -> Result<Vec<u8>, &'static str> {
         if self.mounted {
             // Simulate reading a file
-            for (name, data) in &self.files {
+            for (name, content) in &self.files {
                 if name == filename {
-                    return Ok(data.clone());
+                    return Ok(content.clone());
                 }
             }
             Err("File not found.")
         } else {
-            Err("Filesystem not mounted.")
+            Err("Filesystem not mounted. Cannot read file.")
         }
     }
 
@@ -79,12 +78,12 @@ impl CompatExt4 {
             let pos = self.files.iter().position(|(name, _)| name == filename);
             if let Some(index) = pos {
                 self.files.remove(index);
-                println!("Deleted file {}.", filename);
+                println!("File {} deleted.", filename);
             } else {
                 println!("File not found.");
             }
         } else {
-            println!("Filesystem not mounted.");
+            println!("Filesystem not mounted. Cannot delete file.");
         }
     }
 }
