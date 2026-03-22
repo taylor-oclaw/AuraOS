@@ -4,12 +4,12 @@ use alloc::vec::Vec;
 
 #[no_mangle]
 pub extern "C" fn mdm_pin_policy_init() {
-    // Initialization logic for the module
+    // Initialization code for the module
 }
 
 #[no_mangle]
 pub extern "C" fn mdm_pin_policy_exit() {
-    // Cleanup logic for the module
+    // Cleanup code for the module
 }
 
 pub struct MdmPinPolicy {
@@ -48,18 +48,15 @@ impl MdmPinPolicy {
 
     pub fn reset_attempts(&mut self) {
         self.attempts = 0;
+        self.locked = false;
+    }
+
+    pub fn get_attempts(&self) -> u32 {
+        self.attempts
     }
 
     pub fn is_locked(&self) -> bool {
         self.locked
-    }
-
-    pub fn change_pin(&mut self, old_pin: &str, new_pin: &str) -> bool {
-        if self.locked || old_pin != self.pin {
-            return false;
-        }
-        self.pin = String::from(new_pin);
-        true
     }
 }
 
@@ -68,7 +65,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_verify_pin() {
+    fn test_pin_verification() {
         let mut policy = MdmPinPolicy::new("1234", 3);
         assert!(policy.verify_pin("1234"));
         assert!(!policy.verify_pin("5678"));
@@ -81,14 +78,7 @@ mod tests {
         let mut policy = MdmPinPolicy::new("1234", 3);
         policy.verify_pin("5678");
         policy.reset_attempts();
-        assert_eq!(policy.attempts, 0);
-    }
-
-    #[test]
-    fn test_change_pin() {
-        let mut policy = MdmPinPolicy::new("1234", 3);
-        assert!(policy.change_pin("1234", "5678"));
-        assert!(!policy.verify_pin("1234"));
-        assert!(policy.verify_pin("5678"));
+        assert_eq!(policy.get_attempts(), 0);
+        assert!(!policy.is_locked());
     }
 }
