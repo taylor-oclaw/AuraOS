@@ -1,55 +1,60 @@
+#![no_std]
+#![feature(allocator_api)]
+#![feature(const_mut_refs)]
+
 extern crate alloc;
+
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub struct MarketplaceWallet {
+struct MarketplaceWallet {
     balance: u64,
     transactions: Vec<String>,
 }
 
 impl MarketplaceWallet {
-    pub fn new(initial_balance: u64) -> Self {
+    pub fn new() -> Self {
         MarketplaceWallet {
-            balance: initial_balance,
+            balance: 0,
             transactions: Vec::new(),
         }
+    }
+
+    pub fn deposit(&mut self, amount: u64) {
+        self.balance += amount;
+        self.transactions.push(format!("Deposited {} tokens", amount));
+    }
+
+    pub fn withdraw(&mut self, amount: u64) -> Result<(), String> {
+        if amount > self.balance {
+            return Err("Insufficient funds".to_string());
+        }
+        self.balance -= amount;
+        self.transactions.push(format!("Withdrew {} tokens", amount));
+        Ok(())
     }
 
     pub fn get_balance(&self) -> u64 {
         self.balance
     }
 
-    pub fn deposit(&mut self, amount: u64) -> bool {
-        if amount == 0 {
-            return false;
-        }
-        self.balance += amount;
-        let transaction = format!("Deposited {} units", amount);
-        self.transactions.push(transaction);
-        true
+    pub fn get_transactions(&self) -> Vec<String> {
+        self.transactions.clone()
     }
+}
 
-    pub fn withdraw(&mut self, amount: u64) -> bool {
-        if amount == 0 || amount > self.balance {
-            return false;
-        }
-        self.balance -= amount;
-        let transaction = format!("Withdrew {} units", amount);
-        self.transactions.push(transaction);
-        true
+#[no_mangle]
+pub extern "C" fn init_module() -> i32 {
+    let mut wallet = MarketplaceWallet::new();
+    wallet.deposit(100);
+    println!("Initial balance: {}", wallet.get_balance());
+    for transaction in wallet.get_transactions() {
+        println!("{}", transaction);
     }
+    0
+}
 
-    pub fn transfer(&mut self, recipient: &str, amount: u64) -> bool {
-        if amount == 0 || amount > self.balance {
-            return false;
-        }
-        self.balance -= amount;
-        let transaction = format!("Transferred {} units to {}", amount, recipient);
-        self.transactions.push(transaction);
-        true
-    }
-
-    pub fn get_transaction_history(&self) -> &Vec<String> {
-        &self.transactions
-    }
+#[no_mangle]
+pub extern "C" fn cleanup_module() -> i32 {
+    0
 }
