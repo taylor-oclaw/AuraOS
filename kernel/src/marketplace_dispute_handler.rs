@@ -1,65 +1,90 @@
+#![no_std]
+#![feature(allocator_api)]
+
 extern crate alloc;
+
 use alloc::string::String;
 use alloc::vec::Vec;
+use core::alloc::{AllocError, Allocator, Global};
+use core::sync::atomic::{AtomicUsize, Ordering};
 
-#[no_mangle]
-pub extern "C" fn rust_start() -> i32 {
-    0
+struct MarketplaceDispute {
+    id: usize,
+    description: String,
+    status: DisputeStatus,
+}
+
+enum DisputeStatus {
+    Open,
+    Resolved,
+    Closed,
+}
+
+impl MarketplaceDispute {
+    pub fn new(id: usize, description: String) -> Self {
+        MarketplaceDispute {
+            id,
+            description,
+            status: DisputeStatus::Open,
+        }
+    }
+
+    pub fn get_id(&self) -> usize {
+        self.id
+    }
+
+    pub fn get_description(&self) -> &str {
+        &self.description
+    }
+
+    pub fn resolve_dispute(&mut self) {
+        self.status = DisputeStatus::Resolved;
+    }
+
+    pub fn close_dispute(&mut self) {
+        self.status = DisputeStatus::Closed;
+    }
 }
 
 struct MarketplaceDisputeHandler {
-    disputes: Vec<Dispute>,
+    disputes: Vec<MarketplaceDispute>,
+    next_id: AtomicUsize,
 }
 
 impl MarketplaceDisputeHandler {
     pub fn new() -> Self {
         MarketplaceDisputeHandler {
             disputes: Vec::new(),
+            next_id: AtomicUsize::new(1),
         }
     }
 
-    pub fn add_dispute(&mut self, dispute: Dispute) {
+    pub fn create_dispute(&mut self, description: String) -> Result<usize, AllocError> {
+        let id = self.next_id.fetch_add(1, Ordering::SeqCst);
+        let dispute = MarketplaceDispute::new(id, description);
         self.disputes.push(dispute);
+        Ok(id)
     }
 
-    pub fn get_dispute_count(&self) -> usize {
-        self.disputes.len()
+    pub fn get_dispute(&self, id: usize) -> Option<&MarketplaceDispute> {
+        self.disputes.iter().find(|d| d.id == id)
     }
 
-    pub fn resolve_dispute(&mut self, dispute_id: u32) -> bool {
-        if let Some(index) = self.disputes.iter().position(|d| d.id == dispute_id) {
-            self.disputes.remove(index);
+    pub fn resolve_dispute(&mut self, id: usize) -> bool {
+        if let Some(dispute) = self.disputes.iter_mut().find(|d| d.id == id) {
+            dispute.resolve_dispute();
             true
         } else {
             false
         }
     }
 
-    pub fn list_disputes(&self) -> Vec<Dispute> {
-        self.disputes.clone()
-    }
-}
-
-struct Dispute {
-    id: u32,
-    buyer_id: String,
-    seller_id: String,
-    description: String,
-    status: String,
-}
-
-impl Dispute {
-    pub fn new(id: u32, buyer_id: &str, seller_id: &str, description: &str) -> Self {
-        Dispute {
-            id,
-            buyer_id: String::from(buyer_id),
-            seller_id: String::from(seller_id),
-            description: String::from(description),
-            status: String::from("Open"),
+    pub fn close_dispute(&mut self, id: usize) -> bool {
+        if let Some(dispute) = self.disputes.iter_mut().find(|d| d.id == id) {
+            dispute.close_dispute();
+            true
+        } else {
+            false
         }
-    }
-
-    pub fn update_status(&mut self, new_status: &str) {
-        self.status = String::from(new_status);
     }
 }
