@@ -17,6 +17,8 @@ disambiguation;
 
 
 
+
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -757,6 +759,10 @@ mod backup_nas_schedule;
 mod backup_non_defs_export;
 mod backup_particle_stream;
 mod backup_point_in_time;
+mod backup_restore_instant;
+mod backup_restore_particle;
+mod backup_restore_verify;
+mod backup_restore_void;
 mod backup_retention_1year;
 mod backup_retention_7year;
 mod backup_retention_custom;
