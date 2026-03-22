@@ -13,6 +13,7 @@ disambiguation;
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -734,9 +735,12 @@ mod backup_cloud_encrypt;
 mod backup_cloud_membrane_route;
 mod backup_cloud_resume;
 mod backup_core;
+mod backup_cross_region;
+mod backup_data_sovereignty;
 mod backup_entropy_rewind;
 mod backup_gravity_consistent;
 mod backup_incremental;
+mod backup_integrity_check;
 mod backup_manager;
 mod backup_manifold_selective;
 mod backup_nas_defs_native;
@@ -745,6 +749,7 @@ mod backup_nas_realtime;
 mod backup_nas_schedule;
 mod backup_particle_stream;
 mod backup_point_in_time;
+mod backup_self_heal;
 mod backup_usb_defs_partition;
 mod backup_usb_mirror_filtered;
 mod backup_usb_mirror_full;
