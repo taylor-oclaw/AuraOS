@@ -30,7 +30,7 @@ impl AsfErrorHandler {
         !self.errors.is_empty()
     }
 
-    pub fn count_errors(&self) -> usize {
+    pub fn error_count(&self) -> usize {
         self.errors.len()
     }
 }
