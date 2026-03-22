@@ -9,6 +9,7 @@ disambiguation;
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -732,6 +733,10 @@ mod backup_manager;
 mod backup_manifold_selective;
 mod backup_particle_stream;
 mod backup_point_in_time;
+mod backup_usb_defs_partition;
+mod backup_usb_mirror_filtered;
+mod backup_usb_mirror_full;
+mod backup_usb_mirror_important;
 mod bandwidth_monitor;
 mod barometer_driver;
 mod batch_inference_v2;
