@@ -1,6 +1,7 @@
 
 disambiguation;
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1074,6 +1075,9 @@ mod draft_undo_send;
 mod drag_drop;
 mod dream_cycle;
 mod driver_audio_hda;
+mod driver_bt_le;
+mod driver_bt_mesh;
+mod driver_bt_rfcomm;
 mod driver_framework_core;
 mod driver_framework_download;
 mod driver_framework_error_handle;
@@ -1089,6 +1093,7 @@ mod driver_port_lint;
 mod driver_port_test_generate;
 mod driver_printer_cups_compat;
 mod driver_printer_generic;
+mod driver_usb_xhci;
 mod driver_webcam_generic;
 mod e1000;
 mod eagle_decode;
