@@ -2,68 +2,51 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-#[no_mangle]
-pub extern "C" fn rust_ffi_init() {
-    // Initialize the rootkit detector module
-    let mut detector = AuraRootkitDetector::new();
-    detector.scan_processes();
-    detector.log_results();
-}
-
-#[no_mangle]
-pub extern "C" fn rust_ffi_exit() {
-    // Cleanup code if necessary
-}
-
 pub struct AuraRootkitDetector {
-    processes: Vec<String>,
-    suspicious_activities: Vec<String>,
+    kernel_modules: Vec<String>,
 }
 
 impl AuraRootkitDetector {
     pub fn new() -> Self {
         AuraRootkitDetector {
-            processes: Vec::new(),
-            suspicious_activities: Vec::new(),
+            kernel_modules: Vec::<String>::new(),
         }
     }
 
-    pub fn scan_processes(&mut self) {
-        // Simulate process scanning
-        let known_good_processes = vec![
-            String::from("init"),
-            String::from("sshd"),
-            String::from("bash"),
-            String::from("systemd"),
-        ];
+    pub fn add_kernel_module(&mut self, module_name: &str) {
+        self.kernel_modules.push(String::from(module_name));
+    }
 
-        for process in &known_good_processes {
-            self.processes.push(process.clone());
+    pub fn remove_kernel_module(&mut self, module_name: &str) -> bool {
+        if let Some(index) = self.kernel_modules.iter().position(|x| x == module_name) {
+            self.kernel_modules.remove(index);
+            return true;
         }
+        false
+    }
 
-        // Simulate detection of suspicious activities
-        if self.processes.contains(&String::from("malware")) {
-            self.suspicious_activities.push(String::from("Malware detected: malware"));
+    pub fn get_kernel_modules(&self) -> Vec<String> {
+        self.kernel_modules.clone()
+    }
+
+    pub fn is_rootkit(&self, module_name: &str) -> bool {
+        if let Some(module) = self.kernel_modules.iter().find(|x| x == module_name) {
+            // Here you would implement your rootkit detection logic
+            // For example, checking the module's signature or behavior
+            return true;
         }
+        false
     }
 
-    pub fn log_results(&self) {
-        // Log the results of the scan
-        for activity in &self.suspicious_activities {
-            // Simulate logging to a kernel log buffer
-            println!("{}", activity);
+    pub fn scan_kernel_modules(&mut self) -> Vec<String> {
+        // Here you would implement your kernel module scanning logic
+        // For example, iterating over all loaded modules and checking their properties
+        let mut suspicious_modules = Vec::<String>::new();
+        for module in &self.kernel_modules {
+            if self.is_rootkit(module) {
+                suspicious_modules.push(String::from(module));
+            }
         }
-    }
-
-    pub fn get_suspicious_activities(&self) -> Vec<String> {
-        self.suspicious_activities.clone()
-    }
-
-    pub fn clear_suspicious_activities(&mut self) {
-        self.suspicious_activities.clear();
-    }
-
-    pub fn add_process(&mut self, process_name: String) {
-        self.processes.push(process_name);
+        suspicious_modules
     }
 }
