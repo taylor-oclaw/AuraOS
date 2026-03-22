@@ -2,55 +2,33 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-#[no_mangle]
-pub extern "C" fn rust_start() {
-    // Entry point for the kernel module
-    let mut provider = AiProviderDiscovery::new();
-    provider.register_provider("provider1".into(), "AI Model 1".into());
-    provider.register_provider("provider2".into(), "AI Model 2".into());
-
-    if let Some(model) = provider.get_model_by_name("AI Model 1") {
-        println!("Found model: {}", model);
-    } else {
-        println!("Model not found");
-    }
-
-    let providers = provider.list_providers();
-    for provider in providers.iter() {
-        println!("Provider: {}", provider);
-    }
+pub struct AIProviderDiscovery {
+    providers: Vec<String>,
 }
 
-pub struct AiProviderDiscovery {
-    providers: Vec<(String, String)>,
-}
-
-impl AiProviderDiscovery {
+impl AIProviderDiscovery {
     pub fn new() -> Self {
-        AiProviderDiscovery {
+        AIProviderDiscovery {
             providers: Vec::new(),
         }
     }
 
-    pub fn register_provider(&mut self, name: String, model: String) {
-        self.providers.push((name, model));
+    pub fn add_provider(&mut self, provider_name: &str) {
+        self.providers.push(String::from(provider_name));
     }
 
-    pub fn get_model_by_name(&self, model_name: &str) -> Option<&String> {
-        for (_, model) in self.providers.iter() {
-            if model == model_name {
-                return Some(model);
-            }
+    pub fn remove_provider(&mut self, provider_name: &str) {
+        if let Some(index) = self.providers.iter().position(|p| p == provider_name) {
+            self.providers.remove(index);
         }
-        None
     }
 
     pub fn list_providers(&self) -> Vec<String> {
-        let mut provider_names = Vec::new();
-        for (name, _) in self.providers.iter() {
-            provider_names.push(name.clone());
-        }
-        provider_names
+        self.providers.clone()
+    }
+
+    pub fn find_provider(&self, provider_name: &str) -> Option<&String> {
+        self.providers.iter().find(|&&p| p == provider_name)
     }
 
     pub fn count_providers(&self) -> usize {
