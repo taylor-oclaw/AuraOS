@@ -25,33 +25,35 @@ impl MarketplaceFreeTier {
         }
     }
 
-    pub fn add_item(&mut self, item: String) -> bool {
+    pub fn add_item(&mut self, item_name: &str) -> bool {
         if self.items.len() < self.max_items {
-            self.items.push(item);
+            self.items.push(item_name.to_string());
             true
         } else {
             false
         }
     }
 
-    pub fn remove_item(&mut self, index: usize) -> Option<String> {
-        if index < self.items.len() {
-            Some(self.items.remove(index))
+    pub fn remove_item(&mut self, item_name: &str) -> bool {
+        let position = self.items.iter().position(|x| x == item_name);
+        if let Some(index) = position {
+            self.items.remove(index);
+            true
         } else {
-            None
+            false
         }
     }
 
-    pub fn get_items(&self) -> &[String] {
-        &self.items
+    pub fn list_items(&self) -> Vec<String> {
+        self.items.clone()
     }
 
-    pub fn is_full(&self) -> bool {
-        self.items.len() == self.max_items
+    pub fn has_item(&self, item_name: &str) -> bool {
+        self.items.contains(&item_name.to_string())
     }
 
-    pub fn clear(&mut self) {
-        self.items.clear();
+    pub fn count_items(&self) -> usize {
+        self.items.len()
     }
 }
 
@@ -63,21 +65,22 @@ mod tests {
     fn test_marketplace_free_tier() {
         let mut marketplace = MarketplaceFreeTier::new(3);
 
-        assert_eq!(marketplace.add_item(String::from("Item1")), true);
-        assert_eq!(marketplace.add_item(String::from("Item2")), true);
-        assert_eq!(marketplace.add_item(String::from("Item3")), true);
-        assert_eq!(marketplace.add_item(String::from("Item4")), false);
+        assert!(marketplace.add_item("AI Model 1"));
+        assert!(marketplace.add_item("AI Model 2"));
+        assert!(!marketplace.add_item("AI Model 4")); // Should fail, max_items is 3
 
-        assert_eq!(marketplace.get_items(), vec!["Item1", "Item2", "Item3"]);
+        assert_eq!(marketplace.count_items(), 2);
+        assert!(marketplace.has_item("AI Model 1"));
+        assert!(!marketplace.has_item("AI Model 3"));
 
-        assert_eq!(marketplace.remove_item(1), Some(String::from("Item2")));
-        assert_eq!(marketplace.get_items(), vec!["Item1", "Item3"]);
+        let items = marketplace.list_items();
+        assert_eq!(items.len(), 2);
+        assert!(items.contains(&"AI Model 1".to_string()));
+        assert!(items.contains(&"AI Model 2".to_string()));
 
-        assert_eq!(marketplace.is_full(), false);
-        marketplace.add_item(String::from("Item4"));
-        assert_eq!(marketplace.is_full(), true);
+        assert!(marketplace.remove_item("AI Model 1"));
+        assert!(!marketplace.has_item("AI Model 1"));
 
-        marketplace.clear();
-        assert_eq!(marketplace.get_items().len(), 0);
+        assert_eq!(marketplace.count_items(), 1);
     }
 }
