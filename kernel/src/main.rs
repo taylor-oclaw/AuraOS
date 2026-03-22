@@ -10,6 +10,8 @@ disambiguation;
 
 
 
+
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -731,6 +733,10 @@ mod backup_gravity_consistent;
 mod backup_incremental;
 mod backup_manager;
 mod backup_manifold_selective;
+mod backup_nas_defs_native;
+mod backup_nas_non_defs;
+mod backup_nas_realtime;
+mod backup_nas_schedule;
 mod backup_particle_stream;
 mod backup_point_in_time;
 mod backup_usb_defs_partition;
