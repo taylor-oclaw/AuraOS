@@ -3,6 +3,7 @@ disambiguation;
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1094,6 +1095,11 @@ mod driver_port_lint;
 mod driver_port_test_generate;
 mod driver_printer_cups_compat;
 mod driver_printer_generic;
+mod driver_pwm;
+mod driver_scsi;
+mod driver_sdio;
+mod driver_spi;
+mod driver_uart;
 mod driver_usb_cdc;
 mod driver_usb_hid_v2;
 mod driver_usb_hub_v2;
