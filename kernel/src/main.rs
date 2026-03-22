@@ -1,557 +1,3 @@
-#![no_std]
-#![no_main]
-#![feature(abi_x86_interrupt)]
-
-extern crate alloc;
-
-
-use bootloader_api::{entry_point, BootInfo, BootloaderConfig};
-use core::panic::PanicInfo;
-
-
-
-pub static BOOTLOADER_CONFIG: BootloaderConfig = {
-    let mut config = BootloaderConfig::new_default();
-    config.mappings.physical_memory = Some(bootloader_api::config::Mapping::Dynamic);
-    config.kernel_stack_size = 256 * 1024; // 256 KB stack (default is very small)
-    config
-};
-
-// Remove the duplicate BOOTLOADER_CONFIG above  
-entry_point!(kernel_main, config = &BOOTLOADER_CONFIG);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1632,6 +1078,11 @@ mod driver_framework_hot_unplug;
 mod driver_framework_registry;
 mod driver_framework_test;
 mod driver_framework_trait;
+mod driver_gpu_intel;
+mod driver_gpu_nvidia;
+mod driver_port_api_translate;
+mod driver_port_lint;
+mod driver_port_test_generate;
 mod e1000;
 mod eagle_decode;
 mod elf_loader;
@@ -3520,6 +2971,58 @@ mod voice_correction;
 mod voice_custom_commands;
 mod voice_dictation_mode;
 mod voice_disambiguation;
+mod voice_emotion_detect;
+mod voice_engine;
+mod voice_follow_up;
+mod voice_foreground_action;
+mod voice_intent_confirm;
+mod voice_language_detect;
+mod voice_local_processing;
+mod voice_macro_trigger;
+mod voice_multi_turn;
+mod voice_natural_mode;
+mod voice_noise_cancel;
+mod voice_offline_mode;
+mod voice_permission_check;
+mod voice_pipeline;
+mod voice_privacy_mute;
+mod voice_response_select;
+mod voice_response_tts;
+mod voice_shortcut_trigger;
+mod voice_speaker_identify;
+mod voice_speed_adjust;
+mod voice_to_intent;
+mod voice_tone_adjust;
+mod voice_translate_realtime;
+mod voice_undo_redo;
+mod voice_wake_word;
+mod vpn_client;
+mod vpn_wireguard;
+mod vulkan_renderer;
+mod wasm_runtime;
+mod wasm_skill_bridge;
+mod wasm_skill_loader;
+mod wasm_skill_runtime;
+mod wasm_skill_sandbox;
+mod watch_agent;
+mod watchdog_timer;
+mod webgpu_compat;
+mod websocket_mgr;
+mod websocket_server;
+mod widget;
+mod wifi6e_handler;
+mod wifi7_handler;
+mod wifi_stack;
+mod window_decor;
+mod window_mgr;
+mod window_tiling;
+mod wm;
+mod workflow_engine;
+mod zigbee_handler;
+mod zip_handler;
+mod zwave_handler;
+
+disambiguation;
 mod voice_emotion_detect;
 mod voice_engine;
 mod voice_follow_up;
