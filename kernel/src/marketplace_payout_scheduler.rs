@@ -1,44 +1,72 @@
+#![no_std]
+#![feature(allocator_api)]
+#![feature(const_mut_refs)]
+
 extern crate alloc;
+
 use alloc::string::String;
 use alloc::vec::Vec;
+use core::alloc::{AllocError, Allocator, Global};
+use core::sync::atomic::{AtomicUsize, Ordering};
 
-#[no_mangle]
-pub extern "C" fn rust_start() -> i32 {
-    0
-}
-
-pub struct MarketplacePayoutScheduler {
+struct MarketplacePayoutScheduler {
     payouts: Vec<(String, u64)>,
+    total_payouts: AtomicUsize,
 }
 
 impl MarketplacePayoutScheduler {
     pub fn new() -> Self {
         MarketplacePayoutScheduler {
             payouts: Vec::new(),
+            total_payouts: AtomicUsize::new(0),
         }
     }
 
-    pub fn add_payout(&mut self, user_id: String, amount: u64) {
-        self.payouts.push((user_id, amount));
+    pub fn add_payout(&self, user: String, amount: u64) -> Result<(), AllocError> {
+        self.payouts.push((user, amount));
+        self.total_payouts.fetch_add(amount as usize, Ordering::SeqCst);
+        Ok(())
     }
 
-    pub fn remove_payout(&mut self, user_id: &str) -> Option<u64> {
-        let index = self.payouts.iter().position(|(id, _)| id == user_id);
-        if let Some(idx) = index {
-            return Some(self.payouts.remove(idx).1);
+    pub fn get_total_payouts(&self) -> usize {
+        self.total_payouts.load(Ordering::SeqCst)
+    }
+
+    pub fn list_payouts(&self) -> Vec<&(String, u64)> {
+        self.payouts.iter().collect()
+    }
+
+    pub fn remove_payout(&self, user: &str) -> Option<(String, u64)> {
+        if let Some(index) = self.payouts.iter().position(|&(ref u, _)| u == user) {
+            let (user, amount) = self.payouts.remove(index);
+            self.total_payouts.fetch_sub(amount as usize, Ordering::SeqCst);
+            Some((user, amount))
+        } else {
+            None
         }
-        None
     }
+}
 
-    pub fn get_payout(&self, user_id: &str) -> Option<u64> {
-        self.payouts.iter().find(|(id, _)| id == user_id).map(|(_, amount)| *amount)
-    }
+static mut SCHEDULER: MarketplacePayoutScheduler = MarketplacePayoutScheduler::new();
 
-    pub fn total_payouts(&self) -> u64 {
-        self.payouts.iter().map(|(_, amount)| amount).sum()
+pub fn init_scheduler() {
+    unsafe {
+        SCHEDULER = MarketplacePayoutScheduler::new();
     }
+}
 
-    pub fn list_all_payouts(&self) -> Vec<(String, u64)> {
-        self.payouts.clone()
-    }
+pub fn add_payout(user: String, amount: u64) -> Result<(), AllocError> {
+    unsafe { SCHEDULER.add_payout(user, amount) }
+}
+
+pub fn get_total_payouts() -> usize {
+    unsafe { SCHEDULER.get_total_payouts() }
+}
+
+pub fn list_payouts() -> Vec<&(String, u64)> {
+    unsafe { SCHEDULER.list_payouts() }
+}
+
+pub fn remove_payout(user: &str) -> Option<(String, u64)> {
+    unsafe { SCHEDULER.remove_payout(user) }
 }
