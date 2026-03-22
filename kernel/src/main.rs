@@ -7,6 +7,8 @@ disambiguation;
 
 
 
+
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -724,7 +726,11 @@ mod auto_task_validator;
 mod auto_task_web_search;
 mod backup_core;
 mod backup_entropy_rewind;
+mod backup_gravity_consistent;
+mod backup_incremental;
 mod backup_manager;
+mod backup_manifold_selective;
+mod backup_particle_stream;
 mod backup_point_in_time;
 mod bandwidth_monitor;
 mod barometer_driver;
