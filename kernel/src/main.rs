@@ -4,6 +4,8 @@ disambiguation;
 
 
 
+
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1080,6 +1082,8 @@ mod driver_audio_hda;
 mod driver_bt_le;
 mod driver_bt_mesh;
 mod driver_bt_rfcomm;
+mod driver_displayport_v2;
+mod driver_dp_alt_mode;
 mod driver_framework_core;
 mod driver_framework_download;
 mod driver_framework_error_handle;
@@ -1090,6 +1094,7 @@ mod driver_framework_test;
 mod driver_framework_trait;
 mod driver_gpu_intel;
 mod driver_gpu_nvidia;
+mod driver_hdmi_v2;
 mod driver_port_api_translate;
 mod driver_port_lint;
 mod driver_port_test_generate;
@@ -1099,6 +1104,7 @@ mod driver_pwm;
 mod driver_scsi;
 mod driver_sdio;
 mod driver_spi;
+mod driver_thunderbolt_v2;
 mod driver_uart;
 mod driver_usb_cdc;
 mod driver_usb_hid_v2;
@@ -1107,6 +1113,7 @@ mod driver_usb_mass_storage_v2;
 mod driver_usb_serial;
 mod driver_usb_xhci;
 mod driver_webcam_generic;
+mod driver_wifi_80211ax;
 mod e1000;
 mod eagle_decode;
 mod elf_loader;
