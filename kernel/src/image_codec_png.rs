@@ -2,50 +2,38 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-pub struct PngCodec {
+pub struct Png {
     width: u32,
     height: u32,
     data: Vec<u8>,
 }
 
-impl PngCodec {
+impl Png {
     pub fn new(width: u32, height: u32) -> Self {
-        let size = (width * height * 4) as usize; // RGBA
-        PngCodec {
-            width,
-            height,
-            data: vec![0; size],
-        }
+        Png { width, height, data: Vec::new() }
     }
 
-    pub fn set_pixel(&mut self, x: u32, y: u32, r: u8, g: u8, b: u8, a: u8) {
-        if x < self.width && y < self.height {
-            let index = ((y * self.width + x) * 4) as usize;
-            self.data[index] = r;
-            self.data[index + 1] = g;
-            self.data[index + 2] = b;
-            self.data[index + 3] = a;
-        }
+    pub fn add_pixel(&mut self, r: u8, g: u8, b: u8) {
+        let pixel = [r, g, b];
+        self.data.extend_from_slice(&pixel);
     }
 
-    pub fn get_pixel(&self, x: u32, y: u32) -> Option<(u8, u8, u8, u8)> {
-        if x < self.width && y < self.height {
-            let index = ((y * self.width + x) * 4) as usize;
-            Some((self.data[index], self.data[index + 1], self.data[index + 2], self.data[index + 3]))
-        } else {
-            None
-        }
-    }
-
-    pub fn width(&self) -> u32 {
+    pub fn get_width(&self) -> u32 {
         self.width
     }
 
-    pub fn height(&self) -> u32 {
+    pub fn get_height(&self) -> u32 {
         self.height
     }
 
-    pub fn data(&self) -> &[u8] {
+    pub fn get_data(&self) -> &Vec<u8> {
         &self.data
+    }
+
+    pub fn save_to_file(&self, filename: String) {
+        let mut file = std::fs::File::create(filename).unwrap();
+        for byte in self.data.iter() {
+            file.write(byte).unwrap();
+        }
     }
 }
