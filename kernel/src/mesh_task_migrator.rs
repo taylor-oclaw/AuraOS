@@ -2,50 +2,42 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-#[no_mangle]
-pub extern "C" fn mesh_task_migrator_init() {
-    // Initialization logic for the module
-}
-
-#[no_mangle]
-pub extern "C" fn mesh_task_migrator_exit() {
-    // Cleanup logic for the module
-}
-
 pub struct MeshTaskMigrator {
-    tasks: Vec<Task>,
+    task_id: u32,
+    mesh_id: u32,
+    current_node: u32,
 }
 
 impl MeshTaskMigrator {
-    pub fn new() -> Self {
-        MeshTaskMigrator { tasks: Vec::new() }
+    pub fn new(task_id: u32, mesh_id: u32) -> Self {
+        MeshTaskMigrator {
+            task_id,
+            mesh_id,
+            current_node: 0,
+        }
     }
 
-    pub fn add_task(&mut self, task: Task) {
-        self.tasks.push(task);
+    pub fn get_task_id(&self) -> u32 {
+        self.task_id
     }
 
-    pub fn remove_task(&mut self, task_id: usize) -> Option<Task> {
-        self.tasks.iter().position(|t| t.id == task_id).map(|index| self.tasks.remove(index))
+    pub fn get_mesh_id(&self) -> u32 {
+        self.mesh_id
     }
 
-    pub fn get_task(&self, task_id: usize) -> Option<&Task> {
-        self.tasks.iter().find(|&t| t.id == task_id)
+    pub fn migrate_to_node(&mut self, node_id: u32) {
+        if node_id != self.current_node {
+            self.current_node = node_id;
+            // Simulate migration by printing a message (no println! in kernel)
+            print!("Task {} migrated to node {}\n", self.task_id, node_id);
+        }
     }
 
-    pub fn list_tasks(&self) -> Vec<Task> {
-        self.tasks.clone()
+    pub fn get_current_node(&self) -> u32 {
+        self.current_node
     }
-}
 
-pub struct Task {
-    id: usize,
-    name: String,
-    priority: u32,
-}
-
-impl Task {
-    pub fn new(id: usize, name: String, priority: u32) -> Self {
-        Task { id, name, priority }
+    pub fn update_mesh_id(&mut self, new_mesh_id: u32) {
+        self.mesh_id = new_mesh_id;
     }
 }
