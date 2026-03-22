@@ -21,6 +21,8 @@ disambiguation;
 
 
 
+
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1037,6 +1039,10 @@ mod defs_backup_entropy_export;
 mod defs_backup_gravity_export;
 mod defs_backup_membrane_export;
 mod defs_backup_quantum_log_export;
+mod defs_backup_vym_encrypt;
+mod defs_backup_vym_format_read;
+mod defs_backup_vym_manifest;
+mod defs_backup_vymatik_detect;
 mod defs_btree;
 mod defs_cloud_sync;
 mod defs_compression;
