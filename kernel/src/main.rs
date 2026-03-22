@@ -23,6 +23,7 @@ disambiguation;
 
 
 
+
 mod a2a_artifact_handler;
 mod a2a_host;
 mod a2a_protocol;
@@ -1036,6 +1037,7 @@ mod defs_acl;
 mod defs_alloc;
 mod defs_backup_core;
 mod defs_backup_entropy_export;
+mod defs_backup_fat_export;
 mod defs_backup_gravity_export;
 mod defs_backup_membrane_export;
 mod defs_backup_quantum_log_export;
@@ -1969,8 +1971,12 @@ mod music_auto_skip_learn;
 mod music_auto_volume_context;
 mod namespace_isolate;
 mod nat_gateway;
+mod native_inference_engine;
+mod native_model_loader;
+mod native_model_shard_manager;
 mod native_skill_ffi;
 mod native_skill_loader;
+mod native_weight_particle_store;
 mod net_stack;
 mod network_bridge;
 mod nfc_handler;
