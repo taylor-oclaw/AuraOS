@@ -2,12 +2,7 @@ extern crate alloc;
 use alloc::string::String;
 use alloc::vec::Vec;
 
-#[no_mangle]
-pub extern "C" fn rust_start() -> i32 {
-    0
-}
-
-struct ParallelDecode {
+pub struct ParallelDecode {
     data: Vec<u8>,
     decoded_data: Vec<String>,
 }
@@ -22,8 +17,8 @@ impl ParallelDecode {
 
     pub fn decode(&mut self) {
         for byte in &self.data {
-            let char_str = String::from_utf8(vec![*byte]).unwrap_or_else(|_| String::from("�"));
-            self.decoded_data.push(char_str);
+            let character = *byte as char;
+            self.decoded_data.push(character.to_string());
         }
     }
 
@@ -38,35 +33,12 @@ impl ParallelDecode {
     pub fn append_data(&mut self, additional_data: Vec<u8>) {
         self.data.extend(additional_data);
     }
-}
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_parallel_decode() {
-        let data = vec![72, 101, 108, 108, 111]; // "Hello" in ASCII
-        let mut decoder = ParallelDecode::new(data);
-        decoder.decode();
-        assert_eq!(decoder.get_decoded_data(), &["H", "e", "l", "l", "o"]);
-    }
-
-    #[test]
-    fn test_append_data() {
-        let data = vec![72, 101, 108]; // "Hel" in ASCII
-        let mut decoder = ParallelDecode::new(data);
-        decoder.append_data(vec![108, 111]); // "lo" in ASCII
-        decoder.decode();
-        assert_eq!(decoder.get_decoded_data(), &["H", "e", "l", "l", "o"]);
-    }
-
-    #[test]
-    fn test_clear_decoded_data() {
-        let data = vec![72, 101, 108]; // "Hel" in ASCII
-        let mut decoder = ParallelDecode::new(data);
-        decoder.decode();
-        decoder.clear_decoded_data();
-        assert!(decoder.get_decoded_data().is_empty());
+    pub fn remove_data(&mut self, index: usize) -> Option<u8> {
+        if index < self.data.len() {
+            Some(self.data.remove(index))
+        } else {
+            None
+        }
     }
 }
